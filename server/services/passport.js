@@ -27,13 +27,14 @@ passport.use(
 
       new User({
         googleId: profile.id
-      }).save(err => {
+      }).save((err, user) => {
         if (err) {
-          return console.log(err);
+          console.log(err);
+        } else {
+          console.log("Account is successfully created");
         }
-        console.log("Account is successfully created");
+        done(null, user);
       });
-      done();
     }
   )
 );
@@ -56,13 +57,14 @@ passport.use(
       }
       new User({
         facebookId: profile.id
-      }).save(err => {
+      }).save((err, user) => {
         if (err) {
-          return console.log(err);
+          console.log(err);
+        } else {
+          console.log("Account is successfully created");
         }
-        console.log("Account is successfully created");
+        done(null, user);
       });
-      done();
     }
   )
 );
