@@ -1,9 +1,10 @@
 const express = require("express");
+const app = express();
+
 const { mongoURI } = require("./config/keys");
-
 require("./models/User");
-require("./services/passport");
 
+// MONGOOSE
 const mongoose = require("mongoose");
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
@@ -13,7 +14,10 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
   console.log("Connected to Mongo DB");
 });
 
-const app = express();
+// PASSPORT
+const passport = require("passport");
+require("./services/passport");
+app.use(passport.initialize());
 
 app.get("/", (req, res) => {
   res.send({

@@ -7,6 +7,17 @@ const keys = require("../config/keys");
 
 const User = mongoose.model("users");
 
+passport.serializeUser(function(user, done) {
+  console.log(user);
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then(user => done(null, user))
+    .catch(err => console.log(err));
+});
+
 passport.use(
   new GoogleStrategy(
     {
@@ -17,7 +28,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       console.log("google", accessToken);
       if (profile.provider !== "google") {
-        return done(null);
+        return done(null, false, { message: "Provider issue." });
       }
       const existingUser = await User.findOne({ googleId: profile.id });
       if (existingUser) {
@@ -48,7 +59,7 @@ passport.use(
     },
     async function(accessToken, refreshToken, profile, done) {
       if (profile.provider !== "facebook") {
-        return done(null);
+        return done(null, false, { message: "Provider issue." });
       }
       const existingUser = await User.findOne({ facebookId: profile.id });
       if (existingUser) {
