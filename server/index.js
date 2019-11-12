@@ -1,5 +1,18 @@
 const express = require("express");
+const { mongoURI } = require("./config/keys");
+
+require("./models/User");
 require("./services/passport");
+
+const mongoose = require("mongoose");
+
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+  if (err) {
+    return console.log("mongoose contecction error:", err);
+  }
+  console.log("Connected to Mongo DB");
+});
+
 const app = express();
 
 app.get("/", (req, res) => {
