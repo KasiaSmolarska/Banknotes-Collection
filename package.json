@@ -2,10 +2,10 @@
   "name": "banknotes",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "private": true,
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "passport": "^0.4.0",
+    "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0"
   }
 }
