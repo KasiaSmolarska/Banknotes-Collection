@@ -18,13 +18,13 @@ module.exports = app => {
     res.redirect("/");
   });
 
-  app.get("/api/current_user", (req, res) => {
-    res.send({ req: req.user });
+  app.get("/api/current_user", ({ user }, res) => {
+    res.send({ user });
   });
 
   app.get("/api/logout", (req, res) => {
     req.logout();
     // logout() is a passport method which clean a user cookie
-    res.send(req.user);
+    res.send({ user: req.user });
   });
 };

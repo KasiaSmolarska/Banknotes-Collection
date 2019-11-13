@@ -1,7 +1,9 @@
 import fetchUser from "./fetchUser";
+import logOutUser from "./logOutUser";
 
 const actions = {
-  fetchUser
+  fetchUser,
+  logOutUser
 };
 
 export default actions;

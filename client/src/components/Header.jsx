@@ -7,12 +7,31 @@ import "./Header.scss";
 import actions from "../store/actions";
 
 class Header extends Component {
+  handleClick = e => {
+    e.preventDefault();
+    this.props.logOutUser();
+  };
+
   renderContent() {
-    return <div>content</div>;
+    switch (this.props.auth) {
+      case null:
+        return;
+      case false:
+        return (
+          <Link className="btn btn-primary" to="/login">
+            Log in / sign in
+          </Link>
+        );
+      default:
+        return (
+          <button className="btn btn-primary" onClick={this.handleClick}>
+            Log out
+          </button>
+        );
+    }
   }
 
   render() {
-    console.log(this.props);
     return (
       <nav>
         <div className="nav-wrapper green lighten-1">
@@ -20,11 +39,8 @@ class Header extends Component {
             Banknotes Collection
           </a>
           <ul className="right">
-            <li>
-              <Link to="/login">Log in / sign in</Link>
-            </li>
+            <li>{this.renderContent()}</li>
           </ul>
-          <div>{this.renderContent()}</div>
         </div>
       </nav>
     );
