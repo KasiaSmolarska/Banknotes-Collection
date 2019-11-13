@@ -8,13 +8,13 @@ module.exports = app => {
     })
   );
 
-  app.get("/auth/google/callback", passport.authenticate("google", { session: true, failureRedirect: "/error" }), (req, res) => {
+  app.get("/auth/google/callback", passport.authenticate("google", { session: true, failureRedirect: "/login" }), (req, res) => {
     res.redirect("/");
   });
 
   app.get("/auth/facebook", passport.authenticate("facebook"));
 
-  app.get("/auth/facebook/callback", passport.authenticate("facebook", { failureRedirect: "/error" }), function(req, res) {
+  app.get("/auth/facebook/callback", passport.authenticate("facebook", { failureRedirect: "/login" }), function(req, res) {
     res.redirect("/");
   });
 
