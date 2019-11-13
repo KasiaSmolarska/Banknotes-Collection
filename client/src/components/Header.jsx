@@ -1,8 +1,18 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 import "./Header.scss";
 
+import actions from "../store/actions";
+
 class Header extends Component {
+  renderContent() {
+    return <div>content</div>;
+  }
+
   render() {
+    console.log(this.props);
     return (
       <nav>
         <div className="nav-wrapper green lighten-1">
@@ -11,16 +21,20 @@ class Header extends Component {
           </a>
           <ul className="right">
             <li>
-              <a href="/auth/google">Login with Google</a>
-            </li>
-            <li>
-              <a href="/auth/facebook">Login with Facebook</a>
+              <Link to="/login">Log in / sign in</Link>
             </li>
           </ul>
+          <div>{this.renderContent()}</div>
         </div>
       </nav>
     );
   }
 }
 
-export default Header;
+function mapStateToProps({ auth }) {
+  return {
+    auth
+  };
+}
+
+export default connect(mapStateToProps, actions)(Header);
