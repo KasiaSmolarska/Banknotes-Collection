@@ -6,7 +6,6 @@ import actions from "../store/actions";
 import Header from "./Header";
 import Landing from "./Landing";
 import LoginPage from "./LoginPage";
-import "./App.scss";
 
 class App extends Component {
   componentDidMount() {
@@ -14,9 +13,9 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="container">
         <BrowserRouter>
-          <Header />
+          <Route path="/" render={props => props.location.pathname !== "/login" && <Header />}></Route>
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={LoginPage} />
         </BrowserRouter>

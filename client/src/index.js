@@ -5,8 +5,7 @@ import { createStore, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
 
 import reducers from "./store";
-import "./index.css";
-import "materialize-css/dist/css/materialize.min.css";
+import "../src/scss/index.scss";
 import App from "./components/App.jsx";
 import * as serviceWorker from "./serviceWorker";
 

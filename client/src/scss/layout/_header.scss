@@ -1,0 +1,15 @@
+.nav {
+  &__wrapper {
+    background-color: $primary-color;
+    font-size: 1.4rem;
+    color: $white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+  }
+
+  &__logo {
+    font-size: 3rem;
+    color: $white;
+  }
+}

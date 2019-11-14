@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import "./Header.scss";
-
 import actions from "../store/actions";
 
 class Header extends Component {
@@ -18,13 +16,13 @@ class Header extends Component {
         return;
       case false:
         return (
-          <Link className="btn btn-primary" to="/login">
+          <Link className="btn btn--blue" to="/login">
             Log in / sign in
           </Link>
         );
       default:
         return (
-          <button className="btn btn-primary" onClick={this.handleClick}>
+          <button className="btn btn--blue" onClick={this.handleClick}>
             Log out
           </button>
         );
@@ -34,11 +32,11 @@ class Header extends Component {
   render() {
     return (
       <nav>
-        <div className="nav-wrapper green lighten-1">
-          <a className="left brand-logo" href="*" style={{ paddingLeft: "15px" }}>
+        <div className="nav nav__wrapper row">
+          <a className="nav__logo column" href="*" style={{ paddingLeft: "15px" }}>
             Banknotes Collection
           </a>
-          <ul className="right">
+          <ul className="text-right column">
             <li>{this.renderContent()}</li>
           </ul>
         </div>

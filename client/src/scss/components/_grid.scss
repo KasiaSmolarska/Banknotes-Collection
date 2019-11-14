@@ -1,0 +1,35 @@
+.column {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  //   flex: 1;
+  //   -webkit-flex: 1; /* Safari 6.1+ */
+  //   -ms-flex: 1; /* IE 10 */
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+@each $name in $screenName {
+  @for $i from 1 through 12 {
+    .col-#{$name}-#{$i} {
+      @extend .column;
+    }
+  }
+}
+
+@for $j from 1 through length($screenName) {
+  @media screen and (min-width:#{nth($screenWidth, $j)}) {
+    @for $i from 1 through 12 {
+      .col-#{nth($screenName, $j)}-#{$i} {
+        width: $i / 12 * 100%;
+      }
+    }
+  }
+}
