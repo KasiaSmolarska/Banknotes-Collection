@@ -9,6 +9,15 @@ import "../src/scss/index.scss";
 import App from "./components/App.jsx";
 import * as serviceWorker from "./serviceWorker";
 
+// import axios from "axios";
+// window.axios = axios;
+
+// const banknote = {
+//   title: "my banknnote"
+// };
+
+// axios.post("/api/banknotes", banknote);
+
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(

@@ -56,7 +56,7 @@ const BanknoteSchema = new Schema({
   },
   width: Number,
   height: Number,
-  signatues: String,
+  signatures: String,
   serialNumber: String,
   condition: {
     type: String,
