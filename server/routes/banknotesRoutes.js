@@ -18,7 +18,8 @@ module.exports = app => {
 
     await new Banknote(banknoteData).save((err, banknote) => {
       if (err) {
-        res.send({ error: err });
+        console.log(err);
+        return res.status(422).send(err);
       }
       res.send({ status: "banknote was added to you collection" });
     });
