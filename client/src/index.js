@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
 
 import reducers from "./store";
@@ -13,12 +13,18 @@ import * as serviceWorker from "./serviceWorker";
 // window.axios = axios;
 
 // const banknote = {
-//   title: "my banknnote"
+//   title: "456 my banknnote"
 // };
 
-// axios.post("/api/banknotes", banknote);
+// axios.get("/api/banknotes").then(data => console.log(data));
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const middlewares = [applyMiddleware(reduxThunk)];
+
+if (window.__REDUX_DEVTOOLS_EXTENSION__) {
+  middlewares.push(window.__REDUX_DEVTOOLS_EXTENSION__());
+}
+
+const store = createStore(reducers, {}, compose(...middlewares));
 
 ReactDOM.render(
   <Provider store={store}>
