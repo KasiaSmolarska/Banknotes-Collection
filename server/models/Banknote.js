@@ -1,79 +1,83 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const BanknoteSchema = new Schema({
-  _user: { type: Schema.Types.ObjectId, ref: "users" },
-  dateCreated: { type: Date, default: new Date() },
+const banknoteData = {
+  _user: { type: "ObjectId", ref: "users" },
+  dateCreated: { type: "Date", default: new Date() },
   continent: {
     type: "String",
     enum: ["Africa", "Antarctica", "Asia", "Australia", "Europe", "North America", "South America"]
   },
   country: {
-    type: String,
+    type: "String",
     maxlength: 2,
     validate: /[A-Z]{2}/
   },
   own: {
-    type: Boolean,
+    type: "Boolean",
     default: false
   },
   currency: {
-    type: String,
+    type: "String",
     maxlength: 3,
     validate: /[A-Z]{2,3}/
   },
-  value: Number,
-  pickNumber: String,
-  tbbPickNumber: String,
-  countryPickNumber: String,
-  series: String,
-  issueBank: { type: Schema.Types.ObjectId, ref: "issueBanks" },
-  issueYear: Number,
+  value: "Number",
+  pickNumber: "String",
+  tbbPickNumber: "String",
+  countryPickNumber: "String",
+  series: "String",
+  issueBank: { type: "ObjectId", ref: "issueBanks" },
+  issueYear: "Number",
   title: {
-    type: String,
+    type: "String",
     required: true,
     maxlength: 255
   },
   observe: {
-    type: String,
+    type: "String",
     maxlength: 500
   },
   reverse: {
-    type: String,
+    type: "String",
     maxlength: 500
   },
   textOnNote: {
-    type: String,
+    type: "String",
     maxlength: 500
   },
   userNotes: {
-    type: String,
+    type: "String",
     maxlength: 500
   },
   type: {
-    type: String,
+    type: "String",
     enum: ["Paper", "Polymer"]
   },
-  width: Number,
-  height: Number,
-  signatures: String,
-  serialNumber: String,
+  width: "Number",
+  height: "Number",
+  signatures: "String",
+  serialNumber: "String",
   condition: {
-    type: String,
+    type: "String",
     enum: ["UNC", "-UNC", "AU", "XF/EF", "VF", "F", "VG", "G", "FAIR", "P"]
   },
-  purchaseDate: Date,
+  purchaseDate: "Date",
   currencyPaid: {
-    type: String,
+    type: "String",
     maxlength: 3,
     validate: /[A-Z]{2,3}/
   },
   pricePaid: {
-    type: String,
+    type: "String",
     maxlength: 32
   },
-  imageFront: String,
-  imageReverse: String
-});
+  imageFront: "String",
+  imageReverse: "String"
+};
+
+const BanknoteSchema = new Schema(banknoteData);
 
 mongoose.model("banknotes", BanknoteSchema);
+
+module.exports = banknoteData;

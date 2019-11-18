@@ -1,10 +1,16 @@
 const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
 
+const banknoteData = require("../models/Banknote");
+
 const Banknote = mongoose.model("banknotes");
 
 module.exports = app => {
-  app.post("/api/banknotes", requireLogin, async (req, res) => {
+  app.get("/api/banknote", requireLogin, (req, res) => {
+    res.send(banknoteData);
+  });
+
+  app.post("/api/banknote", requireLogin, async (req, res) => {
     let banknoteData = {
       _user: req.user.id
     };
