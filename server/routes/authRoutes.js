@@ -1,4 +1,6 @@
 const passport = require("passport");
+const path = require("path");
+const express = require("express");
 
 const requireLogin = require("../middlewares/requireLogin");
 
@@ -31,6 +33,6 @@ module.exports = app => {
   });
 
   app.get("/dashboard", requireLogin, (req, res) => {
-    res.send("<h2>dashboard</h2>");
+    res.send("to do ! - routing ");
   });
 };

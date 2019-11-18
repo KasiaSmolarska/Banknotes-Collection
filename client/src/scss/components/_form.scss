@@ -1,0 +1,96 @@
+.form {
+  &__group {
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__input {
+    font-size: 1.5em;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 0;
+    border: 1px solid #ced4da;
+    width: 90%;
+    display: block;
+    transition: all 0.3s;
+    font-family: inherit;
+    color: inherit;
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+      border-bottom: 3px solid $primary-color;
+
+      &:invalid {
+        // pozwala określić wygląd niepoprawnie wyglądającego inputa
+        border-bottom: 3px solid $primary-color;
+      }
+    }
+
+    &::-webkit-input-placeholder {
+      color: #999;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+  }
+
+  &__input:placeholder-shown + &__label {
+    // ta pseudoklasa mówi co ma się dziać kiedy placeholder będzie widoczny (a input będzie jeszcze pusty)
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 0.5rem solid $primary-color;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    top: -4px;
+
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      background-color: $primary-color;
+      //   @include posCenter;
+      opacity: 0;
+      transition: all 0.3s;
+    }
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-input:checked ~ label &__radio-button:after {
+    opacity: 1;
+  }
+}

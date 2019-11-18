@@ -22,13 +22,17 @@ const banknoteData = {
     maxlength: 3,
     validate: /[A-Z]{2,3}/
   },
-  value: "Number",
-  pickNumber: "String",
-  tbbPickNumber: "String",
-  countryPickNumber: "String",
-  series: "String",
+  value: {
+    type: "Number"
+  },
+  pickNumber: { type: "String" },
+  tbbPickNumber: { type: "String" },
+  countryPickNumber: { type: "String" },
+  series: { type: "String" },
   issueBank: { type: "ObjectId", ref: "issueBanks" },
-  issueYear: "Number",
+  issueYear: {
+    type: "Number"
+  },
   title: {
     type: "String",
     required: true,
@@ -54,15 +58,21 @@ const banknoteData = {
     type: "String",
     enum: ["Paper", "Polymer"]
   },
-  width: "Number",
-  height: "Number",
-  signatures: "String",
-  serialNumber: "String",
+  width: {
+    type: "Number"
+  },
+  height: {
+    type: "Number"
+  },
+  signatures: { type: "String" },
+  serialNumber: { type: "String" },
   condition: {
     type: "String",
     enum: ["UNC", "-UNC", "AU", "XF/EF", "VF", "F", "VG", "G", "FAIR", "P"]
   },
-  purchaseDate: "Date",
+  purchaseDate: {
+    type: "Date"
+  },
   currencyPaid: {
     type: "String",
     maxlength: 3,
@@ -72,8 +82,8 @@ const banknoteData = {
     type: "String",
     maxlength: 32
   },
-  imageFront: "String",
-  imageReverse: "String"
+  imageFront: { type: "String" },
+  imageReverse: { type: "String" }
 };
 
 const BanknoteSchema = new Schema(banknoteData);
