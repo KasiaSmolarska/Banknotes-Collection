@@ -7,7 +7,6 @@ import Header from "./Header";
 import Landing from "./Landing";
 import LoginPage from "./LoginPage";
 import Dashboard from "./Dashboard";
-import BanknoteNew from "./BanknoteNew";
 
 class Content extends Component {
   render() {
@@ -16,7 +15,6 @@ class Content extends Component {
         <Header />
         <Route exact path="/" component={Landing} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/add" component={BanknoteNew} />
       </div>
     );
   }

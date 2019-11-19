@@ -12,9 +12,7 @@ const Select = ({ data, input, meta: { touched, error } }) => {
           : ["yes", "no"].map(value => <option key={value}>{value}</option>)}
       </select>
       <label className="form__select-label">{input.name}</label>
-      <div className="red-text" style={{ height: "1rem", marginBottom: "20px" }}>
-        {touched && error}
-      </div>
+      <div className="red-text">{touched && error}</div>
     </div>
   );
 };

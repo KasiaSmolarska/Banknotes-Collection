@@ -7,6 +7,24 @@
     }
   }
 
+  &__alert {
+    color: red;
+    position: absolute;
+    font-size: 1.2rem;
+    bottom: -3rem;
+
+    &:not(:empty):before {
+      content: " \2191";
+      font-size: 2rem;
+      padding: 0 1rem 0 0.5rem;
+    }
+  }
+
+  &__control {
+    position: relative;
+    margin: 2rem 0;
+  }
+
   &__group-label {
     padding-bottom: 3rem;
     text-align: center;

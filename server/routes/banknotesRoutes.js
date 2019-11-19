@@ -14,7 +14,7 @@ module.exports = app => {
     let banknoteData = {
       _user: req.user.id
     };
-
+    console.log(req.body);
     for (const key in req.body) {
       if (req.body.hasOwnProperty(key)) {
         const banknoteFieldData = req.body[key];

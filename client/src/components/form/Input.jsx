@@ -1,12 +1,13 @@
 import React from "react";
 
-const Input = ({ input, label, meta: { touched, error } }) => {
+const Input = ({ input, label, meta: { touched, error }, meta }) => {
+  console.log(error);
   return (
     <div className="form__control">
       <input placeholder={input.name} className="form__input" type="text" {...input} />
       <label className="form__label">{input.name.toUpperCase()}</label>
       <div className="form__alert" style={{ height: "1rem", marginBottom: "20px" }}>
-        {touched && error}
+        {error}
       </div>
     </div>
   );

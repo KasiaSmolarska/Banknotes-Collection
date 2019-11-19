@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm } from "redux-form";
+import { connect } from "react-redux";
 
-import Input from "../form/Input";
-import FormProvider from "../form/FormProvider";
 import FormGroup from "../form/FormGroup";
+import validateFields from "../../utils/validateFields";
 
-const NAME_TO_COMPONENT = {
-  Input: Input
-};
+import postBanknote from "../../store/actions/postBanknote";
 
 const BANKNOTE_FORM_GROUPS = {
   elementary: ["title", "value", "currency", "own"],
@@ -21,7 +19,6 @@ let data = {};
 class BanknoteForm extends Component {
   renderFormGroup() {
     return Object.entries(BANKNOTE_FORM_GROUPS).map(([key, value]) => {
-      console.log(this.props.data);
       return <FormGroup key={key} name={key} inputsName={value} data={this.props.data} />;
     });
   }
@@ -31,8 +28,22 @@ class BanknoteForm extends Component {
       data = this.props.data;
     }
     return (
-      <div>
-        form 22g<FormProvider name="form--banknote">{this.renderFormGroup()}</FormProvider>
+      <div className="add-new-banknote">
+        <form
+          className="form form--banknote"
+          onSubmit={this.props.handleSubmit(values => {
+            this.props.postBanknote(values).then(alert("formularz wysłany"));
+            this.props.reset();
+          })}>
+          <div className="form--banknote__header">
+            <h1>Add new banknote</h1>
+            <button className="btn" type="submit">
+              submit
+            </button>
+          </div>
+
+          {this.renderFormGroup()}
+        </form>
       </div>
     );
   }
@@ -40,22 +51,41 @@ class BanknoteForm extends Component {
 
 function validateInputs(values) {
   const errors = {};
-  console.log("data", data);
-  console.log("validateInputs", values);
+  console.log(errors);
   if (data) {
-    Object.keys(data).forEach(({ name }) => {
-      if (!values[name]) {
-        return (errors[name] = `You must provide survey ${name}`);
+    Object.keys(data).forEach(key => {
+      if (!values[key]) {
+        if (data[key].required) {
+          return (errors[key] = `You must provide ${key}`);
+        }
+      }
+      if (key === "currency" || key === "currencyPaid") {
+        return (errors[key] = validateFields(values[key] || "", /[A-Z]{2,3}/, "This field must contain 2-3 big letters"));
       }
 
-      //errors.recipients = validateEmails(values.recipients || "");
+      if (key === "country") {
+        return (errors[key] = validateFields(values[key] || "", /[A-Z]{2}/, "This field must contain 2 big letters"));
+      }
     });
   }
 
   return errors;
 }
 
+function mapStateToProps({ form: { banknoteForm } }) {
+  return {
+    form: banknoteForm
+  };
+}
+
+const mapDispatchToProps = dispatch => ({
+  postBanknote: banknote => dispatch(postBanknote(banknote))
+});
+
+BanknoteForm = connect(mapStateToProps, mapDispatchToProps)(BanknoteForm);
+
 export default reduxForm({
   form: "banknoteForm",
-  validate: validateInputs
+  validate: validateInputs,
+  destroyOnUnmount: true
 })(BanknoteForm);

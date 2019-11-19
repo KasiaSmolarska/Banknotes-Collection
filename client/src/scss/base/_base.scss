@@ -10,6 +10,20 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary-color-light;
+  transition: all 0.2s;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-color-dark1;
+}
+
 ::selection {
   background-color: $secondary-color;
   color: #fff;

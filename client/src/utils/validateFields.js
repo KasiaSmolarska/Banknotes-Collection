@@ -1,7 +1,7 @@
-export default (field, regex) => {
+export default (field, regex, message) => {
   const invalidField = regex.test(field) === false;
-
+  console.log(invalidField);
   if (invalidField) {
-    return `This data is invalid: ${invalidField}`;
+    return message || `This data is invalid: ${field}`;
   }
 };
