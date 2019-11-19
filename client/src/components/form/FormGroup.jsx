@@ -1,17 +1,32 @@
 import React from "react";
 import { Field } from "redux-form";
-import Input from "../form/Input";
+import Input from "./Input";
+import Select from "./Select";
+import Radio from "./Radio";
+import Textarea from "./Textarea";
 
 const NAME_TO_COMPONENT = {
-  Input: Input
+  Input: Input,
+  Select: Select,
+  Radio,
+  Textarea
 };
 
 const getTypeOfInput = modelField => {
+  if (modelField.enum) {
+    return "Select";
+  }
+  if (modelField.maxlength > 300) {
+    return "Textarea";
+  }
   if (modelField.type === "String") {
     return "Input";
   }
   if (modelField.type === "Number") {
     return "Input";
+  }
+  if (modelField.type === "Boolean") {
+    return "Select";
   }
   return "Input";
 };
@@ -21,17 +36,11 @@ const FormGroup = props => {
     return false;
   }
   return (
-    <div className={props.name}>
-      <h2>{props.name}</h2>
+    <div className={`form__group form__group--${props.name}`}>
+      <h2 className="form__group-label">{props.name}</h2>
       {props.inputsName.map(name => {
         const type = getTypeOfInput(props.data[name]);
-        console.log("tyoe", NAME_TO_COMPONENT[type]);
-        return (
-          <div>
-            {type}
-            <Field type="text" name={name} component={NAME_TO_COMPONENT[type]} />
-          </div>
-        );
+        return <Field key={name} name={name} component={NAME_TO_COMPONENT[type]} data={props.data[name]} />;
       })}
     </div>
   );

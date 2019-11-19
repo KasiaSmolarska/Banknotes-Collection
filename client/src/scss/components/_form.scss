@@ -1,7 +1,73 @@
 .form {
   &__group {
+    box-shadow: $shadow-medium;
+    padding: 2rem;
     &:not(:last-child) {
       margin-bottom: 2rem;
+    }
+  }
+
+  &__group-label {
+    padding-bottom: 3rem;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  &__textarea {
+    line-height: normal;
+    overflow-y: hidden;
+    resize: none;
+    min-height: 12rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 1.5em;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 0;
+    border: 1px solid #ced4da;
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 1rem 2rem #0000001a;
+      border: 1px solid $primary-color;
+
+      &:invalid {
+        border-bottom: 3px solid $primary-color;
+      }
+    }
+  }
+
+  &__select-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+    transform: translateY(-8.6rem);
+    position: absolute;
+    text-transform: uppercase;
+  }
+
+  &__select {
+    font-size: 1.5em;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 0;
+    border: 1px solid #ced4da;
+    width: 100%;
+    display: block;
+    transition: all 0.3s;
+    font-family: inherit;
+    color: inherit;
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 1rem 2rem #0000001a;
+      border: 1px solid $primary-color;
     }
   }
 
@@ -12,7 +78,7 @@
     background-color: rgba(255, 255, 255, 0.5);
     border: 0;
     border: 1px solid #ced4da;
-    width: 90%;
+    width: 100%;
     display: block;
     transition: all 0.3s;
     font-family: inherit;
@@ -20,8 +86,8 @@
 
     &:focus {
       outline: 0;
-      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
-      border-bottom: 3px solid $primary-color;
+      box-shadow: 0 1rem 2rem #0000001a;
+      border: 1px solid $primary-color;
 
       &:invalid {
         // pozwala określić wygląd niepoprawnie wyglądającego inputa
@@ -41,6 +107,13 @@
     margin-top: 0.7rem;
     display: block;
     transition: all 0.3s;
+    transform: translateY(-8rem);
+    position: absolute;
+    color: $primary-color;
+    &--textarea {
+      position: relative;
+      transform: none;
+    }
   }
 
   &__input:placeholder-shown + &__label {
@@ -48,7 +121,7 @@
 
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-4rem);
+    transform: translateY(-10rem);
   }
 
   &__radio-group {
@@ -68,10 +141,12 @@
     width: 3rem;
     border: 0.5rem solid $primary-color;
     border-radius: 50%;
-    display: inline-block;
+    display: inline-flex;
     position: absolute;
     left: 0px;
     top: -4px;
+    align-items: center;
+    justify-content: center;
 
     &::after {
       content: "";

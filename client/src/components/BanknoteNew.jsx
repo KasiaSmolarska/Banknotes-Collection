@@ -11,7 +11,8 @@ class BanknoteNew extends Component {
   render() {
     return (
       <div>
-        add new <BanknoteForm data={this.props.model} />
+        <h1 className="text-center">Add new banknote!</h1>
+        <BanknoteForm data={this.props.model} />
       </div>
     );
   }

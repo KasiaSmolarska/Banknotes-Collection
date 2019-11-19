@@ -10,20 +10,13 @@ const NAME_TO_COMPONENT = {
 };
 
 const BANKNOTE_FORM_GROUPS = {
-  elementary: ["title", "value", "currency"],
+  elementary: ["title", "value", "currency", "own"],
   geolocation: ["country", "continent"],
-  pusta: ["title"]
+  specification: ["pickNumber", "tbbPickNumber", "countryPickNumber", "serialNumber", "issueBank", "issueYear", "condition", "series", "type"],
+  appearance: ["observe", "reverse", "width", "height", "signatures", "textOnNote"]
 };
 
-const getTypeOfInput = modelField => {
-  if (modelField.type === "String") {
-    return "Input";
-  }
-  if (modelField.type === "Number") {
-    return "Input";
-  }
-  return "Input";
-};
+let data = {};
 
 class BanknoteForm extends Component {
   renderFormGroup() {
@@ -34,15 +27,35 @@ class BanknoteForm extends Component {
   }
 
   render() {
-    const data = this.props.data;
+    {
+      data = this.props.data;
+    }
     return (
       <div>
-        form 22g<FormProvider>{this.renderFormGroup()}</FormProvider>
+        form 22g<FormProvider name="form--banknote">{this.renderFormGroup()}</FormProvider>
       </div>
     );
   }
 }
 
+function validateInputs(values) {
+  const errors = {};
+  console.log("data", data);
+  console.log("validateInputs", values);
+  if (data) {
+    Object.keys(data).forEach(({ name }) => {
+      if (!values[name]) {
+        return (errors[name] = `You must provide survey ${name}`);
+      }
+
+      //errors.recipients = validateEmails(values.recipients || "");
+    });
+  }
+
+  return errors;
+}
+
 export default reduxForm({
-  form: "banknoteForm"
+  form: "banknoteForm",
+  validate: validateInputs
 })(BanknoteForm);
