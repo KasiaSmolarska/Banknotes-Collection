@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import Translate from "../translate/Translate";
+
 import actions from "../store/actions";
 import BanknoteForm from "./banknoteForm/BanknoteForm";
 
@@ -16,7 +18,7 @@ class Dashboard extends Component {
       <div>
         <h1 className="text-center">Add new banknote!</h1>
         <button className="btn btn--primary" onClick={() => this.setState({ showWindow: true })}>
-          Add new banknote
+          <Translate name="button.addNewBanknote">Add new banknote</Translate>
         </button>
         {this.state.showWindow && <BanknoteForm closeWindow={() => this.setState({ showWindow: false })} data={this.props.model} />}
       </div>

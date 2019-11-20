@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
+import TranslateProvider from "./translate/TranslateProvider";
 
 import reducers from "./store";
 import "../src/scss/index.scss";
@@ -27,9 +28,11 @@ if (window.__REDUX_DEVTOOLS_EXTENSION__) {
 const store = createStore(reducers, {}, compose(...middlewares));
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <TranslateProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </TranslateProvider>,
   document.getElementById("root")
 );
 
