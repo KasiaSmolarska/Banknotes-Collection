@@ -9,7 +9,11 @@ const Select = ({ data, input, meta: { touched, error } }) => {
           ? data.enum.map(option => {
               return <option key={option}>{option}</option>;
             })
-          : ["yes", "no"].map(value => <option key={value}>{value}</option>)}
+          : ["yes", "no"].map(value => (
+              <option value={value === "yes" ? true : false} key={value}>
+                {value}
+              </option>
+            ))}
       </select>
       <label className="form__select-label">{input.name}</label>
       <div className="red-text">{touched && error}</div>

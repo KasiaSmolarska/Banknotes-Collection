@@ -7,14 +7,31 @@ const Banknote = mongoose.model("banknotes");
 
 module.exports = app => {
   app.get("/api/banknote", requireLogin, (req, res) => {
-    res.send(banknoteData);
+    let frondEndBankoteData = {};
+    for (const key in banknoteData) {
+      if (banknoteData.hasOwnProperty(key)) {
+        const element = banknoteData[key];
+
+        if (key === "_user" || key === "dateCreated") {
+          continue;
+        }
+
+        frondEndBankoteData[key] = { ...element };
+
+        if (element.validate) {
+          frondEndBankoteData[key].validate = element.validate.source;
+        }
+      }
+    }
+    res.send(frondEndBankoteData);
   });
 
   app.post("/api/banknote", requireLogin, async (req, res) => {
     let banknoteData = {
-      _user: req.user.id
+      _user: req.user.id,
+      dateCreated: new Date()
     };
-    console.log(req.body);
+    //console.log(req.body);
     for (const key in req.body) {
       if (req.body.hasOwnProperty(key)) {
         const banknoteFieldData = req.body[key];

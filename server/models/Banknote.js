@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const banknoteData = {
   _user: { type: "ObjectId", ref: "users" },
-  dateCreated: { type: "Date", default: new Date() },
+  dateCreated: { type: "Date" },
   continent: {
     type: "String",
     enum: ["Africa", "Antarctica", "Asia", "Australia", "Europe", "North America", "South America"]

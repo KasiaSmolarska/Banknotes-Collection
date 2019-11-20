@@ -18,7 +18,7 @@ class Dashboard extends Component {
         <button className="btn btn--primary" onClick={() => this.setState({ showWindow: true })}>
           Add new banknote
         </button>
-        {this.state.showWindow && <BanknoteForm data={this.props.model} />}
+        {this.state.showWindow && <BanknoteForm closeWindow={() => this.setState({ showWindow: false })} data={this.props.model} />}
       </div>
     );
   }

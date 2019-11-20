@@ -3,7 +3,6 @@ import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 
 import FormGroup from "../form/FormGroup";
-import validateFields from "../../utils/validateFields";
 
 import postBanknote from "../../store/actions/postBanknote";
 
@@ -32,7 +31,7 @@ class BanknoteForm extends Component {
         <form
           className="form form--banknote"
           onSubmit={this.props.handleSubmit(values => {
-            this.props.postBanknote(values).then(alert("formularz wysłany"));
+            this.props.postBanknote(values).then(this.props.closeWindow);
             this.props.reset();
           })}>
           <div className="form--banknote__header">
@@ -58,13 +57,6 @@ function validateInputs(values) {
         if (data[key].required) {
           return (errors[key] = `You must provide ${key}`);
         }
-      }
-      if (key === "currency" || key === "currencyPaid") {
-        return (errors[key] = validateFields(values[key] || "", /[A-Z]{2,3}/, "This field must contain 2-3 big letters"));
-      }
-
-      if (key === "country") {
-        return (errors[key] = validateFields(values[key] || "", /[A-Z]{2}/, "This field must contain 2 big letters"));
       }
     });
   }

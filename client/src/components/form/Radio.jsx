@@ -14,7 +14,6 @@ const Radio = ({ input, meta, ...rest }) => {
           Yes
         </label>
       </div>
-      cd zcxz cx
       <div className="form__radio-group">
         <input className="form__radio-input" {...input} {...rest} name={input.name} type="radio" value={false} checked={true} />
 
