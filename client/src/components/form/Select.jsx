@@ -10,7 +10,7 @@ const Select = ({ data, input, meta: { touched, error } }) => {
               return <option key={option}>{option}</option>;
             })
           : ["yes", "no"].map(value => (
-              <option value={value === "yes" ? true : false} key={value}>
+              <option value={value === "yes"} key={value}>
                 {value}
               </option>
             ))}

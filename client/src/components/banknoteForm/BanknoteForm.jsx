@@ -30,10 +30,13 @@ class BanknoteForm extends Component {
       <div className="add-new-banknote">
         <form
           className="form form--banknote"
-          onSubmit={this.props.handleSubmit(values => {
-            this.props.postBanknote(values).then(this.props.closeWindow);
-            this.props.reset();
-          })}>
+          onSubmit={e => {
+            const callback = this.props.handleSubmit(values => {
+              this.props.postBanknote(values).then(this.props.closeWindow);
+              this.props.reset();
+            });
+            callback(e);
+          }}>
           <div className="form--banknote__header">
             <h1>Add new banknote</h1>
             <button className="btn" type="submit">

@@ -4,12 +4,14 @@ import Input from "./Input";
 import Select from "./Select";
 import Radio from "./Radio";
 import Textarea from "./Textarea";
+import InputNumber from "./InputNumber";
 
 const NAME_TO_COMPONENT = {
   Input: Input,
   Select: Select,
   Radio,
-  Textarea
+  Textarea,
+  InputNumber
 };
 
 const getTypeOfInput = modelField => {
@@ -23,7 +25,7 @@ const getTypeOfInput = modelField => {
     return "Input";
   }
   if (modelField.type === "Number") {
-    return "Input";
+    return "InputNumber";
   }
   if (modelField.type === "Boolean") {
     return "Select";
