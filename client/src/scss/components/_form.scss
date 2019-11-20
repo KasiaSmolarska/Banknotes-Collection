@@ -52,7 +52,7 @@
       border: 1px solid $primary-color;
 
       &:invalid {
-        border-bottom: 3px solid $primary-color;
+        border-bottom: 3px solid red;
       }
     }
   }
@@ -67,6 +67,9 @@
     transform: translateY(-8.6rem);
     position: absolute;
     text-transform: uppercase;
+    &--selected {
+      color: $primary-color;
+    }
   }
 
   &__select {
@@ -102,14 +105,29 @@
     font-family: inherit;
     color: inherit;
 
+    &:invalid {
+      // pozwala określić wygląd niepoprawnie wyglądającego inputa
+      border: 1px solid red;
+
+      + .form__label {
+        color: red;
+        &:after {
+          content: "!";
+          color: red;
+          position: absolute;
+          right: 30px;
+          top: 34px;
+          font-size: 17px;
+        }
+      }
+    }
+
     &:focus {
       outline: 0;
       box-shadow: 0 1rem 2rem #0000001a;
       border: 1px solid $primary-color;
-
       &:invalid {
-        // pozwala określić wygląd niepoprawnie wyglądającego inputa
-        border-bottom: 3px solid $primary-color;
+        border: 1px solid red;
       }
     }
 
@@ -128,8 +146,10 @@
     transform: translateY(-8rem);
     position: absolute;
     color: $primary-color;
+    text-transform: uppercase;
+    width: 100%;
     &--textarea {
-      position: relative;
+      top: -3.5rem;
       transform: none;
     }
   }
@@ -140,6 +160,10 @@
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10rem);
+
+    &--textarea {
+      transform: none;
+    }
   }
 
   &__radio-group {

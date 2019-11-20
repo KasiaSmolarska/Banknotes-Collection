@@ -1,3 +1,24 @@
 {
-  "button.addNewBanknote": "Add new banknote"
+  "button.addNewBanknote": "Add new banknote",
+  "label.banknoteForm.currency": "Currency (2-3 big letters)",
+  "label.banknoteForm.title": "Title",
+  "label.banknoteForm.country": "Country (2 big letters)",
+  "label.banknoteForm.pickNumber": "Pick Number",
+  "label.banknoteForm.tbbPickNumber": "TBB Pick Number",
+  "label.banknoteForm.countryPickNumber": "Country Pick Number",
+  "label.banknoteForm.serialNumber": "Serial Number",
+  "label.banknoteForm.issueBank": "Issue Bank",
+  "label.banknoteForm.series": "Series",
+  "label.banknoteForm.signatures": "Signatures",
+  "label.banknoteForm.value": "Value of banknote",
+  "label.banknoteForm.issueYear": "Issue Year",
+  "label.banknoteForm.width": "Width (mm)",
+  "label.banknoteForm.height": "Height (mm)",
+  "label.banknoteForm.observe": "Observe decription",
+  "label.banknoteForm.reverse": "Reverse decription",
+  "label.banknoteForm.textOnNote": "Text on note",
+  "label.banknoteForm.purchaseDate": "Purchase Date",
+  "label.banknoteForm.pricePaid": "Price Paid",
+  "label.banknoteForm.currencyPaid": "Currency Paid (2-3 big letters)",
+  "label.banknoteForm.userNotes": "User Notes"
 }

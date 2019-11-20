@@ -10,7 +10,8 @@ const BANKNOTE_FORM_GROUPS = {
   elementary: ["title", "value", "currency", "own"],
   geolocation: ["country", "continent"],
   specification: ["pickNumber", "tbbPickNumber", "countryPickNumber", "serialNumber", "issueBank", "issueYear", "condition", "series", "type"],
-  appearance: ["observe", "reverse", "width", "height", "signatures", "textOnNote"]
+  appearance: ["observe", "reverse", "width", "height", "signatures", "textOnNote"],
+  purchase: ["purchaseDate", "pricePaid", "currencyPaid", "userNotes"]
 };
 
 let data = {};

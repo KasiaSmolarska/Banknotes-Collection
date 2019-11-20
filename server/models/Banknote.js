@@ -79,8 +79,7 @@ const banknoteData = {
     validate: /[A-Z]{2,3}/
   },
   pricePaid: {
-    type: "String",
-    maxlength: 32
+    type: "Number"
   },
   imageFront: { type: "String" },
   imageReverse: { type: "String" }

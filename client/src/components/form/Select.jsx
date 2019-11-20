@@ -1,6 +1,6 @@
 import React from "react";
 
-const Select = ({ data, input, meta: { touched, error } }) => {
+const Select = ({ data, input, meta: { touched, error, pristine } }) => {
   return (
     <div className="form__control">
       <select className="form__select" style={{ marginBottom: "5px" }} type="text" {...input}>
@@ -15,7 +15,7 @@ const Select = ({ data, input, meta: { touched, error } }) => {
               </option>
             ))}
       </select>
-      <label className="form__select-label">{input.name}</label>
+      <label className={`form__select-label ${!pristine ? "form__select-label--selected" : ""}`}>{input.name}</label>
       <div className="red-text">{touched && error}</div>
     </div>
   );

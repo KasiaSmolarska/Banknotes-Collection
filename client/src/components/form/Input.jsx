@@ -1,10 +1,14 @@
 import React from "react";
+import Translate from "../../translate/Translate";
+import PropTypes from "prop-types";
 
-const Input = ({ input, label, meta: { touched, error }, data }) => {
+const Input = ({ input, meta: { touched, error, form }, data }, { translate }) => {
   return (
     <div className="form__control">
-      <input pattern={data.validate} placeholder={input.name} className="form__input" type="text" {...input} />
-      <label className="form__label">{input.name.toUpperCase()}</label>
+      <input pattern={data.validate} placeholder={translate(`label.${form}.${input.name}`)} className="form__input" type="text" {...input} />
+      <label className="form__label">
+        <Translate name={`label.${form}.${input.name}`} />
+      </label>
       <div className="form__alert" style={{ height: "1rem", marginBottom: "20px" }}>
         {touched && error}
       </div>
@@ -13,3 +17,7 @@ const Input = ({ input, label, meta: { touched, error }, data }) => {
 };
 
 export default Input;
+
+Input.contextTypes = {
+  translate: PropTypes.func
+};
