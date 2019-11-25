@@ -10,7 +10,7 @@ const BANKNOTE_FORM_GROUPS = {
   elementary: ["title", "value", "currency", "own"],
   geolocation: ["country", "continent"],
   specification: ["pickNumber", "tbbPickNumber", "countryPickNumber", "serialNumber", "issueBank", "issueYear", "condition", "series", "type"],
-  appearance: ["observe", "reverse", "width", "height", "signatures", "textOnNote"],
+  appearance: ["imageFront", "imageReverse", "observe", "reverse", "width", "height", "signatures", "textOnNote"],
   purchase: ["purchaseDate", "pricePaid", "currencyPaid", "userNotes"]
 };
 
@@ -31,6 +31,7 @@ class BanknoteForm extends Component {
       <div className="add-new-banknote">
         <form
           className="form form--banknote"
+          encType="multipart/form-data"
           onSubmit={e => {
             const callback = this.props.handleSubmit(values => {
               this.props.postBanknote(values).then(this.props.closeWindow);

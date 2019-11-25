@@ -1,4 +1,5 @@
 const express = require("express");
+
 const app = express();
 
 const cookieSession = require("cookie-session");
@@ -7,8 +8,17 @@ const { mongoURI, cookieKey } = require("./config/keys");
 
 // Body-parser
 const bodyParser = require("body-parser");
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "20mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "20mb", extended: true }));
 
+//app.use(express.static("../client/build"));
+
+if (process.env.NODE_ENV === "production") {
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 // MODELS
 require("./models/User");
 require("./models/Banknote");

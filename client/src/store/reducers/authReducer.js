@@ -1,7 +1,6 @@
 import { FETCH_USER, LOG_OUT_USER } from "../actions/types";
 
 export default function(state = null, action) {
-  console.log(action.payload);
   const { payload } = action;
   switch (action.type) {
     case FETCH_USER:

@@ -1,8 +1,6 @@
 import React from "react";
 
 const Radio = ({ input, meta, ...rest }) => {
-  console.log(rest.value);
-
   return (
     <div className="form__control">
       <div className="title">{input.name.toUpperCase()}</div>

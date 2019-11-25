@@ -1,11 +1,32 @@
 const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
 
+const multer = require("multer");
+
+const path = require("path");
+
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, path.resolve(__dirname, "..", "uploads", "images"));
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now().toString() + "-" + file.originalname);
+  }
+});
+
+const upload = multer({ storage });
+
 const banknoteData = require("../models/Banknote");
 
 const Banknote = mongoose.model("banknotes");
 
 module.exports = app => {
+  app.post("/api/upload/image", upload.single("file"), (req, res) => {
+    if (req.file) {
+      res.send(req.file);
+    } else throw "error";
+  });
+
   app.get("/api/banknote", requireLogin, (req, res) => {
     let frondEndBankoteData = {};
     for (const key in banknoteData) {
