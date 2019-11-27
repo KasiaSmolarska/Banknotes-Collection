@@ -14,7 +14,19 @@ var storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  fileFilter: function(req, file, cb) {
+    var filetypes = /jpeg|jpg|png/;
+    var mimetype = filetypes.test(file.mimetype);
+    var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+    if (mimetype && extname) {
+      return cb(null, true);
+    }
+    cb("Error: File upload only supports the following filetypes - " + filetypes);
+  }
+});
 
 const banknoteData = require("../models/Banknote");
 
@@ -23,7 +35,7 @@ const Banknote = mongoose.model("banknotes");
 module.exports = app => {
   app.post("/api/upload/image", upload.single("file"), (req, res) => {
     if (req.file) {
-      res.send(req.file);
+      res.send(req.file.filename);
     } else throw "error";
   });
 

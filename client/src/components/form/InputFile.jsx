@@ -13,12 +13,9 @@ class InputFile extends React.Component {
     const { input } = this.props;
     const targetFile = e.target.files[0];
 
-    console.log("file", targetFile);
-
     if (targetFile) {
       var data = new FormData();
       data.append("file", targetFile);
-      console.log(targetFile);
       fetch("/api/upload/image", {
         method: "POST",
         body: data
@@ -26,7 +23,9 @@ class InputFile extends React.Component {
         .then(function(val) {
           val
             .json()
-            .then(val => input.onChange(val.filename))
+            .then(val => {
+              input.onChange(val);
+            })
             .catch(err => console.log(err));
         })
         .catch(err => console.log(err));
