@@ -4,6 +4,7 @@ const requireLogin = require("../middlewares/requireLogin");
 const multer = require("multer");
 
 const path = require("path");
+const fs = require("fs");
 
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -37,6 +38,23 @@ module.exports = app => {
     if (req.file) {
       res.send(req.file.filename);
     } else throw "error";
+  });
+
+  app.get("/api/upload/image/:image", requireLogin, (req, res) => {
+    const { image } = req.params;
+    const imageUrl = path.resolve(__dirname, "..", "uploads", "images", image);
+
+    fs.readFile(imageUrl, (err, data) => {
+      if (err) {
+        return res.status("404").send(err);
+      }
+      const imageUrlParts = imageUrl.split(".");
+      const imageExtension = imageUrlParts[imageUrlParts - 1];
+
+      res.set({ "Content-Type": `image/${imageExtension}` });
+
+      res.send(data);
+    });
   });
 
   app.get("/api/banknote", requireLogin, (req, res) => {

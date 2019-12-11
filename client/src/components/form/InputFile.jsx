@@ -9,6 +9,10 @@ class InputFile extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+  state = {
+    url: "no-photo.jpg"
+  };
+
   onChange = async e => {
     const { input } = this.props;
     const targetFile = e.target.files[0];
@@ -20,11 +24,12 @@ class InputFile extends React.Component {
         method: "POST",
         body: data
       })
-        .then(function(val) {
-          val
-            .json()
-            .then(val => {
-              input.onChange(val);
+        .then(val => {
+          return val
+            .text()
+            .then(photoName => {
+              input.onChange(photoName);
+              this.setState({ url: photoName });
             })
             .catch(err => console.log(err));
         })
@@ -45,6 +50,9 @@ class InputFile extends React.Component {
         <label className="form__label">
           <Translate name={`label.${form}.${input.name}`} />
         </label>
+        <div className="form_image">
+          <img src={"/api/upload/image/" + this.state.url} alt={this.state.url} />
+        </div>
         <div className="form__alert" style={{ height: "1rem", marginBottom: "20px" }}>
           {touched && error}
         </div>
