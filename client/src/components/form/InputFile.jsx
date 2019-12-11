@@ -29,7 +29,7 @@ class InputFile extends React.Component {
             .text()
             .then(photoName => {
               input.onChange(photoName);
-              this.setState({ url: photoName });
+              this.setState({ url: `thumb-${photoName}` });
             })
             .catch(err => console.log(err));
         })
@@ -45,14 +45,15 @@ class InputFile extends React.Component {
       meta: { touched, error, form }
     } = this.props;
     return (
-      <div className="form__control">
+      <div className="form__control form__control--file">
+        <div className="form__image">
+          <img className="form__image-file" src={"/api/upload/image/" + this.state.url} alt={this.state.url} />
+        </div>
         <input name={input.name} onChange={this.onChange} accept=".jpg, .png, .jpeg" className="form__input" type="file" />
-        <label className="form__label">
+        <label className="form__label form__label--file">
           <Translate name={`label.${form}.${input.name}`} />
         </label>
-        <div className="form_image">
-          <img src={"/api/upload/image/" + this.state.url} alt={this.state.url} />
-        </div>
+
         <div className="form__alert" style={{ height: "1rem", marginBottom: "20px" }}>
           {touched && error}
         </div>

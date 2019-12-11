@@ -8,7 +8,7 @@
     box-shadow: $shadow-medium;
   }
 
-  &--banknote &__control {
+  &--banknote &__control:not(.form__control--file) {
     width: 49%;
     display: inline-block;
     &:nth-of-type(even) {

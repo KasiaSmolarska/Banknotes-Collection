@@ -23,6 +23,13 @@
   &__control {
     position: relative;
     margin: 2rem 0;
+
+    &--file {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2.5rem 0;
+    }
   }
 
   &__group-label {
@@ -152,6 +159,9 @@
       top: -3.5rem;
       transform: none;
     }
+    &--file {
+      transform: translateY(-9rem);
+    }
   }
 
   &__input:placeholder-shown + &__label {
@@ -209,5 +219,14 @@
 
   &__radio-input:checked ~ label &__radio-button:after {
     opacity: 1;
+  }
+
+  &__image {
+    width: 140px;
+  }
+
+  &__image-file {
+    max-width: 100px;
+    max-height: 130px;
   }
 }

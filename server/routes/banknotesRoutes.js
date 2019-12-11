@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const requireLogin = require("../middlewares/requireLogin");
+const imageThumbnail = require("image-thumbnail");
 
 const multer = require("multer");
 
@@ -34,10 +35,21 @@ const banknoteData = require("../models/Banknote");
 const Banknote = mongoose.model("banknotes");
 
 module.exports = app => {
-  app.post("/api/upload/image", upload.single("file"), (req, res) => {
+  app.post("/api/upload/image", upload.single("file"), async (req, res) => {
     if (req.file) {
+      const directoryPath = path.resolve(__dirname, "..", "uploads", "images");
+      const imageUrl = path.resolve(directoryPath, req.file.filename);
+      const imageBuffer = fs.readFileSync(imageUrl);
+      const options = { width: 100, height: 100, jpegOptions: { force: true, quality: 90 } };
+
+      const thumbName = `thumb-${req.file.filename}`;
+      const thumbUrl = path.resolve(directoryPath, thumbName);
+
+      await imageThumbnail(imageBuffer, options).then(thumbnail => fs.writeFile(thumbUrl, thumbnail, err => console.log(err)));
       res.send(req.file.filename);
-    } else throw "error";
+    } else {
+      res.status(500).send({ error: "Uploading file problem" });
+    }
   });
 
   app.get("/api/upload/image/:image", requireLogin, (req, res) => {
