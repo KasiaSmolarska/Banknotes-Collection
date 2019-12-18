@@ -33,6 +33,7 @@ const upload = multer({
 const banknoteData = require("../models/Banknote");
 
 const Banknote = mongoose.model("banknotes");
+const IssueBank = mongoose.model("issueBanks");
 
 module.exports = app => {
   app.post("/api/upload/image", upload.single("file"), async (req, res) => {
@@ -94,11 +95,38 @@ module.exports = app => {
       _user: req.user.id,
       dateCreated: new Date()
     };
-    //console.log(req.body);
+
     for (const key in req.body) {
       if (req.body.hasOwnProperty(key)) {
         const banknoteFieldData = req.body[key];
-        banknoteData[key] = banknoteFieldData;
+
+        if (key === "issueBank") {
+          const existingIssueBank = await IssueBank.findOne({ name: banknoteFieldData, _user: req.user.id });
+
+          if (existingIssueBank) {
+            console.log(`You have already have bank ${existingIssueBank.name} in your collection`);
+            banknoteData[key] = existingIssueBank.id;
+            continue;
+          }
+
+          let issueBankData = {
+            _user: req.user.id,
+            name: banknoteFieldData
+          };
+          await new Promise((resolve, reject) =>
+            new IssueBank(issueBankData).save((err, issueBank) => {
+              if (err) {
+                console.log(err);
+                resolve();
+                return res.status(422).send(err);
+              }
+              banknoteData[key] = issueBank.id;
+              resolve();
+            })
+          );
+        } else {
+          banknoteData[key] = banknoteFieldData;
+        }
       }
     }
 
