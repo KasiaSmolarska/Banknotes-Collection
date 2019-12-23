@@ -80,7 +80,7 @@ module.exports = app => {
     res.send("The query is too short");
   });
 
-  app.get("/api/banknote", requireLogin, (req, res) => {
+  app.get("/api/banknoteModel", requireLogin, (req, res) => {
     let frondEndBankoteData = {};
     for (const key in banknoteData) {
       if (banknoteData.hasOwnProperty(key)) {
@@ -98,6 +98,11 @@ module.exports = app => {
       }
     }
     res.send(frondEndBankoteData);
+  });
+
+  app.get("/api/banknote", requireLogin, async (req, res) => {
+    const banknoteList = await Banknote.find({ _user: req.user.id });
+    res.send(banknoteList);
   });
 
   app.post("/api/banknote", requireLogin, async (req, res) => {

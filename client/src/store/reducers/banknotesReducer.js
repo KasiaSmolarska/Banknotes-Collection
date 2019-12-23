@@ -1,7 +1,8 @@
-import { FETCH_BANKNOTE_MODEL } from "../actions/types";
+import { FETCH_BANKNOTE_MODEL, FETCH_BANKNOTES } from "../actions/types";
 
 const initialState = {
-  model: null
+  model: null,
+  banknotesList: []
 };
 
 export default function(state = initialState, action) {
@@ -11,6 +12,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         model: payload
+      };
+    case FETCH_BANKNOTES:
+      return {
+        ...state,
+        banknotesList: payload
       };
     default:
       return state;

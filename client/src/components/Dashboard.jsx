@@ -5,6 +5,7 @@ import Translate from "../translate/Translate";
 
 import actions from "../store/actions";
 import BanknoteForm from "./banknoteForm/BanknoteForm";
+import BanknotesList from "./BanknotesList";
 
 class Dashboard extends Component {
   state = {
@@ -20,6 +21,7 @@ class Dashboard extends Component {
         <button className="btn btn--primary" onClick={() => this.setState({ showWindow: true })}>
           <Translate name="button.addNewBanknote">Add new banknote</Translate>
         </button>
+        <BanknotesList />
         {this.state.showWindow && <BanknoteForm closeWindow={() => this.setState({ showWindow: false })} data={this.props.model} />}
       </div>
     );

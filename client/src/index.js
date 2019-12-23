@@ -13,11 +13,7 @@ import * as serviceWorker from "./serviceWorker";
 // import axios from "axios";
 // window.axios = axios;
 
-// const banknote = {
-//   title: "456 my banknnote"
-// };
-
-// axios.get("/api/banknotes").then(data => console.log(data));
+// axios.get("/api/banknote").then(data => console.log(data));
 
 const middlewares = [applyMiddleware(reduxThunk)];
 
