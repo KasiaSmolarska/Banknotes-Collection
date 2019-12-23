@@ -70,6 +70,16 @@ module.exports = app => {
     });
   });
 
+  app.post("/api/issuebank", requireLogin, async (req, res) => {
+    const search = req.body.value;
+
+    if (search.length > 2) {
+      const foundedBanks = await IssueBank.find({ name: new RegExp(`.*${search}.*`, "i"), _user: req.user.id });
+      return res.send(foundedBanks);
+    }
+    res.send("The query is too short");
+  });
+
   app.get("/api/banknote", requireLogin, (req, res) => {
     let frondEndBankoteData = {};
     for (const key in banknoteData) {

@@ -6,6 +6,7 @@ import Radio from "./Radio";
 import Textarea from "./Textarea";
 import InputNumber from "./InputNumber";
 import InputFile from "./InputFile";
+import IssueBankInput from "../banknoteForm/IssueBankInput";
 
 const NAME_TO_COMPONENT = {
   Input: Input,
@@ -13,12 +14,16 @@ const NAME_TO_COMPONENT = {
   Radio,
   Textarea,
   InputNumber,
-  InputFile
+  InputFile,
+  IssueBankInput
 };
 
 const getTypeOfInput = (modelField, fieldName) => {
   if (/image|img/g.test(fieldName)) {
     return "InputFile";
+  }
+  if (modelField.type === "ObjectId" && fieldName === "issueBank") {
+    return "IssueBankInput";
   }
   if (modelField.enum) {
     return "Select";
