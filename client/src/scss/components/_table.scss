@@ -1,0 +1,13 @@
+.table {
+  & > *:focus {
+    outline: none;
+  }
+  &__image {
+    max-height: 70px;
+    width: auto;
+    display: block;
+  }
+  &--banknote {
+    font-size: 1.6rem;
+  }
+}

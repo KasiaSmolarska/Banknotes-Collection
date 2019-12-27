@@ -7,6 +7,8 @@ import TranslateProvider from "./translate/TranslateProvider";
 
 import reducers from "./store";
 import "../src/scss/index.scss";
+import "../node_modules/react-virtualized/styles.css";
+
 import App from "./components/App.jsx";
 import * as serviceWorker from "./serviceWorker";
 
