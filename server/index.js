@@ -32,7 +32,8 @@ require("./services/passport");
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 dni
-    keys: [cookieKey]
+    keys: [cookieKey],
+    secure: false
   })
 );
 app.use(passport.initialize());
@@ -43,14 +44,12 @@ authRoutes(app);
 const bankRoutes = require("./routes/banknotesRoutes");
 bankRoutes(app);
 
-if (process.env.NODE_ENV === "production") {
-  const path = require("path");
-  app.use(express.static(path.resolve(__dirname, "..", "client", "build")));
+const path = require("path");
+app.use(express.static(path.resolve(__dirname, "..", "client", "build")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "..", "client", "build", "index.html"));
-  });
-}
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "client", "build", "index.html"));
+});
 
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => console.log("listening on port 7000"));
