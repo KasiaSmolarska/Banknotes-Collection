@@ -36,3 +36,12 @@ ul {
 a {
   text-decoration: none;
 }
+
+.flex-container {
+  display: flex;
+
+  > * {
+    flex: 1 0 0;
+    padding: 0 0.5rem;
+  }
+}
