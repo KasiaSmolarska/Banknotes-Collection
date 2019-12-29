@@ -23,7 +23,10 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: "/auth/google/callback"
+      callbackURL: "/auth/google/callback",
+      userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
+      proxy: true,
+      resave: false
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log("google", accessToken);
