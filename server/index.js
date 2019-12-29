@@ -43,7 +43,7 @@ authRoutes(app);
 const bankRoutes = require("./routes/banknotesRoutes");
 bankRoutes(app);
 
-if (true) {
+if (process.env.NODE_ENV === "production") {
   const path = require("path");
   app.use(express.static(path.resolve(__dirname, "..", "client", "build")));
 
