@@ -31,8 +31,4 @@ module.exports = app => {
     // logout() is a passport method which clean a user cookie
     res.send({ user: req.user });
   });
-
-  app.get("/dashboard", requireLogin, (req, res) => {
-    res.send("to do ! - routing ");
-  });
 };

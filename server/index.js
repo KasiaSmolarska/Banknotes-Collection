@@ -11,14 +11,6 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json({ limit: "20mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "20mb", extended: true }));
 
-if (process.env.NODE_ENV === "production") {
-  const path = require("path");
-  app.use(express.static(path.resolve(__dirname, "..", "client", "build")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "..", "client", "build", "index.html"));
-  });
-}
 // MODELS
 require("./models/User");
 require("./models/Banknote");
@@ -50,6 +42,15 @@ const authRoutes = require("./routes/authRoutes");
 authRoutes(app);
 const bankRoutes = require("./routes/banknotesRoutes");
 bankRoutes(app);
+
+if (true) {
+  const path = require("path");
+  app.use(express.static(path.resolve(__dirname, "..", "client", "build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "..", "client", "build", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => console.log("listening on port 7000"));
