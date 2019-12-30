@@ -46,8 +46,15 @@ module.exports = app => {
       const thumbName = `thumb-${req.file.filename}`;
       const thumbUrl = path.resolve(directoryPath, thumbName);
 
-      await imageThumbnail(imageBuffer, options).then(thumbnail => fs.writeFile(thumbUrl, thumbnail, err => console.log(err)));
-      res.send(req.file.filename);
+      await imageThumbnail(imageBuffer, options).then(thumbnail =>
+        fs.writeFile(thumbUrl, thumbnail, err => {
+          if (err) {
+            console.log(err);
+            return res.status(500).send({ error: "Saving file problem" });
+          }
+          res.send(req.file.filename);
+        })
+      );
     } else {
       res.status(500).send({ error: "Uploading file problem" });
     }
