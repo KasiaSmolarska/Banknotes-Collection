@@ -8,7 +8,7 @@ const keys = require("../config/keys");
 const User = mongoose.model("users");
 
 passport.serializeUser(function(user, done) {
-  console.log(user);
+  console.log("user.id", user.id);
   done(null, user.id);
 });
 
@@ -31,6 +31,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       console.log("google", accessToken);
       if (profile.provider !== "google") {
+        console.log("Provider issue.");
         return done(null, false, { message: "Provider issue." });
       }
       const existingUser = await User.findOne({ googleId: profile.id });

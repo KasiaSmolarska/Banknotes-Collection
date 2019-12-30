@@ -1,8 +1,4 @@
 const passport = require("passport");
-const path = require("path");
-const express = require("express");
-
-const requireLogin = require("../middlewares/requireLogin");
 
 module.exports = app => {
   app.get(

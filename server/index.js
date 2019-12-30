@@ -2,8 +2,6 @@ const express = require("express");
 
 const app = express();
 
-const cookieSession = require("cookie-session");
-
 const { mongoURI, cookieKey } = require("./config/keys");
 
 // Body-parser
@@ -26,24 +24,29 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, 
   console.log("Connected to Mongo DB");
 });
 
-// PASSPORT
-const passport = require("passport");
-require("./services/passport");
+// SESSION
+const cookieSession = require("cookie-session");
+
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 dni
-    keys: [cookieKey],
-    secure: false
+    keys: [cookieKey]
   })
 );
+
+// PASSPORT
+const passport = require("passport");
+require("./services/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
+// ROUTES
 const authRoutes = require("./routes/authRoutes");
 authRoutes(app);
 const bankRoutes = require("./routes/banknotesRoutes");
 bankRoutes(app);
 
+// DEPLOY
 const path = require("path");
 app.use(express.static(path.resolve(__dirname, "..", "client", "build")));
 
@@ -51,5 +54,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "client", "build", "index.html"));
 });
 
+// PORT
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => console.log("listening on port 7000"));
