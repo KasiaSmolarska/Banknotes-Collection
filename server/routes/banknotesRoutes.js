@@ -1,20 +1,29 @@
 const mongoose = require("mongoose");
+const https = require("https");
 const requireLogin = require("../middlewares/requireLogin");
 const imageThumbnail = require("image-thumbnail");
+
+// const uuidv1 = require("uuid/v1");
 
 const multer = require("multer");
 
 const path = require("path");
 const fs = require("fs");
 
-var storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, path.resolve(__dirname, "..", "uploads", "images"));
-  },
-  filename: function(req, file, cb) {
-    cb(null, Date.now().toString() + "-" + file.originalname);
-  }
+const admin = require("firebase-admin");
+
+const { serviceAccount } = require("../config/keys");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: `${serviceAccount.project_id}.appspot.com`
 });
+
+var firebaseStorage = admin.storage();
+
+var bucket = firebaseStorage.bucket();
+
+var storage = multer.memoryStorage();
 
 const upload = multer({
   storage,
@@ -34,27 +43,57 @@ const banknoteData = require("../models/Banknote");
 
 const Banknote = mongoose.model("banknotes");
 const IssueBank = mongoose.model("issueBanks");
-
+const PUBLIC_FILE = {
+  entity: "allUsers",
+  role: "READER"
+};
 module.exports = app => {
   app.post("/api/upload/image", upload.single("file"), async (req, res) => {
     if (req.file) {
       const directoryPath = path.resolve(__dirname, "..", "uploads", "images");
-      const imageUrl = path.resolve(directoryPath, req.file.filename);
-      const imageBuffer = fs.readFileSync(imageUrl);
+
+      const imageBuffer = req.file.buffer;
       const options = { width: 100, height: 100, jpegOptions: { force: true, quality: 90 } };
 
-      const thumbName = `thumb-${req.file.filename}`;
-      const thumbUrl = path.resolve(directoryPath, thumbName);
+      const thumbName = `thumb-${req.file.originalname}`;
 
-      await imageThumbnail(imageBuffer, options).then(thumbnail =>
-        fs.writeFile(thumbUrl, thumbnail, err => {
-          if (err) {
-            console.log(err);
-            return res.status(500).send({ error: "Saving file problem" });
-          }
-          res.send(req.file.filename);
-        })
-      );
+      await imageThumbnail(imageBuffer, options).then(thumbBuffer => {
+        const file = bucket.file(req.file.originalname, {});
+        const fileThumb = bucket.file(thumbName, {});
+
+        Promise.all([file.save(imageBuffer), fileThumb.save(thumbBuffer)])
+          .then(async () => {
+            // let uuid = uuidv1();
+            // let uuidThumb = uuidv1();
+            await file.makePublic();
+            await fileThumb.makePublic();
+            // await file.setMetadata({
+            //   contentType: req.file.mimetype,
+            //   metadata: {
+            //     firebaseStorageDownloadTokens: uuid
+            //   }
+            // });
+            // await fileThumb.setMetadata({
+            //   contentType: req.file.mimetype,
+            //   metadata: {
+            //     firebaseStorageDownloadTokens: uuidThumb
+            //   }
+            // });
+            // await file.getSignedUrl({
+            //   action: "read",
+            //   expires: new Date("2021-01-01")
+            // });
+            // await fileThumb.getSignedUrl({
+            //   action: "read",
+            //   expires: new Date("2021-01-01")
+            // });
+
+            res.send(req.file.originalname);
+          })
+          .catch(err => {
+            res.status(500).send({ error: err });
+          });
+      });
     } else {
       res.status(500).send({ error: "Uploading file problem" });
     }
@@ -62,18 +101,29 @@ module.exports = app => {
 
   app.get("/api/upload/image/:image", requireLogin, (req, res) => {
     const { image } = req.params;
-    const imageUrl = path.resolve(__dirname, "..", "uploads", "images", image);
+    // const imageUrl = path.resolve(__dirname, "..", "uploads", "images", image);
 
-    fs.readFile(imageUrl, (err, data) => {
+    const file = bucket.file(image);
+
+    file.get((err, file, apiResponse) => {
+      console.log(file);
       if (err) {
         return res.status("404").send(err);
       }
-      const imageUrlParts = imageUrl.split(".");
+      const imageUrlParts = image.split(".");
       const imageExtension = imageUrlParts[imageUrlParts - 1];
 
       res.set({ "Content-Type": `image/${imageExtension}` });
 
-      res.send(data);
+      https.get(apiResponse.mediaLink, body => {
+        body.on("data", d => {
+          res.write(d);
+        });
+
+        body.on("end", function() {
+          res.end();
+        });
+      });
     });
   });
 
