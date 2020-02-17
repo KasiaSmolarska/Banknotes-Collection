@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import actions from "../store/actions";
 import Header from "./Header";
 import Landing from "./Landing";
 import LoginPage from "./LoginPage";
 import Dashboard from "./Dashboard";
+import { PrivateRoute } from "./routing/PrivateRoute";
 
 class Content extends Component {
   render() {
@@ -14,28 +15,27 @@ class Content extends Component {
       <div>
         <Header />
         <Route exact path="/" component={Landing} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
       </div>
     );
   }
 }
 
-class App extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
-  }
-  render() {
-    return (
-      <div className="container">
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/login" component={LoginPage} />
-            <Route component={Content} />
-          </Switch>
-        </BrowserRouter>
-      </div>
-    );
-  }
-}
+const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actions.fetchUser());
+  }, []);
+  return (
+    <div className="container">
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login" component={LoginPage} />
+          <Route component={Content} />
+        </Switch>
+      </BrowserRouter>
+    </div>
+  );
+};
 
-export default connect(null, actions)(App);
+export default App;
