@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import UserIcon from "./svg/UserIcon";
 import LogOutIcon from "./svg/LogOutIcon";
 import AddBanknoteIcon from "./svg/AddBanknoteIcon";
+import { ReactComponent as RemoveBanknoteIcon } from "./svg/RemoveBanknoteIcon.svg";
+
+import PropTypes from "prop-types";
 
 import actions from "../store/actions";
 
@@ -45,8 +48,8 @@ class Header extends Component {
       default:
         return (
           <ul className="text-right column flex-container">
-            <li>
-              <AddBanknoteIcon />
+            <li title={this.context.translate(!this.props.showedModalToAddBanknote ? "button.addNewBanknote" : "button.closeModal")} onClick={this.props.show_modal_to_add_new_banknote}>
+              {this.props.showedModalToAddBanknote ? <RemoveBanknoteIcon /> : <AddBanknoteIcon />}
             </li>
             <li>
               <div className="nav__account dropdown">
@@ -79,10 +82,15 @@ class Header extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
+function mapStateToProps({ auth, banknote: { showedModalToAddBanknote } }) {
   return {
-    auth
+    auth,
+    showedModalToAddBanknote
   };
 }
+
+Header.contextTypes = {
+  translate: PropTypes.func
+};
 
 export default connect(mapStateToProps, actions)(Header);

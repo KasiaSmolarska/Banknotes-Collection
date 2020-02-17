@@ -106,7 +106,6 @@ module.exports = app => {
     const file = bucket.file(image);
 
     file.get((err, file, apiResponse) => {
-      console.log(file);
       if (err) {
         return res.status("404").send(err);
       }

@@ -1,36 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import Translate from "../translate/Translate";
-
 import actions from "../store/actions";
 import BanknoteForm from "./banknoteForm/BanknoteForm";
 import BanknotesList from "./BanknotesList";
 
 class Dashboard extends Component {
-  state = {
-    showWindow: false
-  };
   componentDidMount() {
     this.props.fetchBanknoteModel();
   }
   render() {
     return (
       <div>
-        <h1 className="text-center">Add new banknote!</h1>
-        <button className="btn btn--primary" onClick={() => this.setState({ showWindow: true })}>
-          <Translate name="button.addNewBanknote">Add new banknote</Translate>
-        </button>
         <BanknotesList />
-        {this.state.showWindow && <BanknoteForm closeWindow={() => this.setState({ showWindow: false })} data={this.props.model} />}
+        {this.props.showedModalToAddBanknote && <BanknoteForm closeWindow={() => this.setState({ showWindow: false })} data={this.props.model} />}
       </div>
     );
   }
 }
 
-function mapStateToProps({ banknote: { model } }) {
+function mapStateToProps({ banknote: { model, showedModalToAddBanknote } }) {
   return {
-    model: model
+    model: model,
+    showedModalToAddBanknote
   };
 }
 

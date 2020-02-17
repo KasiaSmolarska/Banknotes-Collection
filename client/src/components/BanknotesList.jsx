@@ -1,11 +1,25 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { Column, Table, AutoSizer, WindowScroller } from "react-virtualized";
+import { Column, Table, AutoSizer } from "react-virtualized";
 
 import actions from "../store/actions/index";
 
-const BanknotesList = () => {
+const cache = {};
+
+const ImageContainer = React.memo(({ className, src, alt }) => {
+  return <img className={className} src={src} alt={alt} />;
+});
+
+function uploadFrontImage({ cellData }) {
+  return (
+    <div>
+      <ImageContainer className="table__image" src={`/api/upload/image/${!!cellData ? "thumb-" + cellData : "thumb-no-photo.jpg"}`} alt={cellData} />
+    </div>
+  );
+}
+
+const BanknotesList = React.memo(function BanknotesList() {
   const banknotesList = useSelector(state => state.banknote.banknotesList);
 
   const dispatch = useDispatch();
@@ -14,14 +28,6 @@ const BanknotesList = () => {
     dispatch(actions.fetchBanknotes());
   }, [actions]);
 
-  function uploadFrontImage({ cellData }) {
-    return (
-      <div>
-        <img className="table__image" src={`/api/upload/image/${cellData ? cellData : "no-photo.jpg"}`} alt={cellData} />
-      </div>
-    );
-  }
-
   return (
     <div style={{ position: "relative", height: "calc(100vh - 138px)" }}>
       {banknotesList && (
@@ -29,7 +35,8 @@ const BanknotesList = () => {
           {({ width, height }) => (
             <Table className="table table--banknote" width={width} height={height} headerHeight={20} rowHeight={70} rowCount={banknotesList.length} rowGetter={({ index }) => banknotesList[index]}>
               <Column label="Name" dataKey="title" width={400} />
-              <Column width={200} label="Own" dataKey="own" />
+              <Column label="Country" dataKey="country" width={130} />
+              <Column width={200} label="Own" dataKey="own" cellRenderer={({ cellData }) => (!!cellData ? "yes" : "no")} />
               <Column width={130} label="Image" dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
             </Table>
           )}
@@ -37,6 +44,6 @@ const BanknotesList = () => {
       )}
     </div>
   );
-};
+});
 
 export default BanknotesList;

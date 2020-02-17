@@ -1,5 +1,6 @@
 {
   "button.addNewBanknote": "Add new banknote",
+  "button.closeModal": "Close Window",
   "label.banknoteForm.currency": "Currency (2-3 big letters)",
   "label.banknoteForm.title": "Title",
   "label.banknoteForm.country": "Country (2 big letters)",
