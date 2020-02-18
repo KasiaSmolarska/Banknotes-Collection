@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Column, Table, AutoSizer } from "react-virtualized";
 
 import actions from "../store/actions/index";
+import { Spinner } from "./Spinner";
 
 const ImageContainer = React.memo(({ className, src, alt }) => {
   return <img className={className} src={src} alt={alt} />;
@@ -17,8 +18,12 @@ function uploadFrontImage({ cellData }) {
   );
 }
 
+const getLoading = state => state.banknote;
+
 const BanknotesList = React.memo(function BanknotesList() {
   const banknotesList = useSelector(state => state.banknote.banknotesList);
+
+  const { loading } = useSelector(getLoading);
 
   const dispatch = useDispatch();
 
@@ -28,7 +33,7 @@ const BanknotesList = React.memo(function BanknotesList() {
 
   return (
     <div style={{ position: "relative", height: "calc(100vh - 138px)" }}>
-      {banknotesList && (
+      {banknotesList && !loading ? (
         <AutoSizer>
           {({ width, height }) => (
             <Table className="table table--banknote" width={width} height={height} headerHeight={20} rowHeight={70} rowCount={banknotesList.length} rowGetter={({ index }) => banknotesList[index]}>
@@ -39,6 +44,8 @@ const BanknotesList = React.memo(function BanknotesList() {
             </Table>
           )}
         </AutoSizer>
+      ) : (
+        <Spinner />
       )}
     </div>
   );

@@ -4,7 +4,8 @@ const initialState = {
   model: null,
   banknotesList: [],
   showedModalToAddBanknote: false,
-  loading: true
+  loading: true,
+  error: {}
 };
 
 export default function(state = initialState, action) {

@@ -2,6 +2,7 @@ import React from "react";
 
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { Spinner } from "./Spinner";
 
 import GoogleIcon from "./svg/GoogleIcon";
 import FacebookIcon from "./svg/FacebookIcon";
@@ -14,7 +15,7 @@ const LoginPage = props => {
   if (auth.user) {
     return <Redirect to="/dashboard" />;
   }
-  return (
+  return !auth.loading ? (
     <div className="auth auth__wrapper">
       <div className="auth__container text-center">
         <h1 className="auth__heading heading-1">Login or create Account.</h1>
@@ -31,6 +32,8 @@ const LoginPage = props => {
         </div>
       </div>
     </div>
+  ) : (
+    <Spinner />
   );
 };
 
