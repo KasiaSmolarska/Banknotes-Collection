@@ -162,11 +162,6 @@ module.exports = app => {
         const query = new RegExp(req.query.query, "i");
         const searchedList = await Banknote.find({ $and: [{ _user: req.user.id }, { $or: [{ title: query }, { country: query }] }] });
 
-        if (searchedList.length === 0) {
-          return res.status(404).json({
-            msg: "Banknote not found"
-          });
-        }
         res.send(searchedList);
       } else {
         const banknoteList = await Banknote.find({ _user: req.user.id });

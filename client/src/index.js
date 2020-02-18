@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
 import TranslateProvider from "./translate/TranslateProvider";
+import { Alert } from "./components/Alert";
 
 import reducers from "./store";
 import "../src/scss/index.scss";
@@ -29,6 +30,9 @@ ReactDOM.render(
   <TranslateProvider>
     <Provider store={store}>
       <App />
+      <div className="alert__container">
+        <Alert />
+      </div>
     </Provider>
   </TranslateProvider>,
   document.getElementById("root")
