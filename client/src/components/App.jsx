@@ -25,7 +25,7 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(actions.fetchUser());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="container">
       <BrowserRouter>

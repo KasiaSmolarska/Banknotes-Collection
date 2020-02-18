@@ -5,8 +5,6 @@ import { Column, Table, AutoSizer } from "react-virtualized";
 
 import actions from "../store/actions/index";
 
-const cache = {};
-
 const ImageContainer = React.memo(({ className, src, alt }) => {
   return <img className={className} src={src} alt={alt} />;
 });
@@ -26,7 +24,7 @@ const BanknotesList = React.memo(function BanknotesList() {
 
   React.useEffect(() => {
     dispatch(actions.fetchBanknotes());
-  }, [actions]);
+  }, [dispatch]);
 
   return (
     <div style={{ position: "relative", height: "calc(100vh - 138px)" }}>

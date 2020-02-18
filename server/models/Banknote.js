@@ -82,7 +82,11 @@ const banknoteData = {
     type: "Number"
   },
   imageFront: { type: "String" },
-  imageReverse: { type: "String" }
+  imageReverse: { type: "String" },
+  favorite: {
+    type: "Boolean",
+    default: false
+  }
 };
 
 const BanknoteSchema = new Schema(banknoteData);
