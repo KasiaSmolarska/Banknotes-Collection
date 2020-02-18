@@ -32,7 +32,7 @@ class Header extends Component {
   }
 
   renderContent() {
-    switch (this.props.auth) {
+    switch (this.props.auth.user) {
       case null:
         return;
       case false:

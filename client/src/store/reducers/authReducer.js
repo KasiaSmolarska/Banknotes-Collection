@@ -11,13 +11,13 @@ export default function(state = initial_state, action) {
     case FETCH_USER:
       return {
         ...state,
-        user: payload.user ? payload.user : null,
+        user: payload.user ? payload.user : false,
         loading: false
       };
     case LOG_OUT_USER:
       return {
         ...state,
-        user: null,
+        user: false,
         loading: false
       };
     default:
