@@ -1,11 +1,14 @@
-import { FETCH_BANKNOTE_MODEL, FETCH_BANKNOTES, SHOW_MODAL_TO_ADD_BANKNOTE, SEARCH_BANKNOTES, BANKNOTE_ERROR } from "../actions/types";
+import { FETCH_BANKNOTE_MODEL, FETCH_BANKNOTES, SHOW_MODAL_TO_ADD_BANKNOTE, SEARCH_BANKNOTES, BANKNOTE_ERROR, SET_SEARCH_PARAMS, SET_SORT } from "../actions/types";
 
 const initialState = {
   model: null,
   banknotesList: [],
   showedModalToAddBanknote: false,
   loading: true,
-  error: {}
+  error: {},
+  searchParams: "",
+  sortBy: "title",
+  sortDirection: "ASC"
 };
 
 export default function(state = initialState, action) {
@@ -40,6 +43,17 @@ export default function(state = initialState, action) {
         ...state,
         error: payload,
         loading: false
+      };
+    case SET_SEARCH_PARAMS:
+      return {
+        ...state,
+        searchParams: payload
+      };
+    case SET_SORT:
+      return {
+        ...state,
+        sortBy: payload.sortBy,
+        sortDirection: payload.sortDirection
       };
     default:
       return state;

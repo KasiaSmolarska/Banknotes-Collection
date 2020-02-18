@@ -8,3 +8,5 @@ export const SEARCH_BANKNOTES = "search_banknotes";
 export const BANKNOTE_ERROR = "banknote_error";
 export const SET_ALERT = "set_alert";
 export const REMOVE_ALERT = "remove_alert";
+export const SET_SEARCH_PARAMS = "set_search_params";
+export const SET_SORT = "set_sort";

@@ -158,15 +158,12 @@ module.exports = app => {
 
   app.get("/api/banknote", requireLogin, async (req, res) => {
     try {
-      if (req.query.query) {
-        const query = new RegExp(req.query.query, "i");
-        const searchedList = await Banknote.find({ $and: [{ _user: req.user.id }, { $or: [{ title: query }, { country: query }] }] });
+      const { query = "", sortBy, sortDirection } = req.query;
 
-        res.send(searchedList);
-      } else {
-        const banknoteList = await Banknote.find({ _user: req.user.id });
-        res.send(banknoteList);
-      }
+      const queryRegEx = new RegExp(query, "i");
+      const searchedList = await Banknote.find({ $and: [{ _user: req.user.id }, { $or: [{ title: queryRegEx }, { country: queryRegEx }] }] }).sort({ [sortBy]: sortDirection === "ASC" ? 1 : -1 });
+
+      res.send(searchedList);
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Server Error");
