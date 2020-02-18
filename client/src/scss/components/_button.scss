@@ -51,6 +51,12 @@
     padding: 1.5rem;
   }
 
+  &--round-small {
+    border-radius: 50%;
+    padding: 1rem;
+    display: inherit;
+  }
+
   &--flex {
     display: flex !important;
     align-items: center;
@@ -64,6 +70,12 @@
     &:after {
       background-color: $white;
     }
+  }
+
+  &--search {
+    position: relative;
+    left: -2rem;
+    padding: 1.5rem 2.5rem;
   }
 
   &--icon {
@@ -149,9 +161,5 @@
       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
       transform: translateY(0px);
     }
-  }
-
-  svg {
-    fill: inherit;
   }
 }

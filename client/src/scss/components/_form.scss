@@ -33,6 +33,7 @@
 
     &--flex {
       display: flex;
+      align-items: center;
     }
   }
 
@@ -167,7 +168,7 @@
       transform: translateY(-9rem);
     }
     &--flex {
-      transform: translateY(-3rem);
+      transform: translateY(-4.2rem);
     }
   }
 

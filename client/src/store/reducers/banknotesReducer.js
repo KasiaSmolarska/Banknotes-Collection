@@ -1,4 +1,4 @@
-import { FETCH_BANKNOTE_MODEL, FETCH_BANKNOTES, SHOW_MODAL_TO_ADD_BANKNOTE, SEARCH_BANKNOTES } from "../actions/types";
+import { FETCH_BANKNOTE_MODEL, FETCH_BANKNOTES, SHOW_MODAL_TO_ADD_BANKNOTE, SEARCH_BANKNOTES, BANKNOTE_ERROR } from "../actions/types";
 
 const initialState = {
   model: null,
@@ -32,6 +32,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         banknotesList: payload,
+        loading: false
+      };
+    case BANKNOTE_ERROR:
+      return {
+        ...state,
+        error: payload,
         loading: false
       };
     default:

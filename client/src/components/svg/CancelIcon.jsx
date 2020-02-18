@@ -1,8 +1,8 @@
 import React from "react";
 
-export const CancelIcon = ({ fill }) => {
+export const CancelIcon = ({ fill, width, height }) => {
   return (
-    <svg width="20" height="20" x="0px" y="0px" viewBox="0 0 512.001 512.001">
+    <svg width={width || "20"} height={height || "20"} x="0px" y="0px" viewBox="0 0 512.001 512.001">
       <path
         fill={fill || "#000"}
         d="M294.111,256.001L504.109,46.003c10.523-10.524,10.523-27.586,0-38.109c-10.524-10.524-27.587-10.524-38.11,0L256,217.892
