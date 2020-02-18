@@ -46,6 +46,11 @@
     transition: all 0.4s;
   }
 
+  &--round {
+    border-radius: 50%;
+    padding: 1.5rem;
+  }
+
   &--flex {
     display: flex !important;
     align-items: center;
@@ -100,6 +105,15 @@
     }
   }
 
+  &--danger {
+    background-color: $danger-color;
+    color: $white;
+
+    &:after {
+      background-color: $danger-color;
+    }
+  }
+
   &--animated {
     animation: moveInBottom 1.5s ease-in-out 0.5s;
     animation-fill-mode: backwards;
@@ -135,5 +149,9 @@
       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
       transform: translateY(0px);
     }
+  }
+
+  svg {
+    fill: inherit;
   }
 }

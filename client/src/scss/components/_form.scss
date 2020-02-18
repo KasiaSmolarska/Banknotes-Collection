@@ -30,6 +30,10 @@
       justify-content: space-between;
       padding: 2.5rem 0;
     }
+
+    &--flex {
+      display: flex;
+    }
   }
 
   &__group-label {
@@ -162,6 +166,9 @@
     &--file {
       transform: translateY(-9rem);
     }
+    &--flex {
+      transform: translateY(-3rem);
+    }
   }
 
   &__input:placeholder-shown + &__label {
@@ -228,5 +235,10 @@
   &__image-file {
     max-width: 100px;
     max-height: 130px;
+  }
+
+  &--search {
+    display: flex;
+    margin: 1rem;
   }
 }

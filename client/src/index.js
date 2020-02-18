@@ -15,7 +15,7 @@ import * as serviceWorker from "./serviceWorker";
 // import axios from "axios";
 // window.axios = axios;
 
-// axios.get("/api/banknote").then(data => console.log(data));
+// axios.get("/api/banknote?query=dd").then(data => console.log(data));
 
 const middlewares = [applyMiddleware(reduxThunk)];
 

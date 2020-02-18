@@ -157,8 +157,26 @@ module.exports = app => {
   });
 
   app.get("/api/banknote", requireLogin, async (req, res) => {
-    const banknoteList = await Banknote.find({ _user: req.user.id });
-    res.send(banknoteList);
+    try {
+      if (req.query.query) {
+        const query = new RegExp(req.query.query, "i");
+        const searchedList = await Banknote.find({ $and: [{ _user: req.user.id }, { $or: [{ title: query }, { country: query }] }] });
+        console.log(searchedList);
+
+        if (searchedList.length === 0) {
+          return res.status(404).json({
+            msg: "Banknote not found"
+          });
+        }
+        res.send(searchedList);
+      } else {
+        const banknoteList = await Banknote.find({ _user: req.user.id });
+        res.send(banknoteList);
+      }
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Server Error");
+    }
   });
 
   app.post("/api/banknote", requireLogin, async (req, res) => {

@@ -1,6 +1,7 @@
 {
   "button.addNewBanknote": "Add new banknote",
   "button.closeModal": "Close Window",
+  "button.reset": "Reset",
   "label.banknoteForm.currency": "Currency (2-3 big letters)",
   "label.banknoteForm.title": "Title",
   "label.banknoteForm.country": "Country (2 big letters)",
@@ -21,5 +22,6 @@
   "label.banknoteForm.purchaseDate": "Purchase Date",
   "label.banknoteForm.pricePaid": "Price Paid",
   "label.banknoteForm.currencyPaid": "Currency Paid (2-3 big letters)",
-  "label.banknoteForm.userNotes": "User Notes"
+  "label.banknoteForm.userNotes": "User Notes",
+  "input.searchPlaceholder": "Search banknotes"
 }

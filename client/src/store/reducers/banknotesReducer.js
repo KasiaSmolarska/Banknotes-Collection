@@ -1,4 +1,4 @@
-import { FETCH_BANKNOTE_MODEL, FETCH_BANKNOTES, SHOW_MODAL_TO_ADD_BANKNOTE } from "../actions/types";
+import { FETCH_BANKNOTE_MODEL, FETCH_BANKNOTES, SHOW_MODAL_TO_ADD_BANKNOTE, SEARCH_BANKNOTES } from "../actions/types";
 
 const initialState = {
   model: null,
@@ -26,6 +26,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         showedModalToAddBanknote: !state.showedModalToAddBanknote,
+        loading: false
+      };
+    case SEARCH_BANKNOTES:
+      return {
+        ...state,
+        banknotesList: payload,
         loading: false
       };
     default:
