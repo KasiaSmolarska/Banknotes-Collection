@@ -218,4 +218,25 @@ module.exports = app => {
       res.send({ status: "banknote was added to you collection" });
     });
   });
+
+  app.put("/api/banknote/like/:banknoteId", requireLogin, async (req, res) => {
+    try {
+      const { banknoteId } = req.params;
+      let banknote = await Banknote.findById(banknoteId);
+
+      if (!banknote) {
+        return res.status(404).json({
+          msg: "Banknote you are trying to like doesn't exist"
+        });
+      }
+
+      banknote.favorite = !banknote.favorite;
+
+      await banknote.save(banknote.favorite);
+      res.send(banknote.favorite);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  });
 };

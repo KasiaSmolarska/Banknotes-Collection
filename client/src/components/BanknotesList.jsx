@@ -5,6 +5,7 @@ import { Column, Table, AutoSizer } from "react-virtualized";
 
 import actions from "../store/actions/index";
 import { Spinner } from "./Spinner";
+import { ListActions } from "./list/ListActions";
 
 const ImageContainer = React.memo(({ className, src, alt }) => {
   return <img className={className} src={src} alt={alt} />;
@@ -60,6 +61,7 @@ const BanknotesList = React.memo(function BanknotesList() {
               <Column label="Country" dataKey="country" width={130} />
               <Column width={200} label="Own" dataKey="own" cellRenderer={({ cellData }) => (!!cellData ? "yes" : "no")} />
               <Column width={130} label="Image" dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
+              <Column width={130} label="Actions" dataKey="_id" cellRenderer={({ rowData: { _id, favorite } }) => <ListActions id={_id} favorite={favorite} />} />
             </Table>
           )}
         </AutoSizer>
