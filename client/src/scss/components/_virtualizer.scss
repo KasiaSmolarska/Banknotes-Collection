@@ -1,0 +1,10 @@
+.ReactVirtualized {
+  &__Table {
+    &__row {
+      overflow: visible !important;
+    }
+    &__rowColumn {
+      overflow: visible !important;
+    }
+  }
+}

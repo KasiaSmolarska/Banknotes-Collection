@@ -24,6 +24,6 @@
   "label.banknoteForm.currencyPaid": "Currency Paid (2-3 big letters)",
   "label.banknoteForm.userNotes": "User Notes",
   "input.searchPlaceholder": "Search",
-  "actions.removeFromFavorites": "Remove from favorites",
+  "action.removeFromFavorites": "Remove from favorites",
   "action.addToFavorites": "Add to favorites"
 }

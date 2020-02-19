@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { Dropdown } from "./dropdown/Dropdown";
 import UserIcon from "./svg/UserIcon";
 import LogOutIcon from "./svg/LogOutIcon";
 import AddBanknoteIcon from "./svg/AddBanknoteIcon";
 import { ReactComponent as RemoveBanknoteIcon } from "./svg/RemoveBanknoteIcon.svg";
-
 import PropTypes from "prop-types";
 
 import actions from "../store/actions";
@@ -52,16 +51,11 @@ class Header extends Component {
               {this.props.showedModalToAddBanknote ? <RemoveBanknoteIcon /> : <AddBanknoteIcon />}
             </li>
             <li>
-              <div className="nav__account dropdown">
-                <div className="dropdown__button" onClick={this.showMenu}>
-                  <UserIcon />
-                </div>
-                <div className={`dropdown__container dropdown__container--left ${this.state.showedMenu && "dropdown__container--visible"}`}>
-                  <button className="btn btn--text" onClick={this.handleClick}>
-                    <LogOutIcon color="#7a18e3" /> Log out
-                  </button>
-                </div>
-              </div>
+              <Dropdown icon="UserIcon" classList="dropdown__container--left">
+                <button className="btn btn--text" onClick={this.handleClick}>
+                  <LogOutIcon color="#7a18e3" /> Log out
+                </button>
+              </Dropdown>
             </li>
           </ul>
         );

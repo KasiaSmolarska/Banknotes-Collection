@@ -223,6 +223,13 @@ module.exports = app => {
     try {
       const { banknoteId } = req.params;
       let banknote = await Banknote.findById(banknoteId);
+      console.log(req.user._id, banknote._user);
+
+      if (banknote._user.toString() !== req.user._id.toString()) {
+        return res.status(403).json({
+          msg: "You are not permitted to like this banknote!"
+        });
+      }
 
       if (!banknote) {
         return res.status(404).json({

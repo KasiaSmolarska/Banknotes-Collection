@@ -7,7 +7,7 @@ const toggleBanknotesLike = id => async dispatch => {
     const favorite = await axios.put(`/api/banknote/like/${id}`);
     dispatch(
       actions.setAlert({
-        type: favorite.data ? "success" : "danger",
+        type: favorite.data ? "success" : "info",
         msg: favorite.data ? "Bankote is added to favorites" : "Banknote is removed from favorites",
         duration: 3500
       })
