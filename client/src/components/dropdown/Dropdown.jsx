@@ -14,7 +14,7 @@ export const Dropdown = ({ children, classList, icon, title }, contex) => {
   };
   return (
     <div className="dropdown">
-      <div className="dropdown__button" onClick={handleClick} title={contex.translate({title})}>
+      <div className="dropdown__button" onClick={handleClick} title={contex.translate({ title })}>
         <Icon icon={icon} />
       </div>
       <div className={`dropdown__container ${classList && classList} ${open && "dropdown__container--visible"}`}>{children}</div>
@@ -22,4 +22,6 @@ export const Dropdown = ({ children, classList, icon, title }, contex) => {
   );
 };
 
-Dropdown.
+Dropdown.contextTypes = {
+  translate: PropTypes.func
+};
