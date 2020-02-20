@@ -2,9 +2,33 @@
   &__Table {
     &__row {
       overflow: visible !important;
+      border-bottom: 1px solid #e8e8e8;
     }
     &__rowColumn {
       overflow: visible !important;
+      white-space: normal;
+    }
+
+    &__sortableHeaderColumn {
+      cursor: pointer;
+      color: #000;
+      text-transform: none;
+      font-weight: 500;
+
+      &:focus {
+        border: 0;
+        outline: none;
+      }
+    }
+
+    &__headerRow {
+      border-bottom: 2px solid #e8e8e8;
+    }
+
+    &__sortableHeaderIcon.ReactVirtualized__Table__sortableHeaderIcon--ASC,
+    &__sortableHeaderIcon.ReactVirtualized__Table__sortableHeaderIcon--DESC {
+      width: 25px;
+      height: 25px;
     }
   }
 }

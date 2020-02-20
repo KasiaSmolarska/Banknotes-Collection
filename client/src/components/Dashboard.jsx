@@ -1,39 +1,39 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Search } from "./Search";
 import { Spinner } from "./Spinner";
 
 import actions from "../store/actions";
 import BanknoteForm from "./banknoteForm/BanknoteForm";
 import BanknotesList from "./BanknotesList";
+import EditForm from "./banknoteForm/EditForm";
 
-class Dashboard extends Component {
-  componentDidMount() {
-    this.props.fetchBanknoteModel();
-  }
+import { useMedia } from "./hooks/useMedia";
 
-  render() {
-    return !this.props.loading ? (
-      <div>
-        <Search />
-        <BanknotesList />
-        {this.props.showedModalToAddBanknote && <BanknoteForm />}
-      </div>
-    ) : (
-      <Spinner />
-    );
-  }
-}
+const getBanknote = state => state.banknote;
 
-function mapStateToProps({ banknote: { showedModalToAddBanknote, loading } }) {
-  return {
-    showedModalToAddBanknote,
-    loading
-  };
-}
+const Dashboard = () => {
+  const dispatch = useDispatch();
 
-const mapDispatchToProps = dispatch => ({
-  fetchBanknoteModel: () => dispatch(actions.fetchBanknoteModel())
-});
+  useEffect(() => {
+    dispatch(actions.fetchBanknoteModel());
+  }, []);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+  const media = useMedia();
+
+  const { showedModalToAddBanknote, showedModalToEditBanknote, loading, banknote } = useSelector(getBanknote);
+
+  return !loading ? (
+    <div>
+      <Search />
+      {media == "lg" && <BanknotesList />}
+      {showedModalToEditBanknote && <EditForm initialValues={banknote} />}
+
+      {showedModalToAddBanknote && <BanknoteForm />}
+    </div>
+  ) : (
+    <Spinner />
+  );
+};
+
+export default Dashboard;

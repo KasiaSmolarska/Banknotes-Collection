@@ -5,8 +5,9 @@ import { Column, Table, AutoSizer } from "react-virtualized";
 
 import actions from "../store/actions/index";
 import { Spinner } from "./Spinner";
-import EditForm from "./banknoteForm/EditForm";
 import { ListActions } from "./list/ListActions";
+
+import { useSort } from "./hooks/useSort";
 
 const ImageContainer = React.memo(({ className, src, alt }) => {
   return <img className={className} src={src} alt={alt} />;
@@ -21,18 +22,10 @@ function uploadFrontImage({ cellData }) {
 }
 
 const getLoading = state => state.banknote;
-const getBanknote = state => state.banknote;
-const getShowModal = state => state.banknote;
 
 const BanknotesList = React.memo(function BanknotesList() {
-  const { banknote } = useSelector(getBanknote);
-  const { showedModalToEditBanknote } = useSelector(getShowModal);
-
   const banknotesList = useSelector(state => state.banknote.banknotesList);
   const { loading } = useSelector(getLoading);
-
-  const [sortBy, setSortBy] = useState("title");
-  const [sortDirection, setSortDirection] = useState("ASC");
 
   const dispatch = useDispatch();
 
@@ -40,12 +33,10 @@ const BanknotesList = React.memo(function BanknotesList() {
     dispatch(actions.fetchBanknotes());
   }, [dispatch]);
 
-  React.useEffect(() => {
-    dispatch(actions.sortBanknotes(sortBy, sortDirection));
-  }, [sortBy, sortDirection]);
+  const { sortBy, setSortBy, sortDirection, setSortDirection } = useSort();
 
   return (
-    <div style={{ position: "relative", height: "calc(100vh - 138px)" }}>
+    <div style={{ position: "relative", height: "calc(100vh - 140px)" }}>
       {banknotesList && !loading ? (
         <>
           <AutoSizer>
@@ -60,19 +51,24 @@ const BanknotesList = React.memo(function BanknotesList() {
                 className="table table--banknote"
                 width={width}
                 height={height}
-                headerHeight={20}
-                rowHeight={70}
+                headerHeight={60}
+                rowHeight={90}
                 rowCount={banknotesList.length}
                 rowGetter={({ index }) => banknotesList[index]}>
-                <Column label="Name" dataKey="title" width={400} />
-                <Column label="Country" dataKey="country" width={130} />
-                <Column width={200} label="Own" dataKey="own" cellRenderer={({ cellData }) => (!!cellData ? "yes" : "no")} />
-                <Column width={130} label="Image" dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
-                <Column width={130} label="Actions" dataKey="_id" cellRenderer={({ rowData: { _id, favorite, title } }) => <ListActions id={_id} favorite={favorite} title={title} />} />
+                <Column label="Name" dataKey="title" width={width * 0.2} />
+                <Column width={width * 0.1} label="Front" dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
+                <Column width={width * 0.1} label="Back" dataKey="imageReverse" cellData="" cellRenderer={uploadFrontImage} />
+                <Column label="Country" dataKey="country" width={width * 0.1} />
+                <Column label="Value" dataKey="value" width={width * 0.1} />
+                <Column label="Currency" dataKey="currency" width={width * 0.1} />
+                <Column label="Year" dataKey="issueYear" width={width * 0.1} />
+
+                <Column width={width * 0.1} label="Own" dataKey="own" cellRenderer={({ cellData }) => (!!cellData ? "yes" : "no")} />
+
+                <Column width={width * 0.1} label="Actions" dataKey="_id" cellRenderer={({ rowData: { _id, favorite, title } }) => <ListActions id={_id} favorite={favorite} title={title} />} />
               </Table>
             )}
           </AutoSizer>
-          {showedModalToEditBanknote && <EditForm initialValues={banknote} />}
         </>
       ) : (
         <Spinner />
