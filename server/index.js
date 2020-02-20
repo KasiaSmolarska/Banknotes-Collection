@@ -17,7 +17,7 @@ require("./models/IssueBank");
 // MONGOOSE
 const mongoose = require("mongoose");
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false }, err => {
   if (err) {
     return console.log("mongoose contecction error:", err);
   }

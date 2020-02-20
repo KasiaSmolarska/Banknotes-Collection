@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 
 import FormGroup from "../form/FormGroup";
 
-import postBanknote from "../../store/actions/postBanknote";
+import updateBanknote from "../../store/actions/updateBanknote";
+import show_modal_to_edit_banknote from "../../store/actions/show_modal_to_edit_banknote";
 
 const BANKNOTE_FORM_GROUPS = {
   elementary: ["title", "value", "currency", "own"],
@@ -34,7 +35,7 @@ class EditForm extends Component {
           encType="multipart/form-data"
           onSubmit={e => {
             const callback = this.props.handleSubmit(values => {
-              this.props.handleDispatch(values);
+              this.props.updateBanknote(this.props.form.values._id, values).then(this.props.show_modal_to_edit_banknote());
               this.props.reset();
             });
             callback(e);
@@ -69,15 +70,16 @@ function validateInputs(values) {
   return errors;
 }
 
-function mapStateToProps({ form: { banknoteForm }, banknote: { model } }) {
+function mapStateToProps({ form: { editForm }, banknote: { model } }) {
   return {
-    form: banknoteForm,
+    form: editForm,
     data: model
   };
 }
 
 const mapDispatchToProps = dispatch => ({
-  postBanknote: banknote => dispatch(postBanknote(banknote))
+  updateBanknote: (id, banknote) => dispatch(updateBanknote(id, banknote)),
+  show_modal_to_edit_banknote: () => dispatch(show_modal_to_edit_banknote())
 });
 
 EditForm = connect(mapStateToProps, mapDispatchToProps)(EditForm);

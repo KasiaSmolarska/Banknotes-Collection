@@ -10,6 +10,7 @@ import { sortBanknotes } from "./sortBanknotes";
 import toggleBanknotesLike from "./toggleBanknotesLike";
 import fetchBanknoteById from "./fetchBanknoteById";
 import show_modal_to_edit_banknote from "./show_modal_to_edit_banknote";
+import updateBanknote from "./updateBanknote";
 
 const actions = {
   fetchUser,
@@ -25,7 +26,8 @@ const actions = {
   sortBanknotes,
   toggleBanknotesLike,
   fetchBanknoteById,
-  show_modal_to_edit_banknote
+  show_modal_to_edit_banknote,
+  updateBanknote
 };
 
 export default actions;

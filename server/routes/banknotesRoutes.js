@@ -8,7 +8,6 @@ const imageThumbnail = require("image-thumbnail");
 const multer = require("multer");
 
 const path = require("path");
-const fs = require("fs");
 
 const admin = require("firebase-admin");
 
@@ -43,10 +42,45 @@ const banknoteData = require("../models/Banknote");
 
 const Banknote = mongoose.model("banknotes");
 const IssueBank = mongoose.model("issueBanks");
-const PUBLIC_FILE = {
-  entity: "allUsers",
-  role: "READER"
+
+const createBanknote = async (body, userId) => {
+  const banknoteData = {};
+  for (const key in body) {
+    if (body.hasOwnProperty(key)) {
+      const banknoteFieldData = body[key];
+
+      if (key === "issueBank") {
+        const existingIssueBank = await IssueBank.findOne({ name: banknoteFieldData, _user: userId });
+
+        if (existingIssueBank) {
+          console.log(`You have already have bank ${existingIssueBank.name} in your collection`);
+          banknoteData[key] = existingIssueBank.id;
+          continue;
+        }
+
+        let issueBankData = {
+          _user: userId,
+          name: banknoteFieldData
+        };
+        await new Promise((resolve, reject) =>
+          new IssueBank(issueBankData).save((err, issueBank) => {
+            if (err) {
+              console.log(err);
+              resolve();
+              return res.status(422).send(err);
+            }
+            banknoteData[key] = issueBank.id;
+            resolve();
+          })
+        );
+      } else {
+        banknoteData[key] = banknoteFieldData;
+      }
+    }
+  }
+  return banknoteData;
 };
+
 module.exports = app => {
   app.post("/api/upload/image", upload.single("file"), async (req, res) => {
     if (req.file) {
@@ -176,39 +210,12 @@ module.exports = app => {
       dateCreated: new Date()
     };
 
-    for (const key in req.body) {
-      if (req.body.hasOwnProperty(key)) {
-        const banknoteFieldData = req.body[key];
+    const createdBanknoteData = await createBanknote(req.body, req.user._id);
 
-        if (key === "issueBank") {
-          const existingIssueBank = await IssueBank.findOne({ name: banknoteFieldData, _user: req.user.id });
-
-          if (existingIssueBank) {
-            console.log(`You have already have bank ${existingIssueBank.name} in your collection`);
-            banknoteData[key] = existingIssueBank.id;
-            continue;
-          }
-
-          let issueBankData = {
-            _user: req.user.id,
-            name: banknoteFieldData
-          };
-          await new Promise((resolve, reject) =>
-            new IssueBank(issueBankData).save((err, issueBank) => {
-              if (err) {
-                console.log(err);
-                resolve();
-                return res.status(422).send(err);
-              }
-              banknoteData[key] = issueBank.id;
-              resolve();
-            })
-          );
-        } else {
-          banknoteData[key] = banknoteFieldData;
-        }
-      }
-    }
+    banknoteData = {
+      ...banknoteData,
+      ...createdBanknoteData
+    };
 
     await new Banknote(banknoteData).save((err, banknote) => {
       if (err) {
@@ -267,6 +274,28 @@ module.exports = app => {
       }
 
       res.send(banknote);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  });
+
+  // Update banknote
+
+  app.post("/api/banknote/:banknoteId", requireLogin, async (req, res) => {
+    try {
+      const banknoteId = req.params.banknoteId;
+      let banknote = await Banknote.find({ _user: req.user._id, _id: banknoteId });
+      if (!banknote) {
+        return res.status(404).json({
+          msg: "Banknote you are trying to change doesn't exist"
+        });
+      }
+
+      const createdBanknoteData = await createBanknote(req.body, req.user._id);
+
+      banknote = await Banknote.findOneAndUpdate({ _user: req.user._id, _id: banknoteId }, { $set: createdBanknoteData }, { new: true });
+      return res.send(banknote);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
