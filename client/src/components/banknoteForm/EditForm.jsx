@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 
+import Translate from "../../translate/Translate";
 import FormGroup from "../form/FormGroup";
+import PropTypes from "prop-types";
 
 import updateBanknote from "../../store/actions/updateBanknote";
 import show_modal_to_edit_banknote from "../../store/actions/show_modal_to_edit_banknote";
@@ -41,9 +43,11 @@ class EditForm extends Component {
             callback(e);
           }}>
           <div className="form--banknote__header">
-            <h1>Add new banknote</h1>
+            <h1>
+              <Translate name="header.editForm" />
+            </h1>
             <button className="btn" type="submit">
-              submit
+              <Translate name="button.submit" />
             </button>
           </div>
 
@@ -90,3 +94,7 @@ export default reduxForm({
   destroyOnUnmount: true,
   keepDirtyOnReinitialize: true
 })(EditForm);
+
+EditForm.contextTypes = {
+  translate: PropTypes.func
+};

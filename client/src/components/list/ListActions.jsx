@@ -20,7 +20,9 @@ export const ListActions = ({ id, favorite }, context) => {
   return (
     <>
       <Dropdown icon="AlertIcon">
-        <div className="listActions__remove">Remove</div>
+        <div className="listActions__remove">
+          <Translate name="button.remove" />
+        </div>
         <div className="listActions__favorite" onClick={() => toggleLikes(id)}>
           {favorite ? (
             <span className="listActions__favorite-elem" title={context.translate("action.removeFromFavorites")}>
@@ -33,7 +35,7 @@ export const ListActions = ({ id, favorite }, context) => {
           )}
         </div>
         <div className="listActions__edit" onClick={() => openModal(id)}>
-          Edit
+          <Translate name="button.edit" />
         </div>
       </Dropdown>
     </>

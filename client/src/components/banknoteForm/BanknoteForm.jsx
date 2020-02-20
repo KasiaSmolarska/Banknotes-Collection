@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
-
+import Translate from "../../translate/Translate";
 import FormGroup from "../form/FormGroup";
+import PropTypes from "prop-types";
 
 import postBanknote from "../../store/actions/postBanknote";
 import show_modal_to_add_new_banknote from "../../store/actions/show_modal_to_add_new_banknote";
@@ -41,9 +42,11 @@ class BanknoteForm extends Component {
             callback(e);
           }}>
           <div className="form--banknote__header">
-            <h1>Add new banknote</h1>
+            <h1>
+              <Translate name="header.banknoteForm" />
+            </h1>
             <button className="btn" type="submit">
-              submit
+              <Translate name="button.submit" />
             </button>
           </div>
 
@@ -89,3 +92,7 @@ export default reduxForm({
   validate: validateInputs,
   destroyOnUnmount: true
 })(BanknoteForm);
+
+BanknoteForm.contextTypes = {
+  translate: PropTypes.func
+};
