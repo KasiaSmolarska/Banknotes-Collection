@@ -12,22 +12,31 @@ export const ListActions = ({ id, favorite }, context) => {
   const toggleLikes = id => {
     dispatch(actions.toggleBanknotesLike(id));
   };
+
+  const openModal = id => {
+    dispatch(actions.fetchBanknoteById(id)).then(() => dispatch(actions.show_modal_to_edit_banknote()));
+  };
+
   return (
-    <Dropdown icon="AlertIcon">
-      <div className="listActions__remove">Remove</div>
-      <div className="listActions__favorite" onClick={() => toggleLikes(id)}>
-        {favorite ? (
-          <span className="listActions__favorite-elem" title={context.translate("action.removeFromFavorites")}>
-            <HeartIcon height="25" width="25" />
-          </span>
-        ) : (
-          <span className="listActions__favorite-elem" title={context.translate("action.addToFavorites")}>
-            <HeartIcon height="25" width="25" fill="#cacaca" />
-          </span>
-        )}
-      </div>
-      <div className="listActions__edit">Edit</div>
-    </Dropdown>
+    <>
+      <Dropdown icon="AlertIcon">
+        <div className="listActions__remove">Remove</div>
+        <div className="listActions__favorite" onClick={() => toggleLikes(id)}>
+          {favorite ? (
+            <span className="listActions__favorite-elem" title={context.translate("action.removeFromFavorites")}>
+              <HeartIcon height="25" width="25" />
+            </span>
+          ) : (
+            <span className="listActions__favorite-elem" title={context.translate("action.addToFavorites")}>
+              <HeartIcon height="25" width="25" fill="#cacaca" />
+            </span>
+          )}
+        </div>
+        <div className="listActions__edit" onClick={() => openModal(id)}>
+          Edit
+        </div>
+      </Dropdown>
+    </>
   );
 };
 

@@ -11,12 +11,13 @@ class Dashboard extends Component {
   componentDidMount() {
     this.props.fetchBanknoteModel();
   }
+
   render() {
     return !this.props.loading ? (
       <div>
         <Search />
         <BanknotesList />
-        {this.props.showedModalToAddBanknote && <BanknoteForm closeWindow={() => this.setState({ showWindow: false })} data={this.props.model} />}
+        {this.props.showedModalToAddBanknote && <BanknoteForm />}
       </div>
     ) : (
       <Spinner />
@@ -24,12 +25,15 @@ class Dashboard extends Component {
   }
 }
 
-function mapStateToProps({ banknote: { model, showedModalToAddBanknote, loading } }) {
+function mapStateToProps({ banknote: { showedModalToAddBanknote, loading } }) {
   return {
-    model: model,
     showedModalToAddBanknote,
     loading
   };
 }
 
-export default connect(mapStateToProps, actions)(Dashboard);
+const mapDispatchToProps = dispatch => ({
+  fetchBanknoteModel: () => dispatch(actions.fetchBanknoteModel())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

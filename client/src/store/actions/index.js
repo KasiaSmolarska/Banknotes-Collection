@@ -8,6 +8,8 @@ import searchBanknotes, { resetSearching } from "./searchBanknotes";
 import { setAlert, removeAlert } from "./alerts";
 import { sortBanknotes } from "./sortBanknotes";
 import toggleBanknotesLike from "./toggleBanknotesLike";
+import fetchBanknoteById from "./fetchBanknoteById";
+import show_modal_to_edit_banknote from "./show_modal_to_edit_banknote";
 
 const actions = {
   fetchUser,
@@ -21,7 +23,9 @@ const actions = {
   setAlert,
   removeAlert,
   sortBanknotes,
-  toggleBanknotesLike
+  toggleBanknotesLike,
+  fetchBanknoteById,
+  show_modal_to_edit_banknote
 };
 
 export default actions;

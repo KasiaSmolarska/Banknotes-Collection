@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import FormGroup from "../form/FormGroup";
 
 import postBanknote from "../../store/actions/postBanknote";
-import show_modal_to_add_new_banknote from "../../store/actions/show_modal_to_add_new_banknote";
 
 const BANKNOTE_FORM_GROUPS = {
   elementary: ["title", "value", "currency", "own"],
@@ -17,7 +16,7 @@ const BANKNOTE_FORM_GROUPS = {
 
 let data = {};
 
-class BanknoteForm extends Component {
+class EditForm extends Component {
   renderFormGroup() {
     return Object.entries(BANKNOTE_FORM_GROUPS).map(([key, value]) => {
       return <FormGroup key={key} name={key} inputsName={value} data={this.props.data} />;
@@ -35,7 +34,7 @@ class BanknoteForm extends Component {
           encType="multipart/form-data"
           onSubmit={e => {
             const callback = this.props.handleSubmit(values => {
-              this.props.postBanknote(values).then(() => this.props.show_modal_to_add_new_banknote());
+              this.props.handleDispatch(values);
               this.props.reset();
             });
             callback(e);
@@ -78,14 +77,14 @@ function mapStateToProps({ form: { banknoteForm }, banknote: { model } }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  postBanknote: banknote => dispatch(postBanknote(banknote)),
-  show_modal_to_add_new_banknote: () => dispatch(show_modal_to_add_new_banknote())
+  postBanknote: banknote => dispatch(postBanknote(banknote))
 });
 
-BanknoteForm = connect(mapStateToProps, mapDispatchToProps)(BanknoteForm);
+EditForm = connect(mapStateToProps, mapDispatchToProps)(EditForm);
 
 export default reduxForm({
-  form: "banknoteForm",
+  form: "editForm",
   validate: validateInputs,
-  destroyOnUnmount: true
-})(BanknoteForm);
+  destroyOnUnmount: true,
+  keepDirtyOnReinitialize: true
+})(EditForm);
