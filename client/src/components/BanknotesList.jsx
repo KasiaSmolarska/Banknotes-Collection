@@ -68,7 +68,7 @@ const BanknotesList = React.memo(function BanknotesList() {
                 <Column label="Country" dataKey="country" width={130} />
                 <Column width={200} label="Own" dataKey="own" cellRenderer={({ cellData }) => (!!cellData ? "yes" : "no")} />
                 <Column width={130} label="Image" dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
-                <Column width={130} label="Actions" dataKey="_id" cellRenderer={({ rowData: { _id, favorite } }) => <ListActions id={_id} favorite={favorite} />} />
+                <Column width={130} label="Actions" dataKey="_id" cellRenderer={({ rowData: { _id, favorite, title } }) => <ListActions id={_id} favorite={favorite} title={title} />} />
               </Table>
             )}
           </AutoSizer>

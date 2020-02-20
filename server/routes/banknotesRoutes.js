@@ -301,4 +301,32 @@ module.exports = app => {
       res.status(500).send("Server Error");
     }
   });
+
+  // DELETE banknote by ID
+
+  app.delete("/api/banknote/:banknoteId", requireLogin, async (req, res) => {
+    try {
+      const banknoteId = req.params.banknoteId;
+      const banknote = await Banknote.findById(banknoteId);
+
+      if (!banknote) {
+        return res.status(404).json({
+          msg: "Banknote you are trying to delete doesn't exist"
+        });
+      }
+
+      if (banknote._user.toString() !== req.user._id.toString()) {
+        return res.status(403).json({
+          msg: "You are not permitted to fetch this banknote!"
+        });
+      }
+
+      await banknote.remove();
+
+      res.json({ msg: "Banknote removed" });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  });
 };

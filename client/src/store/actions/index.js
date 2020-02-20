@@ -11,6 +11,7 @@ import toggleBanknotesLike from "./toggleBanknotesLike";
 import fetchBanknoteById from "./fetchBanknoteById";
 import show_modal_to_edit_banknote from "./show_modal_to_edit_banknote";
 import updateBanknote from "./updateBanknote";
+import deleteBanknoteById from "./deleteBanknoteById";
 
 const actions = {
   fetchUser,
@@ -27,7 +28,8 @@ const actions = {
   toggleBanknotesLike,
   fetchBanknoteById,
   show_modal_to_edit_banknote,
-  updateBanknote
+  updateBanknote,
+  deleteBanknoteById
 };
 
 export default actions;

@@ -7,7 +7,7 @@ import { Dropdown } from "../dropdown/Dropdown";
 
 import PropTypes from "prop-types";
 
-export const ListActions = ({ id, favorite }, context) => {
+export const ListActions = ({ id, favorite, title }, context) => {
   const dispatch = useDispatch();
   const toggleLikes = id => {
     dispatch(actions.toggleBanknotesLike(id));
@@ -17,10 +17,16 @@ export const ListActions = ({ id, favorite }, context) => {
     dispatch(actions.fetchBanknoteById(id)).then(() => dispatch(actions.show_modal_to_edit_banknote()));
   };
 
+  const deleteBanknote = id => {
+    let accept = window.confirm(`Are you sure that you want to delete: ${title}`);
+
+    accept && dispatch(actions.deleteBanknoteById(id));
+  };
+
   return (
     <>
       <Dropdown icon="AlertIcon">
-        <div className="listActions__remove">
+        <div className="listActions__remove" onClick={() => deleteBanknote(id)}>
           <Translate name="button.remove" />
         </div>
         <div className="listActions__favorite" onClick={() => toggleLikes(id)}>
