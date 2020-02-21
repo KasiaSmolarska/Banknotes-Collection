@@ -4,10 +4,9 @@ import { Search } from "./Search";
 import { Spinner } from "./Spinner";
 
 import actions from "../store/actions";
-import BanknoteForm from "./banknoteForm/BanknoteForm";
+
 import BanknotesTable from "./BanknotesTable";
 import { BanknotesList } from "./BanknotesList";
-import EditForm from "./banknoteForm/EditForm";
 
 import { useMedia } from "./hooks/useMedia";
 
@@ -26,16 +25,13 @@ const Dashboard = () => {
 
   const media = useMedia();
 
-  const { showedModalToAddBanknote, showedModalToEditBanknote, loading, banknote } = useSelector(getBanknote);
+  const { loading } = useSelector(getBanknote);
 
   return !loading ? (
     <div>
       {console.log(media)}
       <Search />
       {media == "lg" ? <BanknotesTable /> : <BanknotesList />}
-      {showedModalToEditBanknote && <EditForm initialValues={banknote} />}
-
-      {showedModalToAddBanknote && <BanknoteForm />}
     </div>
   ) : (
     <Spinner />

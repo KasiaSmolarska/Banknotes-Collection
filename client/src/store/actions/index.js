@@ -12,6 +12,7 @@ import fetchBanknoteById from "./fetchBanknoteById";
 import show_modal_to_edit_banknote from "./show_modal_to_edit_banknote";
 import updateBanknote from "./updateBanknote";
 import deleteBanknoteById from "./deleteBanknoteById";
+import clearBanknoteData from "./clearBanknoteData";
 
 const actions = {
   fetchUser,
@@ -29,7 +30,8 @@ const actions = {
   fetchBanknoteById,
   show_modal_to_edit_banknote,
   updateBanknote,
-  deleteBanknoteById
+  deleteBanknoteById,
+  clearBanknoteData
 };
 
 export default actions;

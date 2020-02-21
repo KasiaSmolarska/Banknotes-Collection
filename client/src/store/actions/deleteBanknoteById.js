@@ -4,7 +4,7 @@ import actions from "./index";
 
 const deleteBanknoteById = banknoteId => async dispatch => {
   try {
-    await axios.delete(`api/banknote/${banknoteId}`);
+    await axios.delete(`/api/banknote/${banknoteId}`);
 
     dispatch(actions.fetchBanknotes());
     dispatch(
@@ -13,6 +13,7 @@ const deleteBanknoteById = banknoteId => async dispatch => {
         msg: "Banknote was deleted!"
       })
     );
+    dispatch(actions.clearBanknoteData());
   } catch (err) {
     dispatch(
       actions.setAlert({

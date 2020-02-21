@@ -1,0 +1,63 @@
+.preview {
+  text-align: center;
+
+  &__container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  &__title {
+    font-size: 2rem;
+    letter-spacing: 0.03em;
+    color: #2c2c2c;
+    font-weight: 500;
+  }
+
+  &__value {
+    color: #7367f0;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  &__divider {
+    width: 100%;
+    display: block;
+    margin: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  &__description {
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+
+  &__specification {
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    text-align: left;
+    grid-gap: 0.5rem;
+    & > div {
+      align-self: flex-start;
+    }
+  }
+
+  &__label {
+    font-size: 1.4rem;
+    color: #777;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
+    font-weight: 300;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &__element-value {
+    color: #000;
+    display: inline-block;
+    padding-left: 8px;
+    font-weight: 400;
+  }
+}

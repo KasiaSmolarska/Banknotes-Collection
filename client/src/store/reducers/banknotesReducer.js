@@ -1,4 +1,15 @@
-import { FETCH_BANKNOTE_MODEL, FETCH_BANKNOTES, SHOW_MODAL_TO_ADD_BANKNOTE, SEARCH_BANKNOTES, BANKNOTE_ERROR, SHOW_MODAL_TO_EDIT_BANKNOTE, SET_SEARCH_PARAMS, SET_SORT, FETCH_BANKNOTE_BY_ID } from "../actions/types";
+import {
+  FETCH_BANKNOTE_MODEL,
+  FETCH_BANKNOTES,
+  SHOW_MODAL_TO_ADD_BANKNOTE,
+  SEARCH_BANKNOTES,
+  BANKNOTE_ERROR,
+  SHOW_MODAL_TO_EDIT_BANKNOTE,
+  SET_SEARCH_PARAMS,
+  SET_SORT,
+  FETCH_BANKNOTE_BY_ID,
+  CLEAR_BANKNOTE_DATA
+} from "../actions/types";
 
 const initialState = {
   model: null,
@@ -32,6 +43,12 @@ export default function(state = initialState, action) {
             imageReverse: banknote.imageReverse ? banknote.imageReverse : "no-photo.jpg"
           };
         }),
+        loading: false
+      };
+    case CLEAR_BANKNOTE_DATA:
+      return {
+        ...state,
+        banknote: {},
         loading: false
       };
     case SHOW_MODAL_TO_EDIT_BANKNOTE:
@@ -73,7 +90,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        banknote: payload
+        banknote: { ...payload }
       };
     default:
       return state;

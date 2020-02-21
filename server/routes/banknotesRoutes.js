@@ -3,7 +3,7 @@ const https = require("https");
 const requireLogin = require("../middlewares/requireLogin");
 const imageThumbnail = require("image-thumbnail");
 
-// const uuidv1 = require("uuid/v1");
+const uuidv1 = require("uuid/v1");
 
 const multer = require("multer");
 
@@ -88,17 +88,16 @@ module.exports = app => {
 
       const imageBuffer = req.file.buffer;
       const options = { width: 100, height: 100, jpegOptions: { force: true, quality: 90 } };
+      let uuid = uuidv1();
 
-      const thumbName = `thumb-${req.file.originalname}`;
+      const thumbName = `thumb-${uuid}${req.file.originalname}`;
 
       await imageThumbnail(imageBuffer, options).then(thumbBuffer => {
-        const file = bucket.file(req.file.originalname, {});
+        const file = bucket.file(uuid + req.file.originalname, {});
         const fileThumb = bucket.file(thumbName, {});
 
         Promise.all([file.save(imageBuffer), fileThumb.save(thumbBuffer)])
           .then(async () => {
-            // let uuid = uuidv1();
-            // let uuidThumb = uuidv1();
             await file.makePublic();
             await fileThumb.makePublic();
             // await file.setMetadata({
@@ -122,7 +121,7 @@ module.exports = app => {
             //   expires: new Date("2021-01-01")
             // });
 
-            res.send(req.file.originalname);
+            res.send(uuid + req.file.originalname);
           })
           .catch(err => {
             res.status(500).send({ error: err });

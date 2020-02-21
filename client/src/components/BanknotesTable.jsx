@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { Column, Table, AutoSizer } from "react-virtualized";
 
@@ -9,7 +10,9 @@ import { ListActions } from "./list/ListActions";
 import { useSort } from "./hooks/useSort";
 
 const ImageContainer = React.memo(({ className, src, alt }) => {
-  return <img className={className} src={src} alt={alt} />;
+  const ref = useRef(null);
+
+  return <img ref={ref} onClick={() => console.log(ref)} className={className} src={src} alt={alt} />;
 });
 
 function uploadFrontImage({ cellData }) {
@@ -48,7 +51,16 @@ const BanknotesTable = React.memo(function BanknotesList() {
                 rowHeight={90}
                 rowCount={banknotesList.length}
                 rowGetter={({ index }) => banknotesList[index]}>
-                <Column label="Name" dataKey="title" width={width * 0.2} />
+                <Column
+                  label="Name"
+                  dataKey="title"
+                  width={width * 0.2}
+                  cellRenderer={({ cellData, rowData: { _id } }) => (
+                    <Link style={{ color: "inherit" }} to={`/banknotes/${_id}`}>
+                      {cellData}
+                    </Link>
+                  )}
+                />
                 <Column width={width * 0.1} label="Front" dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
                 <Column width={width * 0.1} label="Back" dataKey="imageReverse" cellData="" cellRenderer={uploadFrontImage} />
                 <Column label="Country" dataKey="country" width={width * 0.1} />

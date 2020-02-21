@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 
 import updateBanknote from "../../store/actions/updateBanknote";
 import show_modal_to_edit_banknote from "../../store/actions/show_modal_to_edit_banknote";
+import fetchBanknoteModel from "../../store/actions/fetchBanknoteModel";
 
 const BANKNOTE_FORM_GROUPS = {
   elementary: ["title", "value", "currency", "own"],
@@ -24,6 +25,10 @@ class EditForm extends Component {
     return Object.entries(BANKNOTE_FORM_GROUPS).map(([key, value]) => {
       return <FormGroup key={key} name={key} inputsName={value} data={this.props.data} />;
     });
+  }
+
+  componentDidMount() {
+    this.props.fetchBanknoteModel();
   }
 
   render() {
@@ -83,7 +88,8 @@ function mapStateToProps({ form: { editForm }, banknote: { model } }) {
 
 const mapDispatchToProps = dispatch => ({
   updateBanknote: (id, banknote) => dispatch(updateBanknote(id, banknote)),
-  show_modal_to_edit_banknote: () => dispatch(show_modal_to_edit_banknote())
+  show_modal_to_edit_banknote: () => dispatch(show_modal_to_edit_banknote()),
+  fetchBanknoteModel: () => dispatch(fetchBanknoteModel())
 });
 
 EditForm = connect(mapStateToProps, mapDispatchToProps)(EditForm);

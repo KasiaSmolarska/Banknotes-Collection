@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-
-import { svgList } from "../svg/index";
-
-const Icon = ({ icon }) => {
-  return svgList[icon] || null;
-};
+import { Icon } from "../Icon";
 
 export const Dropdown = ({ children, classList, icon, title }, contex) => {
   const [open, setstate] = useState(false);
