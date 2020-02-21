@@ -25,7 +25,13 @@ export default function(state = initialState, action) {
     case FETCH_BANKNOTES:
       return {
         ...state,
-        banknotesList: payload,
+        banknotesList: payload.map(banknote => {
+          return {
+            ...banknote,
+            imageFront: banknote.imageFront ? banknote.imageFront : "no-photo.jpg",
+            imageReverse: banknote.imageReverse ? banknote.imageReverse : "no-photo.jpg"
+          };
+        }),
         loading: false
       };
     case SHOW_MODAL_TO_EDIT_BANKNOTE:

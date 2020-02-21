@@ -1,80 +1,64 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
-import { Column, Table, AutoSizer } from "react-virtualized";
-
-import actions from "../store/actions/index";
-import { Spinner } from "./Spinner";
+import React from "react";
+import { List, AutoSizer } from "react-virtualized";
+import { useSelector } from "react-redux";
 import { ListActions } from "./list/ListActions";
 
-import { useSort } from "./hooks/useSort";
+const rows = ["title", "country", "value", "currency", "imageFront", "issueYear"];
 
 const ImageContainer = React.memo(({ className, src, alt }) => {
   return <img className={className} src={src} alt={alt} />;
 });
 
-function uploadFrontImage({ cellData }) {
+export const BanknotesList = () => {
+  const { banknotesList, loading } = useSelector(state => state.banknote);
+
+  const rowRenderer = ({
+    key, // Unique key within array of rows
+    index, // Index of row within collection
+    isScrolling, // The List is currently being scrolled
+    isVisible, // This row is visible within the List (eg it is not an overscanned row)
+    style // Style object to be applied to row (to position it)
+  }) => {
+    return (
+      <div key={key} style={style} className="list__element py-1">
+        {Object.entries(banknotesList[index]).map(([key, value]) => {
+          return rows.map(row => {
+            if (row === key) {
+              if (key === "imageFront") {
+                return (
+                  <div key={key} className={`list__${key}`}>
+                    <ImageContainer className="list__image" src={`/api/upload/image/thumb-${value}`} alt={value} />
+                  </div>
+                );
+              }
+              return (
+                <div key={key} className={`list__row list__${key}`}>
+                  <div className="list__label">
+                    <span className="hidden-xs">{key}:</span>
+                    <span className="list__element-value">{value}</span>
+                  </div>
+                </div>
+              );
+            }
+          });
+        })}
+        <div className="list__actions">
+          <ListActions classList="dropdown__container--left" id={banknotesList[index]._id} favorite={banknotesList[index].favorite} title={banknotesList[index].title} />
+        </div>
+      </div>
+    );
+  };
   return (
-    <div>
-      <ImageContainer className="table__image" src={`/api/upload/image/${!!cellData ? "thumb-" + cellData : "thumb-no-photo.jpg"}`} alt={cellData} />
-    </div>
-  );
-}
-
-const getLoading = state => state.banknote;
-
-const BanknotesList = React.memo(function BanknotesList() {
-  const banknotesList = useSelector(state => state.banknote.banknotesList);
-  const { loading } = useSelector(getLoading);
-
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(actions.fetchBanknotes());
-  }, [dispatch]);
-
-  const { sortBy, setSortBy, sortDirection, setSortDirection } = useSort();
-
-  return (
-    <div style={{ position: "relative", height: "calc(100vh - 140px)" }}>
+    <div style={{ position: "relative", height: "calc(100vh - 170px)" }}>
       {banknotesList && !loading ? (
-        <>
-          <AutoSizer>
-            {({ width, height }) => (
-              <Table
-                sortDirection={sortDirection}
-                sortBy={sortBy}
-                sort={({ sortBy, sortDirection }) => {
-                  setSortBy(sortBy);
-                  setSortDirection(sortDirection);
-                }}
-                className="table table--banknote"
-                width={width}
-                height={height}
-                headerHeight={60}
-                rowHeight={90}
-                rowCount={banknotesList.length}
-                rowGetter={({ index }) => banknotesList[index]}>
-                <Column label="Name" dataKey="title" width={width * 0.2} />
-                <Column width={width * 0.1} label="Front" dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
-                <Column width={width * 0.1} label="Back" dataKey="imageReverse" cellData="" cellRenderer={uploadFrontImage} />
-                <Column label="Country" dataKey="country" width={width * 0.1} />
-                <Column label="Value" dataKey="value" width={width * 0.1} />
-                <Column label="Currency" dataKey="currency" width={width * 0.1} />
-                <Column label="Year" dataKey="issueYear" width={width * 0.1} />
-
-                <Column width={width * 0.1} label="Own" dataKey="own" cellRenderer={({ cellData }) => (!!cellData ? "yes" : "no")} />
-
-                <Column width={width * 0.1} label="Actions" dataKey="_id" cellRenderer={({ rowData: { _id, favorite, title } }) => <ListActions id={_id} favorite={favorite} title={title} />} />
-              </Table>
-            )}
-          </AutoSizer>
-        </>
+        <AutoSizer>
+          {({ width, height }) => {
+            return <List className="list list--banknote" width={width} height={height} rowCount={banknotesList.length} rowHeight={140} rowGetter={({ index }) => banknotesList[index]} rowRenderer={rowRenderer} />;
+          }}
+        </AutoSizer>
       ) : (
-        <Spinner />
+        <p>dupa</p>
       )}
     </div>
   );
-});
-
-export default BanknotesList;
+};

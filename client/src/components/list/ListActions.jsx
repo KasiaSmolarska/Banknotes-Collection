@@ -7,7 +7,7 @@ import { Dropdown } from "../dropdown/Dropdown";
 
 import PropTypes from "prop-types";
 
-export const ListActions = ({ id, favorite, title }, context) => {
+export const ListActions = ({ id, favorite, title, classList }, context) => {
   const dispatch = useDispatch();
   const toggleLikes = id => {
     dispatch(actions.toggleBanknotesLike(id));
@@ -25,7 +25,7 @@ export const ListActions = ({ id, favorite, title }, context) => {
 
   return (
     <>
-      <Dropdown icon="AlertIcon">
+      <Dropdown icon="MenuIcon" classList={classList}>
         <div className="listActions__remove" onClick={() => deleteBanknote(id)}>
           <Translate name="button.remove" />
         </div>

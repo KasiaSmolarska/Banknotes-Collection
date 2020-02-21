@@ -11,6 +11,7 @@ import { HeartIcon } from "./HeartIcon";
 import LogOutIcon from "./LogOutIcon";
 import { SearchIcon } from "./SearchIcon";
 import UserIcon from "./UserIcon";
+import { MenuIcon } from "./MenuIcon";
 
 export const svgList = {
   AddBanknoteIcon: <AddBanknoteIcon />,
@@ -23,5 +24,6 @@ export const svgList = {
   HeartIcon: <HeartIcon />,
   LogOutIcon: <LogOutIcon />,
   SearchIcon: <SearchIcon />,
-  UserIcon: <UserIcon />
+  UserIcon: <UserIcon />,
+  MenuIcon: <MenuIcon />
 };

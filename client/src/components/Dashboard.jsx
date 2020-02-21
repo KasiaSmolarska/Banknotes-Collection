@@ -5,7 +5,8 @@ import { Spinner } from "./Spinner";
 
 import actions from "../store/actions";
 import BanknoteForm from "./banknoteForm/BanknoteForm";
-import BanknotesList from "./BanknotesList";
+import BanknotesTable from "./BanknotesTable";
+import { BanknotesList } from "./BanknotesList";
 import EditForm from "./banknoteForm/EditForm";
 
 import { useMedia } from "./hooks/useMedia";
@@ -19,14 +20,19 @@ const Dashboard = () => {
     dispatch(actions.fetchBanknoteModel());
   }, []);
 
+  React.useEffect(() => {
+    dispatch(actions.fetchBanknotes());
+  }, [dispatch]);
+
   const media = useMedia();
 
   const { showedModalToAddBanknote, showedModalToEditBanknote, loading, banknote } = useSelector(getBanknote);
 
   return !loading ? (
     <div>
+      {console.log(media)}
       <Search />
-      {media == "lg" && <BanknotesList />}
+      {media == "lg" ? <BanknotesTable /> : <BanknotesList />}
       {showedModalToEditBanknote && <EditForm initialValues={banknote} />}
 
       {showedModalToAddBanknote && <BanknoteForm />}

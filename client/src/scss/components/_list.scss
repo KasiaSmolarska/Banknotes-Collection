@@ -1,0 +1,84 @@
+.list {
+  &__element {
+    display: grid;
+    grid-template-rows: repeat(3, 33%);
+    grid-template-columns: repeat(5, 20%);
+    grid-gap: 0.5rem;
+    border-bottom: 1px solid #ccc;
+
+    grid-template-areas:
+      "title title title title title"
+      "imageFront value currency currency actions"
+      "imageFront country issueYear issueYear actions";
+  }
+
+  &__imageFront {
+    grid-area: imageFront;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__title {
+    grid-area: title;
+    background: whitesmoke;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  &__country {
+    grid-area: country;
+  }
+
+  &__currency {
+    grid-area: currency;
+  }
+
+  &__value {
+    grid-area: value;
+  }
+
+  &__issueYear {
+    grid-area: issueYear;
+  }
+
+  &__actions {
+    grid-area: actions;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__label {
+    font-size: 1.4rem;
+    color: #777;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &__image {
+    max-height: 80px;
+    width: auto;
+    display: block;
+    max-width: 100%;
+  }
+
+  &__element-value {
+    color: #000;
+    display: inline-block;
+    padding-left: 8px;
+  }
+
+  &--banknote {
+    &:focus {
+      outline: none;
+    }
+  }
+}

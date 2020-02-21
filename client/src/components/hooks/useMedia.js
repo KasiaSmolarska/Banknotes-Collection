@@ -13,6 +13,7 @@ export const useMedia = () => {
         }
       });
     };
+    checkScreenRes();
     window.addEventListener("resize", checkScreenRes);
     return () => {
       window.removeEventListener("resize", checkScreenRes);
