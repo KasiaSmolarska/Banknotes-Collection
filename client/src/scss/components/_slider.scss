@@ -1,0 +1,52 @@
+.slider {
+  position: relative;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+
+  &__pagination {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+
+    &-button {
+      width: 20px;
+      height: 20px;
+      background-color: #bbbbbb;
+      transition: all 0.3s;
+      border-radius: 50%;
+      margin: 0 0.3rem;
+      cursor: pointer;
+      &--active {
+        background-color: $primary-color-gaudy;
+        box-shadow: $shadow-dark;
+      }
+      &:not(.slider__pagination-button--active):hover {
+        background-color: #ccc;
+      }
+    }
+  }
+
+  &__container {
+    overflow: scroll hidden;
+    display: grid;
+    grid-template-columns: 100% 100% 100%;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__image {
+    position: relative;
+    scroll-snap-align: start;
+
+    img {
+      max-width: 100%;
+    }
+  }
+}

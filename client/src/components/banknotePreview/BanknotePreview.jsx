@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import actions from "../../store/actions";
 import { Link } from "react-router-dom";
 import { Spinner } from "../Spinner";
-import { ImageContainer } from "./ImageContainer";
 import { BanknoteActions } from "./BanknoteActions";
+import { Slider } from "../Slider";
 
 const getBanknote = state => state.banknote;
 
@@ -53,7 +53,7 @@ export const BanknotePreview = ({ match, history }) => {
       {Object.keys(banknote).length > 0 && !loading ? (
         <div className="preview">
           <div className="preview__container">
-            <ImageContainer src={banknote.imageFront} alt={banknote.title} />
+            <Slider images={[`/api/upload/image/${banknote.imageFront}`, `/api/upload/image/${banknote.imageReverse}`]} />
             <h1 className="preview__title"> {banknote.title}</h1>
             <div className="preview__value py-1">
               {banknote.value} {banknote.currency}
@@ -70,13 +70,6 @@ export const BanknotePreview = ({ match, history }) => {
               {Object.entries(banknote).map(([key, value]) => {
                 return listPreviewElements.map(row => {
                   if (row === key) {
-                    if (key === "imageFront") {
-                      return (
-                        <div key={key} className={`preview__${key}`}>
-                          <ImageContainer className="preview__image" src={`/api/upload/image/thumb-${value}`} alt={value} />
-                        </div>
-                      );
-                    }
                     return (
                       <div key={key} className={`preview__row preview__${key}`}>
                         <div className="preview__label">
@@ -91,7 +84,6 @@ export const BanknotePreview = ({ match, history }) => {
             </div>
             <div className="preview__divider"></div>
             <BanknoteActions id={banknote._id} title={banknote.title} favorite={banknote.favorite} />
-            {banknote.imageReverse && <ImageContainer src={banknote.imageReverse} alt={banknote.title} />}
           </div>
         </div>
       ) : (
