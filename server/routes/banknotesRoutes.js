@@ -26,7 +26,7 @@ var storage = multer.memoryStorage();
 
 const upload = multer({
   storage,
-  fileFilter: function(req, file, cb) {
+  fileFilter: function (req, file, cb) {
     var filetypes = /jpeg|jpg|png/;
     var mimetype = filetypes.test(file.mimetype);
     var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -152,7 +152,7 @@ module.exports = app => {
           res.write(d);
         });
 
-        body.on("end", function() {
+        body.on("end", function () {
           res.end();
         });
       });
@@ -248,6 +248,7 @@ module.exports = app => {
       await banknote.save(banknote.favorite);
       res.send(banknote.favorite);
     } catch (err) {
+      console.log(err)
       console.error(err.message);
       res.status(500).send("Server Error");
     }
@@ -272,7 +273,19 @@ module.exports = app => {
         });
       }
 
-      res.send(banknote);
+      let banknoteToSend = {
+        ...banknote._doc
+      }
+
+      if (banknote.issueBank) {
+        const foundedBankName = await IssueBank.findById(banknote.issueBank);
+
+        banknoteToSend.issueBank = foundedBankName.name;
+
+      }
+
+
+      res.send(banknoteToSend);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
