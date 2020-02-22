@@ -48,9 +48,9 @@ export const BanknotePreview = ({ match, history }) => {
   return (
     <div>
       <div>
-        <Link className="btn" to="/dashboard">
+        <span className="btn" onClick={() => history.goBack()}>
           Go back
-        </Link>
+        </span>
       </div>
 
       {Object.keys(banknote).length > 0 && !loading ? (

@@ -9,6 +9,8 @@ import PropTypes from "prop-types";
 import updateBanknote from "../../store/actions/updateBanknote";
 import show_modal_to_edit_banknote from "../../store/actions/show_modal_to_edit_banknote";
 import fetchBanknoteModel from "../../store/actions/fetchBanknoteModel";
+import fetchBanknotes from "../../store/actions/fetchBanknotes";
+import fetchBanknoteById from "../../store/actions/fetchBanknoteById";
 
 const BANKNOTE_FORM_GROUPS = {
   elementary: ["title", "value", "currency", "own"],
@@ -31,6 +33,19 @@ class EditForm extends Component {
     this.props.fetchBanknoteModel();
   }
 
+  fetchData() {
+    const regEx = new RegExp("/banknotes/.{10,}");
+
+    const pathName = window.location.pathname;
+    const result = regEx.test(pathName);
+
+    if (result) {
+      this.props.fetchBanknoteById(this.props.banknote._id);
+    }
+
+    return this.props.fetchBanknotes();
+  }
+
   render() {
     {
       data = this.props.data;
@@ -42,7 +57,10 @@ class EditForm extends Component {
           encType="multipart/form-data"
           onSubmit={e => {
             const callback = this.props.handleSubmit(values => {
-              this.props.updateBanknote(this.props.form.values._id, values).then(this.props.show_modal_to_edit_banknote());
+              this.props
+                .updateBanknote(this.props.form.values._id, values)
+                .then(() => this.fetchData())
+                .then(this.props.show_modal_to_edit_banknote());
               this.props.reset();
             });
             callback(e);
@@ -79,17 +97,20 @@ function validateInputs(values) {
   return errors;
 }
 
-function mapStateToProps({ form: { editForm }, banknote: { model } }) {
+function mapStateToProps({ form: { editForm }, banknote: { model, banknote } }) {
   return {
     form: editForm,
-    data: model
+    data: model,
+    banknote
   };
 }
 
 const mapDispatchToProps = dispatch => ({
   updateBanknote: (id, banknote) => dispatch(updateBanknote(id, banknote)),
   show_modal_to_edit_banknote: () => dispatch(show_modal_to_edit_banknote()),
-  fetchBanknoteModel: () => dispatch(fetchBanknoteModel())
+  fetchBanknoteModel: () => dispatch(fetchBanknoteModel()),
+  fetchBanknotes: () => dispatch(fetchBanknotes()),
+  fetchBanknoteById: id => dispatch(fetchBanknoteById(id))
 });
 
 EditForm = connect(mapStateToProps, mapDispatchToProps)(EditForm);
