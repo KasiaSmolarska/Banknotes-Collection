@@ -31,7 +31,7 @@
   &__container {
     overflow: scroll hidden;
     display: grid;
-    grid-template-columns: 100% 100% 100%;
+    grid-template-columns: 100% 100% 100% 100%;
     scroll-snap-type: x mandatory;
     -ms-overflow-style: none;
     scrollbar-width: none;

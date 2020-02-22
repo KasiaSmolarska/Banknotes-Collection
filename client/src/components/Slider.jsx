@@ -22,6 +22,15 @@ export const Slider = ({ images }) => {
     });
     setClickedElementIndex(i);
   };
+
+  const handleScroll = () => {
+    const scrollPosition = container.current.scrollLeft / container.current.clientWidth;
+
+    if (Number.isInteger(scrollPosition)) {
+      setClickedElementIndex(scrollPosition);
+    }
+  };
+
   const slides = images.filter(slide => !slide.includes("undefined"));
 
   return (
@@ -34,9 +43,9 @@ export const Slider = ({ images }) => {
             );
           })}
       </div>
-      <div className="slider__container" ref={container}>
-        {slides.map(slide => {
-          return <Slide key={slide} src={slide} />;
+      <div className="slider__container" ref={container} onScroll={handleScroll}>
+        {slides.map((slide, index) => {
+          return <Slide key={slide + index} src={slide} />;
         })}
       </div>
     </div>
