@@ -2,12 +2,54 @@ import React from "react";
 import { List, AutoSizer } from "react-virtualized";
 import { useSelector } from "react-redux";
 import { ListActions } from "./list/ListActions";
-
-const rows = ["title", "country", "value", "currency", "imageFront", "issueYear"];
+import { Link } from "react-router-dom";
 
 const ImageContainer = React.memo(({ className, src, alt }) => {
   return <img className={className} src={src} alt={alt} />;
 });
+
+const renderDefaultListRow = (key, value) => {
+  return (
+    <div key={key} className={`list__row list__${key}`}>
+      <div className="list__label">
+        <span className="hidden-xs">{key}:</span>
+        <span className="list__element-value">{value}</span>
+      </div>
+    </div>
+  );
+};
+
+const renderImageListRow = (key, value) => {
+  return (
+    <div key={key} className={`list__${key}`}>
+      <ImageContainer className="list__image" src={`/api/upload/image/thumb-${value}`} alt={value} />
+    </div>
+  );
+};
+
+const renderTitleListRow = (key, value, id) => {
+  return (
+    <div key={key} className={`list__row list__${key}`}>
+      <div className="list__label">
+        <span className="hidden-xs">{key}:</span>
+        <span className="list__element-value">
+          <Link style={{ color: "inherit" }} to={`/banknotes/${id}`}>
+            {value}
+          </Link>
+        </span>
+      </div>
+    </div>
+  );
+};
+
+const rows = {
+  title: renderTitleListRow,
+  country: renderDefaultListRow,
+  value: renderDefaultListRow,
+  currency: renderDefaultListRow,
+  imageFront: renderImageListRow,
+  issueYear: renderDefaultListRow
+};
 
 export const BanknotesList = () => {
   const { banknotesList, loading } = useSelector(state => state.banknote);
@@ -22,23 +64,9 @@ export const BanknotesList = () => {
     return (
       <div key={key} style={style} className="list__element py-1">
         {Object.entries(banknotesList[index]).map(([key, value]) => {
-          return rows.map(row => {
-            if (row === key) {
-              if (key === "imageFront") {
-                return (
-                  <div key={key} className={`list__${key}`}>
-                    <ImageContainer className="list__image" src={`/api/upload/image/thumb-${value}`} alt={value} />
-                  </div>
-                );
-              }
-              return (
-                <div key={key} className={`list__row list__${key}`}>
-                  <div className="list__label">
-                    <span className="hidden-xs">{key}:</span>
-                    <span className="list__element-value">{value}</span>
-                  </div>
-                </div>
-              );
+          return Object.entries(rows).map(([rowKey, rowValue]) => {
+            if (rowKey === key) {
+              return rowValue(key, value, banknotesList[index]._id);
             }
           });
         })}
