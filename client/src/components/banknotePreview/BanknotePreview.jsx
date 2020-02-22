@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { Spinner } from "../Spinner";
 import { BanknoteActions } from "./BanknoteActions";
 import { Slider } from "../Slider";
+import { Icon } from "../Icon";
+import { getCountryName } from "../../utils/countriesCodes";
+import { getCurrencyName } from "../../utils/currenciesCodes";
 
 const getBanknote = state => state.banknote;
 
@@ -55,6 +58,9 @@ export const BanknotePreview = ({ match, history }) => {
           <div className="preview__container">
             <Slider images={[`/api/upload/image/${banknote.imageFront}`, `/api/upload/image/${banknote.imageReverse}`]} />
             <h1 className="preview__title"> {banknote.title}</h1>
+            <div className="preview__countryFullName">
+              {getCountryName(banknote.country)} - {banknote.value} {getCurrencyName(banknote.currency)}
+            </div>
             <div className="preview__value py-1">
               {banknote.value} {banknote.currency}
             </div>
@@ -81,6 +87,21 @@ export const BanknotePreview = ({ match, history }) => {
                   }
                 });
               })}
+            </div>
+            <div className="preview__divider"></div>
+            <div className="preview__own">
+              <div className="preview__label preview__label--own">
+                <span>Own:</span>
+                {banknote.own ? (
+                  <span className="preview__element-value preview__element-value--owned">
+                    <Icon icon="CheckMarkIcon" /> YES
+                  </span>
+                ) : (
+                  <span className="preview__element-value preview__element-value--not-owned">
+                    <Icon icon="CrossIcon" /> NO
+                  </span>
+                )}
+              </div>
             </div>
             <div className="preview__divider"></div>
             <BanknoteActions id={banknote._id} title={banknote.title} favorite={banknote.favorite} />

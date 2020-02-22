@@ -12,6 +12,7 @@ import LogOutIcon from "./LogOutIcon";
 import { SearchIcon } from "./SearchIcon";
 import UserIcon from "./UserIcon";
 import { MenuIcon } from "./MenuIcon";
+import { CrossIcon } from "./CrossIcon";
 
 export const svgList = {
   AddBanknoteIcon: <AddBanknoteIcon />,
@@ -25,5 +26,6 @@ export const svgList = {
   LogOutIcon: <LogOutIcon />,
   SearchIcon: <SearchIcon />,
   UserIcon: <UserIcon />,
-  MenuIcon: <MenuIcon />
+  MenuIcon: <MenuIcon />,
+  CrossIcon: <CrossIcon />
 };
