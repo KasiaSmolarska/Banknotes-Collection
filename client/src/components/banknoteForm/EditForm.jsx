@@ -34,7 +34,7 @@ class EditForm extends Component {
   }
 
   fetchData() {
-    const regEx = new RegExp("/banknotes/.{10,}");
+    const regEx = new RegExp(this.props.banknote._id.toString());
 
     const pathName = window.location.pathname;
     const result = regEx.test(pathName);
