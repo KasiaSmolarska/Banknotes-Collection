@@ -54,5 +54,6 @@
   "action.removeFromFavorites": "Remove from favorites",
   "action.addToFavorites": "Add to favorites",
   "header.editForm": "Edit form",
-  "header.banknoteForm": "Add new banknote"
+  "header.banknoteForm": "Add new banknote",
+  "page.noBanknotesFound": "You have not add any banknotes yet. Add your first banknote!"
 }

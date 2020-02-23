@@ -16,16 +16,6 @@ export const fetchBanknotes = () => {
       });
       const res = await axios.get(`/api/banknote?${params}`);
 
-      if (res.data.length === 0) {
-        return dispatch(
-          actions.setAlert({
-            msg: "No banknotes found",
-            type: "danger",
-            duration: 3000
-          })
-        );
-      }
-
       dispatch({
         type: FETCH_BANKNOTES,
         payload: res.data
