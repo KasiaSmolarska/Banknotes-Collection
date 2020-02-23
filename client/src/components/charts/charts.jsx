@@ -4,6 +4,55 @@ import chartOptions from "../../utils/chartConfig";
 
 const { areaChartOptions } = chartOptions;
 
+const sortData = unsortedData => {
+  let sortedData = {};
+  Object.keys(unsortedData)
+    .sort()
+    .forEach(function(v, i) {
+      sortedData[v] = unsortedData[v];
+    });
+  return sortedData;
+};
+
+export const getSearchingField = (banknotesList, value, color) => {
+  const values = {};
+  banknotesList.map(banknote => {
+    let searchingField = banknote[value];
+    if (!!searchingField) {
+      return values[searchingField] ? (values[searchingField] += 1) : (values[searchingField] = 1);
+    }
+  });
+  return values;
+};
+
+export const DefaultChart = ({ banknotesList, value, chartId, seriesName, color }) => {
+  const sortedData = sortData(getSearchingField(banknotesList, value));
+  console.log("sort", sortedData);
+  const chart = {
+    options: {
+      ...areaChartOptions,
+      chart: {
+        ...areaChartOptions.chart,
+        id: chartId
+      },
+      xaxis: {
+        ...areaChartOptions.xaxis,
+        categories: Object.keys(sortedData)
+      },
+      colors: [color]
+    },
+    series: [
+      {
+        name: seriesName,
+        data: Object.values(sortedData)
+      }
+    ]
+  };
+  console.log(chart);
+
+  return <Chart options={chart.options} series={chart.series} type="area" height="100" />;
+};
+
 export const BanknotesChart = ({ banknotesList }) => {
   const getTime = () => {
     const timeAdded = {};
@@ -14,6 +63,8 @@ export const BanknotesChart = ({ banknotesList }) => {
     return timeAdded;
   };
 
+  const sortedData = sortData(getTime(banknotesList));
+
   const chart = {
     options: {
       ...areaChartOptions,
@@ -23,16 +74,15 @@ export const BanknotesChart = ({ banknotesList }) => {
       },
       xaxis: {
         ...areaChartOptions.xaxis,
-        categories: Object.keys(getTime(banknotesList))
+        categories: Object.keys(sortedData)
       }
     },
     series: [
       {
         name: "banknotes added",
-        data: Object.values(getTime(banknotesList))
+        data: Object.values(sortedData)
       }
     ]
   };
-  console.log(chart);
   return <Chart options={chart.options} series={chart.series} type="area" height="100" />;
 };

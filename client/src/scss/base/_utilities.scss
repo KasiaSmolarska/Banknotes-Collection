@@ -16,6 +16,21 @@
   white-space: nowrap !important;
 }
 
+.apexcharts-yaxis {
+  opacity: 0;
+}
+.apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+  background: #eceff1;
+  border-bottom: 1px solid #ddd;
+  font-size: 1.5rem !important;
+  font-weight: 600;
+  color: #000;
+}
+
+.apexcharts-tooltip-series-group.apexcharts-active .apexcharts-tooltip-marker {
+  display: none;
+}
+
 @media screen and (max-width: 480px) {
   .hidden-xs {
     display: none;

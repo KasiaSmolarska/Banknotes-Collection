@@ -56,5 +56,7 @@
   "header.editForm": "Edit form",
   "header.banknoteForm": "Add new banknote",
   "page.noBanknotesFound": "You have not add any banknotes yet. Add your first banknote!",
-  "tile.banknoteAdded": "Added Banknotes"
+  "tile.banknoteAdded": "Banknotes Collected",
+  "tile.continentsAdded": "Continents Collected",
+  "tile.countriesAdded": "Countries Collected"
 }

@@ -30,7 +30,7 @@ export default {
         shadeIntensity: 0.9,
         opacityFrom: 0.5,
         opacityTo: 0.2,
-        stops: [0, 80, 100]
+        stops: [0, 80, 100],
       }
     },
     xaxis: {
@@ -48,8 +48,7 @@ export default {
       offsetX: 0,
       offsetY: 0,
       padding: { left: 0, right: 0 },
-    }],
-
+    }]
   },
   lineChartOptions: {
     grid: {

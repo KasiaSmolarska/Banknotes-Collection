@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "./Spinner";
-import { BanknotesChart } from "./charts/charts";
+import { BanknotesChart, DefaultChart, getSearchingField } from "./charts/charts";
 import Translate from "../translate/Translate";
-import PropTypes from "prop-types";
+import PropTypes, { object } from "prop-types";
 
 import actions from "../store/actions";
 
@@ -15,6 +15,7 @@ const Dashboard = () => {
 
   React.useEffect(() => {
     dispatch(actions.fetchBanknotes());
+    dispatch(actions.fetchBanknoteModel());
   }, []);
 
   return !loading ? (
@@ -37,13 +38,13 @@ const Dashboard = () => {
         <div className="card">
           <div className="card__top">
             <div className="truncate">
-              <h2>{banknotesList.length}</h2>
+              <h2>{Object.keys(getSearchingField(banknotesList, "continent")).length} / 7</h2>
               <div className="card__title">
-                <Translate name="tile.banknoteAdded" />
+                <Translate name="tile.continentsAdded" />
               </div>
             </div>
           </div>
-          <BanknotesChart banknotesList={banknotesList} />
+          <DefaultChart banknotesList={banknotesList} value="continent" chartId="continents-chart" seriesName="banknotes" color="blue" />
         </div>
       </div>
 
@@ -51,13 +52,13 @@ const Dashboard = () => {
         <div className="card">
           <div className="card__top">
             <div className="truncate">
-              <h2>{banknotesList.length}</h2>
+              <h2>{Object.keys(getSearchingField(banknotesList, "country")).length} / 317</h2>
               <div className="card__title">
-                <Translate name="tile.banknoteAdded" />
+                <Translate name="tile.countriesAdded" />
               </div>
             </div>
           </div>
-          <BanknotesChart banknotesList={banknotesList} />
+          <DefaultChart banknotesList={banknotesList} value="country" chartId="countries-chart" seriesName="banknotes" color="red" />
         </div>
       </div>
     </div>
