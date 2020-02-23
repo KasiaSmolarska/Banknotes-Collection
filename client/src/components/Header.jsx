@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Dropdown } from "./dropdown/Dropdown";
-import UserIcon from "./svg/UserIcon";
-import LogOutIcon from "./svg/LogOutIcon";
-import AddBanknoteIcon from "./svg/AddBanknoteIcon";
+import { Icon } from "./Icon";
 import { ReactComponent as RemoveBanknoteIcon } from "./svg/RemoveBanknoteIcon.svg";
 import PropTypes from "prop-types";
 
@@ -37,7 +35,7 @@ class Header extends Component {
       case false:
         return (
           <ul className="text-right column">
-            <li>
+            <li className="header__link-container">
               <Link className="btn btn--blue" to="/login">
                 Log in / sign in
               </Link>
@@ -47,13 +45,18 @@ class Header extends Component {
       default:
         return (
           <ul className="text-right column flex-container">
-            <li title={this.context.translate(!this.props.showedModalToAddBanknote ? "button.addNewBanknote" : "button.closeModal")} onClick={this.props.show_modal_to_add_new_banknote}>
-              {this.props.showedModalToAddBanknote ? <RemoveBanknoteIcon /> : <AddBanknoteIcon />}
+            <li className="header__link-container" style={{ marginRight: "4px" }}>
+              <Link to="/banknotes" title={this.context.translate("button.banknotesList")}>
+                <Icon fill="#fff" icon="BanknotesIcon" />
+              </Link>
             </li>
-            <li>
-              <Dropdown icon="UserIcon" classList="dropdown__container--left">
+            <li className="header__link-container" title={this.context.translate(!this.props.showedModalToAddBanknote ? "button.addNewBanknote" : "button.closeModal")} onClick={this.props.show_modal_to_add_new_banknote}>
+              {this.props.showedModalToAddBanknote ? <RemoveBanknoteIcon /> : <Icon fill="#FFF" icon="AddBanknoteIcon" />}
+            </li>
+            <li className="header__link-container">
+              <Dropdown icon="UserIcon" classList="dropdown__container--left" title="button.account">
                 <button className="btn btn--text" onClick={this.handleClick}>
-                  <LogOutIcon color="#7a18e3" /> Log out
+                  <Icon icon="LogOutIcon" color="#7a18e3" /> Log out
                 </button>
               </Dropdown>
             </li>

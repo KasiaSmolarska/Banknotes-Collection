@@ -7,6 +7,7 @@ class Translate extends React.PureComponent {
       return this.props.name;
     }
     const translateText = this.context.translate(this.props.name);
+    console.log(typeof translateText)
     return translateText.toString();
   }
 }

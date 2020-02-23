@@ -25,7 +25,7 @@ export const ListActions = ({ id, favorite, title, classList }, context) => {
 
   return (
     <>
-      <Dropdown icon="MenuIcon" classList={classList}>
+      <Dropdown icon="MenuIcon" classList={classList} title="button.actions">
         <div className="listActions__remove" onClick={() => deleteBanknote(id)}>
           <Translate name="button.remove" />
         </div>

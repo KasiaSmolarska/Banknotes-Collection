@@ -13,3 +13,17 @@
     color: $white;
   }
 }
+
+.header {
+  &__link-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    .dropdown__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

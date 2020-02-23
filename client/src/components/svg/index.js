@@ -13,19 +13,22 @@ import { SearchIcon } from "./SearchIcon";
 import UserIcon from "./UserIcon";
 import { MenuIcon } from "./MenuIcon";
 import { CrossIcon } from "./CrossIcon";
+import { BanknotesIcon } from "./BanknotesIcon"
+
 
 export const svgList = {
-  AddBanknoteIcon: <AddBanknoteIcon />,
-  AlarmIcon: <AlarmIcon />,
-  AlertIcon: <AlertIcon />,
-  CancelIcon: <CancelIcon />,
-  CheckMarkIcon: <CheckMarkIcon />,
-  FacebookIcon: <FacebookIcon />,
-  GoogleIcon: <GoogleIcon />,
-  HeartIcon: <HeartIcon />,
-  LogOutIcon: <LogOutIcon />,
-  SearchIcon: <SearchIcon />,
-  UserIcon: <UserIcon />,
-  MenuIcon: <MenuIcon />,
-  CrossIcon: <CrossIcon />
+  AddBanknoteIcon,
+  AlarmIcon,
+  AlertIcon,
+  CancelIcon,
+  CheckMarkIcon,
+  FacebookIcon,
+  GoogleIcon,
+  HeartIcon,
+  LogOutIcon,
+  SearchIcon,
+  UserIcon,
+  MenuIcon,
+  CrossIcon,
+  BanknotesIcon
 };
