@@ -45,8 +45,13 @@ class Header extends Component {
       default:
         return (
           <ul className="text-right column flex-container">
+            <li className="header__link-container">
+              <Link style={{ display: "inline-flex", marginRight: "4px" }} title={this.context.translate("button.dashboard")} className="header__link" to="/dashboard">
+                <Icon icon="ScreenIcon" />
+              </Link>
+            </li>
             <li className="header__link-container" style={{ marginRight: "4px" }}>
-              <Link to="/banknotes" title={this.context.translate("button.banknotesList")}>
+              <Link className="header__link" to="/banknotes" title={this.context.translate("button.banknotesList")}>
                 <Icon fill="#fff" icon="BanknotesIcon" />
               </Link>
             </li>

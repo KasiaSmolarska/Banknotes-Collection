@@ -8,6 +8,7 @@
   "button.banknotesList": "Go to Banknotes List",
   "button.actions": "Click to see more actions",
   "button.account": "Your account",
+  "button.dashboard": "Go to dashboard",
   "label.banknoteForm.currency": "Currency (2-3 big letters)",
   "label.banknoteForm.title": "Title",
   "label.banknoteForm.country": "Country (2 big letters)",
