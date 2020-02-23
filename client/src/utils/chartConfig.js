@@ -34,7 +34,7 @@ export default {
       }
     },
     xaxis: {
-      type: 'numeric',
+      type: 'category',
       lines: {
         show: false,
       },
@@ -49,9 +49,7 @@ export default {
       offsetY: 0,
       padding: { left: 0, right: 0 },
     }],
-    tooltip: {
-      x: { show: false }
-    },
+
   },
   lineChartOptions: {
     grid: {

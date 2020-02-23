@@ -6,5 +6,13 @@
   &__top {
     padding: 2rem;
     padding-bottom: 0;
+    color: #000;
+    font-size: 1.4rem;
+    font-weight: 300;
+  }
+  &-container {
+    overflow: hidden;
+    padding: 0 2rem;
+    margin-bottom: 2rem;
   }
 }

@@ -14,16 +14,18 @@ export const BanknotesChart = ({ banknotesList }) => {
     return timeAdded;
   };
 
-  const newValues = {
+  const chart = {
     options: {
+      ...areaChartOptions,
       chart: {
+        ...areaChartOptions.chart,
         id: "banknotes-chart"
       },
       xaxis: {
+        ...areaChartOptions.xaxis,
         categories: Object.keys(getTime(banknotesList))
       }
     },
-
     series: [
       {
         name: "banknotes added",
@@ -31,8 +33,6 @@ export const BanknotesChart = ({ banknotesList }) => {
       }
     ]
   };
-
-  const chart = Object.assign(newValues, { options: { ...areaChartOptions } });
-
-  return <Chart options={chart.options} series={chart.series} type="area" height="130" />;
+  console.log(chart);
+  return <Chart options={chart.options} series={chart.series} type="area" height="100" />;
 };
