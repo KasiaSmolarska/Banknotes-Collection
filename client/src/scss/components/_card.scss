@@ -1,0 +1,10 @@
+.card {
+  background: $white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.1);
+
+  &__top {
+    padding: 2rem;
+    padding-bottom: 0;
+  }
+}
