@@ -25,3 +25,34 @@ $spacepoints: (1, 2, 3, 4, 5);
     padding: 0 #{$space}rem;
   }
 }
+
+/*
+$breakpoints:
+- phone (0 - 480px)
+- tab-port (480 - 720 px)
+- tab-land (720 - 1000px)
+- big-desktop (1800px + )
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media screen and (max-width: 480px) {
+      @content; // pozwala nam dodawać bloki kodu do mixina
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media screen and (max-width: 720px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media screen and (max-width: 1000px) {
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    @media screen and (min-width: 1800px) {
+      @content;
+    }
+  }
+}
