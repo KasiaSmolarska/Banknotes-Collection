@@ -14,7 +14,7 @@ const sortData = unsortedData => {
   return sortedData;
 };
 
-export const getSearchingField = (banknotesList, value, color) => {
+export const getSearchingField = (banknotesList, value) => {
   const values = {};
   banknotesList.map(banknote => {
     let searchingField = banknote[value];
@@ -39,7 +39,16 @@ export const DefaultChart = ({ banknotesList, value, chartId, seriesName, color 
         ...areaChartOptions.xaxis,
         categories: Object.keys(sortedData)
       },
-      colors: [color]
+      colors: [color],
+      theme: {
+        palette: "palette2",
+        monochrome: {
+          enabled: true,
+          color: color,
+          shadeTo: "light",
+          shadeIntensity: 0.65
+        }
+      }
     },
     series: [
       {

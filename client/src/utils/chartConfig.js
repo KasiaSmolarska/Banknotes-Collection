@@ -48,7 +48,12 @@ export default {
       offsetX: 0,
       offsetY: 0,
       padding: { left: 0, right: 0 },
-    }]
+    }],
+    tooltip: {
+      y: {
+        formatter: (value) => { return parseInt(value) },
+      },
+    }
   },
   lineChartOptions: {
     grid: {

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "./Spinner";
 import { BanknotesChart, DefaultChart, getSearchingField } from "./charts/charts";
+import { Card } from "./Card";
 import Translate from "../translate/Translate";
 import PropTypes, { object } from "prop-types";
 
@@ -20,47 +21,17 @@ const Dashboard = () => {
 
   return !loading ? (
     <div className="dashboard">
-      <div className="card-container">
-        <div className="card">
-          <div className="card__top">
-            <div className="truncate">
-              <h2>{banknotesList.length}</h2>
-              <div className="card__title">
-                <Translate name="tile.banknoteAdded" />
-              </div>
-            </div>
-          </div>
-          <BanknotesChart banknotesList={banknotesList} />
-        </div>
-      </div>
+      <Card header={banknotesList.length} title="tile.banknoteAdded">
+        <BanknotesChart banknotesList={banknotesList} />
+      </Card>
 
-      <div className="card-container">
-        <div className="card">
-          <div className="card__top">
-            <div className="truncate">
-              <h2>{Object.keys(getSearchingField(banknotesList, "continent")).length} / 7</h2>
-              <div className="card__title">
-                <Translate name="tile.continentsAdded" />
-              </div>
-            </div>
-          </div>
-          <DefaultChart banknotesList={banknotesList} value="continent" chartId="continents-chart" seriesName="banknotes" color="blue" />
-        </div>
-      </div>
+      <Card header={`${Object.keys(getSearchingField(banknotesList, "continent")).length} / 7`} title="tile.continentsAdded">
+        <DefaultChart banknotesList={banknotesList} value="continent" chartId="continents-chart" seriesName="banknotes" color="#4caf50" />
+      </Card>
 
-      <div className="card-container">
-        <div className="card">
-          <div className="card__top">
-            <div className="truncate">
-              <h2>{Object.keys(getSearchingField(banknotesList, "country")).length} / 317</h2>
-              <div className="card__title">
-                <Translate name="tile.countriesAdded" />
-              </div>
-            </div>
-          </div>
-          <DefaultChart banknotesList={banknotesList} value="country" chartId="countries-chart" seriesName="banknotes" color="red" />
-        </div>
-      </div>
+      <Card header={`${Object.keys(getSearchingField(banknotesList, "country")).length} / 317`} title="tile.countriesAdded">
+        <DefaultChart banknotesList={banknotesList} value="country" chartId="countries-chart" seriesName="banknotes" color="#F69F43" />
+      </Card>
     </div>
   ) : (
     <Spinner />
