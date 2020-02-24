@@ -2,14 +2,18 @@
   &__element {
     display: grid;
     grid-template-rows: repeat(3, 33%);
-    grid-template-columns: repeat(5, 20%);
+    grid-template-columns: repeat(6, 16.6666%);
     grid-gap: 0.5rem;
     border-bottom: 1px solid #ccc;
 
     grid-template-areas:
-      "title title title title title"
-      "imageFront value currency currency actions"
-      "imageFront country issueYear issueYear actions";
+      "title title title title title title"
+      "imageFront imageFront value currency currency actions"
+      "imageFront imageFront country issueYear issueYear actions";
+
+    @include respond(phone) {
+      grid-gap: 0.2rem;
+    }
   }
 
   &__imageFront {
