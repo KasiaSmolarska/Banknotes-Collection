@@ -2,6 +2,16 @@
   background: $white;
   border-radius: 0.5rem;
   box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  &__bg {
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    opacity: 0.3;
+    bottom: 42%;
+    transform: translate(-50%);
+  }
 
   &__top {
     padding: 2rem;
@@ -9,10 +19,48 @@
     color: #000;
     font-size: 1.4rem;
     font-weight: 300;
+    z-index: 1;
   }
   &-container {
     overflow: hidden;
     padding: 0 1.5rem;
     margin-bottom: 2rem;
+
+    &--banknote {
+      grid-area: banknote;
+    }
+
+    &--continent {
+      grid-area: continent;
+    }
+
+    &--country {
+      grid-area: country;
+    }
+
+    &--user {
+      grid-area: user;
+    }
+  }
+
+  &__body {
+    font-size: 1.5rem;
+    padding: 2rem;
+  }
+
+  &__list {
+    font-weight: 300;
+    li {
+      padding: 2px 0;
+    }
+  }
+
+  &--user {
+    background-image: $gradient-primary-light;
+    color: #fff;
+    text-align: center;
+    .card__top {
+      color: #fff;
+    }
   }
 }

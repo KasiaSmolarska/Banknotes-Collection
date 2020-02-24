@@ -1,14 +1,25 @@
 .dashboard {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "banknote continent country"
+    "user user nothing";
+  grid-template-columns: repeat(3, 1fr);
   padding: 2rem 0rem;
   background: #f5f5f5;
 
   @include respond(tab-land) {
-    grid-template-columns: 2fr 2fr;
+    grid-template-areas:
+      "banknote banknote country country"
+      "user user continent continent";
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  @include respond(phone) {
+  @include respond(tab-port) {
+    grid-template-areas:
+      "banknote"
+      "country"
+      "user"
+      "continent";
     grid-template-columns: 1fr;
   }
 }
