@@ -27,6 +27,8 @@
   }
 
   &__label-link {
+    display: flex;
+    align-items: center;
     &:hover {
       color: $primary-color !important;
       path {
