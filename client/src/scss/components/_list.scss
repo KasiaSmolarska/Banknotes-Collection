@@ -14,6 +14,28 @@
     @include respond(phone) {
       grid-gap: 0.2rem;
     }
+
+    &-icon {
+      &--magnify {
+        position: relative;
+        padding-left: 5px;
+        top: 5px;
+        transform: scaleX(-1);
+        display: inline-block;
+      }
+    }
+  }
+
+  &__label-link {
+    &:hover {
+      color: $primary-color !important;
+      path {
+        fill: $primary-color !important;
+      }
+      .list__element-value {
+        color: $primary-color;
+      }
+    }
   }
 
   &__imageFront {

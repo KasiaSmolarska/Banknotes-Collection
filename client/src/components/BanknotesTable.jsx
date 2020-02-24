@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { Icon } from "./Icon";
 import { Column, Table, AutoSizer } from "react-virtualized";
 
 import { Spinner } from "./Spinner";
@@ -56,7 +56,10 @@ const BanknotesTable = React.memo(function BanknotesList() {
                   dataKey="title"
                   width={width * 0.2}
                   cellRenderer={({ cellData, rowData: { _id } }) => (
-                    <Link style={{ color: "inherit" }} to={`/banknotes/${_id}`}>
+                    <Link className="list__label-link" style={{ color: "inherit" }} to={`/banknotes/${_id}`}>
+                      <span className="list__element-icon--magnify">
+                        <Icon icon="MagnifyPlusIcon" width="22" height="22" />
+                      </span>{" "}
                       {cellData}
                     </Link>
                   )}

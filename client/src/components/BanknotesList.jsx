@@ -3,6 +3,7 @@ import { List, AutoSizer } from "react-virtualized";
 import { useSelector } from "react-redux";
 import { ListActions } from "./list/ListActions";
 import { Link } from "react-router-dom";
+import { Icon } from "./Icon";
 
 const ImageContainer = React.memo(({ className, src, alt }) => {
   return <img className={className} src={src} alt={alt} />;
@@ -31,12 +32,13 @@ const renderTitleListRow = (key, value, id) => {
   return (
     <div key={key} className={`list__row list__${key}`}>
       <div className="list__label">
-        <span className="hidden-xs">{key}:</span>
-        <span className="list__element-value">
-          <Link style={{ color: "inherit" }} to={`/banknotes/${id}`}>
-            {value}
-          </Link>
-        </span>
+        <Link className="list__label-link" style={{ color: "inherit" }} to={`/banknotes/${id}`}>
+          <span className="list__element-icon--magnify">
+            <Icon icon="MagnifyPlusIcon" />
+          </span>
+          <span className="hidden-xs">{key}:</span>
+          <span className="list__element-value">{value}</span>
+        </Link>
       </div>
     </div>
   );
