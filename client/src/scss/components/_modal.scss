@@ -1,0 +1,61 @@
+.modal {
+  max-width: 1000px;
+  background-color: #fff;
+  max-height: 95vh;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  &__background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.493);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__body {
+    overflow: auto;
+    max-height: calc(100% - 130px);
+    padding: 1.25rem;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    border-bottom: 1px solid #ebedf2;
+    border-top-left-radius: calc(0.3rem - 1px);
+    border-top-right-radius: calc(0.3rem - 1px);
+  }
+
+  &__header-title {
+    font-size: 2.4rem;
+  }
+
+  &__header-close {
+    cursor: pointer;
+    :hover {
+      path {
+        fill: #000 !important;
+      }
+    }
+  }
+
+  &__footer {
+    padding: 1.25rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid #ebedf2;
+    border-bottom-right-radius: calc(0.3rem - 1px);
+    border-bottom-left-radius: calc(0.3rem - 1px);
+  }
+}

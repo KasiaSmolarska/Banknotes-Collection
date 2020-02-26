@@ -5,6 +5,8 @@
   "button.submit": "Submit",
   "button.edit": "Edit",
   "button.remove": "Remove",
+  "button.update": "Update",
+  "button.close": "Close",
   "button.banknotesList": "Go to Banknotes List",
   "button.actions": "Click to see more actions",
   "button.account": "Your account",

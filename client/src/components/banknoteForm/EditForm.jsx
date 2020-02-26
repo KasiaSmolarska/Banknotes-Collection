@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 
-import Translate from "../../translate/Translate";
 import FormGroup from "../form/FormGroup";
 import PropTypes from "prop-types";
 
@@ -11,6 +10,8 @@ import show_modal_to_edit_banknote from "../../store/actions/show_modal_to_edit_
 import fetchBanknoteModel from "../../store/actions/fetchBanknoteModel";
 import fetchBanknotes from "../../store/actions/fetchBanknotes";
 import fetchBanknoteById from "../../store/actions/fetchBanknoteById";
+
+import { Modal } from "../Modal";
 
 const BANKNOTE_FORM_GROUPS = {
   elementary: ["title", "value", "currency", "own"],
@@ -51,10 +52,11 @@ class EditForm extends Component {
       data = this.props.data;
     }
     return (
-      <div className="add-new-banknote">
-        <form
-          className="form form--banknote"
-          encType="multipart/form-data"
+      <form className="form form--banknote" encType="multipart/form-data">
+        <Modal
+          title="header.editForm"
+          submitText="button.update"
+          onClose={() => this.props.show_modal_to_edit_banknote()}
           onSubmit={e => {
             const callback = this.props.handleSubmit(values => {
               this.props
@@ -65,18 +67,9 @@ class EditForm extends Component {
             });
             callback(e);
           }}>
-          <div className="form--banknote__header">
-            <h1>
-              <Translate name="header.editForm" />
-            </h1>
-            <button className="btn" type="submit">
-              <Translate name="button.submit" />
-            </button>
-          </div>
-
           {this.renderFormGroup()}
-        </form>
-      </div>
+        </Modal>
+      </form>
     );
   }
 }

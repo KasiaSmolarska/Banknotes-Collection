@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Translate from "../../translate/Translate";
 import FormGroup from "../form/FormGroup";
 import PropTypes from "prop-types";
+import { Modal } from "../Modal";
 
 import postBanknote from "../../store/actions/postBanknote";
 import show_modal_to_add_new_banknote from "../../store/actions/show_modal_to_add_new_banknote";
@@ -30,10 +31,11 @@ class BanknoteForm extends Component {
       data = this.props.data;
     }
     return (
-      <div className="add-new-banknote">
-        <form
-          className="form form--banknote"
-          encType="multipart/form-data"
+      <form className="form form--banknote" encType="multipart/form-data">
+        <Modal
+          title="header.banknoteForm"
+          submitText="button.submit"
+          onClose={() => this.props.show_modal_to_add_new_banknote()}
           onSubmit={e => {
             const callback = this.props.handleSubmit(values => {
               this.props.postBanknote(values).then(() => this.props.show_modal_to_add_new_banknote());
@@ -41,18 +43,9 @@ class BanknoteForm extends Component {
             });
             callback(e);
           }}>
-          <div className="form--banknote__header">
-            <h1>
-              <Translate name="header.banknoteForm" />
-            </h1>
-            <button className="btn" type="submit">
-              <Translate name="button.submit" />
-            </button>
-          </div>
-
           {this.renderFormGroup()}
-        </form>
-      </div>
+        </Modal>
+      </form>
     );
   }
 }

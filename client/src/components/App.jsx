@@ -17,7 +17,6 @@ import { Page404 } from "./404Page";
 const getBanknote = state => state.banknote;
 
 const Content = () => {
-  const { showedModalToAddBanknote, showedModalToEditBanknote, banknote } = useSelector(getBanknote);
   return (
     <div>
       <Header />
@@ -28,9 +27,6 @@ const Content = () => {
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <Route component={Page404} />
       </Switch>
-      {showedModalToEditBanknote && banknote && <EditForm initialValues={banknote} />}
-
-      {showedModalToAddBanknote && <BanknoteForm />}
     </div>
   );
 };

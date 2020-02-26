@@ -39,8 +39,9 @@
 
   &__group-label {
     padding-bottom: 3rem;
-    text-align: center;
     text-transform: capitalize;
+    font-size: 1.6rem;
+    color: $primary-color;
   }
 
   &__textarea {

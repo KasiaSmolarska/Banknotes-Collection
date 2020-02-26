@@ -1,13 +1,13 @@
 .form {
-  &--banknote {
-    max-width: 1200px;
-    margin: 0 auto;
-    overflow: scroll;
-    max-height: calc(100vh - 68px);
-    overflow-x: hidden;
-    box-shadow: $shadow-medium;
-    background: #fff;
-  }
+  // &--banknote {
+  //   max-width: 1200px;
+  //   margin: 0 auto;
+  //   overflow: scroll;
+  //   max-height: calc(100vh - 68px);
+  //   overflow-x: hidden;
+  //   box-shadow: $shadow-medium;
+  //   background: #fff;
+  // }
 
   &--banknote &__control:not(.form__control--file) {
     width: 49%;
