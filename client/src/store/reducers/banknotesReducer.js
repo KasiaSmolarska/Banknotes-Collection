@@ -24,7 +24,7 @@ const initialState = {
   sortDirection: "ASC"
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const { payload } = action;
   switch (action.type) {
     case FETCH_BANKNOTE_MODEL:
@@ -55,12 +55,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         showedModalToEditBanknote: !state.showedModalToEditBanknote,
+        showedModalToAddBanknote: false,
         loading: false
       };
     case SHOW_MODAL_TO_ADD_BANKNOTE:
       return {
         ...state,
         showedModalToAddBanknote: !state.showedModalToAddBanknote,
+        showedModalToEditBanknote: false,
         loading: false
       };
     case SEARCH_BANKNOTES:

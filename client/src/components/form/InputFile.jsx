@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import Translate from "../../translate/Translate";
 
@@ -12,6 +13,19 @@ class InputFile extends React.Component {
   state = {
     url: "no-photo.jpg"
   };
+
+  componentDidMount() {
+    const { showedModalToEditBanknote, banknote, input } = this.props;
+    if (!showedModalToEditBanknote) {
+      return;
+    }
+
+    if (!banknote[input.name]) {
+      return;
+    }
+
+    this.setState({ url: banknote[input.name] });
+  }
 
   onChange = async e => {
     const { input } = this.props;
@@ -42,7 +56,9 @@ class InputFile extends React.Component {
   render() {
     const {
       input,
-      meta: { touched, error, form }
+      meta: { touched, error, form },
+      showedModalToEditBanknote,
+      banknote
     } = this.props;
     return (
       <div className="form__control form__control--file">
@@ -51,7 +67,7 @@ class InputFile extends React.Component {
         </div>
         <input name={input.name} onChange={this.onChange} accept=".jpg, .png, .jpeg" className="form__input" type="file" />
         <label className="form__label form__label--file">
-          <Translate name={`label.${form}.${input.name}`} />
+          {showedModalToEditBanknote && banknote[input.name] ? <Translate name={`label.${form}.${input.name}.change`} /> : <Translate name={`label.${form}.${input.name}`} />}
         </label>
 
         <div className="form__alert" style={{ height: "1rem", marginBottom: "20px" }}>
@@ -62,7 +78,11 @@ class InputFile extends React.Component {
   }
 }
 
-export default InputFile;
+const mapStateToProps = ({ banknote }) => ({
+  showedModalToEditBanknote: banknote.showedModalToEditBanknote,
+  banknote: banknote.banknote
+});
+export default connect(mapStateToProps)(InputFile);
 
 InputFile.contextTypes = {
   translate: PropTypes.func
