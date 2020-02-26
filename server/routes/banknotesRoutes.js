@@ -297,7 +297,7 @@ module.exports = app => {
   app.post("/api/banknote/:banknoteId", requireLogin, async (req, res) => {
     try {
       const banknoteId = req.params.banknoteId;
-      let banknote = await Banknote.find({ _user: req.user._id, _id: banknoteId });
+      let banknote = await Banknote.findOne({ _user: req.user._id, _id: banknoteId });
       if (!banknote) {
         return res.status(404).json({
           msg: "Banknote you are trying to change doesn't exist"
@@ -305,6 +305,25 @@ module.exports = app => {
       }
 
       const createdBanknoteData = await createBanknote(req.body, req.user._id);
+      const images = ["imageFront", "imageReverse"];
+      images.forEach(image => {
+        if (banknote[image] === createdBanknoteData[image]) {
+          return;
+        }
+        if (typeof banknote[image] === "undefined") {
+          return;
+        }
+        const filesToDelete = [bucket.file(banknote[image]), bucket.file(`thumb-${banknote[image]}`)]
+
+        filesToDelete.forEach(file => {
+          file.delete().then(() => {
+            console.log(`Successfully deleted photo: ${file.name}, userID : ${req.user._id}`)
+          }).catch(err => {
+            console.log(`Failed to remove photo, error: ${err}`)
+          });
+        })
+
+      });
 
       banknote = await Banknote.findOneAndUpdate({ _user: req.user._id, _id: banknoteId }, { $set: createdBanknoteData }, { new: true });
       return res.send(banknote);
