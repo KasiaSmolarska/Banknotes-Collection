@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const breakPoints = { xs: "(max-width: 490px)", sm: "(max-width: 990px)", lg: "(min-width: 991px)" };
 

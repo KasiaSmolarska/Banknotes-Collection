@@ -17,9 +17,10 @@ const Dashboard = () => {
   const user = useSelector(getUser);
 
   React.useEffect(() => {
-    dispatch(actions.fetchBanknotes());
-    dispatch(actions.fetchBanknoteModel());
-  }, []);
+    new Promise((resolve, reject) => {
+      resolve(dispatch(actions.fetchBanknotes()));
+    }).then(() => dispatch(actions.fetchBanknoteModel()));
+  }, [dispatch]);
 
   return !loading ? (
     <div className="dashboard">

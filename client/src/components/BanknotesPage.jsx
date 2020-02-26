@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Search } from "./Search";
 import { Spinner } from "./Spinner";
@@ -16,12 +16,10 @@ const getBanknote = state => state.banknote;
 const BanknotesPage = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(actions.fetchBanknoteModel());
-  }, []);
-
   React.useEffect(() => {
-    dispatch(actions.fetchBanknotes());
+    new Promise((resolve, reject) => {
+      resolve(dispatch(actions.fetchBanknotes()));
+    }).then(() => dispatch(actions.fetchBanknoteModel()));
   }, [dispatch]);
 
   const media = useMedia();
@@ -32,7 +30,7 @@ const BanknotesPage = () => {
     <div>
       {banknotesList.length > 0 ? (
         <>
-          <Search /> {media == "lg" ? <BanknotesTable /> : <BanknotesList />}{" "}
+          <Search /> {media === "lg" ? <BanknotesTable /> : <BanknotesList />}
         </>
       ) : (
         <div className="banknotesListPage--noResult">

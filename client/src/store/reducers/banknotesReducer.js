@@ -30,8 +30,7 @@ export default function (state = initialState, action) {
     case FETCH_BANKNOTE_MODEL:
       return {
         ...state,
-        model: payload,
-        loading: false
+        model: payload
       };
     case FETCH_BANKNOTES:
       return {
@@ -48,8 +47,7 @@ export default function (state = initialState, action) {
     case CLEAR_BANKNOTE_DATA:
       return {
         ...state,
-        banknote: {},
-        loading: false
+        banknote: {}
       };
     case SHOW_MODAL_TO_EDIT_BANKNOTE:
       return {
@@ -74,8 +72,7 @@ export default function (state = initialState, action) {
     case BANKNOTE_ERROR:
       return {
         ...state,
-        error: payload,
-        loading: false
+        error: payload
       };
     case SET_SEARCH_PARAMS:
       return {

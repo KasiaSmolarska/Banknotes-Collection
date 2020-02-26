@@ -10,7 +10,7 @@ export const useSort = () => {
 
   React.useEffect(() => {
     dispatch(actions.sortBanknotes(sortBy, sortDirection));
-  }, [sortBy, sortDirection]);
+  }, [sortBy, sortDirection, dispatch]);
 
   return {
     sortBy,

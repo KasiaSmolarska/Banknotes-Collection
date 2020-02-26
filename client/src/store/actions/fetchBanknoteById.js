@@ -5,7 +5,6 @@ import actions from "./index";
 const fetchBanknoteById = (banknoteId, history) => async dispatch => {
   try {
     const res = await axios.get(`/api/banknote/${banknoteId}`);
-
     dispatch({
       type: FETCH_BANKNOTE_BY_ID,
       payload: res.data
@@ -13,9 +12,15 @@ const fetchBanknoteById = (banknoteId, history) => async dispatch => {
   } catch (err) {
     console.log(err);
     dispatch(actions.clearBanknoteData());
-    if (err.response.status === 404) {
-      history.push("/dashboard");
-    }
+
+    history.push("/banknotes");
+    dispatch(
+      actions.setAlert({
+        type: "danger",
+        msg: "Sorry. Requested banknote was not found!",
+        duration: 6000
+      })
+    );
     dispatch({
       type: BANKNOTE_ERROR,
       payload: {

@@ -1,7 +1,6 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "react-router-dom";
 
 import actions from "../store/actions";
 import Header from "./Header";
@@ -13,6 +12,7 @@ import { BanknotePreview } from "./banknotePreview/BanknotePreview";
 import BanknotesPage from "./BanknotesPage";
 import EditForm from "./banknoteForm/EditForm";
 import BanknoteForm from "./banknoteForm/BanknoteForm";
+import { Page404 } from "./404Page";
 
 const getBanknote = state => state.banknote;
 
@@ -21,11 +21,13 @@ const Content = () => {
   return (
     <div>
       <Header />
-      <Route exact path="/" component={Landing} />
-      <PrivateRoute exact path="/banknotes/:banknoteId" component={BanknotePreview} />
-      <PrivateRoute exact path="/banknotes" component={BanknotesPage} />
-      <PrivateRoute exact path="/dashboard" component={Dashboard} />
-
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <PrivateRoute exact path="/banknotes/:banknoteId" component={BanknotePreview} />
+        <PrivateRoute exact path="/banknotes" component={BanknotesPage} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <Route component={Page404} />
+      </Switch>
       {showedModalToEditBanknote && banknote && <EditForm initialValues={banknote} />}
 
       {showedModalToAddBanknote && <BanknoteForm />}
