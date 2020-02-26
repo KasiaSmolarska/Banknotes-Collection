@@ -352,6 +352,23 @@ module.exports = app => {
         });
       }
 
+      const images = ["imageFront", "imageReverse"];
+      images.forEach(image => {
+        if (typeof banknote[image] === "undefined") {
+          return;
+        }
+        const filesToDelete = [bucket.file(banknote[image]), bucket.file(`thumb-${banknote[image]}`)]
+
+        filesToDelete.forEach(file => {
+          file.delete().then(() => {
+            console.log(`Successfully deleted photo: ${file.name}, userID : ${req.user._id}`)
+          }).catch(err => {
+            console.log(`Failed to remove photo, error: ${err}`)
+          });
+        })
+
+      });
+
       await banknote.remove();
 
       res.json({ msg: "Banknote removed" });
