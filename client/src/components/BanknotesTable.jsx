@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Icon } from "./Icon";
 import { Column, Table, AutoSizer } from "react-virtualized";
@@ -7,7 +7,7 @@ import { Column, Table, AutoSizer } from "react-virtualized";
 import { Spinner } from "./Spinner";
 import { ListActions } from "./list/ListActions";
 
-import { useSort } from "./hooks/useSort";
+import actions from "../store/actions";
 
 const ImageContainer = React.memo(({ className, src, alt }) => {
   const ref = useRef(null);
@@ -23,14 +23,12 @@ function uploadFrontImage({ cellData }) {
   );
 }
 
-const getLoading = state => state.banknote;
+const getBanknote = state => state.banknote;
 
 const BanknotesTable = React.memo(function BanknotesList() {
   const banknotesList = useSelector(state => state.banknote.banknotesList);
-  const { loading } = useSelector(getLoading);
-
-  const { sortBy, setSortBy, sortDirection, setSortDirection } = useSort();
-
+  const { loading, sortBy, sortDirection } = useSelector(getBanknote);
+  const dispatch = useDispatch();
   return (
     <div style={{ position: "relative", height: "calc(100vh - 170px)" }}>
       {banknotesList && !loading ? (
@@ -41,8 +39,7 @@ const BanknotesTable = React.memo(function BanknotesList() {
                 sortDirection={sortDirection}
                 sortBy={sortBy}
                 sort={({ sortBy, sortDirection }) => {
-                  setSortBy(sortBy);
-                  setSortDirection(sortDirection);
+                  dispatch(actions.sortBanknotes(sortBy, sortDirection));
                 }}
                 className="table table--banknote"
                 width={width}

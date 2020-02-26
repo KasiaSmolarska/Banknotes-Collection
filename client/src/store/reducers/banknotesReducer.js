@@ -20,8 +20,8 @@ const initialState = {
   loading: true,
   error: {},
   searchParams: "",
-  sortBy: "title",
-  sortDirection: "ASC"
+  sortBy: "dateCreated",
+  sortDirection: "DESC"
 };
 
 export default function (state = initialState, action) {
