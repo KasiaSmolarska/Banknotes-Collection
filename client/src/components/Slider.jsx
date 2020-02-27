@@ -25,9 +25,8 @@ export const Slider = ({ images }) => {
 
   const handleScroll = () => {
     const scrollPosition = container.current.scrollLeft / container.current.clientWidth;
-    const scrollPositionInt = Number.parseInt(scrollPosition);
 
-    setClickedElementIndex(Number.parseInt(scrollPositionInt));
+    setClickedElementIndex(Math.round(scrollPosition));
   };
 
   const slides = images.filter(slide => !slide.includes("undefined"));
