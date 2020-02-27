@@ -3,7 +3,7 @@ import { Icon } from "./Icon";
 import Translate from "../translate/Translate";
 import PropTypes from "prop-types";
 
-export const Modal = ({ onClose, onSubmit, title, submitText, children }, context) => {
+export const Modal = ({ onClose, onSubmit, title, submitText, children, type }, context) => {
   return (
     <div className="modal__background">
       <div className="modal">
@@ -13,7 +13,7 @@ export const Modal = ({ onClose, onSubmit, title, submitText, children }, contex
             <Icon icon="CrossIcon" />
           </div>
         </div>
-        <div className="modal__body">{children}</div>
+        <div className={`modal__body ${type ? "modal__body--" + type : ""}`}>{children}</div>
         <div className="modal__footer">
           <button className="modal__footer-close btn" onClick={onClose}>
             <Translate name="button.close" />

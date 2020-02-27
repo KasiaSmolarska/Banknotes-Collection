@@ -53,7 +53,7 @@ const App = () => {
         {showedModalToAddBanknote && <BanknoteForm />}
 
         {imageModal.show && (
-          <Modal onSubmit={false} onClose={() => dispatch(actions.toggleImageModal())}>
+          <Modal type="compact" onSubmit={false} onClose={() => dispatch(actions.toggleImageModal())}>
             {!imageModal.loading ? (
               <img src={imageModal.src} alt="" />
             ) : (
