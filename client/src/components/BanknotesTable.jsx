@@ -11,7 +11,7 @@ import actions from "../store/actions";
 
 const getBanknote = state => state.banknote;
 
-const ImageContainer = React.memo(({ className, src, alt }) => {
+const ImageContainer = React.memo(({ className, src, alt, title }) => {
   const ref = useRef(null);
   const dispatch = useDispatch();
   return (
@@ -20,7 +20,7 @@ const ImageContainer = React.memo(({ className, src, alt }) => {
         ref={ref}
         onClick={() => {
           dispatch(actions.toggleImageModal());
-          dispatch(actions.changeImageInModal(ref.current.alt));
+          dispatch(actions.changeImageInModal(ref.current.alt, title));
         }}
         className={className}
         src={src}
@@ -30,10 +30,10 @@ const ImageContainer = React.memo(({ className, src, alt }) => {
   );
 });
 
-function uploadFrontImage({ cellData }) {
+function uploadFrontImage({ cellData, rowData }) {
   return (
     <div>
-      <ImageContainer className="table__image" src={`/api/upload/image/thumb-${cellData}`} alt={cellData} />
+      <ImageContainer className="table__image" src={`/api/upload/image/thumb-${cellData}`} alt={cellData} title={rowData.title} />
     </div>
   );
 }

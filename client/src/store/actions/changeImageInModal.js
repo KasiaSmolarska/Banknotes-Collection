@@ -1,7 +1,7 @@
 import { CHANGE_IMAGE_IN_MODAL, BANKNOTE_ERROR } from "./types";
 import axios from "axios";
 
-export const changeImageInModal = (image) => async dispatch => {
+export const changeImageInModal = (image, title) => async dispatch => {
 
   try {
     await axios.get(`/api/upload/image/${image}`, {
@@ -18,10 +18,12 @@ export const changeImageInModal = (image) => async dispatch => {
       reader.readAsDataURL(blob);
       reader.onloadend = function () {
         var data = reader.result;
-        console.log(data);
         dispatch({
           type: CHANGE_IMAGE_IN_MODAL,
-          payload: data
+          payload: {
+            src: data,
+            title
+          }
         })
       }
 

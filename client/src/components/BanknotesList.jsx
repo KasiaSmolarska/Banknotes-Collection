@@ -8,14 +8,14 @@ import { Icon } from "./Icon";
 
 import actions from "../store/actions";
 
-const ImageContainer = React.memo(({ className, src, alt }) => {
+const ImageContainer = React.memo(({ className, src, alt, title }) => {
   const ref = useRef(null);
   const dispatch = useDispatch();
   return (
     <img
       onClick={() => {
         dispatch(actions.toggleImageModal());
-        dispatch(actions.changeImageInModal(ref.current.alt));
+        dispatch(actions.changeImageInModal(ref.current.alt, title));
       }}
       ref={ref}
       className={className}
@@ -36,10 +36,10 @@ const renderDefaultListRow = (key, value) => {
   );
 };
 
-const renderImageListRow = (key, value) => {
+const renderImageListRow = (key, value, id, title) => {
   return (
     <div key={key} className={`list__${key}`}>
-      <ImageContainer className="list__image" src={`/api/upload/image/thumb-${value}`} alt={value} />
+      <ImageContainer className="list__image" src={`/api/upload/image/thumb-${value}`} alt={value} title={title} />
     </div>
   );
 };
@@ -84,7 +84,7 @@ export const BanknotesList = () => {
         {Object.entries(banknotesList[index]).map(([key, value]) => {
           return Object.entries(rows).map(([rowKey, rowValue]) => {
             if (rowKey === key) {
-              return rowValue(key, value, banknotesList[index]._id);
+              return rowValue(key, value, banknotesList[index]._id, banknotesList[index].title);
             }
           });
         })}

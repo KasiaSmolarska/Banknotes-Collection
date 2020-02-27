@@ -10,7 +10,7 @@ export const Modal = ({ onClose, onSubmit, title, submitText, children, type }, 
         <div className="modal__header">
           <h5 className="modal__header-title">{title && <Translate name={title} />}</h5>
           <div className="modal__header-close" onClick={onClose} title={context.translate("button.close")}>
-            <Icon icon="CrossIcon" />
+            <Icon icon="CancelIcon" width="16" height="16" fill="#4a4a4a" />
           </div>
         </div>
         <div className={`modal__body ${type ? "modal__body--" + type : ""}`}>{children}</div>

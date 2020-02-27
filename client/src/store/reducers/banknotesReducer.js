@@ -21,6 +21,7 @@ const initialState = {
   showedModalToEditBanknote: false,
   imageModal: {
     src: "",
+    title: "",
     show: false,
     loading: true
   },
@@ -76,6 +77,7 @@ export default function (state = initialState, action) {
         imageModal: {
           ...state.imageModal,
           src: "",
+          title: "",
           show: !state.imageModal.show,
           loading: state.imageModal.show ? true : state.imageModal.loading
 
@@ -86,7 +88,8 @@ export default function (state = initialState, action) {
         ...state,
         imageModal: {
           ...state.imageModal,
-          src: payload,
+          src: payload.src,
+          title: payload.title,
           loading: false
         }
       }
