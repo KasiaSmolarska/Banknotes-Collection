@@ -73,7 +73,7 @@ export const BanknotesList = () => {
           });
         })}
         <div className="list__actions">
-          <ListActions classList="dropdown__container--left" id={banknotesList[index]._id} favorite={banknotesList[index].favorite} title={banknotesList[index].title} />
+          <ListActions classList="dropdown__content--left" id={banknotesList[index]._id} favorite={banknotesList[index].favorite} title={banknotesList[index].title} />
         </div>
       </div>
     );

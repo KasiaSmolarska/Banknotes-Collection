@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Dropdown } from "./dropdown/Dropdown";
+
+import Dropdown, { DropdownTrigger, DropdownContent } from "react-simple-dropdown";
 import { Icon } from "./Icon";
 import { ReactComponent as RemoveBanknoteIcon } from "./svg/RemoveBanknoteIcon.svg";
 import PropTypes from "prop-types";
@@ -59,10 +60,15 @@ class Header extends Component {
               {this.props.showedModalToAddBanknote ? <RemoveBanknoteIcon /> : <Icon fill="#FFF" icon="AddBanknoteIcon" />}
             </li>
             <li className="header__link-container">
-              <Dropdown icon="UserIcon" classList="dropdown__container--left" title="button.account">
-                <button className="btn btn--text" onClick={this.handleClick}>
-                  <Icon icon="LogOutIcon" color="#7a18e3" /> Log out
-                </button>
+              <Dropdown title="button.account">
+                <DropdownTrigger>
+                  <Icon icon="UserIcon" />
+                </DropdownTrigger>
+                <DropdownContent className={`dropdown__content dropdown__content--left`}>
+                  <button className="btn btn--text" onClick={this.handleClick}>
+                    <Icon icon="LogOutIcon" color="#7a18e3" /> Log out
+                  </button>
+                </DropdownContent>
               </Dropdown>
             </li>
           </ul>

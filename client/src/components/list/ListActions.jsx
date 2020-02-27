@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 import actions from "../../store/actions";
 import Translate from "../../translate/Translate";
 import { HeartIcon } from "../svg/HeartIcon";
-import { Dropdown } from "../dropdown/Dropdown";
-
 import PropTypes from "prop-types";
+import { Icon } from "../Icon";
+
+import Dropdown, { DropdownTrigger, DropdownContent } from "react-simple-dropdown";
 
 export const ListActions = ({ id, favorite, title, classList }, context) => {
   const dispatch = useDispatch();
@@ -25,24 +26,29 @@ export const ListActions = ({ id, favorite, title, classList }, context) => {
 
   return (
     <>
-      <Dropdown icon="MenuIcon" classList={classList} title="button.actions">
-        <div className="listActions__remove" onClick={() => deleteBanknote(id)}>
-          <Translate name="button.remove" />
-        </div>
-        <div className="listActions__favorite" onClick={() => toggleLikes(id)}>
-          {favorite ? (
-            <span className="listActions__favorite-elem" title={context.translate("action.removeFromFavorites")}>
-              <HeartIcon height="25" width="25" />
-            </span>
-          ) : (
-            <span className="listActions__favorite-elem" title={context.translate("action.addToFavorites")}>
-              <HeartIcon height="25" width="25" fill="#cacaca" />
-            </span>
-          )}
-        </div>
-        <div className="listActions__edit" onClick={() => openModal(id)}>
-          <Translate name="button.edit" />
-        </div>
+      <Dropdown>
+        <DropdownTrigger>
+          <Icon icon="MenuIcon" />
+        </DropdownTrigger>
+        <DropdownContent className={`dropdown__content ${classList && classList}`}>
+          <div className="dropdown__item listActions__remove" onClick={() => deleteBanknote(id)}>
+            <Translate name="button.remove" />
+          </div>
+          <div className="dropdown__item listActions__favorite" onClick={() => toggleLikes(id)}>
+            {favorite ? (
+              <span className="listActions__favorite-elem" title={context.translate("action.removeFromFavorites")}>
+                <HeartIcon height="25" width="25" />
+              </span>
+            ) : (
+              <span className="listActions__favorite-elem" title={context.translate("action.addToFavorites")}>
+                <HeartIcon height="25" width="25" fill="#cacaca" />
+              </span>
+            )}
+          </div>
+          <div className="dropdown__item listActions__edit" onClick={() => openModal(id)}>
+            <Translate name="button.edit" />
+          </div>
+        </DropdownContent>
       </Dropdown>
     </>
   );

@@ -88,7 +88,12 @@ const BanknotesTable = React.memo(function BanknotesList() {
 
                 <Column width={width * 0.1} label="Own" dataKey="own" cellRenderer={({ cellData }) => (!!cellData ? "yes" : "no")} />
 
-                <Column width={width * 0.1} label="Actions" dataKey="_id" cellRenderer={({ rowData: { _id, favorite, title } }) => <ListActions id={_id} favorite={favorite} title={title} />} />
+                <Column
+                  width={width * 0.1}
+                  label="Actions"
+                  dataKey="_id"
+                  cellRenderer={({ rowData: { _id, favorite, title } }) => <ListActions classList="dropdown__content--left" id={_id} favorite={favorite} title={title} />}
+                />
               </Table>
             )}
           </AutoSizer>
