@@ -20,8 +20,8 @@ const initialState = {
   loading: true,
   error: {},
   searchParams: "",
-  sortBy: "dateCreated",
-  sortDirection: "DESC"
+  sortBy: localStorage.getItem("sortBy") || "dateCreated",
+  sortDirection: localStorage.getItem("sortDirection") || "DESC"
 };
 
 export default function (state = initialState, action) {

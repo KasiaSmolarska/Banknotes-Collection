@@ -40,6 +40,8 @@ const BanknotesTable = React.memo(function BanknotesList() {
                 sortBy={sortBy}
                 sort={({ sortBy, sortDirection }) => {
                   dispatch(actions.sortBanknotes(sortBy, sortDirection));
+                  localStorage.setItem("sortBy", sortBy);
+                  localStorage.setItem("sortDirection", sortDirection);
                 }}
                 className="table table--banknote"
                 width={width}
@@ -48,6 +50,22 @@ const BanknotesTable = React.memo(function BanknotesList() {
                 rowHeight={90}
                 rowCount={banknotesList.length}
                 rowGetter={({ index }) => banknotesList[index]}>
+                <Column
+                  width={width * 0.1}
+                  label="Added"
+                  dataKey="dateCreated"
+                  cellData=""
+                  cellRenderer={({ cellData }) => (
+                    <>
+                      <div>
+                        <small>{new Date(cellData).toLocaleDateString()}</small>
+                      </div>
+                      <div>
+                        <small>{new Date(cellData).toLocaleTimeString()}</small>
+                      </div>
+                    </>
+                  )}
+                />
                 <Column
                   label="Name"
                   dataKey="title"

@@ -605,6 +605,12 @@ const isoCurriencies = {
     symbol_native: "ل.س.‏", code: "SYP",
     name_plural: "Syrian pounds"
   },
+  TJR: {
+    symbol: "	Tjr",
+    name: "Tajikistani ruble",
+    symbol_native: "рубл", code: "TJR",
+
+  },
   THB: {
     symbol: "฿",
     name: "Thai Baht",
