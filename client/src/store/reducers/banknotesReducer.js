@@ -8,7 +8,9 @@ import {
   SET_SEARCH_PARAMS,
   SET_SORT,
   FETCH_BANKNOTE_BY_ID,
-  CLEAR_BANKNOTE_DATA
+  CLEAR_BANKNOTE_DATA,
+  TOGGLE_IMAGE_MODAL,
+  CHANGE_IMAGE_IN_MODAL
 } from "../actions/types";
 
 const initialState = {
@@ -17,6 +19,11 @@ const initialState = {
   banknote: {},
   showedModalToAddBanknote: false,
   showedModalToEditBanknote: false,
+  imageModal: {
+    src: "",
+    show: false,
+    loading: true
+  },
   loading: true,
   error: {},
   searchParams: "",
@@ -63,6 +70,26 @@ export default function (state = initialState, action) {
         showedModalToEditBanknote: false,
         loading: false
       };
+    case TOGGLE_IMAGE_MODAL:
+      return {
+        ...state,
+        imageModal: {
+          ...state.imageModal,
+          src: "",
+          show: !state.imageModal.show,
+          loading: state.imageModal.show ? true : state.imageModal.loading
+
+        }
+      }
+    case CHANGE_IMAGE_IN_MODAL:
+      return {
+        ...state,
+        imageModal: {
+          ...state.imageModal,
+          src: payload,
+          loading: false
+        }
+      }
     case SEARCH_BANKNOTES:
       return {
         ...state,

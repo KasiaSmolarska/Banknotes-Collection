@@ -13,6 +13,8 @@ import BanknotesPage from "./BanknotesPage";
 import EditForm from "./banknoteForm/EditForm";
 import BanknoteForm from "./banknoteForm/BanknoteForm";
 import { Page404 } from "./404Page";
+import { Modal } from "./Modal";
+import { Spinner } from "./Spinner";
 
 const getBanknote = state => state.banknote;
 
@@ -32,7 +34,7 @@ const Content = () => {
 };
 
 const App = () => {
-  const { showedModalToAddBanknote, showedModalToEditBanknote, banknote } = useSelector(getBanknote);
+  const { showedModalToAddBanknote, showedModalToEditBanknote, banknote, imageModal } = useSelector(getBanknote);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -49,6 +51,18 @@ const App = () => {
         {showedModalToEditBanknote && banknote && <EditForm initialValues={banknote} />}
 
         {showedModalToAddBanknote && <BanknoteForm />}
+
+        {imageModal.show && (
+          <Modal onSubmit={false} onClose={() => dispatch(actions.toggleImageModal())}>
+            {!imageModal.loading ? (
+              <img src={imageModal.src} alt="" />
+            ) : (
+              <>
+                <Spinner />
+              </>
+            )}
+          </Modal>
+        )}
       </BrowserRouter>
     </div>
   );

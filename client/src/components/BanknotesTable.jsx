@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Icon } from "./Icon";
@@ -9,10 +9,25 @@ import { ListActions } from "./list/ListActions";
 
 import actions from "../store/actions";
 
+const getBanknote = state => state.banknote;
+
 const ImageContainer = React.memo(({ className, src, alt }) => {
   const ref = useRef(null);
-
-  return <img ref={ref} onClick={() => console.log(ref)} className={className} src={src} alt={alt} />;
+  const dispatch = useDispatch();
+  return (
+    <>
+      <img
+        ref={ref}
+        onClick={() => {
+          dispatch(actions.toggleImageModal());
+          dispatch(actions.changeImageInModal(ref.current.alt));
+        }}
+        className={className}
+        src={src}
+        alt={alt}
+      />
+    </>
+  );
 });
 
 function uploadFrontImage({ cellData }) {
@@ -22,8 +37,6 @@ function uploadFrontImage({ cellData }) {
     </div>
   );
 }
-
-const getBanknote = state => state.banknote;
 
 const BanknotesTable = React.memo(function BanknotesList() {
   const banknotesList = useSelector(state => state.banknote.banknotesList);

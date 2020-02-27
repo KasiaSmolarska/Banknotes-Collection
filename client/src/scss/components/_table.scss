@@ -6,6 +6,12 @@
     max-height: 70px;
     width: auto;
     display: block;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
   }
   &--banknote {
     font-size: 1.6rem;

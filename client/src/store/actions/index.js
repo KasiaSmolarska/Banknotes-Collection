@@ -13,6 +13,8 @@ import show_modal_to_edit_banknote from "./show_modal_to_edit_banknote";
 import updateBanknote from "./updateBanknote";
 import deleteBanknoteById from "./deleteBanknoteById";
 import clearBanknoteData from "./clearBanknoteData";
+import { changeImageInModal } from "./changeImageInModal";
+import { toggleImageModal } from "./toggleImageModal";
 
 const actions = {
   fetchUser,
@@ -31,7 +33,9 @@ const actions = {
   show_modal_to_edit_banknote,
   updateBanknote,
   deleteBanknoteById,
-  clearBanknoteData
+  clearBanknoteData,
+  changeImageInModal,
+  toggleImageModal
 };
 
 export default actions;

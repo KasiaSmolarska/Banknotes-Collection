@@ -13,3 +13,5 @@ export const SET_SORT = "set_sort";
 export const FETCH_BANKNOTE_BY_ID = "fetch_banknote_by_id";
 export const SHOW_MODAL_TO_EDIT_BANKNOTE = "show_modal_to_edit_banknote";
 export const CLEAR_BANKNOTE_DATA = "clear_banknote_data";
+export const TOGGLE_IMAGE_MODAL = "toggle_image_modal";
+export const CHANGE_IMAGE_IN_MODAL = "change_image_in_modal";

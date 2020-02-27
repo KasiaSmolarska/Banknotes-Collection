@@ -8,9 +8,7 @@ export const Modal = ({ onClose, onSubmit, title, submitText, children }, contex
     <div className="modal__background">
       <div className="modal">
         <div className="modal__header">
-          <h5 className="modal__header-title">
-            <Translate name={title} />
-          </h5>
+          <h5 className="modal__header-title">{title && <Translate name={title} />}</h5>
           <div className="modal__header-close" onClick={onClose} title={context.translate("button.close")}>
             <Icon icon="CrossIcon" />
           </div>
@@ -20,9 +18,11 @@ export const Modal = ({ onClose, onSubmit, title, submitText, children }, contex
           <button className="modal__footer-close btn" onClick={onClose}>
             <Translate name="button.close" />
           </button>
-          <button type="submit" className="modal__foter-submit btn btn--blue" onClick={onSubmit}>
-            <Translate name={submitText} />
-          </button>
+          {onSubmit && (
+            <button type="submit" className="modal__foter-submit btn btn--blue" onClick={onSubmit}>
+              {submitText && <Translate name={submitText} />}
+            </button>
+          )}
         </div>
       </div>
     </div>
