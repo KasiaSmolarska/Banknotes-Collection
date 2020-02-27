@@ -11,6 +11,13 @@
     max-height: calc(100% - 56px);
   }
 
+  &--compact {
+    @include respond(phone) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
   img {
     max-width: 100%;
     max-height: 100%;

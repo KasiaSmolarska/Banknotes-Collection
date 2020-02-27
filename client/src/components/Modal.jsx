@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 export const Modal = ({ onClose, onSubmit, title, submitText, children, type }, context) => {
   return (
     <div className="modal__background">
-      <div className="modal">
+      <div className={`modal ${type ? "modal--" + type : ""}`}>
         <div className="modal__header">
           <h5 className="modal__header-title">{title && <Translate name={title} />}</h5>
           <div className="modal__header-close" onClick={onClose} title={context.translate("button.close")}>
@@ -14,16 +14,17 @@ export const Modal = ({ onClose, onSubmit, title, submitText, children, type }, 
           </div>
         </div>
         <div className={`modal__body ${type ? "modal__body--" + type : ""}`}>{children}</div>
-        <div className="modal__footer">
-          <button className="modal__footer-close btn" onClick={onClose}>
-            <Translate name="button.close" />
-          </button>
-          {onSubmit && (
+        {onSubmit && (
+          <div className="modal__footer">
+            <button className="modal__footer-close btn" onClick={onClose}>
+              <Translate name="button.close" />
+            </button>
+
             <button type="submit" className="modal__foter-submit btn btn--blue" onClick={onSubmit}>
               {submitText && <Translate name={submitText} />}
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

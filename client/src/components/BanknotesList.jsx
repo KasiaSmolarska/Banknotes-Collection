@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { List, AutoSizer } from "react-virtualized";
 import { useSelector } from "react-redux";
 import { ListActions } from "./list/ListActions";
 import { Link } from "react-router-dom";
 import { Icon } from "./Icon";
 
+import actions from "../store/actions";
+
 const ImageContainer = React.memo(({ className, src, alt }) => {
-  return <img className={className} src={src} alt={alt} />;
+  const ref = useRef(null);
+  const dispatch = useDispatch();
+  return (
+    <img
+      onClick={() => {
+        dispatch(actions.toggleImageModal());
+        dispatch(actions.changeImageInModal(ref.current.alt));
+      }}
+      ref={ref}
+      className={className}
+      src={src}
+      alt={alt}
+    />
+  );
 });
 
 const renderDefaultListRow = (key, value) => {
