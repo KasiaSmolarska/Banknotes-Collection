@@ -191,13 +191,18 @@ module.exports = app => {
 
   app.get("/api/banknote", requireLogin, async (req, res) => {
     try {
-      const { query = "", sortBy, sortDirection, limit, skip } = req.query;
+      let { query = "", sortBy, sortDirection, limit, skip } = req.query;
+
+      const paginationLimits = [8, 16, 24, 48];
 
       const queryRegEx = new RegExp(query, "i");
       const queryFilters = { $and: [{ _user: req.user.id }, { $or: [{ title: queryRegEx }, { country: queryRegEx }] }] };
+      if (!paginationLimits.find((index) => index === Number(limit))) {
+        limit = 8;
+      }
 
       const searchedList = await Banknote.find(queryFilters).sort({ [sortBy]: sortDirection === "ASC" ? 1 : -1 }).limit(Number(limit)).skip(Number(skip));
-      const total = await Banknote.count(queryFilters);
+      const total = await Banknote.countDocuments(queryFilters);
 
       res.send({
         skip,

@@ -7,16 +7,16 @@ const getBanknote = state => state.banknote;
 const PaginationButton = ({ index, onClick, classClicked }) => {
   const ref = useRef(null);
   const dispatch = useDispatch();
+  const { limit, skip } = useSelector(getBanknote);
 
   return (
     <div
       onClick={() => {
         dispatch(actions.setPaginationSkip(ref.current.dataset.value));
-        onClick();
       }}
       ref={ref}
       data-value={index}
-      className={`btn btn--small ${classClicked}`}>
+      className={`btn btn--small ${skip / limit === index ? "btn--blue" : ""}`}>
       {index + 1}
     </div>
   );
@@ -25,13 +25,11 @@ const PaginationButton = ({ index, onClick, classClicked }) => {
 export const Pagination = () => {
   const { limit, numberOfProduct } = useSelector(getBanknote);
 
-  const [buttonClicked, setButtonClicked] = useState(0);
-
   const numberOfButtons = Array.from(Array(Math.ceil(numberOfProduct / limit)).keys());
   return (
     <div className="pagination">
       {numberOfButtons.map(index => (
-        <PaginationButton classClicked={index === buttonClicked ? "btn--blue" : ""} onClick={() => setButtonClicked(index)} index={index} key={index} />
+        <PaginationButton index={index} key={index} />
       ))}
     </div>
   );
