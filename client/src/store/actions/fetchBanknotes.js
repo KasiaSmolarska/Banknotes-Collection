@@ -14,7 +14,23 @@ export const fetchBanknotes = () => {
         sortBy,
         sortDirection
       });
-      const res = await axios.get(`/api/banknote?${params}`);
+
+
+      let res = await axios.get(`/api/banknote?${params}`);
+
+      if (query && res.data.length === 0) {
+        const params = new URLSearchParams({
+          sortBy,
+          sortDirection
+        });
+        res = await axios.get(`/api/banknote?${params}`);
+
+        dispatch(actions.setAlert({
+          type: "danger",
+          msg: "Sorry. No results found. Try different keywords.",
+          duration: 6000
+        }))
+      }
 
       dispatch({
         type: FETCH_BANKNOTES,
