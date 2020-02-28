@@ -15,6 +15,7 @@ import deleteBanknoteById from "./deleteBanknoteById";
 import clearBanknoteData from "./clearBanknoteData";
 import { changeImageInModal } from "./changeImageInModal";
 import { toggleImageModal } from "./toggleImageModal";
+import copyBanknote from "./copyBanknote";
 
 const actions = {
   fetchUser,
@@ -35,7 +36,8 @@ const actions = {
   deleteBanknoteById,
   clearBanknoteData,
   changeImageInModal,
-  toggleImageModal
+  toggleImageModal,
+  copyBanknote
 };
 
 export default actions;

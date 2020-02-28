@@ -18,6 +18,10 @@ export const ListActions = ({ id, favorite, title, classList }, context) => {
     dispatch(actions.fetchBanknoteById(id)).then(() => dispatch(actions.show_modal_to_edit_banknote()));
   };
 
+  const copyBanknote = id => {
+    dispatch(actions.copyBanknote(id));
+  };
+
   const deleteBanknote = id => {
     let accept = window.confirm(`Are you sure that you want to delete: ${title}`);
 
@@ -31,9 +35,13 @@ export const ListActions = ({ id, favorite, title, classList }, context) => {
           <Icon icon="MenuIcon" />
         </DropdownTrigger>
         <DropdownContent className={`dropdown__content ${classList && classList}`}>
-          <div className="dropdown__item listActions__remove" onClick={() => deleteBanknote(id)}>
-            <Translate name="button.remove" />
+          <div className="dropdown__item listActions__edit" onClick={() => openModal(id)}>
+            <Translate name="button.edit" />
           </div>
+          <div className="dropdown__item listActions__copy" onClick={() => copyBanknote(id)}>
+            <Translate name="button.copy" />
+          </div>
+
           <div className="dropdown__item listActions__favorite" onClick={() => toggleLikes(id)}>
             {favorite ? (
               <span className="listActions__favorite-elem" title={context.translate("action.removeFromFavorites")}>
@@ -45,8 +53,9 @@ export const ListActions = ({ id, favorite, title, classList }, context) => {
               </span>
             )}
           </div>
-          <div className="dropdown__item listActions__edit" onClick={() => openModal(id)}>
-            <Translate name="button.edit" />
+
+          <div className="dropdown__item listActions__remove" onClick={() => deleteBanknote(id)}>
+            <Translate name="button.remove" />
           </div>
         </DropdownContent>
       </Dropdown>

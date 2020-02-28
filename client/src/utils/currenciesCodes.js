@@ -431,6 +431,11 @@ const isoCurriencies = {
     symbol_native: "K", code: "MMK",
     name_plural: "Myanma kyats"
   },
+  MNT: {
+    symbol: "MNT",
+    name: "Tögrög (Tugrik)",
+    symbol_native: "₮", code: "MNT"
+  },
   MOP: {
     symbol: "MOP$",
     name: "Macanese Pataca",
@@ -718,6 +723,11 @@ const isoCurriencies = {
     name: "Zambian Kwacha",
     symbol_native: "ZK", code: "ZMK",
     name_plural: "Zambian kwachas"
+  },
+  ZRZ: {
+    symbol: "ZM",
+    name: "Nouveau Zaïre",
+    symbol_native: "ZM", code: "ZRZ"
   },
   ZWL: {
     symbol: "ZWL$",

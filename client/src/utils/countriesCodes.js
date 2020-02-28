@@ -242,6 +242,7 @@ const isoCountries = {
   WF: "Wallis And Futuna",
   EH: "Western Sahara",
   YE: "Yemen",
+  ZR: "Zaire",
   ZM: "Zambia",
   ZW: "Zimbabwe"
 };

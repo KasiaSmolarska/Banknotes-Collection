@@ -10,8 +10,8 @@ const banknoteData = {
   },
   country: {
     type: "String",
-    maxlength: 2,
-    validate: /[A-Z]{2}/
+    maxlength: 3,
+    validate: /[A-Z]{2,3}/
   },
   own: {
     type: "Boolean",
