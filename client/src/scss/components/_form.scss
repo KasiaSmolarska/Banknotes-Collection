@@ -115,6 +115,12 @@
     font-family: inherit;
     color: inherit;
 
+    &--mini {
+      display: inline-block;
+      width: auto;
+      text-align: center;
+    }
+
     &:focus {
       outline: 0;
       box-shadow: 0 1rem 2rem #0000001a;

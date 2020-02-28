@@ -1,18 +1,24 @@
 import axios from "axios";
-import { FETCH_BANKNOTES, BANKNOTE_ERROR } from "./types";
+import { FETCH_BANKNOTES, BANKNOTE_ERROR, SET_SEARCH_PARAMS, SET_NUMBER_OF_PRODUCTS, SET_PAGINATION_SKIP } from "./types";
 import actions from "./index";
 
-export const fetchBanknotes = () => {
+export const fetchBanknotes = (newSkip = 0) => {
   return async (dispatch, getState) => {
     try {
       const query = getState().banknote.searchParams;
       const sortBy = getState().banknote.sortBy;
       const sortDirection = getState().banknote.sortDirection;
+      const limit = getState().banknote.limit;
+      // const skip = getState().banknote.skip;
+
+      // console.log("skip", skip)
 
       const params = new URLSearchParams({
         query,
         sortBy,
-        sortDirection
+        sortDirection,
+        limit,
+        skip: newSkip * limit
       });
 
 
@@ -25,6 +31,11 @@ export const fetchBanknotes = () => {
         });
         res = await axios.get(`/api/banknote?${params}`);
 
+        dispatch({
+          type: SET_SEARCH_PARAMS,
+          payload: ""
+        });
+
         dispatch(actions.setAlert({
           type: "danger",
           msg: "Sorry. No results found. Try different keywords.",
@@ -34,8 +45,19 @@ export const fetchBanknotes = () => {
 
       dispatch({
         type: FETCH_BANKNOTES,
-        payload: res.data
+        payload: res.data.items
       });
+
+      dispatch({
+        type: SET_NUMBER_OF_PRODUCTS,
+        payload: res.data.total
+      });
+
+      dispatch({
+        type: SET_PAGINATION_SKIP,
+        payload: newSkip
+      })
+
     } catch (err) {
       console.log(err);
       dispatch({

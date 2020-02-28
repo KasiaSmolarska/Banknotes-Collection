@@ -10,7 +10,10 @@ import {
   FETCH_BANKNOTE_BY_ID,
   CLEAR_BANKNOTE_DATA,
   TOGGLE_IMAGE_MODAL,
-  CHANGE_IMAGE_IN_MODAL
+  CHANGE_IMAGE_IN_MODAL,
+  SET_PAGINATION_LIMIT,
+  SET_NUMBER_OF_PRODUCTS,
+  SET_PAGINATION_SKIP
 } from "../actions/types";
 
 const initialState = {
@@ -29,7 +32,10 @@ const initialState = {
   error: {},
   searchParams: "",
   sortBy: localStorage.getItem("sortBy") || "dateCreated",
-  sortDirection: localStorage.getItem("sortDirection") || "DESC"
+  sortDirection: localStorage.getItem("sortDirection") || "DESC",
+  limit: localStorage.getItem("limit") || 16,
+  skip: 0,
+  numberOfProduct: 0
 };
 
 export default function (state = initialState, action) {
@@ -121,6 +127,21 @@ export default function (state = initialState, action) {
         loading: false,
         banknote: { ...payload }
       };
+    case SET_PAGINATION_LIMIT:
+      return {
+        ...state,
+        limit: payload
+      }
+    case SET_NUMBER_OF_PRODUCTS:
+      return {
+        ...state,
+        numberOfProduct: payload
+      }
+    case SET_PAGINATION_SKIP:
+      return {
+        ...state,
+        skip: payload * state.limit
+      }
     default:
       return state;
   }

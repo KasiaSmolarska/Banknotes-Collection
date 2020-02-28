@@ -15,3 +15,6 @@ export const SHOW_MODAL_TO_EDIT_BANKNOTE = "show_modal_to_edit_banknote";
 export const CLEAR_BANKNOTE_DATA = "clear_banknote_data";
 export const TOGGLE_IMAGE_MODAL = "toggle_image_modal";
 export const CHANGE_IMAGE_IN_MODAL = "change_image_in_modal";
+export const SET_PAGINATION_LIMIT = "set_pagination_limit";
+export const SET_NUMBER_OF_PRODUCTS = "set_number_of_products";
+export const SET_PAGINATION_SKIP = "set_pagination_skip"
