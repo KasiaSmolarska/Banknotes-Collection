@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Search } from "./Search";
 import { Spinner } from "./Spinner";
 import { Pagination } from "./Pagination";
 import Translate from "../translate/Translate";
+import { Icon } from "./Icon";
 
 import actions from "../store/actions";
 
@@ -30,8 +31,33 @@ const BanknotesPage = (props, context) => {
 
   const sort = useRef("");
   const selectLimit = useRef(null);
+  const filterContainer = useRef(null);
+  const sortContainer = useRef(null);
+
+  const [menuFilterShow, setMenuFilterShow] = useState(false);
+  const [menuSortShow, setMenuSortShow] = useState(false);
 
   const { loading, banknotesList, sortBy, sortDirection, limit, numberOfProduct, skip } = useSelector(getBanknote);
+
+  React.useEffect(() => {
+    const handleClick = e => {
+      if (menuFilterShow && !filterContainer.current.contains(e.target)) {
+        setMenuFilterShow(false);
+      }
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [menuFilterShow]);
+
+  React.useEffect(() => {
+    const handleClick = e => {
+      if (menuSortShow && !sortContainer.current.contains(e.target)) {
+        setMenuSortShow(false);
+      }
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [menuSortShow]);
 
   const changeSorting = sortParams => {
     const [sortBy, sortDirection] = sortParams.split("-");
@@ -49,37 +75,52 @@ const BanknotesPage = (props, context) => {
     <div>
       {banknotesList.length > 0 ? (
         <>
-          <div className="banknotesListPage__header">
-            <Search />
-            <div className="banknotesListPage__pagination">
-              <div className="form__control">
-                <select ref={selectLimit} className="form__select form__select--mini" value={limit} onChange={() => setLimit(selectLimit.current.value)}>
-                  <option value="8">8</option>
-                  <option value="16">16</option>
-                  <option value="24">24</option>
-                  <option value="48">48</option>
-                </select>
+          <div className="banknotesListPage__buttons">
+            <div className="banknotesListPage__menu-filter-container" ref={filterContainer}>
+              <div className="banknotesListPage__menu-filter-btn btn btn--text" onClick={() => setMenuFilterShow(!menuFilterShow)}>
+                <Icon icon="FilterIcon" /> FILTER
               </div>
+
+              <div className={`banknotesListPage__menu-filter ${menuFilterShow ? "banknotesListPage__menu-filter--visible" : ""}`}>
+                <Search />
+                <div className="form__control">
+                  <select ref={selectLimit} className="form__select form__select--mini" value={limit} onChange={() => setLimit(selectLimit.current.value)}>
+                    <option value="8">8</option>
+                    <option value="16">16</option>
+                    <option value="24">24</option>
+                    <option value="48">48</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            {media !== "lg" ? (
+              <div ref={sortContainer} className="list__header banknotesListPage__menu-sort-container">
+                <div className="banknotesListPage__menu-filter-btn btn btn--text" onClick={() => setMenuSortShow(!menuSortShow)}>
+                  SORT
+                </div>
+                <div className={`banknotesListPage__menu-filter ${menuSortShow ? "banknotesListPage__menu-filter--visible" : ""}`}>
+                  <div className="form__control form__control--sort">
+                    <select className="form__select" value={sortBy + "-" + sortDirection} ref={sort} onChange={() => changeSorting(sort.current.value)}>
+                      {sortingRows.map(row =>
+                        ["ASC", "DESC"].map(direction => (
+                          <option key={row + "-" + direction} value={row + "-" + direction}>
+                            {context.translate(`sort.${row}.${direction}`)}
+                          </option>
+                        ))
+                      )}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            ) : null}
+          </div>
+          <div>
+            <div className="banknotesListPage__pagination">
               {numberOfProduct > limit && <Pagination />}
               <div className="list__result">
                 {skip + 1} - {banknotesList.length + skip} of {numberOfProduct} banknotes
               </div>
             </div>
-            {media !== "lg" ? (
-              <div className="list__header">
-                <div className="form__control form__control--sort">
-                  <select className="form__select" value={sortBy + "-" + sortDirection} ref={sort} onChange={() => changeSorting(sort.current.value)}>
-                    {sortingRows.map(row =>
-                      ["ASC", "DESC"].map(direction => (
-                        <option key={row + "-" + direction} value={row + "-" + direction}>
-                          {context.translate(`sort.${row}.${direction}`)}
-                        </option>
-                      ))
-                    )}
-                  </select>
-                </div>
-              </div>
-            ) : null}
           </div>
 
           {media === "lg" ? <BanknotesTable /> : <BanknotesList />}

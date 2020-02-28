@@ -16,7 +16,7 @@ const PaginationButton = ({ index, onClick, classClicked }) => {
       }}
       ref={ref}
       data-value={index}
-      className={`btn btn--small ${skip / limit === index ? "btn--blue" : ""}`}>
+      className={`btn btn--round-small btn--pagination ${skip / limit === index ? "btn--blue" : ""}`}>
       {index + 1}
     </div>
   );

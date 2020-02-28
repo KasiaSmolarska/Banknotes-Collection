@@ -24,7 +24,7 @@ export const fetchBanknotes = (newSkip = 0) => {
 
       let res = await axios.get(`/api/banknote?${params}`);
 
-      if (query && res.data.length === 0) {
+      if (query && res.data.items.length === 0) {
         const params = new URLSearchParams({
           sortBy,
           sortDirection

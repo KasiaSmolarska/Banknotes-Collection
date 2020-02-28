@@ -38,13 +38,11 @@
 
     &--sort {
       max-width: 400px;
-      margin: 0rem;
-      margin-right: 1.5rem;
+      margin: 1.5rem;
       flex: 1 0;
 
       @include respond(phone) {
         max-width: 100%;
-        margin-right: 0;
       }
 
       .form__select {
@@ -264,6 +262,5 @@
 
   &--search {
     display: flex;
-    margin: 1rem;
   }
 }

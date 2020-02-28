@@ -15,7 +15,8 @@ import { MenuIcon } from "./MenuIcon";
 import { CrossIcon } from "./CrossIcon";
 import { BanknotesIcon } from "./BanknotesIcon"
 import { ScreenIcon } from "./ScreenIcon";
-import { MagnifyPlusIcon } from "./MagnifyPlusIcon"
+import { MagnifyPlusIcon } from "./MagnifyPlusIcon";
+import { FilterIcon } from "./FilterIcon";
 
 export const svgList = {
   AddBanknoteIcon,
@@ -33,5 +34,6 @@ export const svgList = {
   CrossIcon,
   BanknotesIcon,
   ScreenIcon,
-  MagnifyPlusIcon
+  MagnifyPlusIcon,
+  FilterIcon
 };

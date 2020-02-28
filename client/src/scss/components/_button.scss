@@ -58,6 +58,15 @@
     display: inherit;
   }
 
+  &--pagination {
+    display: inline-flex;
+    padding: 0.6rem;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+
   &--flex {
     display: flex !important;
     align-items: center;

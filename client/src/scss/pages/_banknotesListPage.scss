@@ -14,4 +14,41 @@
     padding: 0 1rem;
     flex-wrap: wrap;
   }
+
+  &__menu-filter-container {
+    display: inline-block;
+  }
+
+  &__menu-filter {
+    opacity: 0;
+    transition: all 0.3s ease-out;
+    transform: translateX(-100%);
+    z-index: 1;
+    pointer-events: none;
+    box-shadow: $shadow-medium;
+    position: absolute;
+    max-width: calc(100% - 10px);
+    min-width: 300px;
+    background: $white;
+    padding: 1rem;
+    border: 1px solid $primary-color;
+    border-radius: 4px;
+
+    &-btn {
+      display: inline-flex;
+      align-items: center;
+      margin: 1rem;
+    }
+
+    &--visible {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+  }
 }
