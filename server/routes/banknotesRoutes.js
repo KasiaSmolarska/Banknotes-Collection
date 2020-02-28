@@ -316,8 +316,8 @@ module.exports = app => {
           return;
         }
 
-        const isThereAnyBanknoteWithThisImage = banknotes.find(elem => banknote[image] === elem[image]);
-        if (isThereAnyBanknoteWithThisImage) {
+        const isThereAnyBanknoteWithThisImage = banknotes.filter(elem => banknote[image] === elem[image]);
+        if (isThereAnyBanknoteWithThisImage.length > 1) {
           console.log("Another banknote uses this photo. Photo was not removed")
           return;
         }
@@ -335,6 +335,7 @@ module.exports = app => {
       });
 
       banknote = await Banknote.findOneAndUpdate({ _user: req.user._id, _id: banknoteId }, { $set: createdBanknoteData }, { new: true });
+
       return res.send(banknote);
     } catch (err) {
       console.error(err.message);
