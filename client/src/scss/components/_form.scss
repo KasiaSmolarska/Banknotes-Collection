@@ -35,6 +35,23 @@
       display: flex;
       align-items: center;
     }
+
+    &--sort {
+      max-width: 400px;
+      margin: 0rem;
+      margin-right: 1.5rem;
+      flex: 1 0;
+
+      @include respond(phone) {
+        max-width: 100%;
+        margin-right: 0;
+      }
+
+      .form__select {
+        font-size: 1.4rem;
+        min-width: 24rem;
+      }
+    }
   }
 
   &__group-label {

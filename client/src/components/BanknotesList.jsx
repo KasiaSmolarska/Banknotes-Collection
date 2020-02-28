@@ -96,14 +96,12 @@ export const BanknotesList = () => {
   };
   return (
     <div style={{ position: "relative", height: "calc(100vh - 170px)" }}>
-      {banknotesList && !loading ? (
+      {banknotesList && !loading && (
         <AutoSizer>
           {({ width, height }) => {
             return <List className="list list--banknote" width={width} height={height} rowCount={banknotesList.length} rowHeight={140} rowGetter={({ index }) => banknotesList[index]} rowRenderer={rowRenderer} />;
           }}
         </AutoSizer>
-      ) : (
-        <p>dupa</p>
       )}
     </div>
   );

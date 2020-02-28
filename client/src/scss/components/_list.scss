@@ -40,6 +40,29 @@
     }
   }
 
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    font-size: 1.6rem;
+    flex-wrap: wrap;
+
+    @include respond(phone) {
+      display: block;
+    }
+  }
+
+  &__result {
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: #000;
+    @include respond(phone) {
+      padding: 1rem 0;
+      text-align: center;
+    }
+  }
+
   &__imageFront {
     grid-area: imageFront;
     display: flex;
