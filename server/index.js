@@ -45,6 +45,8 @@ const authRoutes = require("./routes/authRoutes");
 authRoutes(app);
 const bankRoutes = require("./routes/banknotesRoutes");
 bankRoutes(app);
+const statisticsRoutes = require("./routes/statisticsRoutes");
+statisticsRoutes(app);
 
 // DEPLOY
 const path = require("path");

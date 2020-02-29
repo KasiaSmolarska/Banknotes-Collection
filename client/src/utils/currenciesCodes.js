@@ -371,6 +371,11 @@ const isoCurriencies = {
     symbol_native: "тңг.", code: "KZT",
     name_plural: "Kazakhstani tenges"
   },
+  LAK: {
+    symbol: "LAK",
+    name: "Kip",
+    symbol_native: "ກີບ", code: "LAK"
+  },
   LBP: {
     symbol: "LB£",
     name: "Lebanese Pound",
