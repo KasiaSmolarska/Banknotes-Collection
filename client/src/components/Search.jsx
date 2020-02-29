@@ -32,8 +32,10 @@ export const Search = (props, context) => {
         <button type="submit" title={context.translate("input.searchPlaceholder")} className="btn btn--blue btn--search">
           <Translate name="input.searchPlaceholder" />{" "}
         </button>
-        <span title={context.translate("button.reset")} onClick={handleReset} className="btn  btn--round-small">
-          <CancelIcon width="12" height="12" fill="#000" />
+      </div>
+      <div>
+        <span title={context.translate("button.reset.filters")} onClick={handleReset} className="btn  btn--danger">
+          <CancelIcon width="12" height="12" fill="#dc3545" /> {context.translate("button.reset")}
         </span>
       </div>
     </form>

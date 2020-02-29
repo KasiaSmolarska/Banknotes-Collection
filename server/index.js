@@ -4,6 +4,9 @@ const app = express();
 
 const { mongoURI, cookieKey } = require("./config/keys");
 
+const compression = require('compression')
+
+
 // Body-parser
 const bodyParser = require("body-parser");
 app.use(bodyParser.json({ limit: "20mb", extended: true }));
@@ -47,6 +50,20 @@ const bankRoutes = require("./routes/banknotesRoutes");
 bankRoutes(app);
 const statisticsRoutes = require("./routes/statisticsRoutes");
 statisticsRoutes(app);
+
+
+// COMPRESSION
+
+function shouldCompress(req, res) {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false
+  }
+  return true;
+}
+
+app.use(compression({ threshold: 0, filter: shouldCompress }));
+
 
 // DEPLOY
 const path = require("path");

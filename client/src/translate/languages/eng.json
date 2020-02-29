@@ -2,6 +2,7 @@
   "button.addNewBanknote": "Add new banknote",
   "button.closeModal": "Close Window",
   "button.reset": "Reset",
+  "button.reset.filters": "Reset filters",
   "button.submit": "Submit",
   "button.edit": "Edit",
   "button.remove": "Remove",
