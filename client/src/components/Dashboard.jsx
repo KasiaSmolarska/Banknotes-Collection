@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "./Spinner";
-import { BanknotesChart, DefaultChart, getSearchingField } from "./charts/charts";
+import { BanknotesChart, DefaultChart } from "./charts/charts";
 import { Card } from "./Card";
 import PropTypes from "prop-types";
 

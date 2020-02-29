@@ -42,28 +42,30 @@ const App = () => {
 
   return (
     <div className="container">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/" component={Landing} />
-          <Route component={Content} />
-        </Switch>
-        {showedModalToEditBanknote && banknote && <EditForm initialValues={banknote} />}
+      <React.Suspense fallback={<Spinner />}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/" component={Landing} />
+            <Route component={Content} />
+          </Switch>
+          {showedModalToEditBanknote && banknote && <EditForm initialValues={banknote} />}
 
-        {showedModalToAddBanknote && <BanknoteForm />}
+          {showedModalToAddBanknote && <BanknoteForm />}
 
-        {imageModal.show && (
-          <Modal title={imageModal.title} type="compact" onSubmit={false} onClose={() => dispatch(actions.toggleImageModal())}>
-            {!imageModal.loading ? (
-              <img src={imageModal.src} alt="" />
-            ) : (
-              <>
-                <Spinner />
-              </>
-            )}
-          </Modal>
-        )}
-      </BrowserRouter>
+          {imageModal.show && (
+            <Modal title={imageModal.title} type="compact" onSubmit={false} onClose={() => dispatch(actions.toggleImageModal())}>
+              {!imageModal.loading ? (
+                <img src={imageModal.src} alt="" />
+              ) : (
+                <>
+                  <Spinner />
+                </>
+              )}
+            </Modal>
+          )}
+        </BrowserRouter>
+      </React.Suspense>
     </div>
   );
 };

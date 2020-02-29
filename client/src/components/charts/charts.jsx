@@ -1,7 +1,8 @@
 import React from "react";
-import Chart from "react-apexcharts";
+// import Chart from "react-apexcharts";
 import chartOptions from "../../utils/chartConfig";
 import { getCountryName } from "../../utils/countriesCodes";
+const Chart = React.lazy(() => import("react-apexcharts"));
 
 const { areaChartOptions } = chartOptions;
 
