@@ -1,6 +1,7 @@
 import React from "react";
 import Chart from "react-apexcharts";
 import chartOptions from "../../utils/chartConfig";
+import { getCountryName } from "../../utils/countriesCodes";
 
 const { areaChartOptions } = chartOptions;
 
@@ -30,7 +31,7 @@ export const DefaultChart = ({ value, chartId, seriesName, color }) => {
       },
       xaxis: {
         ...areaChartOptions.xaxis,
-        categories: Object.keys(sortedData)
+        categories: chartId === "countries-chart" ? Object.keys(sortedData).map(key => getCountryName(key)) : Object.keys(sortedData)
       },
       colors: [color],
       theme: {
