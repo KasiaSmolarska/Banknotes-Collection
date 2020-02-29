@@ -5,29 +5,22 @@ import chartOptions from "../../utils/chartConfig";
 const { areaChartOptions } = chartOptions;
 
 const sortData = unsortedData => {
-  let sortedData = {};
-  Object.keys(unsortedData)
-    .sort()
-    .forEach(function(v, i) {
-      sortedData[v] = unsortedData[v];
-    });
-  return sortedData;
-};
-
-export const getSearchingField = (banknotesList, value) => {
-  const values = {};
-  banknotesList.map(banknote => {
-    let searchingField = banknote[value];
-    if (!!searchingField) {
-      return values[searchingField] ? (values[searchingField] += 1) : (values[searchingField] = 1);
-    }
+  let data = {};
+  if (!unsortedData) {
+    return {};
+  }
+  unsortedData.forEach(function(v, i) {
+    data[v._id] = v.total;
   });
-  return values;
+  const sortData = {};
+  Object.keys(data)
+    .sort()
+    .forEach(date => (sortData[date] = data[date]));
+  return sortData;
 };
 
-export const DefaultChart = ({ banknotesList, value, chartId, seriesName, color }) => {
-  const sortedData = sortData(getSearchingField(banknotesList, value));
-  console.log("sort", sortedData);
+export const DefaultChart = ({ value, chartId, seriesName, color }) => {
+  const sortedData = sortData(value);
   const chart = {
     options: {
       ...areaChartOptions,
@@ -57,22 +50,12 @@ export const DefaultChart = ({ banknotesList, value, chartId, seriesName, color 
       }
     ]
   };
-  console.log(chart);
 
   return <Chart options={chart.options} series={chart.series} type="area" height="100" />;
 };
 
-export const BanknotesChart = ({ banknotesList }) => {
-  const getTime = () => {
-    const timeAdded = {};
-    banknotesList.map(banknote => {
-      let day = new Date(banknote.dateCreated).toLocaleDateString();
-      return timeAdded[day] ? (timeAdded[day] += 1) : (timeAdded[day] = 1);
-    });
-    return timeAdded;
-  };
-
-  const sortedData = sortData(getTime(banknotesList));
+export const BanknotesChart = ({ value }) => {
+  const sortedData = sortData(value);
 
   const chart = {
     options: {

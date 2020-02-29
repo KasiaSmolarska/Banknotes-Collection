@@ -7,33 +7,40 @@ import PropTypes from "prop-types";
 
 import actions from "../store/actions";
 
-const getBanknote = state => state.banknote;
 const getUser = state => state.auth.user;
+const getStatistics = state => state.statistics;
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const { loading, banknotesList } = useSelector(getBanknote);
+  const { banknote, loading } = useSelector(getStatistics);
 
   const user = useSelector(getUser);
 
   React.useEffect(() => {
-    new Promise((resolve, reject) => {
-      resolve(dispatch(actions.fetchBanknotes()));
-    }).then(() => dispatch(actions.fetchBanknoteModel()));
+    dispatch(actions.fetchBanknoteModel());
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    dispatch(actions.fetchBanknoteStatistics());
   }, [dispatch]);
 
   return !loading ? (
     <div className="dashboard">
-      <Card mod="banknote" header={banknotesList.length} title="tile.banknoteAdded">
-        <BanknotesChart banknotesList={banknotesList} />
+      <Card
+        mod="banknote"
+        header={banknote.dateCreated.reduce((a, b) => {
+          return a + b.total;
+        }, 0)}
+        title="tile.banknoteAdded">
+        <BanknotesChart value={banknote.dateCreated} />
       </Card>
 
-      <Card mod="continent" header={`${Object.keys(getSearchingField(banknotesList, "continent")).length} / 7`} title="tile.continentsAdded">
-        <DefaultChart banknotesList={banknotesList} value="continent" chartId="continents-chart" seriesName="banknotes" color="#4caf50" />
+      <Card mod="continent" header={`${banknote.continents.length} / 7`} title="tile.continentsAdded">
+        <DefaultChart value={banknote.continents} chartId="continents-chart" seriesName="banknotes" color="#4caf50" />
       </Card>
 
-      <Card mod="country" header={`${Object.keys(getSearchingField(banknotesList, "country")).length} / 317`} title="tile.countriesAdded">
-        <DefaultChart banknotesList={banknotesList} value="country" chartId="countries-chart" seriesName="banknotes" color="#F69F43" />
+      <Card mod="country" header={`${banknote.countries.length} / 317`} title="tile.countriesAdded">
+        <DefaultChart value={banknote.countries} chartId="countries-chart" seriesName="banknotes" color="#F69F43" />
       </Card>
 
       <Card mod="user" className="card--user" header={`Hello ${user.given_name},`}>
@@ -42,10 +49,10 @@ const Dashboard = () => {
           <span>you have already collected banknotes from: </span>
           <ul className="card__list">
             <li>
-              <strong>{((Object.keys(getSearchingField(banknotesList, "continent")).length / 7) * 100).toFixed(1)}%</strong> of all continents,
+              <strong>{((banknote.continents.length / 7) * 100).toFixed(1)}%</strong> of all continents,
             </li>
             <li>
-              <strong>{((Object.keys(getSearchingField(banknotesList, "country")).length / 317) * 100).toFixed(1)}%</strong> of all countries
+              <strong>{((banknote.countries.length / 317) * 100).toFixed(1)}%</strong> of all countries
             </li>
           </ul>
           <strong>Keep collecting & have fun! </strong>
