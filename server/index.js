@@ -43,14 +43,6 @@ require("./services/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
-// ROUTES
-const authRoutes = require("./routes/authRoutes");
-authRoutes(app);
-const bankRoutes = require("./routes/banknotesRoutes");
-bankRoutes(app);
-const statisticsRoutes = require("./routes/statisticsRoutes");
-statisticsRoutes(app);
-
 
 // COMPRESSION
 
@@ -61,6 +53,16 @@ function shouldCompress(req, res) {
   }
   return true;
 }
+
+
+// ROUTES
+const authRoutes = require("./routes/authRoutes");
+authRoutes(app);
+const bankRoutes = require("./routes/banknotesRoutes");
+bankRoutes(app);
+const statisticsRoutes = require("./routes/statisticsRoutes");
+statisticsRoutes(app);
+
 
 app.use(compression({ threshold: 0, filter: shouldCompress }));
 

@@ -23,7 +23,6 @@ const Content = () => {
     <div>
       <Header />
       <Switch>
-        <Route exact path="/" component={Landing} />
         <PrivateRoute exact path="/banknotes/:banknoteId" component={BanknotePreview} />
         <PrivateRoute exact path="/banknotes" component={BanknotesPage} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
@@ -46,6 +45,7 @@ const App = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/" component={Landing} />
           <Route component={Content} />
         </Switch>
         {showedModalToEditBanknote && banknote && <EditForm initialValues={banknote} />}
