@@ -120,7 +120,6 @@ module.exports = app => {
             //   action: "read",
             //   expires: new Date("2021-01-01")
             // });
-
             res.send(uuid + req.file.originalname);
           })
           .catch(err => {
@@ -142,10 +141,10 @@ module.exports = app => {
       if (err) {
         return res.status("404").send(err);
       }
-      const imageUrlParts = image.split(".");
-      const imageExtension = imageUrlParts[imageUrlParts - 1];
 
-      res.set({ "Content-Type": `image/${imageExtension}` });
+      res.set({ "Content-Type": `image/jpg` });
+      res.set('Cache-Control', 'public, max-age=604800, s-maxage=604800');
+
 
       https.get(apiResponse.mediaLink, body => {
         body.on("data", d => {
