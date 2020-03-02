@@ -13,10 +13,12 @@ import { SearchIcon } from "./SearchIcon";
 import UserIcon from "./UserIcon";
 import { MenuIcon } from "./MenuIcon";
 import { CrossIcon } from "./CrossIcon";
-import { BanknotesIcon } from "./BanknotesIcon"
+import { BanknotesIcon } from "./BanknotesIcon";
 import { ScreenIcon } from "./ScreenIcon";
 import { MagnifyPlusIcon } from "./MagnifyPlusIcon";
 import { FilterIcon } from "./FilterIcon";
+import { PolandIcon } from "./PolandIcon";
+import { EnglandIcon } from "./EnglandIcon";
 
 export const svgList = {
   AddBanknoteIcon,
@@ -35,5 +37,7 @@ export const svgList = {
   BanknotesIcon,
   ScreenIcon,
   MagnifyPlusIcon,
-  FilterIcon
+  FilterIcon,
+  PolandIcon,
+  EnglandIcon
 };

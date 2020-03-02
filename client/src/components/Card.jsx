@@ -23,5 +23,6 @@ export const Card = ({ header, title, children, className, mod, ...props }) => {
 };
 
 Card.contextTypes = {
-  translate: PropTypes.func
+  translate: PropTypes.func,
+  language: PropTypes.object
 };

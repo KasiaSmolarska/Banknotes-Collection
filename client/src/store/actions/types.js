@@ -19,3 +19,4 @@ export const SET_PAGINATION_LIMIT = "set_pagination_limit";
 export const SET_NUMBER_OF_PRODUCTS = "set_number_of_products";
 export const SET_PAGINATION_SKIP = "set_pagination_skip";
 export const FETCH_BANKNOTE_STATISTICS = "fetch_banknote_statistics";
+export const SET_LANGUAGE = "set_language";

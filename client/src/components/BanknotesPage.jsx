@@ -78,7 +78,7 @@ const BanknotesPage = (props, context) => {
           <div className="banknotesListPage__buttons">
             <div className="banknotesListPage__menu-filter-container" ref={filterContainer}>
               <div className="banknotesListPage__menu-filter-btn btn btn--text" onClick={() => setMenuFilterShow(!menuFilterShow)}>
-                <Icon icon="FilterIcon" /> FILTER
+                <Icon icon="FilterIcon" /> <Translate name="button.filter" />
               </div>
 
               <div className={`banknotesListPage__menu-filter ${menuFilterShow ? "banknotesListPage__menu-filter--visible" : ""}`}>

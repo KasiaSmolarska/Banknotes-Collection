@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Flags } from "./Flags";
 
 import Dropdown, { DropdownTrigger, DropdownContent } from "react-simple-dropdown";
 import { Icon } from "./Icon";
@@ -55,6 +56,9 @@ class Header extends Component {
               <Link className="header__link" to="/banknotes" title={this.context.translate("button.banknotesList")}>
                 <Icon fill="#fff" icon="BanknotesIcon" />
               </Link>
+            </li>
+            <li>
+              <Flags />
             </li>
             <li className="header__link-container" title={this.context.translate(!this.props.showedModalToAddBanknote ? "button.addNewBanknote" : "button.closeModal")} onClick={this.props.show_modal_to_add_new_banknote}>
               {this.props.showedModalToAddBanknote ? <RemoveBanknoteIcon /> : <Icon fill="#FFF" icon="AddBanknoteIcon" />}

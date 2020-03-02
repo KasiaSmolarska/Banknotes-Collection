@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-class Translate extends React.PureComponent {
+class Translate extends React.Component {
   render() {
     if (typeof this.context.translate !== "function") {
       return this.props.name;
     }
     const translateText = this.context.translate(this.props.name);
-    console.log(typeof translateText)
     return translateText.toString();
   }
 }

@@ -13,6 +13,7 @@
   "button.actions": "Click to see more actions",
   "button.account": "Your account",
   "button.dashboard": "Go to dashboard",
+  "button.filter": "FILTER",
   "label.banknoteForm.currency": "Currency (2-3 big letters)",
   "label.banknoteForm.imageReverse": "Add the reverse image",
   "label.banknoteForm.imageFront": "Add the front image",
