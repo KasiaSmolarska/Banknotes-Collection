@@ -23,6 +23,8 @@
   "button.dashboard": "Przejdź do panelu",
   "button.filter": "FILTRUJ",
   "button.goBack": "Powrót",
+  "flags.title.pl": "Polski",
+  "flags.title.eng": "English",
   "form.groupLabel.elementary": "Podstawowe informacje",
   "form.groupLabel.geolocation": "Geo-lokalizacja",
   "form.groupLabel.specification": "Specyfikacja",

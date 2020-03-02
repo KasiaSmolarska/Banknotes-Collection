@@ -101,7 +101,12 @@ const BanknotesTable = (props, context) => {
                 <Column label={context.translate("table.label.currency")} dataKey="currency" width={width * 0.1} />
                 <Column label={context.translate("table.label.issueYear")} dataKey="issueYear" width={width * 0.1} />
 
-                <Column width={width * 0.1} label={context.translate("table.label.own")} dataKey="own" cellRenderer={({ cellData }) => (!!cellData ? "yes" : "no")} />
+                <Column
+                  width={width * 0.1}
+                  label={context.translate("table.label.own")}
+                  dataKey="own"
+                  cellRenderer={({ cellData }) => (!!cellData ? context.translate(`label.banknoteForm.own.yes`) : context.translate(`label.banknoteForm.own.no`))}
+                />
 
                 <Column
                   width={width * 0.1}

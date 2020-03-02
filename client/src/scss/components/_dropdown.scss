@@ -4,10 +4,6 @@
 
   &__trigger {
     cursor: pointer;
-
-    &:hover {
-      filter: saturate(45);
-    }
   }
 
   &__item {
@@ -73,5 +69,11 @@
     opacity: 1;
     pointer-events: all;
     transform: translate(10px);
+  }
+
+  &--active &__content--center {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(3px) translateX(-1px);
   }
 }
