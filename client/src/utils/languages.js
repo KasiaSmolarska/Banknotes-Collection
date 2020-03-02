@@ -8,4 +8,4 @@ const languages = {
 
 export default languages;
 
-export const currentLang = localStorage.getItem("language") || "pl";
+export const currentLang = () => localStorage.getItem("language") || "pl";

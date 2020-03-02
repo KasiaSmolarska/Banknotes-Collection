@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Icon } from "./Icon";
 import { Column, Table, AutoSizer } from "react-virtualized";
-
+import { getCountryName } from "../utils/countriesCodes";
 import { Spinner } from "./Spinner";
 import { ListActions } from "./list/ListActions";
 
@@ -96,7 +96,7 @@ const BanknotesTable = (props, context) => {
                 />
                 <Column width={width * 0.1} label={context.translate("table.label.imageFront")} dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
                 <Column width={width * 0.1} label={context.translate("table.label.imageReverse")} dataKey="imageReverse" cellData="" cellRenderer={uploadFrontImage} />
-                <Column label={context.translate("table.label.country")} dataKey="country" width={width * 0.1} />
+                <Column label={context.translate("table.label.country")} dataKey="country" width={width * 0.1} cellRenderer={({ cellData }) => getCountryName(cellData)} />
                 <Column label={context.translate("table.label.value")} dataKey="value" width={width * 0.1} />
                 <Column label={context.translate("table.label.currency")} dataKey="currency" width={width * 0.1} />
                 <Column label={context.translate("table.label.issueYear")} dataKey="issueYear" width={width * 0.1} />

@@ -70,7 +70,7 @@ class Header extends Component {
                 </DropdownTrigger>
                 <DropdownContent className={`dropdown__content dropdown__content--left`}>
                   <button className="btn btn--text" onClick={this.handleClick}>
-                    <Icon icon="LogOutIcon" color="#7a18e3" /> Log out
+                    <Icon icon="LogOutIcon" color="#7a18e3" /> {this.context.translate("button.logOut")}
                   </button>
                 </DropdownContent>
               </Dropdown>

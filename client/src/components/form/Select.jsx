@@ -3,15 +3,20 @@ import Translate from "../../translate/Translate";
 import PropTypes from "prop-types";
 
 const Select = ({ data, input, meta: { touched, error, pristine, form } }, context) => {
+  console.log(input);
   return (
     <div className="form__control">
       <select className="form__select" style={{ marginBottom: "5px" }} type="text" {...input}>
         <option value="">{context.translate("form.select.noValue")}</option>
         {data.enum
-          ? data.enum.map(option => {
-              return <option key={option}>{option}</option>;
-            })
-          : ["yes", "no"].map(value => (
+          ? input.name === "continent"
+            ? data.enum.map(option => {
+                return <option key={option}>{context.translate(`continent.${option.replace(/ /g, "")}`)}</option>;
+              })
+            : data.enum.map(option => {
+                return <option key={option}>{option}</option>;
+              })
+          : [context.translate(`label.banknoteForm.own.yes`), context.translate(`label.banknoteForm.own.no`)].map(value => (
               <option value={value === "yes"} key={value}>
                 {value}
               </option>

@@ -96,7 +96,7 @@ const BanknotesPage = (props, context) => {
             {media !== "lg" ? (
               <div ref={sortContainer} className="list__header banknotesListPage__menu-sort-container">
                 <div className="banknotesListPage__menu-filter-btn btn btn--text" onClick={() => setMenuSortShow(!menuSortShow)}>
-                  SORT
+                  <Translate name="button.sort" />
                 </div>
                 <div className={`banknotesListPage__menu-filter ${menuSortShow ? "banknotesListPage__menu-filter--visible" : ""}`}>
                   <div className="form__control form__control--sort">

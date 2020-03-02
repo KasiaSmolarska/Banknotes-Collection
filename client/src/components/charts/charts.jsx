@@ -1,5 +1,5 @@
 import React from "react";
-// import Chart from "react-apexcharts";
+import PropTypes from "prop-types";
 import chartOptions from "../../utils/chartConfig";
 import { getCountryName } from "../../utils/countriesCodes";
 const Chart = React.lazy(() => import("react-apexcharts"));
@@ -21,7 +21,7 @@ const sortData = unsortedData => {
   return sortData;
 };
 
-export const DefaultChart = ({ value, chartId, seriesName, color }) => {
+export const DefaultChart = ({ value, chartId, seriesName, color }, context) => {
   const sortedData = sortData(value);
   const chart = {
     options: {
@@ -32,7 +32,14 @@ export const DefaultChart = ({ value, chartId, seriesName, color }) => {
       },
       xaxis: {
         ...areaChartOptions.xaxis,
-        categories: chartId === "countries-chart" ? Object.keys(sortedData).map(key => getCountryName(key)) : Object.keys(sortedData)
+        categories:
+          chartId === "countries-chart"
+            ? Object.keys(sortedData).map(key => getCountryName(key))
+            : chartId === "continents-chart"
+            ? Object.keys(sortedData).map(continent => {
+                return context.translate(`continent.${continent.replace(/ /g, "")}`);
+              })
+            : Object.keys(sortedData)
       },
       colors: [color],
       theme: {
@@ -54,6 +61,10 @@ export const DefaultChart = ({ value, chartId, seriesName, color }) => {
   };
 
   return <Chart options={chart.options} series={chart.series} type="area" height="100" />;
+};
+
+DefaultChart.contextTypes = {
+  translate: PropTypes.func
 };
 
 export const BanknotesChart = ({ value }) => {
