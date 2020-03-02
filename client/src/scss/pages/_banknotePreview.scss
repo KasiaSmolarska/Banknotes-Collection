@@ -35,8 +35,7 @@
 
   &__specification {
     display: grid;
-    grid-template-columns: repeat(3, 33%);
-    text-align: left;
+    grid-template-columns: repeat(2, 50%);
     grid-gap: 0.5rem;
     & > div {
       align-self: flex-start;

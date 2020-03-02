@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import actions from "../../store/actions";
 import { Link } from "react-router-dom";
 import { Spinner } from "../Spinner";
@@ -34,7 +35,7 @@ const listPreviewElements = [
   "currencyPaid"
 ];
 
-export const BanknotePreview = ({ match, history }) => {
+export const BanknotePreview = ({ match, history }, context) => {
   const { banknoteId } = match.params;
   const dispatch = useDispatch();
 
@@ -49,7 +50,7 @@ export const BanknotePreview = ({ match, history }) => {
     <div>
       <div>
         <span className="btn" onClick={() => history.goBack()}>
-          Go back
+          {context.translate("button.goBack")}
         </span>
       </div>
 
@@ -79,7 +80,7 @@ export const BanknotePreview = ({ match, history }) => {
                     return (
                       <div key={key} className={`preview__row preview__${key}`}>
                         <div className="preview__label">
-                          <span className="hidden-xs">{key}:</span>
+                          <span className="hidden-xs">{context.translate(`label.banknoteForm.${key}`)}:</span>
                           <span className="preview__element-value">{value}</span>
                         </div>
                       </div>
@@ -91,14 +92,14 @@ export const BanknotePreview = ({ match, history }) => {
             <div className="preview__divider"></div>
             <div className="preview__own">
               <div className="preview__label preview__label--own">
-                <span>Own:</span>
+                <span>{context.translate(`label.banknoteForm.own`)}:</span>
                 {banknote.own ? (
                   <span className="preview__element-value preview__element-value--owned">
-                    <Icon icon="CheckMarkIcon" /> YES
+                    <Icon icon="CheckMarkIcon" /> {context.translate(`label.banknoteForm.own.yes`)}
                   </span>
                 ) : (
                   <span className="preview__element-value preview__element-value--not-owned">
-                    <Icon icon="CrossIcon" /> NO
+                    <Icon icon="CrossIcon" /> {context.translate(`label.banknoteForm.own.no`)}
                   </span>
                 )}
               </div>
@@ -112,4 +113,8 @@ export const BanknotePreview = ({ match, history }) => {
       )}
     </div>
   );
+};
+
+BanknotePreview.contextTypes = {
+  translate: PropTypes.func
 };

@@ -64,7 +64,7 @@ class Header extends Component {
               {this.props.showedModalToAddBanknote ? <RemoveBanknoteIcon /> : <Icon fill="#FFF" icon="AddBanknoteIcon" />}
             </li>
             <li className="header__link-container">
-              <Dropdown title="button.account">
+              <Dropdown title={this.context.translate("button.account")}>
                 <DropdownTrigger>
                   <Icon icon="UserIcon" />
                 </DropdownTrigger>

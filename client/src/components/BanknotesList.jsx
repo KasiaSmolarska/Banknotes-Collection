@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { ListActions } from "./list/ListActions";
 import { Link } from "react-router-dom";
 import { Icon } from "./Icon";
+import PropTypes from "prop-types";
 
 import actions from "../store/actions";
 
@@ -25,18 +26,18 @@ const ImageContainer = React.memo(({ className, src, alt, title }) => {
   );
 });
 
-const renderDefaultListRow = (key, value) => {
+const renderDefaultListRow = (key, value, a, b, context) => {
   return (
     <div key={key} className={`list__row list__${key}`}>
       <div className="list__label">
-        <span className="hidden-xs">{key}:</span>
+        <span className="hidden-xs">{context.translate(`label.banknoteForm.${key}.short`)}:</span>
         <span className="list__element-value">{value}</span>
       </div>
     </div>
   );
 };
 
-const renderImageListRow = (key, value, id, title) => {
+const renderImageListRow = (key, value, id, title, context) => {
   return (
     <div key={key} className={`list__${key}`}>
       <ImageContainer className="list__image" src={`/api/upload/image/thumb-${value}`} alt={value} title={title} />
@@ -44,7 +45,7 @@ const renderImageListRow = (key, value, id, title) => {
   );
 };
 
-const renderTitleListRow = (key, value, id) => {
+const renderTitleListRow = (key, value, id, a, context) => {
   return (
     <div key={key} className={`list__row list__${key}`}>
       <div className="list__label">
@@ -52,7 +53,7 @@ const renderTitleListRow = (key, value, id) => {
           <span className="list__element-icon--magnify">
             <Icon icon="MagnifyPlusIcon" />
           </span>
-          <span className="hidden-xs">{key}:</span>
+          <span className="hidden-xs">{context.translate(`label.banknoteForm.${key}`)}:</span>
           <span className="list__element-value">{value}</span>
         </Link>
       </div>
@@ -69,7 +70,7 @@ const rows = {
   issueYear: renderDefaultListRow
 };
 
-export const BanknotesList = () => {
+export const BanknotesList = (props, context) => {
   const { banknotesList, loading } = useSelector(state => state.banknote);
 
   const rowRenderer = ({
@@ -84,7 +85,7 @@ export const BanknotesList = () => {
         {Object.entries(banknotesList[index]).map(([key, value]) => {
           return Object.entries(rows).map(([rowKey, rowValue]) => {
             if (rowKey === key) {
-              return rowValue(key, value, banknotesList[index]._id, banknotesList[index].title);
+              return rowValue(key, value, banknotesList[index]._id, banknotesList[index].title, context);
             }
           });
         })}
@@ -105,4 +106,8 @@ export const BanknotesList = () => {
       )}
     </div>
   );
+};
+
+BanknotesList.contextTypes = {
+  translate: PropTypes.func
 };

@@ -118,7 +118,11 @@ const BanknotesPage = (props, context) => {
             <div className="banknotesListPage__pagination">
               {numberOfProduct > limit && <Pagination />}
               <div className="list__result">
-                {skip + 1} - {banknotesList.length + skip} of {numberOfProduct} banknotes
+                {context.translate("page.baknote.pagination.result", {
+                  from: skip + 1,
+                  to: banknotesList.length + skip,
+                  of: numberOfProduct
+                })}
               </div>
             </div>
           </div>

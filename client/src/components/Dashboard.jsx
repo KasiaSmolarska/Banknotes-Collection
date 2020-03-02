@@ -49,13 +49,13 @@ const Dashboard = (props, context) => {
           <span>{context.translate("tile.summary.subtitle")} </span>
           <ul className="card__list">
             <li>
-              <strong>{((banknote.continents.length / 7) * 100).toFixed(1)}%</strong> of all continents,
+              <strong>{((banknote.continents.length / 7) * 100).toFixed(1)}%</strong> {context.translate("tile.summary.point1")}
             </li>
             <li>
-              <strong>{((banknote.countries.length / 317) * 100).toFixed(1)}%</strong> of all countries
+              <strong>{((banknote.countries.length / 317) * 100).toFixed(1)}%</strong> {context.translate("tile.summary.point2")}
             </li>
           </ul>
-          <strong>Keep collecting & have fun! </strong>
+          <strong>{context.translate("tile.summary.bottom")} </strong>
         </div>
       </Card>
     </div>

@@ -7,6 +7,7 @@ import Textarea from "./Textarea";
 import InputNumber from "./InputNumber";
 import InputFile from "./InputFile";
 import IssueBankInput from "../banknoteForm/IssueBankInput";
+import PropTypes from "prop-types";
 
 const NAME_TO_COMPONENT = {
   Input: Input,
@@ -43,13 +44,13 @@ const getTypeOfInput = (modelField, fieldName) => {
   return "Input";
 };
 
-const FormGroup = props => {
+const FormGroup = (props, context) => {
   if (!props.data) {
     return false;
   }
   return (
     <div className={`form__group form__group--${props.name}`}>
-      <h2 className="form__group-label">{props.name}</h2>
+      <h2 className="form__group-label">{context.translate(`form.groupLabel.${props.name}`)}</h2>
       {props.inputsName.map(name => {
         const type = getTypeOfInput(props.data[name], name);
         return <Field key={name} name={name} component={NAME_TO_COMPONENT[type]} data={props.data[name]} />;
@@ -59,3 +60,7 @@ const FormGroup = props => {
 };
 
 export default FormGroup;
+
+FormGroup.contextTypes = {
+  translate: PropTypes.func
+};
