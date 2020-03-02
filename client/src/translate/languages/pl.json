@@ -1,4 +1,12 @@
 {
+  "action.deleteBanknoteById.success": "Banknot został usunięty!",
+  "action.deleteBanknoteById.danger": "Coś poszło nie tak. Spróbuj ponownie!",
+  "action.fetchBanknoteById.danger": "Niestety nie możemy znaleźć żądanego banknotu!",
+  "action.fetchBanknotes.danger": "Niestety nic nie znaleziono. Spróbuj zmienić parametry wyszukiwania.",
+  "action.postBanknote.success": "Banknot został dodany do Twojej kolekcji.",
+  "action.postBanknote.danger": "Coś poszło nie tak. Spróbuj ponownie!",
+  "action.toggleBanknotesLike.success": "Banknot został dodany do ulubionych.",
+  "action.toggleBanknotesLike.info": "Banknot został usunięty z ulubionych.",
   "button.addNewBanknote": "Dodaj banknot",
   "button.closeModal": "Zamknij okno",
   "button.reset": "Zresetuj",
@@ -71,6 +79,8 @@
   "tile.banknoteAdded": "Zebranych Banknotów",
   "tile.continentsAdded": "Zebranych Kontynentów",
   "tile.countriesAdded": "Zebranych Krajów",
+  "tile.summary.tile": "Witaj, $(name)",
+  "tile.summary.subtitle": "aktualnie zebrałeś/aś:",
   "sort.title.DESC": "Tytuł, Z-A",
   "sort.title.ASC": "Tytuł, A-Z",
   "sort.country.DESC": "Kraj (ISO), Z-A",
@@ -82,5 +92,15 @@
   "sort.dateCreated.DESC": "Dada dodania, od najnowszego",
   "sort.dateCreated.ASC": "Data dodania, od najstarszego",
   "sort.issueYear.DESC": "Rok wydania, od najnowszego",
-  "sort.issueYear.ASC": "Rok wydania, od najstarszego"
+  "sort.issueYear.ASC": "Rok wydania, od najstarszego",
+  "table.label.dateCreated": "Dodano",
+  "table.label.title": "Nazwa",
+  "table.label.imageFront": "Przód",
+  "table.label.imageReverse": "Tył",
+  "table.label.country": "Kraj",
+  "table.label.value": "Wartość",
+  "table.label.currency": "Waluta",
+  "table.label.issueYear": "Rok",
+  "table.label.own": "W posiadaniu",
+  "table.label.actions": "Akcje"
 }

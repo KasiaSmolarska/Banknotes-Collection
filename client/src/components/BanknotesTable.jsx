@@ -7,6 +7,8 @@ import { Column, Table, AutoSizer } from "react-virtualized";
 import { Spinner } from "./Spinner";
 import { ListActions } from "./list/ListActions";
 
+import PropTypes from "prop-types";
+
 import actions from "../store/actions";
 
 const getBanknote = state => state.banknote;
@@ -38,7 +40,7 @@ function uploadFrontImage({ cellData, rowData }) {
   );
 }
 
-const BanknotesTable = React.memo(function BanknotesList() {
+const BanknotesTable = (props, context) => {
   const banknotesList = useSelector(state => state.banknote.banknotesList);
   const { loading, sortBy, sortDirection } = useSelector(getBanknote);
   const dispatch = useDispatch();
@@ -65,7 +67,7 @@ const BanknotesTable = React.memo(function BanknotesList() {
                 rowGetter={({ index }) => banknotesList[index]}>
                 <Column
                   width={width * 0.1}
-                  label="Added"
+                  label={context.translate("table.label.dateCreated")}
                   dataKey="dateCreated"
                   cellData=""
                   cellRenderer={({ cellData }) => (
@@ -80,7 +82,7 @@ const BanknotesTable = React.memo(function BanknotesList() {
                   )}
                 />
                 <Column
-                  label="Name"
+                  label={context.translate("table.label.title")}
                   dataKey="title"
                   width={width * 0.2}
                   cellRenderer={({ cellData, rowData: { _id } }) => (
@@ -92,18 +94,18 @@ const BanknotesTable = React.memo(function BanknotesList() {
                     </Link>
                   )}
                 />
-                <Column width={width * 0.1} label="Front" dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
-                <Column width={width * 0.1} label="Back" dataKey="imageReverse" cellData="" cellRenderer={uploadFrontImage} />
-                <Column label="Country" dataKey="country" width={width * 0.1} />
-                <Column label="Value" dataKey="value" width={width * 0.1} />
-                <Column label="Currency" dataKey="currency" width={width * 0.1} />
-                <Column label="Year" dataKey="issueYear" width={width * 0.1} />
+                <Column width={width * 0.1} label={context.translate("table.label.imageFront")} dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
+                <Column width={width * 0.1} label={context.translate("table.label.imageReverse")} dataKey="imageReverse" cellData="" cellRenderer={uploadFrontImage} />
+                <Column label={context.translate("table.label.country")} dataKey="country" width={width * 0.1} />
+                <Column label={context.translate("table.label.value")} dataKey="value" width={width * 0.1} />
+                <Column label={context.translate("table.label.currency")} dataKey="currency" width={width * 0.1} />
+                <Column label={context.translate("table.label.issueYear")} dataKey="issueYear" width={width * 0.1} />
 
-                <Column width={width * 0.1} label="Own" dataKey="own" cellRenderer={({ cellData }) => (!!cellData ? "yes" : "no")} />
+                <Column width={width * 0.1} label={context.translate("table.label.own")} dataKey="own" cellRenderer={({ cellData }) => (!!cellData ? "yes" : "no")} />
 
                 <Column
                   width={width * 0.1}
-                  label="Actions"
+                  label={context.translate("table.label.actions")}
                   dataKey="_id"
                   cellRenderer={({ rowData: { _id, favorite, title } }) => <ListActions classList="dropdown__content--left" id={_id} favorite={favorite} title={title} />}
                 />
@@ -116,6 +118,10 @@ const BanknotesTable = React.memo(function BanknotesList() {
       )}
     </div>
   );
-});
+};
+
+BanknotesTable.contextTypes = {
+  translate: PropTypes.func
+};
 
 export default BanknotesTable;

@@ -25,11 +25,14 @@ class TranslateProvider extends React.Component {
     this.setState({ language: lang });
   }
 
-  translate(languageKey) {
+  translate(languageKey, variables = {}) {
+    const regExp = /\$\(([a-z]+)\)/g;
     if (!languages[this.state.language][languageKey]) {
       return languageKey;
     }
-    return languages[this.state.language][languageKey];
+    return languages[this.state.language][languageKey].replace(regExp, (match, group) => {
+      return variables[group];
+    });
   }
   render() {
     return this.props.children;

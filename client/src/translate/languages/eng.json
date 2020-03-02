@@ -1,4 +1,12 @@
 {
+  "action.deleteBanknoteById.success": "Banknote was deleted!",
+  "action.deleteBanknoteById.danger": "Something went wrong. Try again!",
+  "action.fetchBanknoteById.danger": "Sorry. Requested banknote was not found!",
+  "action.fetchBanknotes.danger": "Sorry. No results found. Try different keywords.",
+  "action.postBanknote.success": "Banknote added to your collection",
+  "action.postBanknote.danger": "Something went wrong. Try again!",
+  "action.toggleBanknotesLike.success": "Bankote is added to favorites",
+  "action.toggleBanknotesLike.info": "Banknote is removed from favorites",
   "button.addNewBanknote": "Add new banknote",
   "button.closeModal": "Close Window",
   "button.reset": "Reset",
@@ -71,6 +79,8 @@
   "tile.banknoteAdded": "Banknotes Collected",
   "tile.continentsAdded": "Continents Collected",
   "tile.countriesAdded": "Countries Collected",
+  "tile.summary.tile": "Hello $(name)",
+  "tile.summary.subtitle": "you have already collected banknotes from:",
   "sort.title.DESC": "Title, Z-A",
   "sort.title.ASC": "Title, A-Z",
   "sort.country.DESC": "Country (ISO), Z-A",
@@ -82,5 +92,15 @@
   "sort.dateCreated.DESC": "Date added, new to old",
   "sort.dateCreated.ASC": "Date added, old to new",
   "sort.issueYear.DESC": "Issue year, new to old",
-  "sort.issueYear.ASC": "Issue year, old to new"
+  "sort.issueYear.ASC": "Issue year, old to new",
+  "table.label.dateCreated": "Added",
+  "table.label.title": "Name",
+  "table.label.imageFront": "Front",
+  "table.label.imageReverse": "Back",
+  "table.label.country": "Country",
+  "table.label.value": "Value",
+  "table.label.currency": "Currency",
+  "table.label.issueYear": "Year",
+  "table.label.own": "Own",
+  "table.label.actions": "Actions"
 }

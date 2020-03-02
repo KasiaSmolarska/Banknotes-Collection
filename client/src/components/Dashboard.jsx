@@ -10,7 +10,7 @@ import actions from "../store/actions";
 const getUser = state => state.auth.user;
 const getStatistics = state => state.statistics;
 
-const Dashboard = () => {
+const Dashboard = (props, context) => {
   const dispatch = useDispatch();
   const { banknote, loading } = useSelector(getStatistics);
 
@@ -43,10 +43,10 @@ const Dashboard = () => {
         <DefaultChart value={banknote.countries} chartId="countries-chart" seriesName="banknotes" color="#F69F43" />
       </Card>
 
-      <Card mod="user" className="card--user" header={`Hello ${user.given_name},`}>
+      <Card mod="user" className="card--user" header={context.translate("tile.summary.tile", { name: user.given_name })}>
         <img className="card__bg" src="/api/upload/image/14458440-5703-11ea-970c-cd5c3b593a0ddottedBg.png" alt="tile-background" />
         <div className="card__body">
-          <span>you have already collected banknotes from: </span>
+          <span>{context.translate("tile.summary.subtitle")} </span>
           <ul className="card__list">
             <li>
               <strong>{((banknote.continents.length / 7) * 100).toFixed(1)}%</strong> of all continents,

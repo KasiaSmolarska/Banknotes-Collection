@@ -1,8 +1,10 @@
 import axios from "axios";
 import { BANKNOTE_ERROR, FETCH_BANKNOTE_BY_ID } from "./types";
 import actions from "./index";
+import languages from "../../utils/languages";
 
 const fetchBanknoteById = (banknoteId, history) => async dispatch => {
+  const lang = localStorage.getItem("language") || "pl";
   try {
     const res = await axios.get(`/api/banknote/${banknoteId}`);
     dispatch({
@@ -17,7 +19,7 @@ const fetchBanknoteById = (banknoteId, history) => async dispatch => {
     dispatch(
       actions.setAlert({
         type: "danger",
-        msg: "Sorry. Requested banknote was not found!",
+        msg: languages[lang]["action.fetchBanknoteById.danger"],
         duration: 6000
       })
     );

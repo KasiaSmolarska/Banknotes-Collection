@@ -38,7 +38,7 @@ const initialState = {
   numberOfProduct: 0
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   const { payload } = action;
   switch (action.type) {
     case FETCH_BANKNOTE_MODEL:
@@ -86,9 +86,8 @@ export default function (state = initialState, action) {
           title: "",
           show: !state.imageModal.show,
           loading: state.imageModal.show ? true : state.imageModal.loading
-
         }
-      }
+      };
     case CHANGE_IMAGE_IN_MODAL:
       return {
         ...state,
@@ -98,7 +97,7 @@ export default function (state = initialState, action) {
           title: payload.title,
           loading: false
         }
-      }
+      };
     case SEARCH_BANKNOTES:
       return {
         ...state,
@@ -131,17 +130,17 @@ export default function (state = initialState, action) {
       return {
         ...state,
         limit: payload
-      }
+      };
     case SET_NUMBER_OF_PRODUCTS:
       return {
         ...state,
         numberOfProduct: payload
-      }
+      };
     case SET_PAGINATION_SKIP:
       return {
         ...state,
         skip: payload * state.limit
-      }
+      };
     default:
       return state;
   }
