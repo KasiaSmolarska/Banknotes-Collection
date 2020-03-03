@@ -1,4 +1,3 @@
-#H1 Banknotes-Collection
----
+# Banknotes-Collection
 
-[link to preview](https://banknotes-collection.herokuapp.com/dashboard)
+[link to preview: https://banknotes-collection.herokuapp.com/dashboard](https://banknotes-collection.herokuapp.com/dashboard)
