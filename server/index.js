@@ -4,8 +4,9 @@ const app = express();
 
 const { mongoURI, cookieKey } = require("./config/keys");
 
-const compression = require('compression')
+const compression = require("compression");
 
+process.setMaxListeners(0);
 
 // Body-parser
 const bodyParser = require("body-parser");
@@ -43,17 +44,15 @@ require("./services/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 // COMPRESSION
 
 function shouldCompress(req, res) {
-  if (req.headers['x-no-compression']) {
+  if (req.headers["x-no-compression"]) {
     // don't compress responses with this request header
-    return false
+    return false;
   }
   return true;
 }
-
 
 // ROUTES
 const authRoutes = require("./routes/authRoutes");
@@ -62,10 +61,10 @@ const bankRoutes = require("./routes/banknotesRoutes");
 bankRoutes(app);
 const statisticsRoutes = require("./routes/statisticsRoutes");
 statisticsRoutes(app);
-
+const profileRoutes = require("./routes/profileRoutes");
+profileRoutes(app);
 
 app.use(compression({ threshold: 0, filter: shouldCompress }));
-
 
 // DEPLOY
 const path = require("path");

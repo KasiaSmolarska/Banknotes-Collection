@@ -16,7 +16,7 @@ import * as serviceWorker from "./serviceWorker";
 // import axios from "axios";
 // window.axios = axios;
 
-// axios.post("/api/banknote/5e4cf7945a0bf63e0f998e54", {}).then(data => console.log(data));
+// axios.delete("/api/profile").then(data => console.log(data));
 
 const middlewares = [applyMiddleware(reduxThunk)];
 
