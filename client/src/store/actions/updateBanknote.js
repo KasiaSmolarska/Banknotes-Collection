@@ -8,14 +8,14 @@ const updateBanknote = (banknoteId, values) => async dispatch => {
     dispatch(
       actions.setAlert({
         type: "success",
-        msg: "Banknote was updated!"
+        msg: "action.updateBanknote.success"
       })
     );
   } catch (err) {
     dispatch(
       actions.setAlert({
         type: "danger",
-        msg: "Something went wrong. Try again!"
+        msg: "action.updateBanknote.danger"
       })
     );
     dispatch({

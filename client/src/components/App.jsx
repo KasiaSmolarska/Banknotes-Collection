@@ -15,6 +15,7 @@ import BanknoteForm from "./banknoteForm/BanknoteForm";
 import { Page404 } from "./404Page";
 import { Modal } from "./Modal";
 import { Spinner } from "./Spinner";
+import { ProfilePage } from "./ProfilePage";
 
 const getBanknote = state => state.banknote;
 
@@ -26,6 +27,7 @@ const Content = () => {
         <PrivateRoute exact path="/banknotes/:banknoteId" component={BanknotePreview} />
         <PrivateRoute exact path="/banknotes" component={BanknotesPage} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/profile" component={ProfilePage} />
         <Route component={Page404} />
       </Switch>
     </div>

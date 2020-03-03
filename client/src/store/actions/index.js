@@ -17,8 +17,9 @@ import { changeImageInModal } from "./changeImageInModal";
 import { toggleImageModal } from "./toggleImageModal";
 import copyBanknote from "./copyBanknote";
 import setPaginationLimit from "./setPaginationLimit";
-import setPaginationSkip from "./setPaginationSkip"
+import setPaginationSkip from "./setPaginationSkip";
 import fetchBanknoteStatistics from "./fetchBanknoteStatistics";
+import deleteUser from "./deleteUser";
 
 const actions = {
   fetchUser,
@@ -43,7 +44,8 @@ const actions = {
   copyBanknote,
   setPaginationLimit,
   setPaginationSkip,
-  fetchBanknoteStatistics
+  fetchBanknoteStatistics,
+  deleteUser
 };
 
 export default actions;

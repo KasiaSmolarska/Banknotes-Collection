@@ -1,10 +1,8 @@
 import axios from "axios";
 import { FETCH_BANKNOTES, BANKNOTE_ERROR, SET_SEARCH_PARAMS, SET_NUMBER_OF_PRODUCTS, SET_PAGINATION_SKIP } from "./types";
 import actions from "./index";
-import languages from "../../utils/languages";
 
 export const fetchBanknotes = (newSkip = 0) => {
-  const lang = localStorage.getItem("language") || "pl";
   return async (dispatch, getState) => {
     try {
       const query = getState().banknote.searchParams;
@@ -37,7 +35,7 @@ export const fetchBanknotes = (newSkip = 0) => {
         dispatch(
           actions.setAlert({
             type: "danger",
-            msg: languages[lang]["action.fetchBanknotes.danger"],
+            msg: "action.fetchBanknotes.danger",
             duration: 6000
           })
         );

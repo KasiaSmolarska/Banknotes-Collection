@@ -6,6 +6,7 @@ const userSchema = new Schema({
   facebookId: String,
   given_name: String,
   familyName: String,
+  picture: String,
   dateCreated: { type: Date, default: new Date() }
 });
 

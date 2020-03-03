@@ -69,6 +69,9 @@ class Header extends Component {
                   <Icon icon="UserIcon" />
                 </DropdownTrigger>
                 <DropdownContent className={`dropdown__content dropdown__content--left`}>
+                  <Link className="btn btn--text" to="/profile">
+                    {this.context.translate("button.yourProfile")}
+                  </Link>
                   <button className="btn btn--text" onClick={this.handleClick}>
                     <Icon icon="LogOutIcon" color="#7a18e3" /> {this.context.translate("button.logOut")}
                   </button>

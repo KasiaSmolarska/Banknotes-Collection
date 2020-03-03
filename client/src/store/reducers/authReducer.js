@@ -1,4 +1,4 @@
-import { FETCH_USER, LOG_OUT_USER } from "../actions/types";
+import { FETCH_USER, LOG_OUT_USER, DELETE_ACCOUNT } from "../actions/types";
 
 const initial_state = {
   user: null,
@@ -14,6 +14,7 @@ export default function(state = initial_state, action) {
         user: payload.user ? payload.user : false,
         loading: false
       };
+    case DELETE_ACCOUNT:
     case LOG_OUT_USER:
       return {
         ...state,
