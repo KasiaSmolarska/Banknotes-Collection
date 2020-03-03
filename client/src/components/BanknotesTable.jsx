@@ -62,7 +62,7 @@ const BanknotesTable = (props, context) => {
                 width={width}
                 height={height}
                 headerHeight={60}
-                rowHeight={90}
+                rowHeight={100}
                 rowCount={banknotesList.length}
                 rowGetter={({ index }) => banknotesList[index]}>
                 <Column
@@ -96,10 +96,10 @@ const BanknotesTable = (props, context) => {
                 />
                 <Column width={width * 0.1} label={context.translate("table.label.imageFront")} dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
                 <Column width={width * 0.1} label={context.translate("table.label.imageReverse")} dataKey="imageReverse" cellData="" cellRenderer={uploadFrontImage} />
-                <Column label={context.translate("table.label.country")} dataKey="country" width={width * 0.1} cellRenderer={({ cellData }) => getCountryName(cellData)} />
+                <Column label={context.translate("table.label.country")} dataKey="country" width={width * 0.15} cellRenderer={({ cellData }) => getCountryName(cellData)} />
                 <Column label={context.translate("table.label.value")} dataKey="value" width={width * 0.1} />
                 <Column label={context.translate("table.label.currency")} dataKey="currency" width={width * 0.1} />
-                <Column label={context.translate("table.label.issueYear")} dataKey="issueYear" width={width * 0.1} />
+                <Column label={context.translate("table.label.issueYear")} dataKey="issueYear" width={width * 0.05} />
 
                 <Column
                   width={width * 0.1}

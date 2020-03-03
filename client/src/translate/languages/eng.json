@@ -25,6 +25,8 @@
   "button.filter": "FILTER",
   "button.sort": "SORT",
   "button.logOut": "Log out",
+  "chart.series.banknotesAdded": "banknotes added",
+  "chart.series.banknotes": "banknotes",
   "continent.Africa": "Africa",
   "continent.Antarctica": "Antarctica",
   "continent.Asia": "Asia",

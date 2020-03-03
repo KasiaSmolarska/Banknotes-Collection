@@ -25,6 +25,8 @@
   "button.dashboard": "Przejdź do panelu",
   "button.filter": "FILTRUJ",
   "button.goBack": "Powrót",
+  "chart.series.banknotesAdded": "dodanych banknotów",
+  "chart.series.banknotes": "banknotów",
   "continent.Africa": "Afryka",
   "continent.Antarctica": "Antarktyda",
   "continent.Asia": "Azja",

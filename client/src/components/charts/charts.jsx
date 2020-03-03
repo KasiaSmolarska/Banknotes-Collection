@@ -21,6 +21,19 @@ const sortData = unsortedData => {
   return sortData;
 };
 
+const parseCategories = (chartId, sortedData, context) => {
+  switch (chartId) {
+    case "countries-chart":
+      return Object.keys(sortedData).map(key => getCountryName(key));
+    case "continents-chart":
+      return Object.keys(sortedData).map(continent => {
+        return context.translate(`continent.${continent.replace(/ /g, "")}`);
+      });
+    default:
+      return Object.keys(sortedData);
+  }
+};
+
 export const DefaultChart = ({ value, chartId, seriesName, color }, context) => {
   const sortedData = sortData(value);
   const chart = {
@@ -32,14 +45,7 @@ export const DefaultChart = ({ value, chartId, seriesName, color }, context) => 
       },
       xaxis: {
         ...areaChartOptions.xaxis,
-        categories:
-          chartId === "countries-chart"
-            ? Object.keys(sortedData).map(key => getCountryName(key))
-            : chartId === "continents-chart"
-            ? Object.keys(sortedData).map(continent => {
-                return context.translate(`continent.${continent.replace(/ /g, "")}`);
-              })
-            : Object.keys(sortedData)
+        categories: parseCategories(chartId, sortedData, context)
       },
       colors: [color],
       theme: {
@@ -54,7 +60,7 @@ export const DefaultChart = ({ value, chartId, seriesName, color }, context) => 
     },
     series: [
       {
-        name: seriesName,
+        name: context.translate(`chart.series.${seriesName}`),
         data: Object.values(sortedData)
       }
     ]
@@ -67,7 +73,7 @@ DefaultChart.contextTypes = {
   translate: PropTypes.func
 };
 
-export const BanknotesChart = ({ value }) => {
+export const BanknotesChart = ({ value }, context) => {
   const sortedData = sortData(value);
 
   const chart = {
@@ -84,10 +90,14 @@ export const BanknotesChart = ({ value }) => {
     },
     series: [
       {
-        name: "banknotes added",
+        name: context.translate("chart.series.banknotesAdded"),
         data: Object.values(sortedData)
       }
     ]
   };
   return <Chart options={chart.options} series={chart.series} type="area" height="100" />;
+};
+
+BanknotesChart.contextTypes = {
+  translate: PropTypes.func
 };
