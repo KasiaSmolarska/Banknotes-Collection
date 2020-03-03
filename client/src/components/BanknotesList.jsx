@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { List, AutoSizer } from "react-virtualized";
+import { getCountryName } from "../utils/countriesCodes";
+import { getCurrencyName } from "../utils/currenciesCodes";
 import { useSelector } from "react-redux";
 import { ListActions } from "./list/ListActions";
 import { Link } from "react-router-dom";
@@ -30,9 +32,33 @@ const renderDefaultListRow = (key, value, a, b, context) => {
   return (
     <div key={key} className={`list__row list__${key}`}>
       <div className="list__label">
-        <span className="hidden-xs">{context.translate(`label.banknoteForm.${key}.short`)}:</span>
+        <span className="smaller-xs">{context.translate(`label.banknoteForm.${key}.short`)}:</span>
         <span className="list__element-value">{value}</span>
       </div>
+    </div>
+  );
+};
+
+const renderCountryRow = (key, value, a, b, context) => {
+  return (
+    <div key={key} className={`list__row list__${key}`}>
+      <div className="list__label">
+        <span className="smaller-xs">{context.translate(`label.banknoteForm.${key}.short`)}:</span>
+        <span className="list__element-value">{value}</span>
+      </div>
+      <div className="list__element-value-expanded">{getCountryName(value)}</div>
+    </div>
+  );
+};
+
+const renderCurrencyRow = (key, value, a, b, context) => {
+  return (
+    <div key={key} className={`list__row list__${key}`}>
+      <div className="list__label">
+        <span className="smaller-xs">{context.translate(`label.banknoteForm.${key}.short`)}:</span>
+        <span className="list__element-value">{value}</span>
+      </div>
+      <div className="list__element-value-expanded">{getCurrencyName(value)}</div>
     </div>
   );
 };
@@ -63,9 +89,9 @@ const renderTitleListRow = (key, value, id, a, context) => {
 
 const rows = {
   title: renderTitleListRow,
-  country: renderDefaultListRow,
+  country: renderCountryRow,
   value: renderDefaultListRow,
-  currency: renderDefaultListRow,
+  currency: renderCurrencyRow,
   imageFront: renderImageListRow,
   issueYear: renderDefaultListRow
 };
@@ -100,7 +126,7 @@ export const BanknotesList = (props, context) => {
       {banknotesList && !loading && (
         <AutoSizer>
           {({ width, height }) => {
-            return <List className="list list--banknote" width={width} height={height} rowCount={banknotesList.length} rowHeight={140} rowGetter={({ index }) => banknotesList[index]} rowRenderer={rowRenderer} />;
+            return <List className="list list--banknote" width={width} height={height} rowCount={banknotesList.length} rowHeight={200} rowGetter={({ index }) => banknotesList[index]} rowRenderer={rowRenderer} />;
           }}
         </AutoSizer>
       )}
