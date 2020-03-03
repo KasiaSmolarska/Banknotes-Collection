@@ -11,7 +11,11 @@ const Select = ({ data, input, meta: { touched, error, pristine, form } }, conte
         {data.enum
           ? input.name === "continent"
             ? data.enum.map(option => {
-                return <option key={option}>{context.translate(`continent.${option.replace(/ /g, "")}`)}</option>;
+                return (
+                  <option value={option} key={option}>
+                    {context.translate(`continent.${option.replace(/ /g, "")}`)}
+                  </option>
+                );
               })
             : data.enum.map(option => {
                 return <option key={option}>{option}</option>;
