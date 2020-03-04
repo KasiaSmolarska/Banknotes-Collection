@@ -1,4 +1,5 @@
 const passport = require("passport");
+const md5 = require("md5");
 
 module.exports = app => {
   app.get(
@@ -19,6 +20,7 @@ module.exports = app => {
   });
 
   app.get("/api/current_user", ({ user }, res) => {
+    user.email = md5(user.email);
     res.send({ user });
   });
 

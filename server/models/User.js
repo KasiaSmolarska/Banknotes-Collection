@@ -7,7 +7,16 @@ const userSchema = new Schema({
   given_name: String,
   familyName: String,
   picture: String,
-  dateCreated: { type: Date, default: new Date() }
+  dateCreated: {
+    type: Date,
+    default: new Date()
+  },
+  active: {
+    default: true,
+    type: Boolean,
+    required: true
+  },
+  email: String
 });
 
 mongoose.model("users", userSchema);
