@@ -6,7 +6,7 @@ $spacepoints: (1, 2, 3, 4, 5);
   }
 
   .p-#{$space} {
-    padding: #{$space}rem;
+    padding: #{$space}rem !important;
   }
 
   .my-#{$space} {
@@ -35,6 +35,11 @@ $breakpoints:
 */
 
 @mixin respond($breakpoint) {
+  @if $breakpoint == phone-small {
+    @media screen and (max-width: 380px) {
+      @content; // pozwala nam dodawać bloki kodu do mixina
+    }
+  }
   @if $breakpoint == phone {
     @media screen and (max-width: 480px) {
       @content; // pozwala nam dodawać bloki kodu do mixina

@@ -8,8 +8,8 @@ import { currentLang } from "../utils/languages";
 import PropTypes from "prop-types";
 
 const flagIcons = {
-  eng: <Icon icon="EnglandIcon" />,
-  pl: <Icon icon="PolandIcon" />
+  eng: <Icon icon="EnglandIcon" width="24" height="24" />,
+  pl: <Icon icon="PolandIcon" width="24" height="24" />
 };
 
 export const Flags = (props, context) => {

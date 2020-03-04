@@ -65,10 +65,10 @@ class Header extends Component {
             </li>
             <li className="header__link-container">
               <Dropdown title={this.context.translate("button.account")}>
-                <DropdownTrigger>
+                <DropdownTrigger style={{ display: "flex" }}>
                   <Icon icon="UserIcon" />
                 </DropdownTrigger>
-                <DropdownContent className={`dropdown__content dropdown__content--left`}>
+                <DropdownContent className={`dropdown__content dropdown__content--left p-1`}>
                   <Link className="btn btn--text" to="/profile">
                     {this.context.translate("button.yourProfile")}
                   </Link>
