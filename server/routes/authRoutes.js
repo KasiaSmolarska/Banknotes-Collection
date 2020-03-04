@@ -20,8 +20,9 @@ module.exports = app => {
   });
 
   app.get("/api/current_user", ({ user }, res) => {
-    user.email = md5(user.email);
-    res.send({ user });
+    const { _id, googleId, picture, familyName, given_name } = user;
+    const newUser = { _id, googleId, picture, familyName, given_name };
+    res.send({ user: newUser });
   });
 
   app.get("/api/logout", (req, res) => {
