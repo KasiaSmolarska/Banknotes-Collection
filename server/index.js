@@ -10,8 +10,8 @@ process.setMaxListeners(0);
 
 // Body-parser
 const bodyParser = require("body-parser");
-app.use(bodyParser.json({ limit: "20mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "20mb", extended: true }));
+app.use(bodyParser.json({ limit: "2mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "2mb", extended: true }));
 
 // MODELS
 require("./models/User");

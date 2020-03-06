@@ -37,6 +37,6 @@ svg {
 
 @media screen and (max-width: 480px) {
   .hidden-xs {
-    display: none;
+    display: none !important;
   }
 }

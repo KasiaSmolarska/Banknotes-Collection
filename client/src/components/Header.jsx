@@ -87,9 +87,12 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav nav__wrapper row">
-          <a className="nav__logo column" href="*" style={{ paddingLeft: "15px" }}>
-            Banknotes Collection
-          </a>
+          <Link to="/" className="header__link-container logo__container nav__logo logo__container--inverse logo__container--autoFit" style={{ paddingLeft: "15px" }}>
+            <div className="logo logo--inverse logo--autoFit">
+              <span>P</span>
+            </div>
+            angea
+          </Link>
           {this.renderContent()}
         </div>
       </nav>

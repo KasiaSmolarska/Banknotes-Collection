@@ -11,3 +11,37 @@ body {
     font-size: smaller;
   }
 }
+
+.heading-1 {
+  font-size: 6.3rem;
+  line-height: 8.5rem;
+  color: #1d2433;
+  letter-spacing: -3px;
+
+  @include respond(tab-land) {
+    font-size: 5rem;
+    line-height: 6.5rem;
+  }
+
+  @include respond(phone) {
+    font-size: 3.5rem;
+    line-height: 4.5rem;
+  }
+
+  &--light {
+    font-weight: 300;
+  }
+
+  &--bold {
+    font-size: 8.37rem;
+    font-weight: 600;
+
+    @include respond(tab-land) {
+      font-size: 7rem;
+    }
+
+    @include respond(phone) {
+      font-size: 5rem;
+    }
+  }
+}

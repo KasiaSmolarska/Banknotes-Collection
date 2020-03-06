@@ -1,0 +1,45 @@
+.nav {
+  padding: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__container {
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+  }
+  &__element {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: #1d2433;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: $primary-color;
+      transform: translateY(-2px);
+    }
+
+    &:not(:last-of-type) {
+      padding-right: 7rem;
+
+      @include respond(tab-port) {
+        padding-right: 4rem;
+      }
+    }
+
+    &--button {
+      height: 50px;
+      background: $primary-color-fade;
+      color: #fff;
+      padding: 1.2rem 3rem;
+    }
+  }
+  &__logo {
+    padding-right: 15rem !important;
+
+    @include respond(tab-land) {
+      padding-right: 5rem !important;
+    }
+  }
+}

@@ -16,6 +16,8 @@
 .container {
   min-height: 100vh;
   overflow: hidden;
+  margin: 0 auto;
+  max-width: 1920px;
 }
 
 @each $name in $screenName {
