@@ -32,13 +32,15 @@ export const Menu = (props, context) => {
   return (
     <div className="nav">
       <ul className="column nav__container">
-        <Link to="/" className="header__link-container logo__container nav__logo">
-          {/* <img src={logo} alt="ff" /> */}
-          <div className="logo">
-            <span>P</span>
-          </div>
-          angea
-        </Link>
+        <li className="header__link-container">
+          <Link to="/" className="logo__container nav__logo">
+            {/* <img src={logo} alt="ff" /> */}
+            <div className="logo">
+              <span>P</span>
+            </div>
+            angea
+          </Link>
+        </li>
         {useMedia() !== "lg" ? (
           <li className="header__link-container nav__element">
             <Dropdown title={context.translate("button.account")}>
@@ -46,7 +48,9 @@ export const Menu = (props, context) => {
                 <Icon icon="MenuIcon" />
               </DropdownTrigger>
               <DropdownContent className={`"dropdown__content dropdown__content--center p-1`}>
-                <MenuElements />
+                <ul>
+                  <MenuElements />
+                </ul>
               </DropdownContent>
             </Dropdown>
           </li>
@@ -57,7 +61,7 @@ export const Menu = (props, context) => {
           <Flags />
         </li>
       </ul>
-      <Link to="/login" className=" nav__element--button btn btn--primary hidden-xs">
+      <Link to="/login" className="nav__element--button btn btn--primary hidden-xs">
         {" "}
         {context.translate("button.getStarted")}
       </Link>
