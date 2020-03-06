@@ -104,18 +104,6 @@
   margin-right: 1px;
   line-height: 8.5rem;
 
-  &--autoFit {
-    line-height: 0.9;
-
-    span {
-      font-size: 3.2rem;
-    }
-
-    &:after {
-      top: 12px !important;
-    }
-  }
-
   &--inverse {
     z-index: 2;
 
@@ -165,5 +153,19 @@
     transform: rotate(45deg) translateX(-50%);
     color: #fff;
     border-radius: 5px;
+  }
+
+  &--autoFit {
+    line-height: 0.9;
+
+    span {
+      font-size: 3.2rem;
+    }
+
+    &:after {
+      top: 9px !important;
+      width: 22px;
+      height: 22px;
+    }
   }
 }
