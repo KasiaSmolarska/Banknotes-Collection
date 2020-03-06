@@ -8,7 +8,9 @@ const fetchUser = () => {
       const data = await res.json();
 
       dispatch({ type: FETCH_USER, payload: data });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 

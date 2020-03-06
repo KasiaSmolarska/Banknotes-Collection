@@ -20,9 +20,9 @@ const Select = ({ data, input, meta: { touched, error, pristine, form } }, conte
             : data.enum.map(option => {
                 return <option key={option}>{option}</option>;
               })
-          : [context.translate(`label.banknoteForm.own.yes`), context.translate(`label.banknoteForm.own.no`)].map(value => (
+          : ["yes", "no"].map(value => (
               <option value={value === "yes"} key={value}>
-                {value}
+                {context.translate(`label.banknoteForm.own.${value}`)}
               </option>
             ))}
       </select>

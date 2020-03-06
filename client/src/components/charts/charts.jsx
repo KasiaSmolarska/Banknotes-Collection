@@ -1,10 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import chartOptions from "../../utils/chartConfig";
+import chartOptionsFile from "../../utils/chartConfig";
 import { getCountryName } from "../../utils/countriesCodes";
 const Chart = React.lazy(() => import("react-apexcharts"));
 
-const { areaChartOptions } = chartOptions;
+const { areaChartOptions, lineChartOptions } = chartOptionsFile;
+
+const chartOptions = {
+  area: areaChartOptions,
+  line: lineChartOptions
+};
 
 const sortData = unsortedData => {
   let data = {};
@@ -26,25 +31,57 @@ const parseCategories = (chartId, sortedData, context) => {
     case "countries-chart":
       return Object.keys(sortedData).map(key => getCountryName(key));
     case "continents-chart":
+      console.log(Object.keys(sortedData).map(continent => continent));
       return Object.keys(sortedData).map(continent => {
         return context.translate(`continent.${continent.replace(/ /g, "")}`);
       });
+    case "favorites-chart":
+      console.log(Object.values(sortedData).map(value => value));
+      return Object.keys(sortedData).map(key => (key === "true" ? "favorite" : "not favorite"));
     default:
       return Object.keys(sortedData);
   }
 };
 
-export const DefaultChart = ({ value, chartId, seriesName, color }, context) => {
+export const DonutChart = ({ value, chartId, color, charttype }, context) => {
   const sortedData = sortData(value);
   const chart = {
     options: {
-      ...areaChartOptions,
       chart: {
-        ...areaChartOptions.chart,
+        height: 150,
+        type: "radialBar"
+      },
+      colors: [color, "#7a18e3"],
+      legend: {
+        show: false
+      },
+
+      dataLabels: {
+        enabled: false
+      },
+      labels: parseCategories(chartId, sortedData, context)
+    },
+    series: Object.values(sortedData)
+  };
+
+  return <Chart options={chart.options} series={chart.series} type={charttype} height="150" />;
+};
+
+DonutChart.contextTypes = {
+  translate: PropTypes.func
+};
+
+export const DefaultChart = ({ value, chartId, seriesName, color, charttype }, context) => {
+  const sortedData = sortData(value);
+  const chart = {
+    options: {
+      ...chartOptions[charttype],
+      chart: {
+        ...chartOptions[charttype].chart,
         id: chartId
       },
       xaxis: {
-        ...areaChartOptions.xaxis,
+        ...chartOptions[charttype].xaxis,
         categories: parseCategories(chartId, sortedData, context)
       },
       colors: [color],
@@ -66,14 +103,14 @@ export const DefaultChart = ({ value, chartId, seriesName, color }, context) => 
     ]
   };
 
-  return <Chart options={chart.options} series={chart.series} type="area" height="100" />;
+  return <Chart options={chart.options} series={chart.series} type={charttype} height="100" />;
 };
 
 DefaultChart.contextTypes = {
   translate: PropTypes.func
 };
 
-export const BanknotesChart = ({ value }, context) => {
+export const BanknotesChart = ({ value, charttype }, context) => {
   const sortedData = sortData(value);
 
   const chart = {
@@ -95,7 +132,7 @@ export const BanknotesChart = ({ value }, context) => {
       }
     ]
   };
-  return <Chart options={chart.options} series={chart.series} type="area" height="100" />;
+  return <Chart options={chart.options} series={chart.series} type={charttype} height="100" />;
 };
 
 BanknotesChart.contextTypes = {

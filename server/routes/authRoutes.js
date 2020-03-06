@@ -23,7 +23,7 @@ module.exports = app => {
     if (user) {
       const { _id, googleId, picture, familyName, given_name } = user;
       const newUser = { _id, googleId, picture, familyName, given_name };
-      res.send({ user: newUser });
+      return res.send({ user: newUser });
     }
 
     res.send({ user });

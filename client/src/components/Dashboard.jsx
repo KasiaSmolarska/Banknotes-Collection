@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spinner } from "./Spinner";
-import { BanknotesChart, DefaultChart } from "./charts/charts";
+import { BanknotesChart, DefaultChart, DonutChart } from "./charts/charts";
 import { Card } from "./Card";
 import PropTypes from "prop-types";
 
@@ -32,15 +32,19 @@ const Dashboard = (props, context) => {
           return a + b.total;
         }, 0)}
         title="tile.banknoteAdded">
-        <BanknotesChart value={banknote.dateCreated} />
+        <BanknotesChart charttype="area" value={banknote.dateCreated} />
       </Card>
 
       <Card mod="continent" header={`${banknote.continents.length} / 7`} title="tile.continentsAdded">
-        <DefaultChart value={banknote.continents} chartId="continents-chart" seriesName="banknotes" color="#4caf50" />
+        <DefaultChart charttype="area" value={banknote.continents} chartId="continents-chart" seriesName="banknotes" color="#4caf50" />
       </Card>
 
       <Card mod="country" header={`${banknote.countries.length} / 317`} title="tile.countriesAdded">
-        <DefaultChart value={banknote.countries} chartId="countries-chart" seriesName="banknotes" color="#F69F43" />
+        <DefaultChart charttype="area" value={banknote.countries} chartId="countries-chart" seriesName="banknotes" color="#F69F43" />
+      </Card>
+
+      <Card mod="favorite" header={`${banknote.favorites[1] ? banknote.favorites[1].total : 0} / ${banknote.favorites.reduce((start, value) => start + value.total, 0)}`} title="tile.favoritesAdded">
+        <DonutChart charttype="donut" value={banknote.favorites} chartId="favorites-chart" color="#F9B4C4" />
       </Card>
 
       <Card mod="user" className="card--user" header={context.translate("tile.summary.tile", { name: user.given_name })}>
