@@ -25,7 +25,6 @@ module.exports = app => {
       ]);
 
       const statistcs = { countries, continents, favorites, dateCreated };
-      console.log(statistcs);
 
       res.send(statistcs);
     } catch (err) {

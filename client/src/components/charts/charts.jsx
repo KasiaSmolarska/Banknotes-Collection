@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import chartOptionsFile from "../../utils/chartConfig";
 import { getCountryName } from "../../utils/countriesCodes";
+import { adjustBrightness } from "../../utils/adjustBrightness";
 const Chart = React.lazy(() => import("react-apexcharts"));
 
 const { areaChartOptions, lineChartOptions } = chartOptionsFile;
@@ -31,33 +32,52 @@ const parseCategories = (chartId, sortedData, context) => {
     case "countries-chart":
       return Object.keys(sortedData).map(key => getCountryName(key));
     case "continents-chart":
-      console.log(Object.keys(sortedData).map(continent => continent));
       return Object.keys(sortedData).map(continent => {
         return context.translate(`continent.${continent.replace(/ /g, "")}`);
       });
     case "favorites-chart":
-      console.log(Object.values(sortedData).map(value => value));
-      return Object.keys(sortedData).map(key => (key === "true" ? "favorite" : "not favorite"));
+      return Object.keys(sortedData).map(key => context.translate(`favorite.${key === "true" ? "favorite" : "others"}`));
     default:
       return Object.keys(sortedData);
   }
 };
 
-export const DonutChart = ({ value, chartId, color, charttype }, context) => {
+export const DonutChart = ({ value, chartId, colors, charttype }, context) => {
   const sortedData = sortData(value);
+  console.log(colors);
+  console.log(colors.map(color => adjustBrightness(color, -20)));
   const chart = {
     options: {
-      chart: {
-        height: 150,
-        type: "radialBar"
+      colors: [...colors],
+      fill: {
+        type: "gradient",
+        gradient: {
+          gradientToColors: colors.map(color => adjustBrightness(color, -30))
+        }
       },
-      colors: [color, "#7a18e3"],
       legend: {
         show: false
       },
-
       dataLabels: {
         enabled: false
+      },
+      legend: { show: false },
+      chart: {
+        type: "pie",
+        offsetY: 0,
+        dropShadow: {
+          enabled: false,
+          blur: 7,
+          left: 1,
+          top: 1,
+          opacity: 0.1
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      stroke: {
+        width: 5
       },
       labels: parseCategories(chartId, sortedData, context)
     },

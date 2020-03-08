@@ -43,6 +43,8 @@
   "continent.Europe": "Europa",
   "continent.NorthAmerica": "Ameryka Północna",
   "continent.SouthAmerica": "Ameryka Południowa",
+  "favorite.favorite": "Ulubione",
+  "favorite.others": "Pozostałe",
   "flags.title.pl": "Polski",
   "flags.title.eng": "English",
   "form.groupLabel.elementary": "Podstawowe informacje",

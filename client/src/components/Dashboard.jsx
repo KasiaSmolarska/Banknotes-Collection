@@ -44,7 +44,7 @@ const Dashboard = (props, context) => {
       </Card>
 
       <Card mod="favorite" header={`${banknote.favorites[1] ? banknote.favorites[1].total : 0} / ${banknote.favorites.reduce((start, value) => start + value.total, 0)}`} title="tile.favoritesAdded">
-        <DonutChart charttype="donut" value={banknote.favorites} chartId="favorites-chart" color="#F9B4C4" />
+        <DonutChart charttype="pie" value={banknote.favorites} chartId="favorites-chart" colors={["#F9B4C4", "#7a18e3"]} />
       </Card>
 
       <Card mod="user" className="card--user" header={context.translate("tile.summary.tile", { name: user.given_name })}>
