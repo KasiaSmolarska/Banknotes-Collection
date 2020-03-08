@@ -22,3 +22,4 @@ export const FETCH_BANKNOTE_STATISTICS = "fetch_banknote_statistics";
 export const SET_LANGUAGE = "set_language";
 export const DELETE_ACCOUNT = "delete_user";
 export const SET_FILTER_PARAMS = "set_filter_params";
+export const RESET_FILTERING = "reset_filtering";

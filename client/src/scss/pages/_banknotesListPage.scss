@@ -51,5 +51,16 @@
   &__buttons {
     display: flex;
     align-items: center;
+    position: relative;
+
+    &-reset {
+      position: absolute;
+      right: 20px;
+      bottom: -1.1rem;
+
+      @include respond(tab-land) {
+        bottom: auto;
+      }
+    }
   }
 }

@@ -6,6 +6,7 @@ import { Card } from "./Card";
 import PropTypes from "prop-types";
 
 import actions from "../store/actions";
+import { SET_FILTER_PARAMS } from "../store/actions/types";
 
 const getUser = state => state.auth.user;
 const getStatistics = state => state.statistics;
@@ -44,6 +45,18 @@ const Dashboard = (props, context) => {
       </Card>
 
       <Card mod="favorite" header={`${banknote.favorites[1] ? banknote.favorites[1].total : 0} / ${banknote.favorites.reduce((start, value) => start + value.total, 0)}`} title="tile.favoritesAdded">
+        <div
+          className="btn btn--primary card-favorite-button"
+          onClick={() => {
+            // dispatch(actions.filterBanknotes({ favorite: true }));
+            dispatch({
+              type: SET_FILTER_PARAMS,
+              payload: { favorite: true }
+            });
+            props.history.push("/banknotes");
+          }}>
+          See all favorites
+        </div>
         <DonutChart charttype="pie" value={banknote.favorites} chartId="favorites-chart" colors={["#F9B4C4", "#7a18e3"]} />
       </Card>
 

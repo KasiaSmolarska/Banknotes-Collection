@@ -14,7 +14,8 @@ import {
   SET_PAGINATION_LIMIT,
   SET_NUMBER_OF_PRODUCTS,
   SET_PAGINATION_SKIP,
-  SET_FILTER_PARAMS
+  SET_FILTER_PARAMS,
+  RESET_FILTERING
 } from "../actions/types";
 
 const initialState = {
@@ -147,6 +148,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         skip: payload * state.limit
+      };
+    case RESET_FILTERING:
+      return {
+        ...state,
+        filters: {}
       };
     default:
       return state;

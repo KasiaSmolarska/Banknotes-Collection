@@ -1,4 +1,4 @@
-import { SET_FILTER_PARAMS } from "./types";
+import { SET_FILTER_PARAMS, RESET_FILTERING } from "./types";
 import actions from "./index";
 
 const filterBanknotes = query => dispatch => {
@@ -12,8 +12,7 @@ const filterBanknotes = query => dispatch => {
 
 export const resetFiltering = () => dispatch => {
   dispatch({
-    type: SET_FILTER_PARAMS,
-    payload: ""
+    type: RESET_FILTERING
   });
   dispatch(actions.fetchBanknotes());
 };

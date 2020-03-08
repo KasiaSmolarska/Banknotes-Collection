@@ -40,6 +40,10 @@
     &--user {
       grid-area: user;
     }
+
+    &--favorite {
+      grid-area: favorite;
+    }
   }
 
   &__body {

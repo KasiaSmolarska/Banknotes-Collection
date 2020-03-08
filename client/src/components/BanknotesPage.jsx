@@ -6,13 +6,13 @@ import { Spinner } from "./Spinner";
 import { Pagination } from "./Pagination";
 import Translate from "../translate/Translate";
 import { Icon } from "./Icon";
-
 import actions from "../store/actions";
 
 import BanknotesTable from "./BanknotesTable";
 import { BanknotesList } from "./BanknotesList";
 
 import { useMedia } from "./hooks/useMedia";
+import { RESET_FILTERING } from "../store/actions/types";
 
 const getBanknote = state => state.banknote;
 
@@ -37,7 +37,14 @@ const BanknotesPage = (props, context) => {
   const [menuFilterShow, setMenuFilterShow] = useState(false);
   const [menuSortShow, setMenuSortShow] = useState(false);
 
-  const { loading, banknotesList, sortBy, sortDirection, limit, numberOfProduct, skip } = useSelector(getBanknote);
+  const { loading, banknotesList, sortBy, sortDirection, limit, numberOfProduct, skip, filters, searchParams } = useSelector(getBanknote);
+
+  const handleReset = () => {
+    dispatch({
+      type: RESET_FILTERING
+    });
+    dispatch(actions.resetSearching());
+  };
 
   React.useEffect(() => {
     const handleClick = e => {
@@ -113,6 +120,14 @@ const BanknotesPage = (props, context) => {
                 </div>
               </div>
             ) : null}
+            {searchParams.length ||
+              (Object.keys(filters).length ? (
+                <div className="banknotesListPage__buttons-reset">
+                  <span title={context.translate("button.reset.filters")} onClick={handleReset} className="btn  btn--danger btn--smaller">
+                    <Icon icon="CancelIcon" width="12" height="12" fill="#dc3545" /> {context.translate("button.reset")}
+                  </span>
+                </div>
+              ) : null)}
           </div>
           <div>
             <div className="banknotesListPage__pagination">

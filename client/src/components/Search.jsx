@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import actions from "../store/actions/index";
 import Translate from "../translate/Translate";
-import { CancelIcon } from "./svg/CancelIcon";
 
 export const Search = (props, context) => {
   const [query, setQuery] = useState("");
@@ -16,13 +15,8 @@ export const Search = (props, context) => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(actions.searchBanknotes(query));
-    dispatch(actions.filterBanknotes({ favorite: true, country: "PL" }));
   };
 
-  const handleReset = () => {
-    dispatch(actions.resetSearching());
-    setQuery("");
-  };
   return (
     <form className="form form--search" onSubmit={handleSubmit}>
       <div className="form__control form__control--flex">
@@ -33,11 +27,6 @@ export const Search = (props, context) => {
         <button type="submit" title={context.translate("input.searchPlaceholder")} className="btn btn--blue btn--search">
           <Translate name="input.searchPlaceholder" />{" "}
         </button>
-      </div>
-      <div>
-        <span title={context.translate("button.reset.filters")} onClick={handleReset} className="btn  btn--danger">
-          <CancelIcon width="12" height="12" fill="#dc3545" /> {context.translate("button.reset")}
-        </span>
       </div>
     </form>
   );

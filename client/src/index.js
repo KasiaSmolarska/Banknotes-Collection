@@ -21,7 +21,7 @@ import * as serviceWorker from "./serviceWorker";
 const middlewares = [applyMiddleware(reduxThunk)];
 
 if (window.__REDUX_DEVTOOLS_EXTENSION__) {
-  middlewares.push(window.__REDUX_DEVTOOLS_EXTENSION__());
+  middlewares.push(window.__REDUX_DEVTOOLS_EXTENSION__({ trace: true, traceLimit: 25 }));
 }
 
 const store = createStore(reducers, {}, compose(...middlewares));

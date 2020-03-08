@@ -127,6 +127,15 @@
     }
   }
 
+  &--primary {
+    background-color: $primary-color-fade;
+    color: $white;
+  }
+
+  &--smaller {
+    padding: 0.6rem 1.4rem;
+  }
+
   &--danger {
     background-color: $white;
     border: 1px solid $danger-color;
