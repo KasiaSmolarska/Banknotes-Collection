@@ -868,7 +868,6 @@ const isoCurriencies = {
 };
 
 export const getCurrencyName = currencyCode => {
-  console.log(isoCurriencies[currentLang()]);
   if (isoCurriencies[currentLang()].hasOwnProperty(currencyCode)) {
     return isoCurriencies[currentLang()][currencyCode].name;
   } else {

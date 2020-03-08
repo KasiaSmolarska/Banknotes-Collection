@@ -3,7 +3,6 @@ import Translate from "../../translate/Translate";
 import PropTypes from "prop-types";
 
 const Select = ({ data, input, meta: { touched, error, pristine, form } }, context) => {
-  console.log(input);
   return (
     <div className="form__control">
       <select className="form__select" style={{ marginBottom: "5px" }} type="text" {...input}>

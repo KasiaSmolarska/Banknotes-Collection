@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_BANKNOTES, BANKNOTE_ERROR, SET_SEARCH_PARAMS, SET_NUMBER_OF_PRODUCTS, SET_PAGINATION_SKIP } from "./types";
+import { FETCH_BANKNOTES, BANKNOTE_ERROR, SET_SEARCH_PARAMS, SET_NUMBER_OF_PRODUCTS, SET_PAGINATION_SKIP, SET_FILTER_PARAMS } from "./types";
 import actions from "./index";
 
 export const fetchBanknotes = (newSkip = 0) => {
@@ -9,13 +9,15 @@ export const fetchBanknotes = (newSkip = 0) => {
       const sortBy = getState().banknote.sortBy;
       const sortDirection = getState().banknote.sortDirection;
       const limit = getState().banknote.limit;
+      const filters = getState().banknote.filters;
 
       const params = new URLSearchParams({
         query,
         sortBy,
         sortDirection,
         limit,
-        skip: newSkip * limit
+        skip: newSkip * limit,
+        filters: JSON.stringify(filters)
       });
 
       let res = await axios.get(`/api/banknote?${params}`);

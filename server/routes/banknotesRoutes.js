@@ -26,7 +26,7 @@ var storage = multer.memoryStorage();
 
 const upload = multer({
   storage,
-  fileFilter: function (req, file, cb) {
+  fileFilter: function(req, file, cb) {
     var filetypes = /jpeg|jpg|png/;
     var mimetype = filetypes.test(file.mimetype);
     var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -143,15 +143,14 @@ module.exports = app => {
       }
 
       res.set({ "Content-Type": `image/jpg` });
-      res.set('Cache-Control', 'public, max-age=604800, s-maxage=604800');
-
+      res.set("Cache-Control", "public, max-age=604800, s-maxage=604800");
 
       https.get(apiResponse.mediaLink, body => {
         body.on("data", d => {
           res.write(d);
         });
 
-        body.on("end", function () {
+        body.on("end", function() {
           res.end();
         });
       });
@@ -190,17 +189,36 @@ module.exports = app => {
 
   app.get("/api/banknote", requireLogin, async (req, res) => {
     try {
-      let { query = "", sortBy, sortDirection, limit, skip } = req.query;
+      let { query = "", sortBy, sortDirection, limit, skip, filters = "" } = req.query;
+      if (filters.length > 0) {
+        filters = JSON.parse(filters);
+      } else {
+        filters = {};
+      }
+      console.log(filters);
 
       const paginationLimits = [8, 16, 24, 48];
 
-      const queryRegEx = new RegExp(query, "i");
-      const queryFilters = { $and: [{ _user: req.user.id }, { $or: [{ title: queryRegEx }, { country: queryRegEx }] }] };
-      if (!paginationLimits.find((index) => index === Number(limit))) {
+      const queryFiltersArray = [{ _user: req.user.id }];
+
+      if (query.length) {
+        const queryRegEx = new RegExp(query, "i");
+        queryFiltersArray.push({ $or: [{ title: queryRegEx }, { country: queryRegEx }] });
+      }
+
+      if (filters.favorite) {
+        queryFiltersArray.push({ favorite: filters.favorite });
+      }
+
+      const queryFilters = { $and: queryFiltersArray };
+      if (!paginationLimits.find(index => index === Number(limit))) {
         limit = 8;
       }
 
-      const searchedList = await Banknote.find(queryFilters).sort({ [sortBy]: sortDirection === "ASC" ? 1 : -1 }).limit(Number(limit)).skip(Number(skip));
+      const searchedList = await Banknote.find(queryFilters)
+        .sort({ [sortBy]: sortDirection === "ASC" ? 1 : -1 })
+        .limit(Number(limit))
+        .skip(Number(skip));
       const total = await Banknote.countDocuments(queryFilters);
 
       res.send({
@@ -260,7 +278,7 @@ module.exports = app => {
       await banknote.save(banknote.favorite);
       res.send(banknote.favorite);
     } catch (err) {
-      console.log(err)
+      console.log(err);
       console.error(err.message);
       res.status(500).send("Server Error");
     }
@@ -287,15 +305,13 @@ module.exports = app => {
 
       let banknoteToSend = {
         ...banknote._doc
-      }
+      };
 
       if (banknote.issueBank) {
         const foundedBankName = await IssueBank.findById(banknote.issueBank);
 
         banknoteToSend.issueBank = foundedBankName.name;
-
       }
-
 
       res.send(banknoteToSend);
     } catch (err) {
@@ -330,20 +346,22 @@ module.exports = app => {
 
         const isThereAnyBanknoteWithThisImage = banknotes.filter(elem => banknote[image] === elem[image]);
         if (isThereAnyBanknoteWithThisImage.length > 1) {
-          console.log("Another banknote uses this photo. Photo was not removed")
+          console.log("Another banknote uses this photo. Photo was not removed");
           return;
         }
 
-        const filesToDelete = [bucket.file(banknote[image]), bucket.file(`thumb-${banknote[image]}`)]
+        const filesToDelete = [bucket.file(banknote[image]), bucket.file(`thumb-${banknote[image]}`)];
 
         filesToDelete.forEach(file => {
-          file.delete().then(() => {
-            console.log(`Successfully deleted photo: ${file.name}, userID : ${req.user._id}`)
-          }).catch(err => {
-            console.log(`Failed to remove photo, error: ${err}`)
-          });
-        })
-
+          file
+            .delete()
+            .then(() => {
+              console.log(`Successfully deleted photo: ${file.name}, userID : ${req.user._id}`);
+            })
+            .catch(err => {
+              console.log(`Failed to remove photo, error: ${err}`);
+            });
+        });
       });
 
       banknote = await Banknote.findOneAndUpdate({ _user: req.user._id, _id: banknoteId }, { $set: createdBanknoteData }, { new: true });
@@ -386,21 +404,22 @@ module.exports = app => {
 
         const isThereAnyBanknoteWithThisImage = banknotes.find(elem => banknote[image] === elem[image]);
         if (isThereAnyBanknoteWithThisImage) {
-          console.log("Another banknote uses this photo. Photo was not removed")
+          console.log("Another banknote uses this photo. Photo was not removed");
           return;
         }
-        const filesToDelete = [bucket.file(banknote[image]), bucket.file(`thumb-${banknote[image]}`)]
+        const filesToDelete = [bucket.file(banknote[image]), bucket.file(`thumb-${banknote[image]}`)];
 
         filesToDelete.forEach(file => {
-          file.delete().then(() => {
-            console.log(`Successfully deleted photo: ${file.name}, userID : ${req.user._id}`)
-          }).catch(err => {
-            console.log(`Failed to remove photo, error: ${err}`)
-          });
-        })
-
+          file
+            .delete()
+            .then(() => {
+              console.log(`Successfully deleted photo: ${file.name}, userID : ${req.user._id}`);
+            })
+            .catch(err => {
+              console.log(`Failed to remove photo, error: ${err}`);
+            });
+        });
       });
-
 
       res.json({ msg: "Banknote removed" });
     } catch (err) {

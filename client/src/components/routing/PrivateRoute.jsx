@@ -6,6 +6,5 @@ const getAuth = state => state.auth;
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const auth = useSelector(getAuth);
-  console.log(auth);
   return !auth.loading && <Route {...rest} render={props => (auth.user && !auth.loading ? <Component {...props} /> : <Redirect to="/login" />)} />;
 };

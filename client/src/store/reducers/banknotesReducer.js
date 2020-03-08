@@ -13,7 +13,8 @@ import {
   CHANGE_IMAGE_IN_MODAL,
   SET_PAGINATION_LIMIT,
   SET_NUMBER_OF_PRODUCTS,
-  SET_PAGINATION_SKIP
+  SET_PAGINATION_SKIP,
+  SET_FILTER_PARAMS
 } from "../actions/types";
 
 const initialState = {
@@ -35,7 +36,8 @@ const initialState = {
   sortDirection: localStorage.getItem("sortDirection") || "DESC",
   limit: localStorage.getItem("limit") || 16,
   skip: 0,
-  numberOfProduct: 0
+  numberOfProduct: 0,
+  filters: {}
 };
 
 export default function(state = initialState, action) {
@@ -108,6 +110,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error: payload
+      };
+    case SET_FILTER_PARAMS:
+      return {
+        ...state,
+        filters: { ...state.filters, ...payload }
       };
     case SET_SEARCH_PARAMS:
       return {

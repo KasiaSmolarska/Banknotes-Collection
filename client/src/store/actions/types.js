@@ -21,3 +21,4 @@ export const SET_PAGINATION_SKIP = "set_pagination_skip";
 export const FETCH_BANKNOTE_STATISTICS = "fetch_banknote_statistics";
 export const SET_LANGUAGE = "set_language";
 export const DELETE_ACCOUNT = "delete_user";
+export const SET_FILTER_PARAMS = "set_filter_params";

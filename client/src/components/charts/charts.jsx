@@ -44,8 +44,6 @@ const parseCategories = (chartId, sortedData, context) => {
 
 export const DonutChart = ({ value, chartId, colors, charttype }, context) => {
   const sortedData = sortData(value);
-  console.log(colors);
-  console.log(colors.map(color => adjustBrightness(color, -20)));
   const chart = {
     options: {
       colors: [...colors],

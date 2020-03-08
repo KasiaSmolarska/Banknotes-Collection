@@ -20,6 +20,7 @@ import setPaginationLimit from "./setPaginationLimit";
 import setPaginationSkip from "./setPaginationSkip";
 import fetchBanknoteStatistics from "./fetchBanknoteStatistics";
 import deleteUser from "./deleteUser";
+import filterBanknotes from "./filterBanknotes";
 
 const actions = {
   fetchUser,
@@ -45,7 +46,8 @@ const actions = {
   setPaginationLimit,
   setPaginationSkip,
   fetchBanknoteStatistics,
-  deleteUser
+  deleteUser,
+  filterBanknotes
 };
 
 export default actions;
