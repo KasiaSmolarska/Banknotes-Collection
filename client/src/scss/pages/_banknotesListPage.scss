@@ -33,6 +33,16 @@
     padding: 1rem;
     border: 1px solid $primary-color;
     border-radius: 4px;
+    max-width: 85rem;
+
+    @include respond(tab-land){
+      max-width: 70rem ;
+    }
+
+    @include respond(tab-port){
+      max-width: 100% ;
+    }
+
 
     &-btn {
       display: inline-flex;

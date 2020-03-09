@@ -7,6 +7,8 @@ import { Pagination } from "./Pagination";
 import Translate from "../translate/Translate";
 import { Icon } from "./Icon";
 import actions from "../store/actions";
+import { Checkboxes } from "./filters/Checkboxes";
+import Filters from "./Filters";
 
 import BanknotesTable from "./BanknotesTable";
 import { BanknotesList } from "./BanknotesList";
@@ -57,6 +59,10 @@ const BanknotesPage = (props, context) => {
   }, [menuFilterShow]);
 
   React.useEffect(() => {
+    dispatch(actions.fetchBanknoteStatistics());
+  }, [dispatch]);
+
+  React.useEffect(() => {
     const handleClick = e => {
       if (menuSortShow && !sortContainer.current.contains(e.target)) {
         setMenuSortShow(false);
@@ -90,6 +96,7 @@ const BanknotesPage = (props, context) => {
 
               <div className={`banknotesListPage__menu-filter ${menuFilterShow ? "banknotesListPage__menu-filter--visible" : ""}`}>
                 <Search />
+                <Filters />
                 <div className="form__control">
                   <select ref={selectLimit} className="form__select form__select--mini" value={limit} onChange={() => setLimit(selectLimit.current.value)}>
                     <option value="8">8</option>

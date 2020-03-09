@@ -209,6 +209,12 @@ module.exports = app => {
       if (filters.favorite) {
         queryFiltersArray.push({ favorite: filters.favorite });
       }
+      
+      if (filters.country && Array.isArray(filters.country)) {
+        queryFiltersArray.push({ country: { $in: filters.country } });
+      }
+
+      console.log("queryFiltersArray", queryFiltersArray)
 
       const queryFilters = { $and: queryFiltersArray };
       if (!paginationLimits.find(index => index === Number(limit))) {

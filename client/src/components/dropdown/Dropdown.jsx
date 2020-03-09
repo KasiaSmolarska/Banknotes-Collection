@@ -1,22 +1,39 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Icon } from "../Icon";
+import React from "react";
 
-export const Dropdown = ({ children, classList, icon, title }, contex) => {
-  const [open, setstate] = useState(false);
-  const handleClick = () => {
-    setstate(!open);
-  };
-  return (
-    <div className="dropdown">
-      <div className="dropdown__button" onClick={handleClick} title={contex.translate(title)}>
-        <Icon icon={icon} />
+import TooltipTrigger from "react-popper-tooltip";
+import "react-popper-tooltip/dist/styles.css";
+
+const Dropdown = ({ tooltip, children, ...props }) => (
+  <TooltipTrigger
+    {...props}
+    placement="right"
+    trigger="click"
+    tooltip={({ getTooltipProps, getArrowProps, tooltipRef, arrowRef, placement }) => (
+      <div
+        {...getTooltipProps({
+          ref: tooltipRef,
+          className: "tooltip-container"
+        })}>
+        <div
+          {...getArrowProps({
+            ref: arrowRef,
+            "data-placement": placement,
+            className: "tooltip-arrow"
+          })}
+        />
+        {tooltip}
       </div>
-      <div className={`dropdown__container ${classList && classList} ${open && "dropdown__container--visible"}`}>{children}</div>
-    </div>
-  );
-};
+    )}>
+    {({ getTriggerProps, triggerRef }) => (
+      <span
+        {...getTriggerProps({
+          ref: triggerRef,
+          className: "trigger"
+        })}>
+        {children}
+      </span>
+    )}
+  </TooltipTrigger>
+);
 
-Dropdown.contextTypes = {
-  translate: PropTypes.func
-};
+export default Dropdown;

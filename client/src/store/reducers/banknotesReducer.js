@@ -115,7 +115,7 @@ export default function(state = initialState, action) {
     case SET_FILTER_PARAMS:
       return {
         ...state,
-        filters: { ...state.filters, ...payload }
+        filters: payload
       };
     case SET_SEARCH_PARAMS:
       return {
