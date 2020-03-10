@@ -19,6 +19,7 @@ import { MagnifyPlusIcon } from "./MagnifyPlusIcon";
 import { FilterIcon } from "./FilterIcon";
 import { PolandIcon } from "./PolandIcon";
 import { EnglandIcon } from "./EnglandIcon";
+import { ChevronDown } from "./ChevronDown";
 
 export const svgList = {
   AddBanknoteIcon,
@@ -39,5 +40,6 @@ export const svgList = {
   MagnifyPlusIcon,
   FilterIcon,
   PolandIcon,
-  EnglandIcon
+  EnglandIcon,
+  ChevronDown
 };

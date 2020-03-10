@@ -2,28 +2,41 @@ import React, { useEffect } from "react";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { Checkboxes } from "./filters/Checkboxes";
-import actions from "../store/actions"
+import actions from "../store/actions";
+import PropTypes from "prop-types";
+import Translate from "../translate/Translate";
 
 class Filters extends React.Component {
+
+
+  componentDidUpdate() {
+    console.log("filters update")
+  }
+
   render() {
     const {
       banknote: { countries }
     } = this.props.statistics;
+
     return (
       <div>
-        <form className="form form--filters" encType="multipart/form-data" onSubmit={e => {
+        <form
+          className="form form--filters"
+          encType="multipart/form-data"
+          onSubmit={e => {
             const callback = this.props.handleSubmit(values => {
               this.props.filterBanknotes(values);
               // this.props.reset();
-              console.log(values)
+              console.log(values);
             });
             callback(e);
           }}>
+
           <Checkboxes name="country" trigger="countries" data={countries ? countries.map(country => country._id) : []} />
 
           <button type="submit" className="modal__foter-submit btn btn--blue">
-             wyślij
-            </button>
+            <Translate name="button.submit" />
+          </button>
         </form>
       </div>
     );
@@ -38,12 +51,17 @@ function mapStateToProps({ form: { filtersForm }, banknote: { model, banknote },
 }
 
 const mapDispatchToProps = dispatch => ({
-  filterBanknotes: (query) => dispatch(actions.filterBanknotes(query)),
+  filterBanknotes: query => dispatch(actions.filterBanknotes(query))
 });
 
 Filters = connect(mapStateToProps, mapDispatchToProps)(Filters);
 
 export default reduxForm({
   form: "filtersForm",
-  destroyOnUnmount: true
+  destroyOnUnmount: true,
+  keepDirtyOnReinitialize: false
 })(Filters);
+
+Filters.contextTypes = {
+  translate: PropTypes.func
+};
