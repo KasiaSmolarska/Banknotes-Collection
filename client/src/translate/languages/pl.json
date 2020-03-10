@@ -35,6 +35,8 @@
   "button.goBack": "Powrót",
   "button.getStarted": "Rozpocznij!",
   "collapse.trigger.countries": "Kraje:",
+  "collapse.trigger.currencies": "Waluty:",
+  "collapse.trigger.continents": "Kontynenty:",
   "chart.series.banknotesAdded": "dodanych banknotów",
   "chart.series.banknotes": "banknotów",
   "continent.Africa": "Afryka",

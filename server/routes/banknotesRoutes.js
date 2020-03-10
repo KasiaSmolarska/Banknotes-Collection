@@ -218,6 +218,10 @@ module.exports = app => {
         queryFiltersArray.push({ currency: { $in: filters.currency } });
       }
 
+      if (filters.continent && Array.isArray(filters.continent)) {
+        queryFiltersArray.push({ continent: { $in: filters.continent } });
+      }
+
       const queryFilters = { $and: queryFiltersArray };
       if (!paginationLimits.find(index => index === Number(limit))) {
         limit = 8;

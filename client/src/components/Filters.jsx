@@ -10,7 +10,7 @@ class Filters extends React.Component {
 
   render() {
     const {
-      banknote: { countries, currencies }
+      banknote: { countries, currencies, continents }
     } = this.props.statistics;
 
     return (
@@ -27,9 +27,11 @@ class Filters extends React.Component {
             callback(e);
           }}>
 
-          <Checkboxes name="country" trigger="countries" data={countries ? countries.map(country => country._id) : []} />
+          <Checkboxes name="country" trigger="countries" data={countries ? countries.map(country => country._id) : []} shortcut={true} />
 
-          <Checkboxes name="currency" trigger="currencies" data={currencies ? currencies.map(currency => currency._id) : []} />
+          <Checkboxes name="currency" trigger="currencies" data={currencies ? currencies.map(currency => currency._id) : []} shortcut={true} />
+
+          <Checkboxes name="continent" trigger="continents" data={continents ? continents.map(continent => continent._id) : []} shortcut={false} />
 
           <button type="submit" className="modal__foter-submit btn btn--blue">
             <Translate name="button.submit" />

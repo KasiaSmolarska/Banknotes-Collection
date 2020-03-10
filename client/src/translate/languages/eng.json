@@ -35,6 +35,8 @@
   "button.getStarted": "Get Started",
   "button.logIn": "SIGN IN/ LOG IN",
   "collapse.trigger.countries": "Countries:",
+  "collapse.trigger.currencies": "Currencies:",
+  "collapse.trigger.continents": "Continents:",
   "chart.series.banknotesAdded": "banknotes added",
   "chart.series.banknotes": "banknotes",
   "continent.Africa": "Africa",
