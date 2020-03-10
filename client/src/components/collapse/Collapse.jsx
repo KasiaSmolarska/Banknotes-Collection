@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 export const Collapse = ({ trigger, children, className }, context) => {
   const [isOpen, setOpen] = useState(false);
-  console.log(context)
   return (
     <div className={className ? "collapse__container " + className : "collapse__container"}>
       <div className="collapse__trigger" onClick={() => setOpen(!isOpen)}>

@@ -7,6 +7,9 @@ module.exports = app => {
   app.get("/api/statistics/banknotes", requireLogin, async (req, res) => {
     try {
       const countries = await Banknote.aggregate([{ $match: { _user: req.user._id, country: { $ne: null } } }, { $group: { _id: "$country", total: { $sum: 1 } } }, { $sort: { total: -1 } }]);
+
+      const currencies = await Banknote.aggregate([{ $match: { _user: req.user._id, currency: { $ne: null } } }, { $group: { _id: "$currency", total: { $sum: 1 } } }, { $sort: { total: -1 } }]);
+
       const continents = await Banknote.aggregate([{ $match: { _user: req.user._id, continent: { $ne: null } } }, { $group: { _id: "$continent", total: { $sum: 1 } } }, { $sort: { total: -1 } }]);
 
       const favorites = await Banknote.aggregate([{ $match: { _user: req.user._id, favorite: { $ne: null } } }, { $group: { _id: "$favorite", total: { $sum: 1 } } }, { $sort: { total: -1 } }]);
@@ -24,7 +27,7 @@ module.exports = app => {
         { $sort: { total: -1 } }
       ]);
 
-      const statistcs = { countries, continents, favorites, dateCreated };
+      const statistcs = { countries, continents, favorites, dateCreated, currencies };
 
       res.send(statistcs);
     } catch (err) {

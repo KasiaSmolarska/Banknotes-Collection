@@ -43,6 +43,27 @@ export const fetchBanknotes = (newSkip = 0) => {
         );
       }
 
+      if (filters && res.data.items.length === 0) {
+        const params = new URLSearchParams({
+          sortBy,
+          sortDirection
+        });
+        res = await axios.get(`/api/banknote?${params}`);
+
+        dispatch({
+          type: SET_FILTER_PARAMS,
+          payload: {}
+        });
+
+        dispatch(
+          actions.setAlert({
+            type: "danger",
+            msg: "action.fetchBanknotes.danger",
+            duration: 6000
+          })
+        );
+      }
+
       dispatch({
         type: FETCH_BANKNOTES,
         payload: res.data.items

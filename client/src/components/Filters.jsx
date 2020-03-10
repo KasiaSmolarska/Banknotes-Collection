@@ -8,14 +8,9 @@ import Translate from "../translate/Translate";
 
 class Filters extends React.Component {
 
-
-  componentDidUpdate() {
-    console.log("filters update")
-  }
-
   render() {
     const {
-      banknote: { countries }
+      banknote: { countries, currencies }
     } = this.props.statistics;
 
     return (
@@ -33,6 +28,8 @@ class Filters extends React.Component {
           }}>
 
           <Checkboxes name="country" trigger="countries" data={countries ? countries.map(country => country._id) : []} />
+
+          <Checkboxes name="currency" trigger="currencies" data={currencies ? currencies.map(currency => currency._id) : []} />
 
           <button type="submit" className="modal__foter-submit btn btn--blue">
             <Translate name="button.submit" />

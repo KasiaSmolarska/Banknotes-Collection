@@ -203,7 +203,7 @@ module.exports = app => {
 
       if (query.length) {
         const queryRegEx = new RegExp(query, "i");
-        queryFiltersArray.push({ $or: [{ title: queryRegEx }, { country: queryRegEx }] });
+        queryFiltersArray.push({ $or: [{ title: queryRegEx }, { userNotes: queryRegEx }] });
       }
 
       if (filters.favorite) {
@@ -214,7 +214,9 @@ module.exports = app => {
         queryFiltersArray.push({ country: { $in: filters.country } });
       }
 
-      console.log("queryFiltersArray", queryFiltersArray)
+      if (filters.currency && Array.isArray(filters.currency)) {
+        queryFiltersArray.push({ currency: { $in: filters.currency } });
+      }
 
       const queryFilters = { $and: queryFiltersArray };
       if (!paginationLimits.find(index => index === Number(limit))) {
