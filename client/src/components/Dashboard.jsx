@@ -75,6 +75,10 @@ const Dashboard = (props, context) => {
           <strong>{context.translate("tile.summary.bottom")} </strong>
         </div>
       </Card>
+
+      <Card mod="issueYear" header={`${banknote.issueYears[banknote.issueYears.length -1]._id} - ${banknote.issueYears[0]._id}`} title="tile.issueYearAdded">
+        <DefaultChart charttype="area" value={banknote.issueYears} chartId="issueYear-chart" seriesName="issueYear" color="#F69F43" />
+      </Card>
     </div>
   ) : (
     <Spinner />

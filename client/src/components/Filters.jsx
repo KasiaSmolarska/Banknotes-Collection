@@ -31,11 +31,11 @@ class Filters extends React.Component {
          {values && values.length > 1 && <div className="form--filters__container"><Field component={Range} min={0.1} name="value" id="value" max={values[0]._id} /></div> }
          {issueYears && issueYears.length > 1 && <div className="form--filters__container"><Field component={Range} name="issueYear" id="issueYear" min={issueYears[issueYears.length - 1]._id} max={issueYears[0]._id} step={2} /></div>}
           
-          <Checkboxes name="country" trigger="countries" data={countries ? countries.map(country => country._id) : []} shortcut={true} />
+          <Checkboxes name="country" trigger="countries" data={countries ? countries.map(country => country._id).sort() : []} shortcut={true} />
 
-          <Checkboxes name="currency" trigger="currencies" data={currencies ? currencies.map(currency => currency._id) : []} shortcut={true} />
+          <Checkboxes name="currency" trigger="currencies" data={currencies ? currencies.map(currency => currency._id).sort() : []} shortcut={true} />
 
-          <Checkboxes name="continent" trigger="continents" data={continents ? continents.map(continent => continent._id) : []} shortcut={false} />
+          <Checkboxes name="continent" trigger="continents" data={continents ? continents.map(continent => continent._id).sort() : []} shortcut={false} />
 
           <button type="submit" className="modal__foter-submit btn btn--blue">
             <Translate name="button.submit" />

@@ -2,7 +2,8 @@
   display: grid;
   grid-template-areas:
     "banknote continent country"
-    "user user favorite";
+    "user user favorite"
+    "issueYear issueYear favorite";
   grid-template-columns: repeat(3, 1fr);
   padding: 2rem 0rem;
   background: #f5f5f5;
@@ -14,7 +15,7 @@
     grid-template-areas:
       "banknote banknote user user"
       "country country continent continent"
-      "favorite favorite nothing nothing";
+      "favorite favorite issueYear issueYear";
     grid-template-columns: repeat(4, 1fr);
   }
 
@@ -24,7 +25,8 @@
       "user"
       "country"
       "continent"
-      "favorite";
+      "favorite"
+      "issueYear";
     grid-template-columns: 1fr;
   }
 

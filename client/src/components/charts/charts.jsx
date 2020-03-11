@@ -53,6 +53,17 @@ export const DonutChart = ({ value, chartId, colors, charttype }, context) => {
           gradientToColors: colors.map(color => adjustBrightness(color, -30))
         }
       },
+      responsive: [{
+        breakpoint: 1000,
+        options: {
+          chart: {
+            height: 200
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+    }],
       legend: {
         show: false
       },
@@ -82,7 +93,7 @@ export const DonutChart = ({ value, chartId, colors, charttype }, context) => {
     series: Object.values(sortedData)
   };
 
-  return <Chart options={chart.options} series={chart.series} type={charttype} height="150" />;
+  return <Chart options={chart.options} series={chart.series} type={charttype} height="350" />;
 };
 
 DonutChart.contextTypes = {
