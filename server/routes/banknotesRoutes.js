@@ -195,8 +195,6 @@ module.exports = app => {
       } else {
         filters = {};
       }
-      console.log(filters);
-
       const paginationLimits = [8, 16, 24, 48];
 
       const queryFiltersArray = [{ _user: req.user.id }];
@@ -225,6 +223,15 @@ module.exports = app => {
       if (filters.value && typeof filters.value === "object") {
         queryFiltersArray.push({ value: { $gte: filters.value.min, $lte: filters.value.max } });
       }
+
+      if (filters.value && typeof filters.value === "object") {
+        queryFiltersArray.push({ value: { $gte: filters.value.min, $lte: filters.value.max } });
+      }
+
+      if (filters.issueYear && typeof filters.issueYear === "object") {
+        queryFiltersArray.push({ issueYear: { $gte: filters.issueYear.min, $lte: filters.issueYear.max } });
+      }
+
 
       const queryFilters = { $and: queryFiltersArray };
       if (!paginationLimits.find(index => index === Number(limit))) {

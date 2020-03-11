@@ -11,7 +11,7 @@ import { Field } from "redux-form";
 class Filters extends React.Component {
   render() {
     const {
-      banknote: { countries, currencies, continents, values }
+      banknote: { countries, currencies, continents, values, issueYears }
     } = this.props.statistics;
 
     return (
@@ -28,7 +28,8 @@ class Filters extends React.Component {
             callback(e);
           }}>
 
-         {values && <div className="form--filters__container"><Field component={Range} name="value" id="value" max={values[0]._id} /></div> }
+         {values && values.length > 1 && <div className="form--filters__container"><Field component={Range} min={0.1} name="value" id="value" max={values[0]._id} /></div> }
+         {issueYears && issueYears.length > 1 && <div className="form--filters__container"><Field component={Range} name="issueYear" id="issueYear" min={issueYears[issueYears.length - 1]._id} max={issueYears[0]._id} step={2} /></div>}
           
           <Checkboxes name="country" trigger="countries" data={countries ? countries.map(country => country._id) : []} shortcut={true} />
 
