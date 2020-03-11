@@ -5,12 +5,13 @@ import { Checkboxes } from "./filters/Checkboxes";
 import actions from "../store/actions";
 import PropTypes from "prop-types";
 import Translate from "../translate/Translate";
+import Range from "./form/Range";
+import { Field } from "redux-form";
 
 class Filters extends React.Component {
-
   render() {
     const {
-      banknote: { countries, currencies, continents }
+      banknote: { countries, currencies, continents, values }
     } = this.props.statistics;
 
     return (
@@ -27,6 +28,8 @@ class Filters extends React.Component {
             callback(e);
           }}>
 
+         {values && <div className="form--filters__container"><Field component={Range} name="value" id="value" max={values[0]._id} /></div> }
+          
           <Checkboxes name="country" trigger="countries" data={countries ? countries.map(country => country._id) : []} shortcut={true} />
 
           <Checkboxes name="currency" trigger="currencies" data={currencies ? currencies.map(currency => currency._id) : []} shortcut={true} />

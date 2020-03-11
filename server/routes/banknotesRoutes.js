@@ -222,6 +222,10 @@ module.exports = app => {
         queryFiltersArray.push({ continent: { $in: filters.continent } });
       }
 
+      if (filters.value && typeof filters.value === "object") {
+        queryFiltersArray.push({ value: { $gte: filters.value.min, $lte: filters.value.max } });
+      }
+
       const queryFilters = { $and: queryFiltersArray };
       if (!paginationLimits.find(index => index === Number(limit))) {
         limit = 8;
@@ -271,7 +275,6 @@ module.exports = app => {
     try {
       const { banknoteId } = req.params;
       let banknote = await Banknote.findById(banknoteId);
-      console.log(req.user._id, banknote._user);
 
       if (banknote._user.toString() !== req.user._id.toString()) {
         return res.status(403).json({

@@ -14,6 +14,8 @@ module.exports = app => {
 
       const favorites = await Banknote.aggregate([{ $match: { _user: req.user._id, favorite: { $ne: null } } }, { $group: { _id: "$favorite", total: { $sum: 1 } } }, { $sort: { total: -1 } }]);
 
+      const values = await Banknote.aggregate([{ $match: { _user: req.user._id, value: { $ne: null } } }, { $group: { _id: "$value" } }, { $sort: { _id: -1 } }]);
+
       const dateCreated = await Banknote.aggregate([
         {
           $match: { _user: req.user._id, dateCreated: { $ne: null } }
@@ -27,7 +29,7 @@ module.exports = app => {
         { $sort: { total: -1 } }
       ]);
 
-      const statistcs = { countries, continents, favorites, dateCreated, currencies };
+      const statistcs = { countries, continents, favorites, dateCreated, currencies, values };
 
       res.send(statistcs);
     } catch (err) {

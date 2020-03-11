@@ -259,6 +259,15 @@
       color: $color-grey;
       font-weight: 400;
     }
+
+    &--range {
+      transform: translateY(-5.9rem);
+      color: #777;
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-left: 0px;
+      text-transform: none;
+    }
   }
 
   &__input:placeholder-shown + &__label {
@@ -325,5 +334,102 @@
   &__image-file {
     max-width: 100px;
     max-height: 130px;
+  }
+
+  &--filters {
+    padding: 1.2rem 0;
+    &__container {
+      padding: 1.2rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  /// EXTERNAL LIBRARIES
+
+  .input-range__slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #ffffff;
+    border: 2px solid $primary-color;
+    border-radius: 100%;
+    cursor: pointer;
+    display: block;
+    margin-left: -0.5rem;
+    margin-top: -0.65rem;
+    outline: none;
+    position: absolute;
+    transition: none;
+    width: 1.2rem !important;
+    height: 1.2rem !important;
+
+    &:active {
+      transform: scale(1.2) !important;
+      background-color: $primary-color;
+    }
+  }
+
+  .input-range__slider-container {
+    transition: left 0.1s ease-out;
+  }
+
+  .input-range__track {
+    transition: left 0.1s ease-out, width 0.1s ease-out;
+    &--active {
+      background-color: $primary-color !important;
+    }
+  }
+
+  .input-range__label {
+    color: #777;
+    font-family: inherit;
+    font-size: 1.2rem;
+    transform: translateZ(0);
+    white-space: nowrap;
+    &--value {
+      position: absolute;
+      top: -2.7rem;
+    }
+  }
+
+  .input-range__label--value .input-range__label-container {
+    left: -50%;
+    position: relative;
+    color: $primary-color;
+    padding: 0.4rem;
+    position: relative;
+  }
+
+  .input-range__label--max {
+    right: 8px;
+  }
+
+  .input-range__label--min {
+    left: 8px;
+  }
+  .input-range__label--min,
+  .input-range__label--max {
+    bottom: -2.4rem;
+    position: absolute;
+  }
+
+  // span.input-range__slider-container:nth-of-type(1) {
+  //   .input-range__label-container {
+  //     margin-left: 8px;
+  //   }
+  // }
+
+  // span.input-range__slider-container:nth-of-type(2) {
+  //   .input-range__label-container {
+  //     margin-right: 8px;
+  //   }
+  // }
+
+  .input-range__track--background {
+    left: 8px;
+    margin-top: -0.15rem;
+    position: absolute;
+    right: 8px;
+    top: 50%;
   }
 }

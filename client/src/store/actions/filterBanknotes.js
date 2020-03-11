@@ -6,7 +6,11 @@ const filterBanknotes = query => dispatch => {
   const newQuery = Object.entries(query).reduce((filters, elem) => {
     if (typeof elem[1] === "object") {
       const properties = Object.keys(elem[1]).filter(value => elem[1][value]);
-      filters[elem[0]] = properties;
+      if(properties.includes("min") || properties.includes("max")){
+       filters[elem[0]] = elem[1];
+      } else{
+        filters[elem[0]] = properties;
+      }
     } else if (typeof elem[1] === "string") {
       filters[elem[0]] = elem[1];
     }
@@ -14,7 +18,7 @@ const filterBanknotes = query => dispatch => {
   }, {});
 
   Object.entries(newQuery).map(queryPart => {
-    if(!queryPart[1].length){
+    if(Array.isArray(queryPart[1]) && !queryPart[1].length){
       delete newQuery[queryPart[0]];
     }
   })
