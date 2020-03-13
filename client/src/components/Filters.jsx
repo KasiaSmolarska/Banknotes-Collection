@@ -8,11 +8,25 @@ import Translate from "../translate/Translate";
 import Range from "./form/Range";
 import { Field } from "redux-form";
 
+const checkIfStatisticsAreFilled = stats => {
+  let isFilled = true;
+  for (let i = 0; i < Object.values(stats).length; i++) {
+    const stat = Object.values(stats)[i];
+
+    if (stat.length < 2) {
+      isFilled = false;
+      break;
+    }
+  }
+  return isFilled;
+};
+
 class Filters extends React.Component {
   render() {
-    const {
-      banknote: { countries, currencies, continents, values, issueYears }
-    } = this.props.statistics;
+    const { banknote } = this.props.statistics;
+    const filters = this.props.filters;
+
+    const { countries, currencies, continents, values, issueYears } = banknote;
 
     return (
       <div>
@@ -23,33 +37,48 @@ class Filters extends React.Component {
             const callback = this.props.handleSubmit(values => {
               this.props.filterBanknotes(values);
               // this.props.reset();
-              console.log(values);
             });
             callback(e);
           }}>
+          {values && values.length > 1 && (
+            <div className="form--filters__container">
+              <Field component={Range} min={0.1} name="value" id="value" max={values[0]._id} />
+            </div>
+          )}
+          {issueYears && issueYears.length > 1 && (
+            <div className="form--filters__container">
+              <Field component={Range} name="issueYear" id="issueYear" min={issueYears[issueYears.length - 1]._id} max={issueYears[0]._id} step={2} />
+            </div>
+          )}
 
-         {values && values.length > 1 && <div className="form--filters__container"><Field component={Range} min={0.1} name="value" id="value" max={values[0]._id} /></div> }
-         {issueYears && issueYears.length > 1 && <div className="form--filters__container"><Field component={Range} name="issueYear" id="issueYear" min={issueYears[issueYears.length - 1]._id} max={issueYears[0]._id} step={2} /></div>}
-          
-          <Checkboxes name="country" trigger="countries" data={countries ? countries.map(country => country._id).sort() : []} shortcut={true} />
+          {countries && countries.length > 1 && <Checkboxes name="country" trigger="countries" data={countries.map(country => country._id).sort()} shortcut={true} />}
 
-          <Checkboxes name="currency" trigger="currencies" data={currencies ? currencies.map(currency => currency._id).sort() : []} shortcut={true} />
+          {currencies && currencies.length > 1 && <Checkboxes name="currency" trigger="currencies" data={currencies.map(currency => currency._id).sort()} shortcut={true} />}
 
-          <Checkboxes name="continent" trigger="continents" data={continents ? continents.map(continent => continent._id).sort() : []} shortcut={false} />
+          {continents && continents.length > 1 && <Checkboxes name="continent" trigger="continents" data={continents ? continents.map(continent => continent._id).sort() : []} shortcut={false} />}
 
-          <button type="submit" className="modal__foter-submit btn btn--blue">
-            <Translate name="button.submit" />
-          </button>
+          {!checkIfStatisticsAreFilled(banknote) ? (
+            <div className="form--filters__container">
+              <div className="text"><Translate name="filter.noFilterInfo" /></div>
+            </div>
+          ) : null}
+
+          {Object.keys(filters).length ? (
+            <button type="submit" className="modal__foter-submit btn btn--blue">
+              <Translate name="button.submit" />
+            </button>
+          ) : null}
         </form>
       </div>
     );
   }
 }
 
-function mapStateToProps({ form: { filtersForm }, banknote: { model, banknote }, statistics }) {
+function mapStateToProps({ form: { filtersForm }, banknote: { filters }, statistics }) {
   return {
     form: filtersForm,
-    statistics
+    statistics,
+    filters
   };
 }
 

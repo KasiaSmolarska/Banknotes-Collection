@@ -4,6 +4,7 @@ import { Spinner } from "./Spinner";
 import { BanknotesChart, DefaultChart, DonutChart } from "./charts/charts";
 import { Card } from "./Card";
 import PropTypes from "prop-types";
+import { Icon } from "./Icon";
 
 import actions from "../store/actions";
 import { SET_FILTER_PARAMS } from "../store/actions/types";
@@ -73,12 +74,19 @@ const Dashboard = (props, context) => {
             </li>
           </ul>
           <strong>{context.translate("tile.summary.bottom")} </strong>
+          <div className="py-1">
+            <span className="btn btn--primary--reverse" onClick={() => dispatch(actions.show_modal_to_add_new_banknote())}>
+              {context.translate("button.addNewBanknote")}
+            </span>
+          </div>
         </div>
       </Card>
 
-      <Card mod="issueYear" header={`${banknote.issueYears[banknote.issueYears.length -1]._id} - ${banknote.issueYears[0]._id}`} title="tile.issueYearAdded">
-        <DefaultChart charttype="area" value={banknote.issueYears} chartId="issueYear-chart" seriesName="issueYear" color="#F69F43" />
-      </Card>
+      {banknote.issueYears.length > 1 && (
+        <Card mod="issueYear" header={`${banknote.issueYears[banknote.issueYears.length - 1]._id} - ${banknote.issueYears[0]._id}`} title="tile.issueYearAdded">
+          <DefaultChart charttype="area" value={banknote.issueYears} chartId="issueYear-chart" seriesName="issueYear" color="#F69F43" />
+        </Card>
+      )}
     </div>
   ) : (
     <Spinner />

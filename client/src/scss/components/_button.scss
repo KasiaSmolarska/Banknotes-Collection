@@ -132,6 +132,12 @@
     color: $white;
   }
 
+  &--primary--reverse {
+    background-color: $primary-color-fade;
+    color: $white;
+    border: 1px solid $white;
+  }
+
   &--smaller {
     padding: 0.6rem 1.4rem;
   }
