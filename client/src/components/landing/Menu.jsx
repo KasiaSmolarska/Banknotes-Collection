@@ -61,7 +61,7 @@ export const Menu = (props, context) => {
           <Flags />
         </li>
       </ul>
-      <Link to="/login" className="nav__element--button btn btn--primary hidden-xs">
+      <Link to="/login" className="nav__element--button btn--smaller btn btn--primary--reverse hidden-xs">
         {" "}
         {context.translate("button.getStarted")}
       </Link>

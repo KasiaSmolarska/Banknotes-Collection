@@ -148,6 +148,8 @@
   "label.editForm.own": "Posiadany",
   "label.filtersForm.value": "Wartości banknotów:",
   "label.filtersForm.issueYear": "Lata wydania:",
+  "label.loginForm.email": "Email:",
+  "label.loginForm.password": "Hasło:",
   "label.registerForm.givenName": "Imię:",
   "label.registerForm.familyName": "Nazwisko:",
   "label.registerForm.email": "Email:",
@@ -196,6 +198,8 @@
   "table.label.issueYear": "Rok",
   "table.label.own": "W posiadaniu",
   "table.label.actions": "Akcje",
-  "register.or": "ALBO"
+  "register.or": "ALBO",
+  "loginform.header": "Zaloguj się",
+  "registerform.header": "Zarejestruj się"
 
 }

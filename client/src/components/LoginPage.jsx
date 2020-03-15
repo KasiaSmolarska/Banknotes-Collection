@@ -33,11 +33,11 @@ const LoginPage = (props, context) => {
 
       <div className="auth__wrapper">
         <div className="auth__container text-center">
-          <h1 className="auth__heading">Login or create Account.</h1>
-          {!registerState ? <RegisterForm toggleRegisterState={toggleRegisterState} /> : <LoginForm toggleRegisterState={toggleRegisterState} />}
+          <h1 className="auth__heading">{!registerState ? <Translate name="loginform.header" /> : <Translate name="registerform.header" />}</h1>
+          {registerState ? <RegisterForm toggleRegisterState={toggleRegisterState} /> : <LoginForm toggleRegisterState={toggleRegisterState} />}
           <div className="auth__element">
             <a className="btn btn--google btn--flex btn--icon" href="/auth/google">
-              <GoogleIcon color="#FFF" /> {!registerState ? <Translate name="button.registerWithGoogle" /> : <Translate name="button.loginWithGoogle" />}
+              <GoogleIcon color="#FFF" /> {registerState ? <Translate name="button.registerWithGoogle" /> : <Translate name="button.loginWithGoogle" />}
             </a>
           </div>
           {/* <div className="auth__element">

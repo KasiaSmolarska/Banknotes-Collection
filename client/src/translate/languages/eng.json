@@ -36,6 +36,8 @@
   "button.logIn": "SIGN IN/ LOG IN",
   "button.register": "Register",
   "button.login": "Login",
+  "button.loginWithGoogle": "Login with Google",
+  "button.registerWithGoogle": "Register with Google",
   "collapse.trigger.countries": "Countries:",
   "collapse.trigger.currencies": "Currencies:",
   "collapse.trigger.continents": "Continents:",
@@ -146,6 +148,8 @@
   "label.editForm.own": "Own",
   "label.filtersForm.value": "Banknotes values:",
   "label.filtersForm.issueYear": "Issue years:",
+  "label.loginForm.email": "Email:",
+  "label.loginForm.password": "Password:",
   "label.registerForm.givenName": "Name:",
   "label.registerForm.familyName": "Surname:",
   "label.registerForm.email": "Email:",
@@ -194,5 +198,7 @@
   "table.label.issueYear": "Year",
   "table.label.own": "Own",
   "table.label.actions": "Actions",
-  "register.or": "OR"
+  "register.or": "OR",
+  "loginform.header": "Login",
+  "registerform.header": "Register"
 }

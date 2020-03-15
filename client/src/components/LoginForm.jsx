@@ -20,8 +20,8 @@ class LoginForm extends React.Component {
           });
           callback(e);
         }}>
-        <Field component={Input} name="email" id="email" type="email" />
-        <Field component={Input} name="password" id="password" type="password" />
+        <Field component={Input} name="email" id="email" type="email" required/>
+        <Field component={Input} name="password" id="password" type="password" required/>
 
         <div className="form--login__footer">
           <span onClick={() => this.props.toggleRegisterState()} className="btn btn--primary--reverse btn--smaller">
