@@ -20,6 +20,18 @@
     }
   }
 
+  &--login{
+    width:100%;
+  }
+
+  &--login &__control{
+    padding: 0.5rem 0;
+  }
+
+  &--login &__label{
+    text-align: left;
+  }
+
   &__control {
     position: relative;
     margin: 2rem 0;
@@ -157,7 +169,21 @@
     font-family: inherit;
     color: inherit;
 
-    &:invalid {
+    &:required{
+      ~ .required {
+
+        &:after {
+          content: "*";
+          color: red;
+          position: absolute;
+          right: 20px;
+          top: 18px;
+          font-size: 17px;
+        }
+      }
+    }
+
+    &:invalid:not(:required) {
       // pozwala określić wygląd niepoprawnie wyglądającego inputa
       border: 1px solid red;
 
@@ -353,6 +379,28 @@
     &__footer{
       padding-top: 2rem;
       text-align: right;
+    }
+  }
+
+  &--login{
+
+    &__footer{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-bottom: 3rem;
+      position: relative;
+
+    }
+
+    &__or {
+      font-size: 1.6rem;
+      position: relative;
+      top: -15px;
+      background: #fff;
+      padding: 0 1rem;
+      display: inline-block;
     }
   }
 

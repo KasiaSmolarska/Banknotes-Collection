@@ -139,9 +139,9 @@
   }
 
   &--primary--reverse {
-    background-color: $primary-color-fade;
-    color: $white;
-    border: 1px solid $white;
+    background-color: $white;
+    color:  $primary-color-fade;;
+    border: 1px solid $primary-color-fade;
   }
 
   &--smaller {

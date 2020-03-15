@@ -6,10 +6,11 @@ const Input = ({ input, meta: { touched, error, form }, data, value, type, ...pr
   console.log("input", value);
   return (
     <div className="form__control">
-      <input pattern={data && data.validate} placeholder={translate(`label.${form}.${input.name}`)} className="form__input" type={type || "text"} {...input} {...props} value={value} />
+      <input pattern={data && data.validate} placeholder={translate(`label.${form}.${input.name}`)} className="form__input" type={type || "text"} {...input} {...props} />
       <label className="form__label">
         <Translate name={`label.${form}.${input.name}`} />
       </label>
+      <span className="required"></span>
       <div className="form__alert" style={{ height: "1rem", marginBottom: "20px" }}>
         {touched && error}
       </div>

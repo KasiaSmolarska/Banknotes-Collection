@@ -34,6 +34,8 @@
   "button.logOut": "Log out",
   "button.getStarted": "Get Started",
   "button.logIn": "SIGN IN/ LOG IN",
+  "button.register": "Register",
+  "button.login": "Login",
   "collapse.trigger.countries": "Countries:",
   "collapse.trigger.currencies": "Currencies:",
   "collapse.trigger.continents": "Continents:",
@@ -144,6 +146,11 @@
   "label.editForm.own": "Own",
   "label.filtersForm.value": "Banknotes values:",
   "label.filtersForm.issueYear": "Issue years:",
+  "label.registerForm.givenName": "Name:",
+  "label.registerForm.familyName": "Surname:",
+  "label.registerForm.email": "Email:",
+  "label.registerForm.password": "Password:",
+  "label.registerForm.password2": "Confirm password:",
   "landing.banner.textTop1": "BANKNOTES",
   "landing.banner.textTop2": "COLLECTION",
   "landing.banner.textBottom": "Pangea is a very powerful tool which lets you keep track of all of the banknotes that you currently own. Discover the platform that gives you the freedom to manage your banknotes collection easy and freely. Keep colleting and have fun!",
@@ -186,5 +193,6 @@
   "table.label.currency": "Currency",
   "table.label.issueYear": "Year",
   "table.label.own": "Own",
-  "table.label.actions": "Actions"
+  "table.label.actions": "Actions",
+  "register.or": "OR"
 }
