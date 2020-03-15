@@ -12,7 +12,7 @@ module.exports = app => {
 
       user.active = false;
       user.email = md5(user.email);
-      user.googleId = user.googleId + "delete";
+      user.googleId !== null ? user.googleId = user.googleId + "delete" : user.googleId = user.googleId;
 
       await user.save();
       res.json({

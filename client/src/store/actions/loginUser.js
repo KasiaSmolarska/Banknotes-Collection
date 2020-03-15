@@ -7,7 +7,7 @@ export const loginUser = (values) => async dispatch => {
     const userData = await axios.post("/auth/login", values);
     dispatch({
       type: FETCH_USER,
-      payload: {user: userData}
+      payload: {user: userData.data.user}
     })
   } catch (error) {
     console.log(error)

@@ -23,6 +23,7 @@ import deleteUser from "./deleteUser";
 import filterBanknotes from "./filterBanknotes";
 import { resetFiltering } from "./filterBanknotes";
 import {loginUser} from "./loginUser";
+import {registerUser} from "./registerUser";
 
 const actions = {
   fetchUser,
@@ -51,7 +52,8 @@ const actions = {
   deleteUser,
   filterBanknotes,
   resetFiltering,
-  loginUser
+  loginUser,
+  registerUser
 };
 
 export default actions;

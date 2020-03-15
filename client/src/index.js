@@ -16,7 +16,7 @@ import * as serviceWorker from "./serviceWorker";
 import axios from "axios";
 window.axios = axios;
 
-// axios.post("/auth/login", {email: "test@test.pl", password: "test"}).then(data => console.log(data));
+// axios.post("/auth/register", {email: "test22ew@test.pl", password: "test", password2: "test"}).then(data => console.log(data));
 
 const middlewares = [applyMiddleware(reduxThunk)];
 

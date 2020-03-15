@@ -33,7 +33,7 @@ passport.use(
 
       if (existingUser) {
         console.log("User already exists in collection.");
-        if (existingUser.password !== password) {
+        if (existingUser.password !== md5(password)) {
           return done(null, false, { message: "Incorrect username or password." });
         }
 
