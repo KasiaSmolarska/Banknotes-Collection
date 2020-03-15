@@ -2,11 +2,11 @@ import React from "react";
 import Translate from "../../translate/Translate";
 import PropTypes from "prop-types";
 
-const Input = ({ input, meta: { touched, error, form }, data, value }, { translate }) => {
+const Input = ({ input, meta: { touched, error, form }, data, value, type }, { translate }) => {
   console.log("input", value);
   return (
     <div className="form__control">
-      <input pattern={data && data.validate} placeholder={translate(`label.${form}.${input.name}`)} className="form__input" type="text" {...input} value={value} />
+      <input pattern={data && data.validate} placeholder={translate(`label.${form}.${input.name}`)} className="form__input" type={type || "text"} {...input} value={value} />
       <label className="form__label">
         <Translate name={`label.${form}.${input.name}`} />
       </label>

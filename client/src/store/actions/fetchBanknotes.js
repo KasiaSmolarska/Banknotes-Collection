@@ -43,7 +43,7 @@ export const fetchBanknotes = (newSkip = 0) => {
         );
       }
 
-      if (filters && res.data.items.length === 0) {
+      if (Object.keys(filters).length && res.data.items.length === 0) {
         const params = new URLSearchParams({
           sortBy,
           sortDirection

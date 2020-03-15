@@ -16,7 +16,8 @@ const userSchema = new Schema({
     type: Boolean,
     required: true
   },
-  email: String
+  email: String,
+  password: String
 });
 
 mongoose.model("users", userSchema);

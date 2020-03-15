@@ -2,6 +2,10 @@ const passport = require("passport");
 const md5 = require("md5");
 
 module.exports = app => {
+  app.post("/auth/login", passport.authenticate("local", { failureRedirect: "/login" }), ({user}, res) => {
+    res.send({user})
+  });
+
   app.get(
     "/auth/google",
     passport.authenticate("google", {

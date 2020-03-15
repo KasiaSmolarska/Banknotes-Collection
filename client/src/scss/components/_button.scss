@@ -16,6 +16,12 @@
     cursor: pointer;
   }
 
+  &:disabled{
+    pointer-events: none;
+    opacity: .6;
+    filter: grayscale(100%);
+  }
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0px 1rem 2rem rgba(0, 0, 0, 0.2);

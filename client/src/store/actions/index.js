@@ -22,6 +22,7 @@ import fetchBanknoteStatistics from "./fetchBanknoteStatistics";
 import deleteUser from "./deleteUser";
 import filterBanknotes from "./filterBanknotes";
 import { resetFiltering } from "./filterBanknotes";
+import {loginUser} from "./loginUser";
 
 const actions = {
   fetchUser,
@@ -49,7 +50,8 @@ const actions = {
   fetchBanknoteStatistics,
   deleteUser,
   filterBanknotes,
-  resetFiltering
+  resetFiltering,
+  loginUser
 };
 
 export default actions;

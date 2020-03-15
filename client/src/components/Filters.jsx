@@ -6,6 +6,7 @@ import actions from "../store/actions";
 import PropTypes from "prop-types";
 import Translate from "../translate/Translate";
 import Range from "./form/Range";
+import Select from "./form/Select";
 import { Field } from "redux-form";
 
 const checkIfStatisticsAreFilled = stats => {
@@ -22,11 +23,12 @@ const checkIfStatisticsAreFilled = stats => {
 };
 
 class Filters extends React.Component {
+
   render() {
     const { banknote } = this.props.statistics;
     const filters = this.props.filters;
 
-    const { countries, currencies, continents, values, issueYears } = banknote;
+    const { countries, currencies, continents, values, issueYears, types, own } = banknote;
 
     return (
       <div>
@@ -42,14 +44,22 @@ class Filters extends React.Component {
           }}>
           {values && values.length > 1 && (
             <div className="form--filters__container">
-              <Field component={Range} min={0.1} name="value" id="value" max={values[0]._id} />
+              <Field abs={this.props.menuFilterShow} component={Range} min={0.1} name="value" id="value" max={values[0]._id} />
             </div>
           )}
           {issueYears && issueYears.length > 1 && (
             <div className="form--filters__container">
-              <Field component={Range} name="issueYear" id="issueYear" min={issueYears[issueYears.length - 1]._id} max={issueYears[0]._id} step={2} />
+              <Field abs={this.props.menuFilterShow} component={Range} name="issueYear" id="issueYear" min={issueYears[issueYears.length - 1]._id} max={issueYears[0]._id} step={2} />
             </div>
           )}
+
+            {types && types.length > 1 && (<div className="form--filters__container">
+              <Field abs={this.props.menuFilterShow} component={Select} name="type" id="type" data={types.reduce((obj, type) => {obj.enum.push(type._id); return obj;}, {enum: []})} />
+            </div>)}
+
+            {own && own.length > 1 && (<div className="form--filters__container">
+              <Field abs={this.props.menuFilterShow} component={Select} name="own" id="own" data={own.map(own => own._id)} />
+            </div>)}
 
           {countries && countries.length > 1 && <Checkboxes name="country" trigger="countries" data={countries.map(country => country._id).sort()} shortcut={true} />}
 
@@ -59,26 +69,27 @@ class Filters extends React.Component {
 
           {!checkIfStatisticsAreFilled(banknote) ? (
             <div className="form--filters__container">
-              <div className="text"><Translate name="filter.noFilterInfo" /></div>
+              <div className="text">
+                <Translate name="filter.noFilterInfo" />
+              </div>
             </div>
           ) : null}
 
-          {Object.keys(filters).length ? (
-            <button type="submit" className="modal__foter-submit btn btn--blue">
+          <div className="form--filters__footer">
+            <button type="submit" disabled={!(this.props.form && this.props.form.values && Object.keys(this.props.form.values).length)} className="modal__foter-submit btn btn--blue">
               <Translate name="button.submit" />
             </button>
-          ) : null}
+            </div>
         </form>
       </div>
     );
   }
 }
 
-function mapStateToProps({ form: { filtersForm }, banknote: { filters }, statistics }) {
+function mapStateToProps({ form: { filtersForm }, statistics }) {
   return {
     form: filtersForm,
-    statistics,
-    filters
+    statistics
   };
 }
 

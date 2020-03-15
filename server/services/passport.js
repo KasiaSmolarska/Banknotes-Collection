@@ -1,4 +1,5 @@
 const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const mongoose = require("mongoose");
@@ -19,6 +20,31 @@ passport.deserializeUser((id, done) => {
     .then(user => done(null, user))
     .catch(err => console.log(err));
 });
+
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+      passReqToCallback: true
+    },
+    async function(req, username, password, done) {
+      const existingUser = await User.findOne({ email: username, googleId: null, facebookId: null });
+
+      if (existingUser) {
+        console.log("User already exists in collection.");
+        if (existingUser.password !== password) {
+          return done(null, false, { message: "Incorrect username or password." });
+        }
+
+        const userData = await User.findOne({_id: existingUser._id}).select("-password");
+
+        return done(null, userData);
+      }
+      return done(null, false, { message: "Incorrect username or password." });
+    }
+  )
+);
 
 passport.use(
   new GoogleStrategy(
@@ -44,6 +70,7 @@ passport.use(
       }
       new User({
         googleId: profile.id,
+        facebookId: null,
         familyName: profile.name.familyName || "",
         given_name: profile.name.givenName || "",
         picture: profile.photos[0].value,

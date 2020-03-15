@@ -28,6 +28,12 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, us
   console.log("Connected to Mongo DB");
 });
 
+
+// // FLASH 
+
+// var flash = require('connect-flash');
+// app.use(flash());
+
 // SESSION
 const cookieSession = require("cookie-session");
 

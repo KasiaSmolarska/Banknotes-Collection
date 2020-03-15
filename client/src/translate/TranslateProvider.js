@@ -5,9 +5,7 @@ import languages from "../utils/languages";
 class TranslateProvider extends React.Component {
   constructor(props) {
     super(props);
-    this.translate = this.translate.bind(this);
-    this.setLanguage = this.setLanguage.bind(this);
-
+    
     this.state = {
       language: localStorage.getItem("language") || "pl"
     };
@@ -15,8 +13,8 @@ class TranslateProvider extends React.Component {
   getChildContext() {
     return {
       language: languages[this.state.language],
-      translate: this.translate,
-      setLanguage: this.setLanguage
+      translate: this.translate.bind(this),
+      setLanguage: this.setLanguage.bind(this)
     };
   }
 

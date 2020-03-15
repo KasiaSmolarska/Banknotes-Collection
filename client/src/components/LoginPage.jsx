@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Spinner } from "./Spinner";
 import { Menu } from "./landing/Menu";
+import LoginForm from "./LoginForm";
 
 import GoogleIcon from "./svg/GoogleIcon";
 import FacebookIcon from "./svg/FacebookIcon";
@@ -23,6 +24,7 @@ const LoginPage = props => {
       <div className="auth__wrapper">
         <div className="auth__container text-center">
           <h1 className="auth__heading">Login or create Account.</h1>
+          <LoginForm/>
           <div className="auth__element">
             <a className="btn btn--google btn--flex btn--icon" href="/auth/google">
               <GoogleIcon color="#FFF" /> Login with Google
