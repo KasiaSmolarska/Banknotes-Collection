@@ -29,19 +29,24 @@ passport.use(
       passReqToCallback: true
     },
     async function(req, username, password, done) {
-      const existingUser = await User.findOne({ email: username, googleId: null, facebookId: null });
+      try {
+        const existingUser = await User.findOne({ email: username, googleId: null, facebookId: null });
 
-      if (existingUser) {
-        console.log("User already exists in collection.");
-        if (existingUser.password !== md5(password)) {
-          return done(null, false, { message: "Incorrect username or password." });
+        if (existingUser) {
+          console.log("User already exists in collection.");
+          if (existingUser.password !== md5(password)) {
+            console.log("Incorrect username or password.")
+            return done(null, false, { message: "Incorrect username or password." });
+          }
+
+          const userData = await User.findOne({ _id: existingUser._id }).select("-password");
+
+          return done(null, userData);
         }
-
-        const userData = await User.findOne({_id: existingUser._id}).select("-password");
-
-        return done(null, userData);
+        return done(null, false, { message: "Incorrect username or password." });
+      } catch (error) {
+        console.log(error);
       }
-      return done(null, false, { message: "Incorrect username or password." });
     }
   )
 );

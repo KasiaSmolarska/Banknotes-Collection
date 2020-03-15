@@ -5,8 +5,21 @@ const md5 = require("md5");
 const User = mongoose.model("users");
 
 module.exports = app => {
-  app.post("/auth/login", passport.authenticate("local", { failureRedirect: "/login" }), ({ user }, res) => {
-    res.send({ user });
+  app.post('/auth/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+      if (err) {
+        return next(err); // will generate a 500 error
+      }
+      if (! user) {
+        return res.status(401).send({ success : false, message : 'authentication failed' });
+      }
+      req.login(user, loginErr => {
+        if (loginErr) {
+          return next(loginErr);
+        }
+        return res.send({ user });
+      });      
+    })(req, res, next);
   });
 
   app.post("/auth/register", async (req, res) => {
