@@ -101,6 +101,7 @@ const isoCountries = {
     HK: "Hongkong",
     HU: "Węgry",
     IS: "Islandia",
+    IN: "Indie",
     ID: "Indonezja",
     IR: "Iran, Islamska Republika",
     IQ: "Irak",
