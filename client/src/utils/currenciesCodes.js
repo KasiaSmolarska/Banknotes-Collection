@@ -128,6 +128,9 @@ const isoCurriencies = {
     GTQ: {
       name: "Guatemalan Quetzal"
     },
+    GYD: {
+      name: "Guyanese dollar"
+    },
     HKD: {
       name: "Hong Kong Dollar"
     },
@@ -544,6 +547,10 @@ const isoCurriencies = {
 
     GNF: {
       name: "frank gwineański"
+    },
+
+    GYD: {
+      name: "Dolar gujański"
     },
 
     HRD: {
