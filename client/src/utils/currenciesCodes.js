@@ -131,6 +131,9 @@ const isoCurriencies = {
     GYD: {
       name: "Guyanese dollar"
     },
+    GWP: {
+      name: "Guinea-Bissau peso"
+    },
     HKD: {
       name: "Hong Kong Dollar"
     },
@@ -552,7 +555,9 @@ const isoCurriencies = {
     GYD: {
       name: "Dolar gujański"
     },
-
+    GWP: {
+      name: "Gwinea Bissau peso"
+    },
     HRD: {
       name: "Dinar chorwacki"
     },
