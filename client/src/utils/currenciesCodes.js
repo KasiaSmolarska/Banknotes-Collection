@@ -134,6 +134,9 @@ const isoCurriencies = {
     HNL: {
       name: "Honduran Lempira"
     },
+    HRD: {
+      name: "Croatian dinar"
+    },
     HRK: {
       name: "Croatian Kuna"
     },
@@ -535,6 +538,10 @@ const isoCurriencies = {
 
     GNF: {
       name: "frank gwineański"
+    },
+
+    HRD: {
+      name: "Dinar chorwacki"
     },
 
     OW: {
