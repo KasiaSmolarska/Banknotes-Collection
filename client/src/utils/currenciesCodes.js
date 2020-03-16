@@ -308,6 +308,12 @@ const isoCurriencies = {
     SOS: {
       name: "Somali Shilling"
     },
+    SRG: {
+      name: "Surinamese guilder"
+    },
+    SRD: {
+      name: "Surinamese dollar"
+    },
     SYP: {
       name: "Syrian Pound"
     },
@@ -784,6 +790,14 @@ const isoCurriencies = {
       name: "Szyling somalijski"
     },
 
+    SRG: {
+      name: "Gulden surinamski"
+    },
+
+    SRD: {
+      name: "Dolar surinamski"
+    },
+
     SYP: {
       name: "funt syryjski"
     },
@@ -804,7 +818,7 @@ const isoCurriencies = {
       name: "Tongan Paʻanga"
     },
 
-    WYPRÓBUJ: {
+    TRY: {
       name: "lira turecka"
     },
 
