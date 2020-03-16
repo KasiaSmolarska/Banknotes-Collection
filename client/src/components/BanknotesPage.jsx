@@ -127,8 +127,8 @@ const BanknotesPage = (props, context) => {
                 </div>
               </div>
             ) : null}
-            {searchParams.length ||
-              (Object.keys(filters).length ? (
+            {(searchParams.length ||
+              (Object.keys(filters).length) ? (
                 <div className="banknotesListPage__buttons-reset">
                   <span title={context.translate("button.reset.filters")} onClick={handleReset} className="btn  btn--danger btn--smaller">
                     <Icon icon="CancelIcon" width="12" height="12" fill="#dc3545" /> {context.translate("button.reset")}
