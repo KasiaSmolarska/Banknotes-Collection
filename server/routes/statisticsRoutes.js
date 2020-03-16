@@ -12,7 +12,7 @@ module.exports = app => {
 
       const continents = Banknote.aggregate([{ $match: { _user: req.user._id, continent: { $ne: null } } }, { $group: { _id: "$continent", total: { $sum: 1 } } }]);
 
-      const favorites = Banknote.aggregate([{ $match: { _user: req.user._id, favorite: { $ne: null } } }, { $group: { _id: "$favorite", total: { $sum: 1 } } }]);
+      const favorites = Banknote.aggregate([{ $match: { _user: req.user._id, favorite: { $ne: null } } }, { $group: { _id: "$favorite", total: { $sum: 1 } } },  { $sort: { total: -1 } }]);
 
       const issueYears = Banknote.aggregate([{ $match: { _user: req.user._id, issueYear: { $ne: null } } }, { $group: { _id: "$issueYear", total: { $sum: 1 } } }, { $sort: { _id: -1 } }]);
 
