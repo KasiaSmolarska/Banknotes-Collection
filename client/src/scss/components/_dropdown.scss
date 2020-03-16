@@ -96,3 +96,18 @@
     }
   }
 }
+
+
+// tooltip override
+
+.tooltip-arrow[data-placement*='left']::before {
+  border-color: transparent transparent transparent silver;
+  border-width: 0.6rem 0 0.6rem 0.5em;
+}
+
+.tooltip-arrow[data-placement*='left']::after {
+  border-color: transparent transparent transparent white;
+  border-width: 0.6rem 0 0.6rem 0.5em;
+  left: 2px;
+  top: 0;
+}

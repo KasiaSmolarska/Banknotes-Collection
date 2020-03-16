@@ -3,10 +3,10 @@ import React from "react";
 import TooltipTrigger from "react-popper-tooltip";
 import "react-popper-tooltip/dist/styles.css";
 
-const Dropdown = ({ tooltip, children, ...props }) => (
+const Dropdown = ({ tooltip, children, placement, ...props }) => (
   <TooltipTrigger
     {...props}
-    placement="right"
+    placement={placement || "right"}
     trigger="click"
     tooltip={({ getTooltipProps, getArrowProps, tooltipRef, arrowRef, placement }) => (
       <div

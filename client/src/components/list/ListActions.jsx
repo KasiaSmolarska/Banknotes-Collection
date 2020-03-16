@@ -6,7 +6,9 @@ import { HeartIcon } from "../svg/HeartIcon";
 import PropTypes from "prop-types";
 import { Icon } from "../Icon";
 
-import Dropdown, { DropdownTrigger, DropdownContent } from "react-simple-dropdown";
+// import Dropdown, { DropdownTrigger, DropdownContent } from "react-simple-dropdown";
+
+import Dropdown from "../dropdown/Dropdown";
 
 export const ListActions = ({ id, favorite, title, classList }, context) => {
   const dispatch = useDispatch();
@@ -28,9 +30,40 @@ export const ListActions = ({ id, favorite, title, classList }, context) => {
     accept && dispatch(actions.deleteBanknoteById(id));
   };
 
+  const DropdownContent = (
+    <div>
+      <div className="dropdown__item listActions__edit" onClick={() => openModal(id)}>
+        <Translate name="button.edit" />
+      </div>
+      <div className="dropdown__item listActions__copy" onClick={() => copyBanknote(id)}>
+        <Translate name="button.copy" />
+      </div>
+
+      <div className="dropdown__item listActions__favorite" onClick={() => toggleLikes(id)}>
+        {favorite ? (
+          <span className="listActions__favorite-elem" title={context.translate("action.removeFromFavorites")}>
+            <HeartIcon height="25" width="25" />
+          </span>
+        ) : (
+          <span className="listActions__favorite-elem" title={context.translate("action.addToFavorites")}>
+            <HeartIcon height="25" width="25" fill="#cacaca" />
+          </span>
+        )}
+      </div>
+
+      <div className="dropdown__item listActions__remove" onClick={() => deleteBanknote(id)}>
+        <Translate name="button.remove" />
+      </div>
+    </div>
+  );
+
   return (
     <>
-      <Dropdown>
+      <Dropdown tooltip={DropdownContent}>
+        {" "}
+        <Icon icon="MenuIcon" />
+      </Dropdown>
+      {/* <Dropdown>
         <DropdownTrigger>
           <Icon icon="MenuIcon" />
         </DropdownTrigger>
@@ -58,7 +91,7 @@ export const ListActions = ({ id, favorite, title, classList }, context) => {
             <Translate name="button.remove" />
           </div>
         </DropdownContent>
-      </Dropdown>
+      </Dropdown> */}
     </>
   );
 };
