@@ -42,11 +42,11 @@ export const ListActions = ({ id, favorite, title, classList }, context) => {
       <div className="dropdown__item listActions__favorite" onClick={() => toggleLikes(id)}>
         {favorite ? (
           <span className="listActions__favorite-elem" title={context.translate("action.removeFromFavorites")}>
-            <HeartIcon height="25" width="25" />
+            <HeartIcon height="22" width="22" />
           </span>
         ) : (
           <span className="listActions__favorite-elem" title={context.translate("action.addToFavorites")}>
-            <HeartIcon height="25" width="25" fill="#cacaca" />
+            <HeartIcon height="22" width="22" fill="#cacaca" />
           </span>
         )}
       </div>
@@ -60,38 +60,8 @@ export const ListActions = ({ id, favorite, title, classList }, context) => {
   return (
     <>
       <Dropdown tooltip={DropdownContent}>
-        {" "}
         <Icon icon="MenuIcon" />
       </Dropdown>
-      {/* <Dropdown>
-        <DropdownTrigger>
-          <Icon icon="MenuIcon" />
-        </DropdownTrigger>
-        <DropdownContent className={`dropdown__content ${classList && classList}`}>
-          <div className="dropdown__item listActions__edit" onClick={() => openModal(id)}>
-            <Translate name="button.edit" />
-          </div>
-          <div className="dropdown__item listActions__copy" onClick={() => copyBanknote(id)}>
-            <Translate name="button.copy" />
-          </div>
-
-          <div className="dropdown__item listActions__favorite" onClick={() => toggleLikes(id)}>
-            {favorite ? (
-              <span className="listActions__favorite-elem" title={context.translate("action.removeFromFavorites")}>
-                <HeartIcon height="25" width="25" />
-              </span>
-            ) : (
-              <span className="listActions__favorite-elem" title={context.translate("action.addToFavorites")}>
-                <HeartIcon height="25" width="25" fill="#cacaca" />
-              </span>
-            )}
-          </div>
-
-          <div className="dropdown__item listActions__remove" onClick={() => deleteBanknote(id)}>
-            <Translate name="button.remove" />
-          </div>
-        </DropdownContent>
-      </Dropdown> */}
     </>
   );
 };
