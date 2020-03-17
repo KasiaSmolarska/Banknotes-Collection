@@ -27,7 +27,7 @@ const ResetPasswordPage = ({ match, history }, context) => {
 
       <div className="auth__wrapper">
         <div className="auth__container text-center">
-          <ResetPassword passwordToken={passwordToken}/>
+          <ResetPassword history={history} passwordToken={passwordToken}/>
         </div>
       </div>
     </div>

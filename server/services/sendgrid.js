@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("users");
+const md5 = require("md5");
 
 const sgMail = require("@sendgrid/mail");
 const keys = require("../config/keys");
 sgMail.setApiKey(keys.sendgridApiKey);
 
 const {passwordRecover} = require("../emailTemplates/passwordRecover");
+const {emailResetSuccess} = require("../emailTemplates/emailResetSuccess");
 
 // ===PASSWORD RECOVER AND RESET
 
@@ -82,21 +84,27 @@ exports.resetPassword = (req, res) => {
     }
 
     //Set the new password
-    user.password = req.body.password;
+    user.password = md5(req.body.password);
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
 
     // Save
     user.save(err => {
       if (err) return res.status(500).json({ message: err.message });
+      const resetTemplate = emailResetSuccess(user.given_name, user.email);
+      const {lang} = req.body;
 
       // send email
       const mailOptions = {
         to: user.email,
         from: keys.sendgridFromMail,
-        subject: "Your password has been changed",
-        text: `Hi ${user.username} \n 
-                    This is a confirmation that the password for your account ${user.email} has just been changed.\n`
+        subject: resetTemplate.subject[lang],
+        content: [
+          {
+            type: "text/html",
+            value: resetTemplate.text[lang]
+          }
+        ]
       };
 
       sgMail.send(mailOptions, (error, result) => {

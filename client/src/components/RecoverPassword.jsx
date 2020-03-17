@@ -18,7 +18,9 @@ class RecoverPassword extends React.Component {
             this.props.remindPassword(values);
           });
           callback(e);
+          this.props.reset();
         }}>
+          {console.log(this.props)}
         <h1 className="auth__heading">
           <Translate name="recoverPasswordform.header" />
         </h1>

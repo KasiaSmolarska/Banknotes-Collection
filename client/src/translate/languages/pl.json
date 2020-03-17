@@ -20,6 +20,8 @@
   "action.validatePasswordResetToken.danger": "Kod tokena do zmiany hasła wygasł lub jest niepoprawny.",
   "action.resetPassword.danger": "Kod tokena do zmiany hasła wygasł lub jest niepoprawny.",
   "action.resetPassword.danger.email": "Podany email jest niepoprawny",
+  "action.resetPassword.success": "Hasło zostało zmienione!",
+  "action.remindPassword.success": "Link do zmiany hasła został wysłany na Twój email!",
   "button.addNewBanknote": "Dodaj banknot",
   "button.closeModal": "Zamknij okno",
   "button.reset": "Zresetuj",
@@ -45,6 +47,7 @@
   "button.register": "Zarejestruj się",
   "button.login": "Zaloguj się",
   "button.loginWithGoogle": "Zaloguj się przez Google",
+  "button.recoverPassword": "Zapomniałeś hasło?",
   "button.registerWithGoogle": "Zarejestruj się przez Google",
   "collapse.trigger.countries": "Kraje:",
   "collapse.trigger.currencies": "Waluty:",
@@ -208,6 +211,17 @@
   "table.label.actions": "Akcje",
   "register.or": "ALBO",
   "loginform.header": "Zaloguj się",
-  "registerform.header": "Zarejestruj się"
+  "registerform.header": "Zarejestruj się",
+  "recoverPasswordform.header": "Odzyskaj swoje hasło",
+  "recoverPasswordform.subheader": "Wprowadź swój adres email a prześlemy Ci dalsze instrukcje w jaki sposób możesz zresetować swoje hasło.",
+  "label.recoverPassword.email": "Email:",
+  "button.login-back": "Powrót Do Logowania",
+  "button.remindPassword": "Odzyskaj Hasło",
+  "resetPasswordform.header": "Zresetuj swoje hasło",
+  "resetPasswordform.subheader": "Wprowadź nowe hasło.",
+  "label.resetPassword.email": "Email",
+  "label.resetPassword.password": "Hasło",
+  "label.resetPassword.password2": "Potwierdź hasło",
+  "button.resetPassword": "Zresetuj Hasło"
 
 }
