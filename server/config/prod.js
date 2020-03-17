@@ -16,7 +16,7 @@ module.exports = {
     token_uri: process.env.TOKEN_URI,
     auth_provider_x509_cert_url: process.env.AUTH_PROVIDER,
     client_x509_cert_url: process.env.CLIENT_CERT_URL,
-    sendgridApiKey: process.env.SENDGRID_API_KEY,
-    sendgridFromMail: process.env.SENDGRID_FROM_MAIL
-  }
+  },
+  sendgridApiKey: process.env.SENDGRID_API_KEY,
+  sendgridFromMail: process.env.SENDGRID_FROM_MAIL
 };
