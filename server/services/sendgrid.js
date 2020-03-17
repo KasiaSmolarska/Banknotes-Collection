@@ -42,10 +42,8 @@ exports.recover = (req, res) => {
           };
           sgMail.send(mailOptions, (error, result) => {
             if (error) {
-              console.log("eerr", error);
               return res.status(500).json({ message: error.message });
             }
-            console.log("A reset email has been sent to " + user.email + ".");
             res.status(200).json({ message: "A reset email has been sent to " + user.email + "." });
           });
         })

@@ -222,5 +222,7 @@
   "label.resetPassword.email": "Email",
   "label.resetPassword.password": "Password",
   "label.resetPassword.password2": "Confirm Password",
-  "button.resetPassword": "Reset Password"
+  "button.resetPassword": "Reset Password",
+  "action.remindPassword.danger": "The email address is not associated with any account. Double-check your email address and try again."
+
 }

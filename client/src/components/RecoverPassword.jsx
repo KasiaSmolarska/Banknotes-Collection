@@ -15,12 +15,14 @@ class RecoverPassword extends React.Component {
         className="form form--login"
         onSubmit={e => {
           const callback = this.props.handleSubmit(values => {
-            this.props.remindPassword(values);
-          });
+            this.props.remindPassword(values).then(status => {
+              if (status === "success") {
+                this.props.reset();
+              }
+            });
+          })
           callback(e);
-          this.props.reset();
         }}>
-          {console.log(this.props)}
         <h1 className="auth__heading">
           <Translate name="recoverPasswordform.header" />
         </h1>

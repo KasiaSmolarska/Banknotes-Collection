@@ -9,18 +9,19 @@ export const remindPassword = (values) => async (dispatch) => {
       lang
     }
     await axios.post("/auth/recover", valuesToSend);
-    dispatch(actions.setAlert({
+     dispatch(actions.setAlert({
       type: "success",
       msg: "action.remindPassword.success",
       duration: 8000
     }));
-
+    return "success";
   } catch (error) {
     console.log({error})
     dispatch(actions.setAlert({
       type: "danger",
-      msg: "action.loginUser.danger",
+      msg: "action.remindPassword.danger",
       duration: 8000
     }))
+    return "fail";
   }
 }

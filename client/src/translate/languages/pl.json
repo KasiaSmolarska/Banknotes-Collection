@@ -222,6 +222,6 @@
   "label.resetPassword.email": "Email",
   "label.resetPassword.password": "Hasło",
   "label.resetPassword.password2": "Potwierdź hasło",
-  "button.resetPassword": "Zresetuj Hasło"
-
+  "button.resetPassword": "Zresetuj Hasło",
+  "action.remindPassword.danger": "Wprowadzony email nie jest powiązany z żadnym kontem.\nUpewnij się czy podany email jest poprawny i spróbuj ponownie!"
 }
