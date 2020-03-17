@@ -16,6 +16,7 @@ import { Page404 } from "./404Page";
 import { Modal } from "./Modal";
 import { Spinner } from "./Spinner";
 import { ProfilePage } from "./ProfilePage";
+import ResetPasswordPage from "./ResetPasswordPage";
 
 const getBanknote = state => state.banknote;
 
@@ -49,6 +50,7 @@ const App = () => {
           <Switch>
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/" component={Landing} />
+            <Route path="/auth/reset/:passwordToken" component={ResetPasswordPage}/>
             <Route component={Content} />
           </Switch>
           {showedModalToEditBanknote && banknote && <EditForm initialValues={banknote} />}

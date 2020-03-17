@@ -394,6 +394,12 @@
 
     }
 
+    &__recover{
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 2rem;
+    }
+
     &__or {
       font-size: 1.6rem;
       position: relative;

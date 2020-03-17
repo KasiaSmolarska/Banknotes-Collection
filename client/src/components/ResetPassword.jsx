@@ -8,59 +8,55 @@ import Input from "./form/Input";
 
 import { Field } from "redux-form";
 
-class LoginForm extends React.Component {
+class ResetPassword extends React.Component {
   render() {
     return (
       <form
         className="form form--login"
         onSubmit={e => {
           const callback = this.props.handleSubmit(values => {
-            this.props.loginUser(values);
-            // this.props.reset();
+            this.props.resetPassword(values, this.props.passwordToken, this.props.history);
           });
           callback(e);
         }}>
+        <h1 className="auth__heading">
+          <Translate name="resetPasswordform.header" />
+        </h1>
+        <div className="text">
+          <Translate name="resetPasswordform.subheader" />
+        </div>
         <Field component={Input} name="email" id="email" type="email" required />
         <Field component={Input} name="password" id="password" type="password" required />
-        <div className="form--login__recover">
-          <span className="btn btn--text form--login__recover-button" onClick={() => this.props.toggleRecoverMode()}>
-            <Translate name="button.recoverPassword" />
-          </span>
-        </div>
+        <Field component={Input} name="password2" id="password2" type="password" required />
+
         <div className="form--login__footer">
-          <span onClick={() => this.props.toggleRegisterState()} className="btn btn--primary--reverse btn--smaller">
-            <Translate name="button.register" />
-          </span>
           <button type="submit" className="modal__foter-submit btn btn--primary">
-            <Translate name="button.login" />
+            <Translate name="button.resetPassword" />
           </button>
-        </div>
-        <div className="form--login__or">
-          <Translate name="register.or" />
         </div>
       </form>
     );
   }
 }
 
-function mapStateToProps({ form: { loginForm } }) {
+function mapStateToProps({ form: { resetPassword } }) {
   return {
-    form: loginForm
+    form: resetPassword
   };
 }
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: values => dispatch(actions.loginUser(values))
+  resetPassword: (values, passwordToken, history) => dispatch(actions.resetPassword(values, passwordToken, history))
 });
 
-LoginForm = connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+ResetPassword = connect(mapStateToProps, mapDispatchToProps)(ResetPassword);
 
 export default reduxForm({
-  form: "loginForm",
+  form: "resetPassword",
   destroyOnUnmount: true,
   keepDirtyOnReinitialize: false
-})(LoginForm);
+})(ResetPassword);
 
-LoginForm.contextTypes = {
+ResetPassword.contextTypes = {
   translate: PropTypes.func
 };

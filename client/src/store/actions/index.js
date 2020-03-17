@@ -24,6 +24,9 @@ import filterBanknotes from "./filterBanknotes";
 import { resetFiltering } from "./filterBanknotes";
 import {loginUser} from "./loginUser";
 import {registerUser} from "./registerUser";
+import {remindPassword} from "./remindPassword";
+import {validatePasswordResetToken} from "./validatePasswordResetToken";
+import {resetPassword} from "./resetPassword";
 
 const actions = {
   fetchUser,
@@ -53,7 +56,10 @@ const actions = {
   filterBanknotes,
   resetFiltering,
   loginUser,
-  registerUser
+  registerUser,
+  remindPassword,
+  validatePasswordResetToken,
+  resetPassword
 };
 
 export default actions;
