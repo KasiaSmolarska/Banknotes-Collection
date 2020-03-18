@@ -33,7 +33,6 @@ const userSchema = new Schema({
 userSchema.methods.generatePasswordReset = function() {
   const uuid = uuidv1();
   this.resetPasswordToken = uuid;
-  console.log(uuid)
   this.resetPasswordExpires = Date.now() + 3600000; //expires in an hour
 };
 

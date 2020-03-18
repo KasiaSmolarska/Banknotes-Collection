@@ -22,7 +22,6 @@ export const registerUser = (values) => async dispatch => {
     await axios.post("/auth/register", values);
 
     const userData = await axios.post("/auth/login", { email: values.email, password: values.password})
-    console.log(userData)
     dispatch({
       type: FETCH_USER,
       payload: {user: userData.data.user}

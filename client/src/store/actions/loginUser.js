@@ -5,7 +5,6 @@ import actions from "./index";
 export const loginUser = (values) => async dispatch => {
   try {
     const userData = await axios.post("/auth/login", values);
-    console.log(userData)
     dispatch({
       type: FETCH_USER,
       payload: {user: userData.data.user}

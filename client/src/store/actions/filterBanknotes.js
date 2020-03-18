@@ -4,7 +4,6 @@ import actions from "./index";
 const filterBanknotes = query => dispatch => {
 
   const newQuery = Object.entries(query).reduce((filters, elem) => {
-    console.log(elem[1])
     if (typeof elem[1] === "object") {
       const properties = Object.keys(elem[1]).filter(value => elem[1][value]);
       if(properties.includes("min") || properties.includes("max")){

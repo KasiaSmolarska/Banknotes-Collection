@@ -10,7 +10,6 @@ export const changeImageInModal = (image, title) => async dispatch => {
         'Accept': 'image/jpg'
       }
     }).then(response => {
-      console.log(response);
       const blob = new Blob([response.data], {
         type: 'image/jpg',
       });

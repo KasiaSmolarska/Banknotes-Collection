@@ -6,8 +6,8 @@ const sgMail = require("@sendgrid/mail");
 const keys = require("../config/keys");
 sgMail.setApiKey(keys.sendgridApiKey);
 
-const {passwordRecover} = require("../emailTemplates/passwordRecover");
-const {emailResetSuccess} = require("../emailTemplates/emailResetSuccess");
+const { passwordRecover } = require("../emailTemplates/passwordRecover");
+const { emailResetSuccess } = require("../emailTemplates/emailResetSuccess");
 
 // ===PASSWORD RECOVER AND RESET
 
@@ -17,23 +17,25 @@ const {emailResetSuccess} = require("../emailTemplates/emailResetSuccess");
 exports.recover = (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
-      console.log("sendgridApiKey", keys.sendgridApiKey);
-      if (!user) return res.status(401).json({ message: "The email address " + req.body.email + " is not associated with any account. Double-check your email address and try again." });
-      console.log(user.resetPasswordExpires > Date.now(), user.resetPasswordExpires, Date.now() )
-      if(user.resetPasswordExpires > Date.now()){
-        return res.status(200).json({label: "tokenAlreadySent", message: "Token has been already sent, please check your spam folder."})
+      console.log(user)
+      if (!user) {
+        return res.status(401).json({ message: "The email address " + req.body.email + " is not associated with any account. Double-check your email address and try again." });
       }
+
+      if (user.resetPasswordExpires > new Date().toISOString()) {
+        return res.status(200).json({ label: "tokenAlreadySent", message: "Token has been already sent, please check your spam folder." });
+      }
+      
       //Generate and set password reset token
       user.generatePasswordReset();
 
-  
       // Save the updated user object
       user
         .save()
         .then(user => {
           // send email
           let link = "http://" + req.headers.host + "/auth/reset/" + user.resetPasswordToken;
-          const {lang} = req.body;
+          const { lang } = req.body;
           const recoverTemplate = passwordRecover(user.given_name, link);
           const mailOptions = {
             to: user.email,
@@ -67,7 +69,6 @@ exports.reset = (req, res) => {
       if (!user) return res.status(401).json({ message: "Password reset token is invalid or has expired." });
       //Redirect user to form with the email address
       res.json({ user });
-      
     })
     .catch(err => res.status(500).json({ message: err.message }));
 };
@@ -79,11 +80,11 @@ exports.resetPassword = (req, res) => {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }).then(user => {
     if (!user) return res.status(401).json({ message: "Password reset token is invalid or has expired." });
 
-    if(user.email !== req.body.email){
+    if (user.email !== req.body.email) {
       return res.status(409).json({ message: "Passed email is not correct!" });
     }
 
-    if(req.body.password2 !== req.body.password){
+    if (req.body.password2 !== req.body.password) {
       return res.status(422).json({ message: "The passwords you have entered do not match!" });
     }
 
@@ -96,7 +97,7 @@ exports.resetPassword = (req, res) => {
     user.save(err => {
       if (err) return res.status(500).json({ message: err.message });
       const resetTemplate = emailResetSuccess(user.given_name, user.email);
-      const {lang} = req.body;
+      const { lang } = req.body;
 
       // send email
       const mailOptions = {

@@ -53,7 +53,6 @@ const BanknotesPage = (props, context) => {
         setMenuFilterShow(false);
       }
     };
-    console.log("filershow")
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
   }, [menuFilterShow]);

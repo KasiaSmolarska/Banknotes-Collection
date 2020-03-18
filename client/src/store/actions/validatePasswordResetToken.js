@@ -4,7 +4,6 @@ import actions from "./index";
 export const validatePasswordResetToken = (passwordToken, history) => async dispatch => {
   try {
     const resetTokenIsValid = await axios.get(`/api/auth/reset/${passwordToken}`);
-    console.log(resetTokenIsValid.data);
   } catch (error) {
     console.log({ error });
     history.push("/login");
