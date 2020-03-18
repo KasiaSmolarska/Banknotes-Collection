@@ -31,7 +31,7 @@ class RecoverPassword extends React.Component {
         </div>
         <Field component={Input} name="email" id="email" type="email" required />
 
-        <div className="form--login__footer">
+        <div className="form--login__footer form--login__footer-recovery">
           <span onClick={() => this.props.toggleRecoverMode()} className="btn btn--primary--reverse btn--smaller">
             <Translate name="button.login-back" />
           </span>

@@ -23,6 +23,7 @@
   "action.resetPassword.success": "Password for your account has just been changed.",
   "action.remindPassword.success": "A password change link has been sent to your email!",
   "button.recoverPassword": "Forgot Password?",
+  "action.remindPassword.tokenAlreadySent.success": "You have sent a password reset request within the last hour. If the message has not arrived, check the spam folder.",
   "button.addNewBanknote": "Add new banknote",
   "button.closeModal": "Close Window",
   "button.reset": "Reset",

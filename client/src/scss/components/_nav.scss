@@ -3,6 +3,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include respond(phone){
+    padding: 1.5rem 4rem 2.5rem;
+  }
   &__container {
     justify-content: flex-start;
     display: flex;
