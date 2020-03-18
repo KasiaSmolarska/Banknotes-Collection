@@ -17,15 +17,14 @@ const { emailResetSuccess } = require("../emailTemplates/emailResetSuccess");
 exports.recover = (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
-      console.log(user)
       if (!user) {
         return res.status(401).json({ message: "The email address " + req.body.email + " is not associated with any account. Double-check your email address and try again." });
       }
-
-      if (user.resetPasswordExpires > new Date().toISOString()) {
+      
+      if (user.resetPasswordExpires > new Date(Date.now())) {
         return res.status(200).json({ label: "tokenAlreadySent", message: "Token has been already sent, please check your spam folder." });
       }
-      
+
       //Generate and set password reset token
       user.generatePasswordReset();
 
