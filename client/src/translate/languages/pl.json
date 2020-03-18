@@ -160,6 +160,8 @@
   "label.editForm.own": "Posiadany",
   "label.filtersForm.value": "Wartości banknotów:",
   "label.filtersForm.issueYear": "Lata wydania:",
+  "label.filtersForm.type": "Typ:",
+  "label.filtersForm.own": "Posiadany:",
   "label.loginForm.email": "Email:",
   "label.loginForm.password": "Hasło:",
   "label.registerForm.givenName": "Imię:",

@@ -15,6 +15,7 @@ export const Search = (props, context) => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(actions.searchBanknotes(query));
+    props.setMenuFilterShow(false);
   };
 
   return (

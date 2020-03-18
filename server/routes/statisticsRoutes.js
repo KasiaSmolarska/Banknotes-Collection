@@ -18,9 +18,9 @@ module.exports = app => {
 
       const values = Banknote.aggregate([{ $match: { _user: req.user._id, value: { $ne: null } } }, { $group: { _id: "$value" } }, { $sort: { _id: -1 } }]);
 
-      const own = Banknote.aggregate([{ $match: { _user: req.user._id, own: { $ne: null } } }, { $group: { _id: "$own" } }]);
+      const own = Banknote.aggregate([{ $match: { _user: req.user._id, own: { $ne: null } } }, { $group: { _id: "$own" , total: { $sum: 1 }} }]);
 
-      const types = Banknote.aggregate([{ $match: { _user: req.user._id, type: { $ne: null } } }, { $group: { _id: "$type" } }]);
+      const types = Banknote.aggregate([{ $match: { _user: req.user._id, type: { $ne: null } } }, { $group: { _id: "$type" , total: { $sum: 1 }} }]);
 
       const dateCreated = Banknote.aggregate([
         {

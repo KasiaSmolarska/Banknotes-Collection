@@ -224,9 +224,15 @@ module.exports = app => {
         queryFiltersArray.push({ value: { $gte: filters.value.min, $lte: filters.value.max } });
       }
 
-      if (filters.value && typeof filters.value === "object") {
-        queryFiltersArray.push({ value: { $gte: filters.value.min, $lte: filters.value.max } });
+      if (filters.type && typeof filters.type === "string") {
+        queryFiltersArray.push({ type: filters.type });
       }
+
+
+      if (filters.own && typeof filters.own === "string") {
+        queryFiltersArray.push({ own: filters.own });
+      }
+
 
       if (filters.issueYear && typeof filters.issueYear === "object") {
         queryFiltersArray.push({ issueYear: { $gte: filters.issueYear.min, $lte: filters.issueYear.max } });

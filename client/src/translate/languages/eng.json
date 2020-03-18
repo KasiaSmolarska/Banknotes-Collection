@@ -160,6 +160,8 @@
   "label.editForm.own": "Own",
   "label.filtersForm.value": "Banknotes values:",
   "label.filtersForm.issueYear": "Issue years:",
+  "label.filtersForm.type": "Type:",
+  "label.filtersForm.own": "Own:",
   "label.loginForm.email": "Email:",
   "label.loginForm.password": "Password:",
   "label.registerForm.givenName": "Name:",

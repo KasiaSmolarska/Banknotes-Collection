@@ -8,6 +8,8 @@ import Translate from "../translate/Translate";
 import { Icon } from "./Icon";
 import actions from "../store/actions";
 import Filters from "./Filters";
+import { reset } from "redux-form";
+
 
 import BanknotesTable from "./BanknotesTable";
 import { BanknotesList } from "./BanknotesList";
@@ -16,6 +18,7 @@ import { useMedia } from "./hooks/useMedia";
 import { RESET_FILTERING } from "../store/actions/types";
 
 const getBanknote = state => state.banknote;
+const getForm = state => state.form;
 
 const sortingRows = ["title", "country", "value", "currency", "issueYear", "dateCreated"];
 
@@ -40,11 +43,13 @@ const BanknotesPage = (props, context) => {
 
   const { loading, banknotesList, sortBy, sortDirection, limit, numberOfProduct, skip, filters, searchParams } = useSelector(getBanknote);
 
+  const { filtersForm } = useSelector(getForm);
   const handleReset = () => {
     dispatch({
       type: RESET_FILTERING
     });
     dispatch(actions.resetSearching());
+    dispatch(reset("filtersForm"));
   };
 
   React.useEffect(() => {
@@ -94,8 +99,8 @@ const BanknotesPage = (props, context) => {
               </div>
 
               <div className={`banknotesListPage__menu-filter ${menuFilterShow ? "banknotesListPage__menu-filter--visible" : ""}`}>
-                <Search />
-                <Filters menuFilterShow={menuFilterShow} />
+                <Search setMenuFilterShow={setMenuFilterShow} />
+                <Filters menuFilterShow={menuFilterShow} setMenuFilterShow={setMenuFilterShow}/>
                 <div className="form__control">
                   <select ref={selectLimit} className="form__select form__select--mini" value={limit} onChange={() => setLimit(selectLimit.current.value)}>
                     <option value="8">8</option>
@@ -126,14 +131,13 @@ const BanknotesPage = (props, context) => {
                 </div>
               </div>
             ) : null}
-            {(searchParams.length ||
-              (Object.keys(filters).length) ? (
-                <div className="banknotesListPage__buttons-reset">
-                  <span title={context.translate("button.reset.filters")} onClick={handleReset} className="btn  btn--danger btn--smaller">
-                    <Icon icon="CancelIcon" width="12" height="12" fill="#dc3545" /> {context.translate("button.reset")}
-                  </span>
-                </div>
-              ) : null)}
+            {searchParams.length || Object.keys(filters).length ? (
+              <div className="banknotesListPage__buttons-reset">
+                <span title={context.translate("button.reset.filters")} onClick={handleReset} className="btn  btn--danger btn--smaller">
+                  <Icon icon="CancelIcon" width="12" height="12" fill="#dc3545" /> {context.translate("button.reset")}
+                </span>
+              </div>
+            ) : null}
           </div>
           <div>
             <div className="banknotesListPage__pagination">

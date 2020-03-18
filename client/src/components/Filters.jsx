@@ -23,6 +23,11 @@ const checkIfStatisticsAreFilled = stats => {
 };
 
 class Filters extends React.Component {
+  componentDidUpdate() {
+    if (!(this.props.form && this.props.form.values && Object.keys(this.props.form.values).length)) {
+      this.props.filterBanknotes({});
+    }
+  }
 
   render() {
     const { banknote } = this.props.statistics;
@@ -38,7 +43,7 @@ class Filters extends React.Component {
           onSubmit={e => {
             const callback = this.props.handleSubmit(values => {
               this.props.filterBanknotes(values);
-              // this.props.reset();
+              this.props.setMenuFilterShow(false);
             });
             callback(e);
           }}>
@@ -53,13 +58,29 @@ class Filters extends React.Component {
             </div>
           )}
 
-            {types && types.length > 1 && (<div className="form--filters__container">
-              <Field abs={this.props.menuFilterShow} component={Select} name="type" id="type" data={types.reduce((obj, type) => {obj.enum.push(type._id); return obj;}, {enum: []})} />
-            </div>)}
+          {types && types.length > 1 && (
+            <div className="form--filters__container">
+              <Field
+                abs={this.props.menuFilterShow}
+                component={Select}
+                name="type"
+                id="type"
+                data={types.reduce(
+                  (obj, type) => {
+                    obj.enum.push(type._id);
+                    return obj;
+                  },
+                  { enum: [] }
+                )}
+              />
+            </div>
+          )}
 
-            {own && own.length > 1 && (<div className="form--filters__container">
+          {own && own.length > 1 && (
+            <div className="form--filters__container">
               <Field abs={this.props.menuFilterShow} component={Select} name="own" id="own" data={own.map(own => own._id)} />
-            </div>)}
+            </div>
+          )}
 
           {countries && countries.length > 1 && <Checkboxes name="country" trigger="countries" data={countries.map(country => country._id).sort()} shortcut={true} />}
 
@@ -79,7 +100,7 @@ class Filters extends React.Component {
             <button type="submit" disabled={!(this.props.form && this.props.form.values && Object.keys(this.props.form.values).length)} className="modal__foter-submit btn btn--blue">
               <Translate name="button.submit" />
             </button>
-            </div>
+          </div>
         </form>
       </div>
     );
