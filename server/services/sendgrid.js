@@ -19,9 +19,14 @@ exports.recover = (req, res) => {
     .then(user => {
       console.log("sendgridApiKey", keys.sendgridApiKey);
       if (!user) return res.status(401).json({ message: "The email address " + req.body.email + " is not associated with any account. Double-check your email address and try again." });
+      console.log(user.resetPasswordExpires > Date.now(), user.resetPasswordExpires, Date.now() )
+      if(user.resetPasswordExpires > Date.now()){
+        return res.status(200).json({label: "tokenAlreadySent", message: "Token has been already sent, please check your spam folder."})
+      }
       //Generate and set password reset token
       user.generatePasswordReset();
 
+  
       // Save the updated user object
       user
         .save()
@@ -45,7 +50,7 @@ exports.recover = (req, res) => {
             if (error) {
               return res.status(500).json({ message: error.message });
             }
-            res.status(200).json({ message: "A reset email has been sent to " + user.email + "." });
+            res.status(200).json({ label: "emailSent", message: "A reset email has been sent to " + user.email + "." });
           });
         })
         .catch(err => res.status(500).json({ message: err.message }));
