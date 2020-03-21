@@ -27,6 +27,7 @@ import {registerUser} from "./registerUser";
 import {remindPassword} from "./remindPassword";
 import {validatePasswordResetToken} from "./validatePasswordResetToken";
 import {resetPassword} from "./resetPassword";
+import {confirmAccount} from "./confirmAccount";
 
 const actions = {
   fetchUser,
@@ -59,7 +60,8 @@ const actions = {
   registerUser,
   remindPassword,
   validatePasswordResetToken,
-  resetPassword
+  resetPassword,
+  confirmAccount
 };
 
 export default actions;

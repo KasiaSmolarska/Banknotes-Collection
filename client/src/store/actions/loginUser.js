@@ -11,6 +11,13 @@ export const loginUser = (values) => async dispatch => {
     })
   } catch (error) {
     console.log({error})
+    if (error.response.status === 409) {
+      return dispatch(actions.setAlert({
+        type: "info",
+        msg: "action.loginUser.info",
+        duration: 8000
+      }))
+    }
     dispatch(actions.setAlert({
       type: "danger",
       msg: "action.loginUser.danger",

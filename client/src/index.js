@@ -26,6 +26,8 @@ if (window.__REDUX_DEVTOOLS_EXTENSION__) {
 
 const store = createStore(reducers, {}, compose(...middlewares));
 
+console.log(window.location.hash)
+
 ReactDOM.render(
   <TranslateProvider>
     <Provider store={store}>

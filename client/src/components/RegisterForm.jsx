@@ -16,6 +16,7 @@ class RegisterForm extends React.Component {
         onSubmit={e => {
           const callback = this.props.handleSubmit(values => {
             this.props.registerUser(values);
+            this.props.reset();
           });
           callback(e);
         }}>

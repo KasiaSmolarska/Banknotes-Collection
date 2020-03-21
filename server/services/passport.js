@@ -79,7 +79,8 @@ passport.use(
         familyName: profile.name.familyName || "",
         given_name: profile.name.givenName || "",
         picture: profile.photos[0].value,
-        email: profile.emails[0].value
+        email: profile.emails[0].value,
+        confirmed: true
       }).save((err, user) => {
         if (err) {
           console.log(err);

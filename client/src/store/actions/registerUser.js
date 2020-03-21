@@ -20,19 +20,21 @@ export const registerUser = (values) => async dispatch => {
       }))
     }
     await axios.post("/auth/register", values);
+    dispatch(actions.confirmAccount(values.email));
 
-    const userData = await axios.post("/auth/login", { email: values.email, password: values.password})
-    dispatch({
-      type: FETCH_USER,
-      payload: {user: userData.data.user}
-    })
     dispatch(actions.setAlert({
       type: "success",
-      msg: "action.registerUser.success",
+      msg: "action.registerUser.info",
       duration: 5000
     }))
   } catch (error) {
-    console.log(error)
+    if (error.response.status === 422) {
+      return dispatch(actions.setAlert({
+        type: "danger",
+        msg: "action.registerUser.email.danger",
+        duration: 8000
+      }))
+    }
     dispatch(actions.setAlert({
       type: "danger",
       msg: "action.registerUser.danger",

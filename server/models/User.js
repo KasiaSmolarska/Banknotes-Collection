@@ -23,12 +23,30 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
-
   resetPasswordExpires: {
+    type: Date,
+    required: false
+  },
+  confirmed: {
+    default: false,
+    type: Boolean,
+    required: true
+  },
+  confirmAccountToken: {
+    type: String,
+    required: false
+  },
+  confirmAccountExpires: {
     type: Date,
     required: false
   }
 });
+
+userSchema.methods.generateAccountConfirm = function() {
+  const uuid = uuidv1();
+  this.confirmAccountToken = uuid;
+  this.confirmAccountExpires = Date.now() + 86400000; //expires in a day
+};
 
 userSchema.methods.generatePasswordReset = function() {
   const uuid = uuidv1();

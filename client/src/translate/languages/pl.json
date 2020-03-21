@@ -23,6 +23,8 @@
   "action.resetPassword.success": "Hasło zostało zmienione!",
   "action.remindPassword.success": "Link do zmiany hasła został wysłany na Twój email!",
   "action.remindPassword.tokenAlreadySent.success": "Wysłałeś już żądanie o zresetowanie hasła w ciągu ostatniej godziny. Jeśli wiadomość nie dotarła sprawdź folder spam.",
+  "action.loginUser.info": "Twoje konto nie jest jeszcze aktywne. Kliknij w link przesłany w mailu aby aktywować swoje konto.",
+  "action.registerUser.email.danger": "Użytkownik o podanym adresie email jest już zarejestrowany w naszym serwisie!",
   "button.addNewBanknote": "Dodaj banknot",
   "button.closeModal": "Zamknij okno",
   "button.reset": "Zresetuj",

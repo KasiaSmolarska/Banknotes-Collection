@@ -8,6 +8,88 @@ sgMail.setApiKey(keys.sendgridApiKey);
 
 const { passwordRecover } = require("../emailTemplates/passwordRecover");
 const { emailResetSuccess } = require("../emailTemplates/emailResetSuccess");
+const { confirmYourAccount } = require("../emailTemplates/confirmYourAccount");
+
+// ===CONFIRM ACCOUT AFTER REGISTRATION
+
+// @route POST api/auth/confirm
+// @desc Confirm Email Address - Generates token and Sends password confirmation email
+// @access Public
+
+exports.confirmPassword = (req, res) => {
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (user.confirmAccountExpires > new Date(Date.now())) {
+        return res.status(200).json({ label: "tokenAlreadySent", message: "Token has been already sent, please check your spam folder if you didn't get it." });
+      }
+
+      if (user.confirmed) {
+        return res.status(200).json({ label: "accountConfirmed", message: "Account has been already confirmed!" });
+      }
+
+      //Generate and set confirmation token
+      user.generateAccountConfirm();
+
+      // Save the updated user object
+      user
+        .save()
+        .then(user => {
+          // send email
+          let link = "http://" + req.headers.host + "/api/auth/confirm/" + user.confirmAccountToken;
+          const { lang } = req.body;
+          const confirmTemplate = confirmYourAccount(user.given_name, link);
+          const mailOptions = {
+            to: user.email,
+            from: keys.sendgridFromMail,
+            subject: confirmTemplate.subject[lang],
+            content: [
+              {
+                type: "text/html",
+                value: confirmTemplate.text[lang]
+              }
+            ]
+          };
+          sgMail.send(mailOptions, (error, result) => {
+            if (error) {
+              return res.status(500).json({ message: error.message });
+            }
+            res.status(200).json({ label: "emailSent", message: "A confirmation email has been sent to " + user.email + "." });
+          });
+        })
+        .catch(err => res.status(500).json({ message: err.message }));
+    })
+    .catch(err => res.status(500).json({ message: err.message }));
+  };
+
+  // @route GET api/auth/confirm
+  // @desc Confirm Email Address - checking if the token is valid and accept or reject confrmation
+  // @access Public
+  exports.confirmAccountToken = (req, res) => {
+    User.findOne({ confirmAccountToken: req.params.token, confirmAccountExpires: { $gt: Date.now() } })
+      .then(user => {
+        if (!user) {
+          return res.status(401).json({ message: "Account confirm token is invalid or has expired." });
+        }
+
+        if (user.confirmed) {
+          return res.status(200).json({ label: "accountConfirmed", message: "Account has been already confirmed!" });
+        }
+
+        user.confirmAccountToken = undefined;
+        user.confirmAccountExpires = undefined;
+        user.confirmed = true;
+
+        // Save
+        user.save(err => {
+          if (err) {
+            return res.status(500).json({ message: err.message });
+          }
+
+          res.status(200).redirect("/confirm");
+        });
+      })
+      .catch(err => res.status(500).json({ message: err.message }));
+  };
 
 // ===PASSWORD RECOVER AND RESET
 
@@ -20,7 +102,7 @@ exports.recover = (req, res) => {
       if (!user) {
         return res.status(401).json({ message: "The email address " + req.body.email + " is not associated with any account. Double-check your email address and try again." });
       }
-      
+
       if (user.resetPasswordExpires > new Date(Date.now())) {
         return res.status(200).json({ label: "tokenAlreadySent", message: "Token has been already sent, please check your spam folder." });
       }

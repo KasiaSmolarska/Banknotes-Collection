@@ -1,8 +1,8 @@
 const passport = require("passport");
 const mongoose = require("mongoose");
 const md5 = require("md5");
-const {check} = require('express-validator');
-const Password = require("../services/sendgrid");
+const { check } = require("express-validator");
+const Sendgrid = require("../services/sendgrid");
 
 const User = mongoose.model("users");
 
@@ -15,6 +15,11 @@ module.exports = app => {
       if (!user) {
         return res.status(401).send({ success: false, message: "authentication failed" });
       }
+
+      if(!user.confirmed){
+        return res.status(409).send({ success: false, message: "user email is not confirmed" });
+      }
+
       req.login(user, loginErr => {
         if (loginErr) {
           return next(loginErr);
@@ -26,7 +31,6 @@ module.exports = app => {
 
   app.post("/auth/register", async (req, res) => {
     try {
-      console.log(req.body);
       if (!req.body.email || !req.body.password) {
         return res.status(409).json({
           msg: "Not all of the required field is filled!"
@@ -59,7 +63,6 @@ module.exports = app => {
         } else {
           const dataToSend = { ...data._doc };
           delete dataToSend.password;
-          console.log(dataToSend);
           res.send({ user: dataToSend });
         }
       });
@@ -82,6 +85,20 @@ module.exports = app => {
 
   app.get("/auth/facebook", passport.authenticate("facebook"));
 
+  //CONFIRM account
+  app.post(
+    "/api/auth/confirm",
+    Sendgrid.confirmPassword,
+    function(req, res) {
+      console.log(req.body);
+    }
+  );
+
+  app.get(
+    "/api/auth/confirm/:token",
+    Sendgrid.confirmAccountToken
+  );
+
   //Password RESET
   app.post(
     "/auth/recover",
@@ -90,12 +107,13 @@ module.exports = app => {
         .isEmail()
         .withMessage("Enter a valid email address")
     ],
-    Password.recover, function(req, res){
-      console.log(req.body)
+    Sendgrid.recover,
+    function(req, res) {
+      console.log(req.body);
     }
   );
 
-  app.get("/api/auth/reset/:token", Password.reset);
+  app.get("/api/auth/reset/:token", Sendgrid.reset);
 
   app.post(
     "/api/auth/reset/:token",
@@ -107,7 +125,7 @@ module.exports = app => {
         .withMessage("Must be at least 6 chars long"),
       check("password2", "Passwords do not match").custom((value, { req }) => value === req.body.password)
     ],
-    Password.resetPassword
+    Sendgrid.resetPassword
   );
 
   app.get("/auth/facebook/callback", passport.authenticate("facebook", { failureRedirect: "/login" }), function(req, res) {
