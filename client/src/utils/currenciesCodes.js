@@ -1,6 +1,6 @@
 import { currentLang } from "./languages";
 
-const isoCurriencies = {
+export const isoCurriencies = {
   eng: {
     USD: {
       name: "US Dollar"

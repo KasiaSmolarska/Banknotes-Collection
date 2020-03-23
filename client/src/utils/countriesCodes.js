@@ -1,5 +1,5 @@
 import { currentLang } from "./languages";
-const isoCountries = {
+export const isoCountries = {
   pl: {
     AF: "Afganistan",
     AX: "Wyspy Alandzkie",
