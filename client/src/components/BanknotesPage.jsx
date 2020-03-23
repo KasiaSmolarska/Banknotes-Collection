@@ -10,7 +10,6 @@ import actions from "../store/actions";
 import Filters from "./Filters";
 import { reset } from "redux-form";
 
-
 import BanknotesTable from "./BanknotesTable";
 import { BanknotesList } from "./BanknotesList";
 
@@ -24,11 +23,16 @@ const sortingRows = ["title", "country", "value", "currency", "issueYear", "date
 
 const BanknotesPage = (props, context) => {
   const dispatch = useDispatch();
+  const { loading, banknotesList, sortBy, sortDirection, limit, numberOfProduct, skip, filters, searchParams, model } = useSelector(getBanknote);
 
   React.useEffect(() => {
     new Promise((resolve, reject) => {
       resolve(dispatch(actions.fetchBanknotes()));
-    }).then(() => dispatch(actions.fetchBanknoteModel()));
+    }).then(() => {
+      if (model === null) {
+        return dispatch(actions.fetchBanknoteModel());
+      }
+    });
   }, [dispatch]);
 
   const media = useMedia();
@@ -40,8 +44,6 @@ const BanknotesPage = (props, context) => {
 
   const [menuFilterShow, setMenuFilterShow] = useState(false);
   const [menuSortShow, setMenuSortShow] = useState(false);
-
-  const { loading, banknotesList, sortBy, sortDirection, limit, numberOfProduct, skip, filters, searchParams } = useSelector(getBanknote);
 
   const { filtersForm } = useSelector(getForm);
   const handleReset = () => {
@@ -100,7 +102,7 @@ const BanknotesPage = (props, context) => {
 
               <div className={`banknotesListPage__menu-filter ${menuFilterShow ? "banknotesListPage__menu-filter--visible" : ""}`}>
                 <Search setMenuFilterShow={setMenuFilterShow} />
-                <Filters menuFilterShow={menuFilterShow} setMenuFilterShow={setMenuFilterShow}/>
+                <Filters menuFilterShow={menuFilterShow} setMenuFilterShow={setMenuFilterShow} />
                 <div className="form__control">
                   <select ref={selectLimit} className="form__select form__select--mini" value={limit} onChange={() => setLimit(selectLimit.current.value)}>
                     <option value="8">8</option>

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import actions from "../../store/actions";
-import { Link } from "react-router-dom";
 import { Spinner } from "../Spinner";
 import { BanknoteActions } from "./BanknoteActions";
 import { Slider } from "../Slider";
@@ -39,11 +38,18 @@ export const BanknotePreview = ({ match, history }, context) => {
   const { banknoteId } = match.params;
   const dispatch = useDispatch();
 
-  const { banknote, loading } = useSelector(getBanknote);
+  const { banknote, loading, model } = useSelector(getBanknote);
 
   useEffect(() => {
     dispatch(actions.clearBanknoteData());
     dispatch(actions.fetchBanknoteById(banknoteId, history));
+  }, []);
+
+
+  useEffect(() => {
+    if(model === null){
+      dispatch(actions.fetchBanknoteModel())
+    }
   }, []);
 
   return (
