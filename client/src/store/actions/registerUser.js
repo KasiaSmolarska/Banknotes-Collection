@@ -23,7 +23,7 @@ export const registerUser = (values) => async dispatch => {
     dispatch(actions.confirmAccount(values.email));
 
     dispatch(actions.setAlert({
-      type: "success",
+      type: "info",
       msg: "action.registerUser.info",
       duration: 5000
     }))

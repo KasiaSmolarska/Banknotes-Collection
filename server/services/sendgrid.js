@@ -67,6 +67,7 @@ exports.confirmPassword = (req, res) => {
   exports.confirmAccountToken = (req, res) => {
     User.findOne({ confirmAccountToken: req.params.token, confirmAccountExpires: { $gt: Date.now() } })
       .then(user => {
+        console.log(req.params.token)
         if (!user) {
           return res.status(401).json({ message: "Account confirm token is invalid or has expired." });
         }
@@ -85,7 +86,7 @@ exports.confirmPassword = (req, res) => {
             return res.status(500).json({ message: err.message });
           }
 
-          res.status(200).redirect("/confirm");
+          res.status(200).redirect("/dashboard#account-confirmed");
         });
       })
       .catch(err => res.status(500).json({ message: err.message }));
@@ -97,7 +98,7 @@ exports.confirmPassword = (req, res) => {
 // @desc Recover Password - Generates token and Sends password reset email
 // @access Public
 exports.recover = (req, res) => {
-  User.findOne({ email: req.body.email })
+  User.findOne({ email: req.body.email, googleId: null, facebookId: null})
     .then(user => {
       if (!user) {
         return res.status(401).json({ message: "The email address " + req.body.email + " is not associated with any account. Double-check your email address and try again." });

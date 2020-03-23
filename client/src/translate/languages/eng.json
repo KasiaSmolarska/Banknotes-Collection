@@ -26,6 +26,8 @@
   "action.remindPassword.tokenAlreadySent.success": "You have sent a password reset request within the last hour. If the message has not arrived, check the spam folder.",
   "action.registerUser.email.danger": "That email address has been already registered in our service!",
   "action.loginUser.info": "Your account has not been activated yet. Please click on the confirmation link we email you to confirm your account.",
+  "action.registerUser.info": "A confirmation email has been sent to your email address. Please confirm your email now.",
+  "action.confirmAccount.success": "Congratulations! Your account is confirmed now! Log in to continue.",
   "button.addNewBanknote": "Add new banknote",
   "button.closeModal": "Close Window",
   "button.reset": "Reset",

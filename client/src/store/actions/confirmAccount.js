@@ -1,7 +1,7 @@
 import axios from "axios";
 import actions from "./index";
 
-export const confirmAccount = (email) => async dispatch => {
+export const confirmAccount = email => async dispatch => {
   try {
     const lang = localStorage.getItem("language") || "pl";
     const valuesToSend = {
@@ -17,17 +17,7 @@ export const confirmAccount = (email) => async dispatch => {
           duration: 8000
         })
       );
-    } 
-    else if (res.data.label === "accountConfirmed") {
-      dispatch(
-        actions.setAlert({
-          type: "info",
-          msg: "action.confirmAccount.accountConfirmed.info",
-          duration: 8000
-        })
-      );
-    } 
-    else {
+    } else if (res.data.label === "accountConfirmed") {
       dispatch(
         actions.setAlert({
           type: "success",
@@ -44,7 +34,7 @@ export const confirmAccount = (email) => async dispatch => {
       actions.setAlert({
         type: "danger",
         msg: "action.confirmAccount.danger",
-        duration: 8000
+        duration: 12000
       })
     );
     return "fail";

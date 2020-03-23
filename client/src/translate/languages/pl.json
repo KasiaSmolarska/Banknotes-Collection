@@ -25,6 +25,8 @@
   "action.remindPassword.tokenAlreadySent.success": "Wysłałeś już żądanie o zresetowanie hasła w ciągu ostatniej godziny. Jeśli wiadomość nie dotarła sprawdź folder spam.",
   "action.loginUser.info": "Twoje konto nie jest jeszcze aktywne. Kliknij w link przesłany w mailu aby aktywować swoje konto.",
   "action.registerUser.email.danger": "Użytkownik o podanym adresie email jest już zarejestrowany w naszym serwisie!",
+  "action.registerUser.info": "Email potwierdzający został wysłany na adres mailowy podany przy rejestracji.",
+  "action.confirmAccount.success": "Gratulacje! Twoje konto zostało potwierdzone! Zaloguj się aby kontunuować.",
   "button.addNewBanknote": "Dodaj banknot",
   "button.closeModal": "Zamknij okno",
   "button.reset": "Zresetuj",

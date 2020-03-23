@@ -5,6 +5,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
 import TranslateProvider from "./translate/TranslateProvider";
 import { Alert } from "./components/Alert";
+import actions from "./store/actions";
 
 import reducers from "./store";
 import "../node_modules/react-virtualized/styles.css";
@@ -26,7 +27,16 @@ if (window.__REDUX_DEVTOOLS_EXTENSION__) {
 
 const store = createStore(reducers, {}, compose(...middlewares));
 
-console.log(window.location.hash)
+if (window.location.hash === "#account-confirmed") {
+  store.dispatch(
+    actions.setAlert({
+      type: "success",
+      msg: "action.confirmAccount.success",
+      duration: 10000
+    })
+  );
+}
+console.log(window.location.hash);
 
 ReactDOM.render(
   <TranslateProvider>
