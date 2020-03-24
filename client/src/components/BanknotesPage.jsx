@@ -9,6 +9,7 @@ import { Icon } from "./Icon";
 import actions from "../store/actions";
 import Filters from "./Filters";
 import { reset } from "redux-form";
+import { Collapse } from "./collapse/Collapse";
 
 import BanknotesTable from "./BanknotesTable";
 import { BanknotesList } from "./BanknotesList";
@@ -17,7 +18,6 @@ import { useMedia } from "./hooks/useMedia";
 import { RESET_FILTERING } from "../store/actions/types";
 
 const getBanknote = state => state.banknote;
-const getForm = state => state.form;
 
 const sortingRows = ["title", "country", "value", "currency", "issueYear", "dateCreated"];
 
@@ -44,8 +44,6 @@ const BanknotesPage = (props, context) => {
 
   const [menuFilterShow, setMenuFilterShow] = useState(false);
   const [menuSortShow, setMenuSortShow] = useState(false);
-
-  const { filtersForm } = useSelector(getForm);
   const handleReset = () => {
     dispatch({
       type: RESET_FILTERING
@@ -101,16 +99,29 @@ const BanknotesPage = (props, context) => {
               </div>
 
               <div className={`banknotesListPage__menu-filter ${menuFilterShow ? "banknotesListPage__menu-filter--visible" : ""}`}>
-                <Search setMenuFilterShow={setMenuFilterShow} />
-                <Filters menuFilterShow={menuFilterShow} setMenuFilterShow={setMenuFilterShow} />
-                <div className="form__control">
-                  <select ref={selectLimit} className="form__select form__select--mini" value={limit} onChange={() => setLimit(selectLimit.current.value)}>
-                    <option value="8">8</option>
-                    <option value="16">16</option>
-                    <option value="24">24</option>
-                    <option value="48">48</option>
-                  </select>
-                </div>
+                <Collapse className="collapse__container--header" trigger="search">
+                  <Search setMenuFilterShow={setMenuFilterShow} />
+                </Collapse>
+                <Collapse className="collapse__container--header" trigger="filter">
+                  <Filters menuFilterShow={menuFilterShow} setMenuFilterShow={setMenuFilterShow} />
+                </Collapse>
+                <Collapse className="collapse__container--header" trigger="limit">
+                  <div className="form__control">
+                    <select
+                      ref={selectLimit}
+                      className="form__select form__select--mini"
+                      value={limit}
+                      onChange={() => {
+                        setLimit(selectLimit.current.value);
+                        setMenuFilterShow(false);
+                      }}>
+                      <option value="8">8</option>
+                      <option value="16">16</option>
+                      <option value="24">24</option>
+                      <option value="48">48</option>
+                    </select>
+                  </div>
+                </Collapse>
               </div>
             </div>
             {media !== "lg" ? (

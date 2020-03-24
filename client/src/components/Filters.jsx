@@ -98,7 +98,7 @@ class Filters extends React.Component {
 
           <div className="form--filters__footer">
             <button type="submit" disabled={!(this.props.form && this.props.form.values && Object.keys(this.props.form.values).length)} className="modal__foter-submit btn btn--blue">
-              <Translate name="button.submit" />
+              <Translate name="button.filterResults" />
             </button>
           </div>
         </form>

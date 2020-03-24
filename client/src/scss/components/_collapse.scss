@@ -4,6 +4,26 @@
     cursor: pointer;
     -webkit-transition: all 0.25s ease;
     transition: all 0.25s ease;
+
+    &--header{
+
+      & > .collapse__trigger{
+        color: $primary-color;
+        text-transform: uppercase;
+        font-weight: 500;
+        letter-spacing: .03em;
+
+        .collapse__icon{
+          svg{
+            width:24px!important;
+            height:24px!important;
+          }
+          path{
+            fill: $primary-color;
+          }
+        }
+      }
+    }
   }
 
   &__trigger {
