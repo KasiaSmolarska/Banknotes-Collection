@@ -424,30 +424,30 @@ module.exports = app => {
 
       const banknotes = await Banknote.find({ _user: req.user.id });
 
-      const images = ["imageFront", "imageReverse"];
-      images.forEach(image => {
-        if (typeof banknote[image] === "undefined") {
-          return;
-        }
+      // const images = ["imageFront", "imageReverse"];
+      // images.forEach(image => {
+      //   if (typeof banknote[image] === "undefined") {
+      //     return;
+      //   }
 
-        const isThereAnyBanknoteWithThisImage = banknotes.find(elem => banknote[image] === elem[image]);
-        if (isThereAnyBanknoteWithThisImage) {
-          console.log("Another banknote uses this photo. Photo was not removed");
-          return;
-        }
-        const filesToDelete = [bucket.file(banknote[image]), bucket.file(`thumb-${banknote[image]}`)];
+      //   const isThereAnyBanknoteWithThisImage = banknotes.find(elem => banknote[image] === elem[image]);
+      //   if (isThereAnyBanknoteWithThisImage) {
+      //     console.log("Another banknote uses this photo. Photo was not removed");
+      //     return;
+      //   }
+      //   const filesToDelete = [bucket.file(banknote[image]), bucket.file(`thumb-${banknote[image]}`)];
 
-        filesToDelete.forEach(file => {
-          file
-            .delete()
-            .then(() => {
-              console.log(`Successfully deleted photo: ${file.name}, userID : ${req.user._id}`);
-            })
-            .catch(err => {
-              console.log(`Failed to remove photo, error: ${err}`);
-            });
-        });
-      });
+      //   filesToDelete.forEach(file => {
+      //     file
+      //       .delete()
+      //       .then(() => {
+      //         console.log(`Successfully deleted photo: ${file.name}, userID : ${req.user._id}`);
+      //       })
+      //       .catch(err => {
+      //         console.log(`Failed to remove photo, error: ${err}`);
+      //       });
+      //   });
+      // });
 
       res.json({ msg: "Banknote removed" });
     } catch (err) {
