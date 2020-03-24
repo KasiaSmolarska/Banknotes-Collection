@@ -16,6 +16,7 @@ const CountriesInput = ({ input, meta: { touched, error, form }, data }, { trans
           if (value.match(searchedCountry)) {
             return true;
           }
+          return false;
         })
         .map(([key, value]) => ({
           code: key,

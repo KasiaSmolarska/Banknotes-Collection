@@ -1,5 +1,3 @@
-import React from "react";
-
 import AddBanknoteIcon from "./AddBanknoteIcon";
 import { AlarmIcon } from "./AlarmIcon";
 import { AlertIcon } from "./AlertIcon";

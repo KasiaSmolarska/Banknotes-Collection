@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import Translate from "../../translate/Translate";
 import FormGroup from "../form/FormGroup";
 import PropTypes from "prop-types";
 import { Modal } from "../Modal";
@@ -27,9 +26,8 @@ class BanknoteForm extends Component {
   }
 
   render() {
-    {
-      data = this.props.data;
-    }
+    data = this.props.data;
+
     return (
       <form className="form form--banknote" encType="multipart/form-data">
         <Modal

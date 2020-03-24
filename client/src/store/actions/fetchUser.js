@@ -1,5 +1,4 @@
 import { FETCH_USER } from "./types";
-import actions from "./index";
 
 const fetchUser = () => {
   return async dispatch => {

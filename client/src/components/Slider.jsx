@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 
-const Slide = ({ src }) => {
+const Slide = ({ src, index }) => {
   return (
     <div className="slider__image">
-      <img src={src} />
+      <img alt={"photo" + index} src={src} />
     </div>
   );
 };
@@ -43,7 +43,7 @@ export const Slider = ({ images }) => {
       </div>
       <div className="slider__container" ref={container} onScroll={handleScroll}>
         {slides.map((slide, index) => {
-          return <Slide key={slide + index} src={slide} />;
+          return <Slide key={slide + index} src={slide} index={index} />;
         })}
       </div>
     </div>

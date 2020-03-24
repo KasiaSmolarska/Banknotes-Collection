@@ -19,8 +19,9 @@ const filterBanknotes = query => dispatch => {
 
   Object.entries(newQuery).map(queryPart => {
     if(Array.isArray(queryPart[1]) && !queryPart[1].length){
-      delete newQuery[queryPart[0]];
+      return delete newQuery[queryPart[0]];
     }
+    return false;
   })
 
   dispatch({

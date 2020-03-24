@@ -2,7 +2,7 @@ import React from "react";
 import Translate from "../../translate/Translate";
 import PropTypes from "prop-types";
 import { currentLang } from "../../utils/languages";
-import { isoCurriencies, getCurrencyName } from "../../utils/currenciesCodes";
+import { isoCurriencies } from "../../utils/currenciesCodes";
 
 const CurrencyInput = ({ input, meta: { touched, error, form }, data }, { translate }) => {
   const [foundedCurriencies, setFoundedCurriencies] = React.useState([]);
@@ -16,6 +16,7 @@ const CurrencyInput = ({ input, meta: { touched, error, form }, data }, { transl
           if (value.name.match(searchedCountry)) {
             return true;
           }
+          return false;
         })
         .map(([key, value]) => ({
           code: key,

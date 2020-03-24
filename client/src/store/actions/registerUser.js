@@ -1,5 +1,4 @@
 import axios from "axios";
-import {FETCH_USER} from "./types";
 import actions from "./index";
 
 export const registerUser = (values) => async dispatch => {

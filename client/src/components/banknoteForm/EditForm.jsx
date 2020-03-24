@@ -48,9 +48,8 @@ class EditForm extends Component {
   }
 
   render() {
-    {
-      data = this.props.data;
-    }
+    data = this.props.data;
+
     return (
       <form className="form form--banknote" encType="multipart/form-data">
         <Modal

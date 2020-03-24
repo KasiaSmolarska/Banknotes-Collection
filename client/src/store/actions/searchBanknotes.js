@@ -1,4 +1,3 @@
-import axios from "axios";
 import { SET_SEARCH_PARAMS } from "./types";
 import actions from "./index";
 

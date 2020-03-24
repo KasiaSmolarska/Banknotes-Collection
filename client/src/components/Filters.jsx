@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { Checkboxes } from "./filters/Checkboxes";
@@ -31,7 +31,6 @@ class Filters extends React.Component {
 
   render() {
     const { banknote } = this.props.statistics;
-    const filters = this.props.filters;
 
     const { countries, currencies, continents, values, issueYears, types, own } = banknote;
 

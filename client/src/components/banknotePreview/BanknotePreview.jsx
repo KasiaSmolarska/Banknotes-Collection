@@ -43,14 +43,14 @@ export const BanknotePreview = ({ match, history }, context) => {
   useEffect(() => {
     dispatch(actions.clearBanknoteData());
     dispatch(actions.fetchBanknoteById(banknoteId, history));
-  }, []);
+  }, [dispatch, banknoteId, history]);
 
 
   useEffect(() => {
     if(model === null){
       dispatch(actions.fetchBanknoteModel())
     }
-  }, []);
+  }, [dispatch, model]);
 
   return (
     <div>
@@ -92,6 +92,7 @@ export const BanknotePreview = ({ match, history }, context) => {
                       </div>
                     );
                   }
+                  return false;
                 });
               })}
             </div>

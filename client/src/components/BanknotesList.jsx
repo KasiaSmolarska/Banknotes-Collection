@@ -113,6 +113,7 @@ export const BanknotesList = (props, context) => {
             if (rowKey === key) {
               return rowValue(key, value, banknotesList[index]._id, banknotesList[index].title, context);
             }
+            return false;
           });
         })}
         <div className="list__actions">

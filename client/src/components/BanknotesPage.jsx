@@ -33,7 +33,7 @@ const BanknotesPage = (props, context) => {
         return dispatch(actions.fetchBanknoteModel());
       }
     });
-  }, [dispatch]);
+  }, [dispatch, model]);
 
   const media = useMedia();
 

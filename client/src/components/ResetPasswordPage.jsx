@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 
-import { useSelector, dispatch, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Menu } from "./landing/Menu";
 import ResetPassword from "./ResetPassword";
 import actions from "../store/actions";
 
 import PropTypes from "prop-types";
-import Translate from "../translate/Translate";
-
-const getAuth = state => state.auth;
 
 const ResetPasswordPage = ({ match, history }, context) => {
-  const auth = useSelector(getAuth);
   const { passwordToken } = match.params;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(actions.validatePasswordResetToken(passwordToken, history));
-  }, [dispatch]);
+  }, [dispatch, history, passwordToken]);
 
   return (
     <div className="auth landing">

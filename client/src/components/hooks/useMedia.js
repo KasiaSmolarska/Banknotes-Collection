@@ -11,6 +11,7 @@ export const useMedia = () => {
         if (window.matchMedia(value).matches) {
           setCurrentBreakpoint(key);
         }
+        return false;
       });
     };
     checkScreenRes();

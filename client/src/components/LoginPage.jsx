@@ -9,7 +9,7 @@ import RegisterForm from "./RegisterForm";
 import RecoverPassword from "./RecoverPassword";
 
 import GoogleIcon from "./svg/GoogleIcon";
-import FacebookIcon from "./svg/FacebookIcon";
+//import FacebookIcon from "./svg/FacebookIcon";
 
 import PropTypes from "prop-types";
 import Translate from "../translate/Translate";

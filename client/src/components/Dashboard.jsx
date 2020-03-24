@@ -4,7 +4,6 @@ import { Spinner } from "./Spinner";
 import { BanknotesChart, DefaultChart, DonutChart } from "./charts/charts";
 import { Card } from "./Card";
 import PropTypes from "prop-types";
-import { Icon } from "./Icon";
 
 import actions from "../store/actions";
 import { SET_FILTER_PARAMS } from "../store/actions/types";

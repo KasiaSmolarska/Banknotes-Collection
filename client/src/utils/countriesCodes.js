@@ -221,7 +221,7 @@ export const isoCountries = {
     TL: "Timor Wschodni",
     TG: "Togo",
     TK: "Tokelau",
-    DO: "Tonga",
+    TO: "Tonga",
     TT: "Trynidad i Tobago",
     TN: "Tunezja",
     TR: "Turcja",

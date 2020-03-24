@@ -70,7 +70,6 @@ export const DonutChart = ({ value, chartId, colors, charttype }, context) => {
       dataLabels: {
         enabled: false
       },
-      legend: { show: false },
       chart: {
         type: "pie",
         offsetY: 0,
