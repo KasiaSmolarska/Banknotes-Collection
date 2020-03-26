@@ -28,7 +28,7 @@ const Dropdown = ({ tooltip, children, placement, ...props }) => (
       <span
         {...getTriggerProps({
           ref: triggerRef,
-          className: "trigger"
+          className: "dropdown__trigger"
         })}>
         {children}
       </span>
