@@ -87,7 +87,7 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav nav__wrapper row">
-          <Link to="/" className="header__link-container logo__container nav__logo logo__container--inverse logo__container--autoFit" style={{ paddingLeft: "15px" }}>
+          <Link to={this.props.auth.user ? "/dashboard" : "/"} className="header__link-container logo__container nav__logo logo__container--inverse logo__container--autoFit" style={{ paddingLeft: "15px" }}>
             <div className="logo logo--inverse logo--autoFit">
               <span>P</span>
             </div>
