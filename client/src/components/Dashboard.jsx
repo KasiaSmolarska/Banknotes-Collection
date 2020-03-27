@@ -4,6 +4,7 @@ import { Spinner } from "./Spinner";
 import { BanknotesChart, DefaultChart, DonutChart } from "./charts/charts";
 import { Card } from "./Card";
 import PropTypes from "prop-types";
+import { GoogleChart } from "./charts/GoogleChart";
 
 import actions from "../store/actions";
 import { SET_FILTER_PARAMS } from "../store/actions/types";
@@ -86,6 +87,9 @@ const Dashboard = (props, context) => {
           <DefaultChart charttype="area" value={banknote.issueYears} chartId="issueYear-chart" seriesName="issueYear" color="#F69F43" />
         </Card>
       )}
+      <Card mod="map" header={`${banknote.countries.length} / 317`} title="tile.countriesAdded">
+        <GoogleChart value={banknote.countries} chartId="countriesMap-chart" />
+      </Card>
     </div>
   ) : (
     <Spinner />

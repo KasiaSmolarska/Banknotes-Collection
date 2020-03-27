@@ -63,6 +63,7 @@
   "collapse.trigger.limit": "Number of results per page:",
   "chart.series.banknotesAdded": "banknotes added",
   "chart.series.banknotes": "banknotes",
+  "chart.maps.banknotes":"banknotes",
   "continent.Africa": "Africa",
   "continent.Antarctica": "Antarctica",
   "continent.Asia": "Asia",

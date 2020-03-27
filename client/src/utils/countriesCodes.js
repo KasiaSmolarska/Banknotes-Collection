@@ -505,3 +505,11 @@ export const getCountryName = countryCode => {
     return countryCode;
   }
 };
+
+export const getEnglishCountryName = countryCode => {
+  if (isoCountries["eng"].hasOwnProperty(countryCode)) {
+    return isoCountries["eng"][countryCode];
+  } else {
+    return countryCode;
+  }
+};

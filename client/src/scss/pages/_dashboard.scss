@@ -3,7 +3,8 @@
   grid-template-areas:
     "banknote continent country"
     "user user favorite"
-    "issueYear issueYear favorite";
+    "issueYear issueYear favorite"
+    "map map map";
   grid-template-columns: repeat(3, 1fr);
   padding: 2rem 0rem;
   background: #f5f5f5;
@@ -15,7 +16,8 @@
     grid-template-areas:
       "banknote banknote user user"
       "country country continent continent"
-      "favorite favorite issueYear issueYear";
+      "favorite favorite issueYear issueYear"
+      "map map map map";
     grid-template-columns: repeat(4, 1fr);
   }
 
@@ -26,7 +28,8 @@
       "country"
       "continent"
       "favorite"
-      "issueYear";
+      "issueYear",
+      "map";
     grid-template-columns: 1fr;
   }
 
@@ -37,4 +40,13 @@
     padding: 0.6rem 1.4rem;
     z-index: 2;
   }
+}
+
+.google-visualization-tooltip-item-list .google-visualization-tooltip-item:first-child{
+  display: none;
+}
+
+.chart--maps-bold{
+  display: inline-flex;
+  white-space: nowrap;
 }
