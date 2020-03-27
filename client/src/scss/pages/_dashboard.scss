@@ -26,10 +26,10 @@
       "banknote"
       "user"
       "country"
+      "map"
       "continent"
       "favorite"
-      "issueYear",
-      "map";
+      "issueYear";
     grid-template-columns: 1fr;
   }
 
@@ -42,11 +42,11 @@
   }
 }
 
-.google-visualization-tooltip-item-list .google-visualization-tooltip-item:first-child{
+.google-visualization-tooltip-item-list .google-visualization-tooltip-item:first-child {
   display: none;
 }
 
-.chart--maps-bold{
+.chart--maps-bold {
   display: inline-flex;
   white-space: nowrap;
 }
