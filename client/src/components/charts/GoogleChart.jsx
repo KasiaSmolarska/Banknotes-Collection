@@ -34,7 +34,7 @@ export const GoogleChart = ({ value }, context) => {
       options={{
         // This must be also set to render the tooltip with html (vs svg)
         tooltip: { isHtml: true, trigger: "visible" },
-        colorAxis: { colors: ["#a4d6a6", "#2daf34"] },
+        colorAxis: { colors: ["#a4d6a6", "#007505"] },
         backgroundColor: '#9cd5dc',
         datalessRegionColor: '#ffffff',
         defaultColor: '#f5f5f5',
