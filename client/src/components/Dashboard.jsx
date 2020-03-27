@@ -87,7 +87,7 @@ const Dashboard = (props, context) => {
           <DefaultChart charttype="area" value={banknote.issueYears} chartId="issueYear-chart" seriesName="issueYear" color="#F69F43" />
         </Card>
       )}
-      <Card mod="map" header={`${banknote.countries.length} / 317`} title="tile.countriesAdded">
+      <Card mod="map">
         <GoogleChart value={banknote.countries} chartId="countriesMap-chart" />
       </Card>
     </div>
