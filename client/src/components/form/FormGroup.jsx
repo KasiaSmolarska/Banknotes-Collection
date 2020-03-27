@@ -6,9 +6,10 @@ import Radio from "./Radio";
 import Textarea from "./Textarea";
 import InputNumber from "./InputNumber";
 import InputFile from "./InputFile";
-import CurrencyInput from "../banknoteForm/CurrencyInput"
+import CurrencyInput from "../banknoteForm/CurrencyInput";
 import IssueBankInput from "../banknoteForm/IssueBankInput";
 import CountriesInput from "../banknoteForm/CountriesInput";
+import ContinentsSelect from "../banknoteForm/ContinentsSelect";
 import PropTypes from "prop-types";
 
 const NAME_TO_COMPONENT = {
@@ -20,7 +21,8 @@ const NAME_TO_COMPONENT = {
   InputFile,
   IssueBankInput,
   CountriesInput,
-  CurrencyInput
+  CurrencyInput,
+  ContinentsSelect
 };
 
 const getTypeOfInput = (modelField, fieldName) => {
@@ -35,6 +37,9 @@ const getTypeOfInput = (modelField, fieldName) => {
   }
   if (modelField.type === "String" && fieldName === "currency") {
     return "CurrencyInput";
+  }
+  if (modelField.type === "String" && fieldName === "continent") {
+    return "ContinentsSelect";
   }
   if (modelField.enum) {
     return "Select";

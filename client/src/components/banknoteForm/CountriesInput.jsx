@@ -1,13 +1,18 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Translate from "../../translate/Translate";
 import PropTypes from "prop-types";
 import { currentLang } from "../../utils/languages";
 import { isoCountries } from "../../utils/countriesCodes";
+import { getContinentName } from "../../utils/country-continent";
+import { change } from "redux-form";
+const getForm = state => state.form;
 
 const CountriesInput = ({ input, meta: { touched, error, form }, data }, { translate }) => {
   const [foundedCountries, setFoundedCountries] = React.useState([]);
   const countriesList = isoCountries[currentLang()];
-
+  const { banknoteForm } = useSelector(getForm);
+  const dispatch = useDispatch();
   const getCountries = search => {
     const searchedCountry = new RegExp(`.*${search}.*`, "i");
     setFoundedCountries(
@@ -38,6 +43,7 @@ const CountriesInput = ({ input, meta: { touched, error, form }, data }, { trans
         className="form__input"
         type="text"
         {...input}
+        onInput={(e) => dispatch(change("banknoteForm", "continent", getContinentName(e.target.value), true))}
       />
       <label className="form__label">
         <Translate name={`label.${form}.${input.name}`} />
