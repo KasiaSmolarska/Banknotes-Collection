@@ -41,7 +41,7 @@ const Dashboard = (props, context) => {
         <DefaultChart charttype="area" value={banknote.continents} chartId="continents-chart" seriesName="banknotes" color="#4caf50" />
       </Card>
 
-      <Card mod="country" header={`${banknote.countries.length} / 317`} title="tile.countriesAdded">
+      <Card mod="country" header={`${banknote.countries.length} / 193`} title="tile.countriesAdded">
         <DefaultChart charttype="area" value={banknote.countries} chartId="countries-chart" seriesName="banknotes" color="#F69F43" />
       </Card>
 
@@ -69,7 +69,7 @@ const Dashboard = (props, context) => {
               <strong>{((banknote.continents.length / 7) * 100).toFixed(1)}%</strong> {context.translate("tile.summary.point1")}
             </li>
             <li>
-              <strong>{((banknote.countries.length / 317) * 100).toFixed(1)}%</strong> {context.translate("tile.summary.point2")}
+              <strong>{((banknote.countries.length / 193) * 100).toFixed(1)}%</strong> {context.translate("tile.summary.point2")}
             </li>
           </ul>
           <strong>{context.translate("tile.summary.bottom")} </strong>
