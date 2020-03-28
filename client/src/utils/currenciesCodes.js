@@ -53,6 +53,9 @@ export const isoCurriencies = {
     BOB: {
       name: "Bolivian Boliviano"
     },
+    BRC: {
+      name: "Brazilian cruzado"
+    },
     BRL: {
       name: "Brazilian Real"
     },
@@ -457,6 +460,10 @@ export const isoCurriencies = {
 
     BOB: {
       name: "Bolivian Boliviano"
+    },
+
+    BRC: {
+      name: "Brazylijskie cruzado"
     },
 
     BRL: {
