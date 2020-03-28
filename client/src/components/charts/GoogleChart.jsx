@@ -16,43 +16,48 @@ export const GoogleChart = ({ value }, context) => {
   }, []);
   mappedData.unshift(["Country", "Banknotes", { role: "tooltip", type: "string", p: { html: true } }]);
   return (
-    <Chart
-      chartEvents={[
-        {
-          eventName: "select",
-          callback: ({ chartWrapper }) => {
-            const chart = chartWrapper.getChart();
-            const selection = chart.getSelection();
-            if (selection.length === 0) {
-              return;
+    <div style={{ position: "relative", width: "100%", height: "0px", paddingBottom: "40%" }}>
+      <div style={{ position: "absolute", width: "100%", height: "100%" }}>
+        <Chart
+          chartEvents={[
+            {
+              eventName: "select",
+              callback: ({ chartWrapper }) => {
+                const chart = chartWrapper.getChart();
+                const selection = chart.getSelection();
+                if (selection.length === 0) {
+                  return;
+                }
+                const region = getCountryName(mappedData[selection[0].row + 1][0]);
+                const decision = window.confirm(`Chcesz zobaczyć banknoty dla ${region}`);
+                if (decision) {
+                  const countryCode = [mappedData[selection[0].row + 1][0]];
+                  dispatch({
+                    type: SET_FILTER_PARAMS,
+                    payload: { country: countryCode }
+                  });
+                  dispatch(change("filtersForm", "country", { [countryCode]: true }, true));
+                  history.push("/banknotes");
+                }
+              }
             }
-            const region = getCountryName(mappedData[selection[0].row + 1][0]);
-            const decision = window.confirm(`Chcesz zobaczyć banknoty dla ${region}`);
-            if (decision) {
-              const countryCode = [mappedData[selection[0].row + 1][0]];
-              dispatch({
-                type: SET_FILTER_PARAMS,
-                payload: { country: countryCode }
-              });
-              dispatch(change("filtersForm", "country", {[countryCode] : true}, true))
-              history.push("/banknotes");
-            }
-          }
-        }
-      ]}
-      chartType="GeoChart"
-      width="100%"
-      height="400px"
-      data={mappedData}
-      options={{
-        // This must be also set to render the tooltip with html (vs svg)
-        tooltip: { isHtml: true, trigger: "visible" },
-        colorAxis: { colors: ["#a4d6a6", "#007505"] },
-        backgroundColor: "#9cd5dc",
-        datalessRegionColor: "#ffffff",
-        defaultColor: "#f5f5f5"
-      }}
-    />
+          ]}
+          chartType="GeoChart"
+          width="100%"
+          height="100%"
+          data={mappedData}
+          options={{
+            // This must be also set to render the tooltip with html (vs svg)
+            tooltip: { isHtml: true, trigger: "visible" },
+            colorAxis: { colors: ["#a4d6a6", "#007505"] },
+            backgroundColor: "#9cd5dc",
+            datalessRegionColor: "#ffffff",
+            defaultColor: "#f5f5f5",
+            explorer: { actions: ["dragToZoom", "rightClickToReset"] }
+          }}
+        />
+      </div>
+    </div>
   );
 };
 

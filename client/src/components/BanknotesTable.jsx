@@ -33,10 +33,10 @@ const ImageContainer = React.memo(({ className, src, alt, title }) => {
   );
 });
 
-function uploadFrontImage({ cellData, rowData }) {
+function uploadImage({ cellData, rowData }) {
   return (
     <div>
-      <ImageContainer className="table__image" src={`/api/upload/image/thumb-${cellData}`} alt={cellData} title={rowData.title} />
+      <ImageContainer key={cellData} className="table__image" src={`/api/upload/image/thumb-${cellData}`} alt={cellData} title={rowData.title} />
     </div>
   );
 }
@@ -95,8 +95,8 @@ const BanknotesTable = (props, context) => {
                     </Link>
                   )}
                 />
-                <Column width={width * 0.1} label={context.translate("table.label.imageFront")} dataKey="imageFront" cellData="" cellRenderer={uploadFrontImage} />
-                <Column width={width * 0.1} label={context.translate("table.label.imageReverse")} dataKey="imageReverse" cellData="" cellRenderer={uploadFrontImage} />
+                <Column width={width * 0.1} label={context.translate("table.label.imageFront")} dataKey="imageFront" cellData="" cellRenderer={uploadImage} />
+                <Column width={width * 0.1} label={context.translate("table.label.imageReverse")} dataKey="imageReverse" cellData="" cellRenderer={uploadImage} />
                 <Column
                   label={context.translate("table.label.country")}
                   dataKey="country"
