@@ -56,6 +56,9 @@ export const isoCurriencies = {
     BRL: {
       name: "Brazilian Real"
     },
+    BTN: {
+      name: "Bhutanese ngultrum"
+    },
     BWP: {
       name: "Botswanan Pula"
     },
@@ -458,6 +461,10 @@ export const isoCurriencies = {
 
     BRL: {
       name: "real brazylijski"
+    },
+
+    BTN: {
+      name: "Ngultrum"
     },
 
     BWP: {
