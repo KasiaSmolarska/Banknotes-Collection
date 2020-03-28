@@ -25,7 +25,7 @@ const checkIfStatisticsAreFilled = stats => {
 class Filters extends React.Component {
   componentDidUpdate() {
     if (!(this.props.form && this.props.form.values && Object.keys(this.props.form.values).length)) {
-      this.props.filterBanknotes({});
+      //this.props.filterBanknotes({});
     }
   }
 

@@ -49,7 +49,6 @@ const Dashboard = (props, context) => {
         <div
           className="btn btn--primary card-favorite-button"
           onClick={() => {
-            // dispatch(actions.filterBanknotes({ favorite: true }));
             dispatch({
               type: SET_FILTER_PARAMS,
               payload: { favorite: true }
