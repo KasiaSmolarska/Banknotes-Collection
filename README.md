@@ -1,3 +1,3 @@
 # Banknotes-Collection
 
-[link to preview: https://banknotes-collection.herokuapp.com/](https://banknotes-collection.herokuapp.com)
+[link to preview: https://e-pangea.herokuapp.com/](https://e-pangea.herokuapp.com/)
