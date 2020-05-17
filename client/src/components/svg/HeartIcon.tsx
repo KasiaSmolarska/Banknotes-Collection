@@ -1,6 +1,7 @@
 import React from "react";
+import { IconPropsTypes } from "./index";
 
-export const HeartIcon = ({ width, height, fill }) => {
+export const HeartIcon = ({ width, height, fill }: IconPropsTypes) => {
   return (
     <svg width={width || "20"} height={height || "20"} x="0px" y="0px" viewBox="0 0 418.375 418.375">
       <path

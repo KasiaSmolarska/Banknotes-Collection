@@ -1,6 +1,7 @@
 import React from "react";
+import { MaterialIconPropsTypes } from "./index";
 
-export const CheckMarkIcon = ({ width, height, fill1, fill2 }) => {
+export const CheckMarkIcon = ({ width, height, fill1, fill2 }: MaterialIconPropsTypes) => {
   return (
     <svg width={width || "20"} height={height || "20"} x="0px" y="0px" viewBox="0 0 511.999 511.999">
       <path

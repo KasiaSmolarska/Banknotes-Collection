@@ -51,14 +51,14 @@ const LoginPage = (props, context) => {
               {registerState ? <RegisterForm toggleRegisterState={toggleRegisterState} /> : <LoginForm toggleRecoverMode={toggleRecoverMode} toggleRegisterState={toggleRegisterState} />}
               <div className="auth__element">
                 <a className="btn btn--google btn--flex btn--icon" href="/auth/google">
-                  <GoogleIcon color="#FFF" /> {registerState ? <Translate name="button.registerWithGoogle" /> : <Translate name="button.loginWithGoogle" />}
+                  <GoogleIcon fill="#FFF" /> {registerState ? <Translate name="button.registerWithGoogle" /> : <Translate name="button.loginWithGoogle" />}
                 </a>
               </div>
             </>
           )}
           {/* <div className="auth__element">
             <a className="btn btn--facebook btn--flex btn--icon" href="/auth/facebook">
-              <FacebookIcon color="#FFF" />
+              <FacebookIcon fill="#FFF" />
               Login with Facebook
             </a>
           </div> */}

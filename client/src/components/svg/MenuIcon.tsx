@@ -1,6 +1,7 @@
 import React from "react";
+import { IconPropsTypes } from "./index";
 
-export const MenuIcon = ({ fill, width, height }) => {
+export const MenuIcon = ({ fill, width, height }: IconPropsTypes) => {
   return (
     <svg width={width || "20"} height={height || "20"} x="0px" y="0px" viewBox="0 0 512 512">
       <circle fill={fill || "black"} cx="256" cy="256" r="64" />
