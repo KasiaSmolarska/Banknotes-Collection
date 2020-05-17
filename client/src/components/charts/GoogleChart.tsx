@@ -3,18 +3,28 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { SET_FILTER_PARAMS } from "../../store/actions/types";
 import { Chart } from "react-google-charts";
-import { getCountryName } from "../../utils/countriesCodes";
+import { getCountryName, CountriesKeys } from "../../utils/countriesCodes";
 import useReactRouter from "use-react-router";
 import { change } from "redux-form";
+import { TranslateContextTypes } from "../../translate/TranslateProvider";
 
-export const GoogleChart = ({ value }, context) => {
+interface CountryStatTypes {
+  _id: CountriesKeys;
+  total: number;
+}
+
+interface GoogleChartPropsTypes {
+  value: CountryStatTypes[];
+}
+
+export const GoogleChart = ({ value }: GoogleChartPropsTypes, context: TranslateContextTypes) => {
   const { history } = useReactRouter();
   const dispatch = useDispatch();
-  let mappedData = value.reduce((arr, obj) => {
-    arr.push([obj._id, obj.total, `<strong class="chart--maps-bold">${getCountryName(obj._id)} - ${obj.total} ${context.translate("chart.maps.banknotes")}</strong>`]);
-    return arr;
-  }, []);
-  mappedData.unshift(["Country", "Banknotes", { role: "tooltip", type: "string", p: { html: true } }]);
+
+  let mappedData = [
+    ["Country", "Banknotes", { role: "tooltip", type: "string", p: { html: true } }],
+    ...value.map((obj) => [obj._id, obj.total, `<strong class="chart--maps-bold">${getCountryName(obj._id)} - ${obj.total} ${context.translate("chart.maps.banknotes")}</strong>`]),
+  ];
   return (
     <div style={{ position: "relative", width: "100%", height: "0px", paddingBottom: "40%" }}>
       <div style={{ position: "absolute", width: "100%", height: "100%" }}>
@@ -28,19 +38,22 @@ export const GoogleChart = ({ value }, context) => {
                 if (selection.length === 0) {
                   return;
                 }
+                // @ts-ignore
                 const region = getCountryName(mappedData[selection[0].row + 1][0]);
                 const decision = window.confirm(`Chcesz zobaczyć banknoty dla ${region}`);
                 if (decision) {
                   const countryCode = [mappedData[selection[0].row + 1][0]];
                   dispatch({
                     type: SET_FILTER_PARAMS,
-                    payload: { country: countryCode }
+                    payload: { country: countryCode },
                   });
+                  // @ts-ignore
+
                   dispatch(change("filtersForm", "country", { [countryCode]: true }, true));
                   history.push("/banknotes");
                 }
-              }
-            }
+              },
+            },
           ]}
           chartType="GeoChart"
           width="100%"
@@ -53,7 +66,7 @@ export const GoogleChart = ({ value }, context) => {
             backgroundColor: "#9cd5dc",
             datalessRegionColor: "#ffffff",
             defaultColor: "#f5f5f5",
-            explorer: { actions: ["dragToZoom", "rightClickToReset"] }
+            explorer: { actions: ["dragToZoom", "rightClickToReset"] },
           }}
         />
       </div>
@@ -62,5 +75,5 @@ export const GoogleChart = ({ value }, context) => {
 };
 
 GoogleChart.contextTypes = {
-  translate: PropTypes.func
+  translate: PropTypes.func,
 };
