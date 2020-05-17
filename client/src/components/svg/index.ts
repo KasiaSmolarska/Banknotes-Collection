@@ -29,7 +29,7 @@ export interface MaterialIconPropsTypes {
   width?: string;
   height?: string;
   fill1?: string;
-  fill2: string;
+  fill2?: string;
 }
 
 export const svgList = {
