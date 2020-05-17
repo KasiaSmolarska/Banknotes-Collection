@@ -1,6 +1,7 @@
 import React from "react";
+import { MaterialIconPropsTypes } from "./index";
 
-export const AlertIcon = ({ width, height, fill1, fill2 }) => {
+export const AlertIcon = ({ width, height, fill1, fill2 }: MaterialIconPropsTypes) => {
   return (
     <svg width={width || "20"} height={height || "20"} viewBox="0 0 512 512.92258">
       <path

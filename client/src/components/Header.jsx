@@ -58,7 +58,7 @@ class Header extends Component {
               </Link>
             </li>
             <li className="header__link-container" title={this.context.translate(!this.props.showedModalToAddBanknote ? "button.addNewBanknote" : "button.closeModal")} onClick={this.props.show_modal_to_add_new_banknote}>
-              {this.props.showedModalToAddBanknote ? <RemoveBanknoteIcon /> : <Icon fill="#FFF" icon="AddBanknoteIcon" />}
+              {this.props.showedModalToAddBanknote ? <RemoveBanknoteIcon /> : <Icon icon="AddBanknoteIcon" />}
             </li>
             <li className="header__link-container">
               <Flags />
@@ -73,7 +73,7 @@ class Header extends Component {
                     {this.context.translate("button.yourProfile")}
                   </Link>
                   <button className="btn btn--text" onClick={this.handleClick}>
-                    <Icon icon="LogOutIcon" color="#7a18e3" /> {this.context.translate("button.logOut")}
+                    <Icon icon="LogOutIcon" fill="#7a18e3" /> {this.context.translate("button.logOut")}
                   </button>
                 </DropdownContent>
               </Dropdown>

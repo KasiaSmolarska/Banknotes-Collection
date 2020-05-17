@@ -19,6 +19,19 @@ import { PolandIcon } from "./PolandIcon";
 import { EnglandIcon } from "./EnglandIcon";
 import { ChevronDown } from "./ChevronDown";
 
+export interface IconPropsTypes {
+  width?: string;
+  height?: string;
+  fill?: string;
+}
+
+export interface MaterialIconPropsTypes {
+  width?: string;
+  height?: string;
+  fill1?: string;
+  fill2: string;
+}
+
 export const svgList = {
   AddBanknoteIcon,
   AlarmIcon,
@@ -39,5 +52,5 @@ export const svgList = {
   FilterIcon,
   PolandIcon,
   EnglandIcon,
-  ChevronDown
+  ChevronDown,
 };
