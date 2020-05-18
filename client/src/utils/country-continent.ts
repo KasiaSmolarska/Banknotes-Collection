@@ -249,7 +249,10 @@ const countryByContinent = {
   ZM: "AF",
   ZW: "AF"
 };
-export const getContinentName = countryCode => {
+
+type CountryCodesTypes = keyof typeof countryByContinent;
+
+export const getContinentName = (countryCode : CountryCodesTypes) => {
   switch (countryByContinent[countryCode]) {
     case "AF":
       return "Africa";

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import languages from "../utils/languages";
+import languages, { LangKey } from "../utils/languages";
 import { Icon } from "./Icon";
+// @ts-ignore
 import Dropdown, { DropdownTrigger, DropdownContent } from "react-simple-dropdown";
+import {TranslateContextTypes} from "../translate/TranslateProvider";
 
 import { currentLang } from "../utils/languages";
 
@@ -12,15 +14,17 @@ const flagIcons = {
   pl: <Icon icon="PolandIcon" width="24" height="24" />
 };
 
-export const Flags = (props, context) => {
-  const [lang, setLang] = useState(currentLang);
+interface FlagsProps {}
+
+export const Flags = (props: FlagsProps, context: TranslateContextTypes) => {
+  const [lang, setLang] = useState<LangKey>(currentLang);
   return (
     <Dropdown>
       <DropdownTrigger title={context.translate(`flags.title.${lang}`)} style={{ display: "flex", marginLeft: "3px" }}>
         {flagIcons[lang]}
       </DropdownTrigger>
       <DropdownContent className="dropdown__content dropdown__content--center">
-        {Object.keys(languages).map(lang => (
+        {(Object.keys(languages) as LangKey[]).map((lang) : React.ReactNode => (
           <span
             className="flags__link"
             onClick={() => {
