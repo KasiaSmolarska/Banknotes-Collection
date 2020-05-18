@@ -51,7 +51,7 @@ export default {
     }],
     tooltip: {
       y: {
-        formatter: (value) => { return parseInt(value) },
+        formatter: (value: string) => { return parseInt(value) },
       },
     }
   },
