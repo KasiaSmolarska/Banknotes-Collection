@@ -1,4 +1,4 @@
-export function adjustBrightness(col, amt) {
+export function adjustBrightness(col : string, amt: number): string {
   var usePound = false;
 
   if (col[0] === "#") {

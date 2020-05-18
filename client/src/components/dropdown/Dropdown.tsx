@@ -3,7 +3,14 @@ import React from "react";
 import TooltipTrigger from "react-popper-tooltip";
 import "react-popper-tooltip/dist/styles.css";
 
-const Dropdown = ({ tooltip, children, placement, ...props }) => (
+interface DropdownProps {
+  tooltip: string | React.ReactNode;
+  children: React.ReactNode;
+  placement: "right" | "auto-start" | "auto" | "auto-end" | "top-start" | "top" | "top-end" | "right-start" | "right-end" | "bottom-end" | "bottom" | "bottom-start" | "left-end" | "left" | "left-start" | undefined;
+  props: any;
+}
+
+const Dropdown = ({ tooltip, children, placement, ...props }: DropdownProps): React.ReactNode => (
   <TooltipTrigger
     {...props}
     placement={placement || "right"}
@@ -12,13 +19,13 @@ const Dropdown = ({ tooltip, children, placement, ...props }) => (
       <div
         {...getTooltipProps({
           ref: tooltipRef,
-          className: "tooltip-container"
+          className: "tooltip-container",
         })}>
         <div
           {...getArrowProps({
             ref: arrowRef,
             "data-placement": placement,
-            className: "tooltip-arrow"
+            className: "tooltip-arrow",
           })}
         />
         {tooltip}
@@ -28,7 +35,7 @@ const Dropdown = ({ tooltip, children, placement, ...props }) => (
       <span
         {...getTriggerProps({
           ref: triggerRef,
-          className: "dropdown__trigger"
+          className: "dropdown__trigger",
         })}>
         {children}
       </span>

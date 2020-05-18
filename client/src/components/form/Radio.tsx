@@ -1,5 +1,8 @@
 import React from "react";
 
+// @ts-ignore
+
+// file is not used!
 const Radio = ({ input, meta, ...rest }) => {
   return (
     <div className="form__control">

@@ -1,6 +1,11 @@
 import React, { useRef, useState } from "react";
 
-const Slide = ({ src, index }) => {
+interface SlideProps {
+  src: string;
+  index: number;
+}
+
+const Slide = ({ src, index }: SlideProps) => {
   return (
     <div className="slider__image">
       <img alt={"photo" + index} src={src} />
@@ -8,28 +13,36 @@ const Slide = ({ src, index }) => {
   );
 };
 
-export const Slider = ({ images }) => {
-  const container = useRef(null);
+interface SliderProps {
+  images: string[];
+}
+
+export const Slider = ({ images }: SliderProps): React.ReactNode => {
+  const container = useRef<HTMLDivElement>(null);
   const [clickedElementIndex, setClickedElementIndex] = useState(0);
-  const handleClick = i => {
+  const handleClick = (i: number) => {
     if (container.current === null) {
       return;
     }
-    container.current.scroll({
-      top: 0,
-      left: i * container.current.clientWidth,
-      behavior: "smooth"
-    });
+    container &&
+      container.current.scroll({
+        top: 0,
+        left: i * container.current.clientWidth,
+        behavior: "smooth",
+      });
     setClickedElementIndex(i);
   };
 
-  const handleScroll = () => {
+  const handleScroll = (): void => {
+    if (container === null || container.current === null) {
+      return;
+    }
     const scrollPosition = container.current.scrollLeft / container.current.clientWidth;
 
     setClickedElementIndex(Math.round(scrollPosition));
   };
 
-  const slides = images.filter(slide => !slide.includes("undefined"));
+  const slides = images.filter((slide) => !slide.includes("undefined"));
 
   return (
     <div className="slider">
