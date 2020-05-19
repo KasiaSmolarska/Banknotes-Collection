@@ -2,8 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Translate from "../../translate/Translate";
+import { DataType } from "./Input";
+import { TranslateContextTypes } from "../../translate/TranslateProvider";
+import { WrappedFieldProps } from "redux-form";
 
-const InputNumber = ({ input, label, meta: { touched, error, form }, data }, { translate }) => {
+interface InputNumberProps extends WrappedFieldProps {
+  data: DataType;
+}
+
+const InputNumber = ({ input, meta: { touched, error, form }, data }: InputNumberProps, { translate }: TranslateContextTypes) => {
+  console.log("dataNum", data)
   return (
     <div className="form__control">
       <input pattern={data.validate} placeholder={translate(`label.${form}.${input.name}`)} className="form__input" type="number" {...input} />
@@ -20,5 +28,5 @@ const InputNumber = ({ input, label, meta: { touched, error, form }, data }, { t
 export default InputNumber;
 
 InputNumber.contextTypes = {
-  translate: PropTypes.func
+  translate: PropTypes.func,
 };

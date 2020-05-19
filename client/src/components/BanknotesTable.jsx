@@ -124,7 +124,7 @@ const BanknotesTable = (props, context) => {
                   width={width * 0.1}
                   label={context.translate("table.label.own")}
                   dataKey="own"
-                  cellRenderer={({ cellData }) => (!!cellData ? context.translate(`label.banknoteForm.own.yes`) : context.translate(`label.banknoteForm.own.no`))}
+                  cellRenderer={({ cellData }) => (!!cellData ? context.translate(`label.banknoteForm.own.true`) : context.translate(`label.banknoteForm.own.false`))}
                 />
 
                 <Column
