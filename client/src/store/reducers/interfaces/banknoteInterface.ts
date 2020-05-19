@@ -17,10 +17,11 @@ import {
   SET_FILTER_PARAMS,
   RESET_FILTERING,
 } from "../../actions/types";
+import { Continents } from "../../../utils/country-continent";
 
 export type BanknoteType = {
   _user?: string;
-  continent?: "Africa" | "Antarctica" | "Asia" | "Australia" | "Europe" | "North America" | "South America";
+  continent?: Continents;
   country?: string;
   own?: boolean;
   currency?: string;

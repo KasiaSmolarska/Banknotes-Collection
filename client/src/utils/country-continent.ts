@@ -250,6 +250,8 @@ const countryByContinent = {
   ZW: "AF"
 };
 
+export type Continents =  "Africa" | "Antarctica" | "Asia" | "Europe" | "North America" | "Australia" | "South America";
+
 type CountryCodesTypes = keyof typeof countryByContinent;
 
 export const getContinentName = (countryCode : CountryCodesTypes) => {
