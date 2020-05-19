@@ -15,70 +15,88 @@ import {
   SET_NUMBER_OF_PRODUCTS,
   SET_PAGINATION_SKIP,
   SET_FILTER_PARAMS,
-  RESET_FILTERING
+  RESET_FILTERING,
 } from "../actions/types";
 
-const initialState = {
-  model: null,
-  banknotesList: [],
-  banknote: {},
-  showedModalToAddBanknote: false,
-  showedModalToEditBanknote: false,
-  imageModal: {
-    src: "",
-    title: "",
-    show: false,
-    loading: true
-  },
-  loading: true,
-  error: {},
-  searchParams: "",
-  sortBy: localStorage.getItem("sortBy") || "dateCreated",
-  sortDirection: localStorage.getItem("sortDirection") || "DESC",
-  limit: localStorage.getItem("limit") || 16,
-  skip: 0,
-  numberOfProduct: 0,
-  filters: {}
-};
+import {
+  FetchBanknoteModel,
+  FetchBanknotes,
+  ClearBanknoteData,
+  ShowModalToEditBanknote,
+  ShowModalToAddBanknote,
+  ToggleImageModal,
+  ChangeImageInModal,
+  SearchBanknotes,
+  BanknoteError,
+  SetFilterParams,
+  SetSearchParams,
+  SetSort,
+  FetchBanknoteByID,
+  SetPaginationLimit,
+  SetNumberOfProduct,
+  SetPaginationSkip,
+  ResetFiltering,
+  initialState,
+  BanknotesState,
+  BanknoteType,
+} from "./interfaces/banknoteInterface";
 
-export default function(state = initialState, action) {
-  const { payload } = action;
+export type BanknotesActionTypes =
+  | FetchBanknoteModel
+  | FetchBanknotes
+  | ClearBanknoteData
+  | ShowModalToEditBanknote
+  | ShowModalToAddBanknote
+  | ToggleImageModal
+  | ChangeImageInModal
+  | SearchBanknotes
+  | BanknoteError
+  | SetFilterParams
+  | SetSearchParams
+  | SetSort
+  | FetchBanknoteByID
+  | SetPaginationLimit
+  | SetNumberOfProduct
+  | SetPaginationSkip
+  | ResetFiltering;
+
+export default function (state = initialState, action: BanknotesActionTypes): BanknotesState {
   switch (action.type) {
     case FETCH_BANKNOTE_MODEL:
       return {
         ...state,
-        model: payload
+        model: action.payload,
       };
     case FETCH_BANKNOTES:
       return {
         ...state,
-        banknotesList: payload.map(banknote => {
+        banknotesList: action.payload.map((banknote: BanknoteType) => {
           return {
             ...banknote,
             imageFront: banknote.imageFront ? banknote.imageFront : "no-photo.jpg",
-            imageReverse: banknote.imageReverse ? banknote.imageReverse : "no-photo.jpg"
+            imageReverse: banknote.imageReverse ? banknote.imageReverse : "no-photo.jpg",
           };
         }),
-        loading: false
+        loading: false,
       };
     case CLEAR_BANKNOTE_DATA:
       return {
         ...state,
-        banknote: {}
+        banknote: { title: "" },
       };
     case SHOW_MODAL_TO_EDIT_BANKNOTE:
       return {
         ...state,
         showedModalToEditBanknote: !state.showedModalToEditBanknote,
         showedModalToAddBanknote: false,
-        loading: false
+        loading: false,
       };
     case SHOW_MODAL_TO_ADD_BANKNOTE:
       return {
         ...state,
         showedModalToAddBanknote: !state.showedModalToAddBanknote,
         showedModalToEditBanknote: false,
-        loading: false
+        loading: false,
       };
     case TOGGLE_IMAGE_MODAL:
       return {
@@ -88,71 +106,71 @@ export default function(state = initialState, action) {
           src: "",
           title: "",
           show: !state.imageModal.show,
-          loading: state.imageModal.show ? true : state.imageModal.loading
-        }
+          loading: state.imageModal.show ? true : state.imageModal.loading,
+        },
       };
     case CHANGE_IMAGE_IN_MODAL:
       return {
         ...state,
         imageModal: {
           ...state.imageModal,
-          src: payload.src,
-          title: payload.title,
-          loading: false
-        }
+          src: action.payload.src,
+          title: action.payload.title,
+          loading: false,
+        },
       };
     case SEARCH_BANKNOTES:
       return {
         ...state,
-        banknotesList: payload,
-        loading: false
+        banknotesList: action.payload,
+        loading: false,
       };
     case BANKNOTE_ERROR:
       return {
         ...state,
-        error: payload
+        error: action.payload,
       };
     case SET_FILTER_PARAMS:
       return {
         ...state,
-        filters: payload
+        filters: action.payload,
       };
     case SET_SEARCH_PARAMS:
       return {
         ...state,
-        searchParams: payload
+        searchParams: action.payload,
       };
     case SET_SORT:
       return {
         ...state,
-        sortBy: payload.sortBy,
-        sortDirection: payload.sortDirection
+        sortBy: action.payload.sortBy,
+        sortDirection: action.payload.sortDirection,
       };
     case FETCH_BANKNOTE_BY_ID:
       return {
         ...state,
         loading: false,
-        banknote: { ...payload }
+        banknote: { ...action.payload },
       };
     case SET_PAGINATION_LIMIT:
       return {
         ...state,
-        limit: payload
+        limit: action.payload,
       };
     case SET_NUMBER_OF_PRODUCTS:
       return {
         ...state,
-        numberOfProduct: payload
+        numberOfProduct: action.payload,
       };
     case SET_PAGINATION_SKIP:
       return {
         ...state,
-        skip: payload * state.limit
+        skip: action.payload * parseInt(state.limit as string),
       };
     case RESET_FILTERING:
       return {
         ...state,
-        filters: {}
+        filters: {},
       };
     default:
       return state;
