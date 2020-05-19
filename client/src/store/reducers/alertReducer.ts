@@ -1,15 +1,13 @@
 import { SET_ALERT, REMOVE_ALERT } from "../actions/types";
-import { ActionTypes } from "../index";
+import { SetAlert, RemoveAlert, AlertState } from "./interfaces/alertInterface";
 
 const initialState = {
   alerts: [],
 };
 
-interface AlertState {
-  alerts: { id: number }[];
-}
+export type AlertActionTypes = SetAlert | RemoveAlert;
 
-const alertReducer = (state: AlertState = initialState, action: ActionTypes) => {
+const alertReducer = (state: AlertState = initialState, action: AlertActionTypes): AlertState => {
   switch (action.type) {
     case SET_ALERT:
       return {
