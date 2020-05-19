@@ -11,6 +11,7 @@ import IssueBankInput from "../banknoteForm/IssueBankInput";
 import CountriesInput from "../banknoteForm/CountriesInput";
 import ContinentsSelect from "../banknoteForm/ContinentsSelect";
 import PropTypes from "prop-types";
+import { TranslateContextTypes } from "../../translate/TranslateProvider";
 
 const NAME_TO_COMPONENT = {
   Input: Input,
@@ -22,10 +23,11 @@ const NAME_TO_COMPONENT = {
   IssueBankInput,
   CountriesInput,
   CurrencyInput,
-  ContinentsSelect
+  ContinentsSelect,
 };
 
-const getTypeOfInput = (modelField, fieldName) => {
+const getTypeOfInput = (modelField: { [key: string]: string | number }, fieldName: string) => {
+  console.log("modelField", modelField);
   if (/image|img/g.test(fieldName)) {
     return "InputFile";
   }
@@ -59,14 +61,23 @@ const getTypeOfInput = (modelField, fieldName) => {
   return "Input";
 };
 
-const FormGroup = (props, context) => {
+interface FormGroupProps {
+  data: {
+    [key: string]: any;
+  };
+  inputsName: string[];
+  name: string;
+}
+
+const FormGroup = (props: FormGroupProps, context: TranslateContextTypes) => {
+  console.log("props", props);
   if (!props.data) {
     return false;
   }
   return (
     <div className={`form__group form__group--${props.name}`}>
       <h2 className="form__group-label">{context.translate(`form.groupLabel.${props.name}`)}</h2>
-      {props.inputsName.map(name => {
+      {props.inputsName.map((name) => {
         const type = getTypeOfInput(props.data[name], name);
         return <Field key={name} name={name} component={NAME_TO_COMPONENT[type]} data={props.data[name]} />;
       })}
@@ -77,5 +88,5 @@ const FormGroup = (props, context) => {
 export default FormGroup;
 
 FormGroup.contextTypes = {
-  translate: PropTypes.func
+  translate: PropTypes.func,
 };

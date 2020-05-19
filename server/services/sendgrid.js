@@ -17,12 +17,12 @@ const { confirmYourAccount } = require("../emailTemplates/confirmYourAccount");
 // @access Public
 
 exports.confirmPassword = (req, res) => {
-  User.findOne({ email: req.body.email })
-    .then(user => {
+  User.findOne({ email: req.body.email, googleId: null, facebookId: null })
+    .then((user) => {
       if (user.confirmAccountExpires > new Date(Date.now())) {
         return res.status(200).json({ label: "tokenAlreadySent", message: "Token has been already sent, please check your spam folder if you didn't get it." });
       }
-
+      
       if (user.confirmed) {
         return res.status(200).json({ label: "accountConfirmed", message: "Account has been already confirmed!" });
       }
@@ -33,7 +33,7 @@ exports.confirmPassword = (req, res) => {
       // Save the updated user object
       user
         .save()
-        .then(user => {
+        .then((user) => {
           // send email
           let link = "http://" + req.headers.host + "/api/auth/confirm/" + user.confirmAccountToken;
           const { lang } = req.body;
@@ -45,9 +45,9 @@ exports.confirmPassword = (req, res) => {
             content: [
               {
                 type: "text/html",
-                value: confirmTemplate.text[lang]
-              }
-            ]
+                value: confirmTemplate.text[lang],
+              },
+            ],
           };
           sgMail.send(mailOptions, (error, result) => {
             if (error) {
@@ -56,41 +56,41 @@ exports.confirmPassword = (req, res) => {
             res.status(200).json({ label: "emailSent", message: "A confirmation email has been sent to " + user.email + "." });
           });
         })
-        .catch(err => res.status(500).json({ message: err.message }));
+        .catch((err) => res.status(500).json({ message: err.message }));
     })
-    .catch(err => res.status(500).json({ message: err.message }));
-  };
+    .catch((err) => res.status(500).json({ message: err.message }));
+};
 
-  // @route GET api/auth/confirm
-  // @desc Confirm Email Address - checking if the token is valid and accept or reject confrmation
-  // @access Public
-  exports.confirmAccountToken = (req, res) => {
-    User.findOne({ confirmAccountToken: req.params.token, confirmAccountExpires: { $gt: Date.now() } })
-      .then(user => {
-        console.log(req.params.token)
-        if (!user) {
-          return res.status(401).json({ message: "Account confirm token is invalid or has expired." });
+// @route GET api/auth/confirm
+// @desc Confirm Email Address - checking if the token is valid and accept or reject confrmation
+// @access Public
+exports.confirmAccountToken = (req, res) => {
+  User.findOne({ confirmAccountToken: req.params.token, confirmAccountExpires: { $gt: Date.now() } })
+    .then((user) => {
+      console.log(req.params.token);
+      if (!user) {
+        return res.status(401).json({ message: "Account confirm token is invalid or has expired." });
+      }
+
+      if (user.confirmed) {
+        return res.status(200).json({ label: "accountConfirmed", message: "Account has been already confirmed!" });
+      }
+
+      user.confirmAccountToken = undefined;
+      user.confirmAccountExpires = undefined;
+      user.confirmed = true;
+
+      // Save
+      user.save((err) => {
+        if (err) {
+          return res.status(500).json({ message: err.message });
         }
 
-        if (user.confirmed) {
-          return res.status(200).json({ label: "accountConfirmed", message: "Account has been already confirmed!" });
-        }
-
-        user.confirmAccountToken = undefined;
-        user.confirmAccountExpires = undefined;
-        user.confirmed = true;
-
-        // Save
-        user.save(err => {
-          if (err) {
-            return res.status(500).json({ message: err.message });
-          }
-
-          res.status(200).redirect("/dashboard#account-confirmed");
-        });
-      })
-      .catch(err => res.status(500).json({ message: err.message }));
-  };
+        res.status(200).redirect("/dashboard#account-confirmed");
+      });
+    })
+    .catch((err) => res.status(500).json({ message: err.message }));
+};
 
 // ===PASSWORD RECOVER AND RESET
 
@@ -98,8 +98,8 @@ exports.confirmPassword = (req, res) => {
 // @desc Recover Password - Generates token and Sends password reset email
 // @access Public
 exports.recover = (req, res) => {
-  User.findOne({ email: req.body.email, googleId: null, facebookId: null})
-    .then(user => {
+  User.findOne({ email: req.body.email, googleId: null, facebookId: null })
+    .then((user) => {
       if (!user) {
         return res.status(401).json({ message: "The email address " + req.body.email + " is not associated with any account. Double-check your email address and try again." });
       }
@@ -114,7 +114,7 @@ exports.recover = (req, res) => {
       // Save the updated user object
       user
         .save()
-        .then(user => {
+        .then((user) => {
           // send email
           let link = "http://" + req.headers.host + "/auth/reset/" + user.resetPasswordToken;
           const { lang } = req.body;
@@ -126,9 +126,9 @@ exports.recover = (req, res) => {
             content: [
               {
                 type: "text/html",
-                value: recoverTemplate.text[lang]
-              }
-            ]
+                value: recoverTemplate.text[lang],
+              },
+            ],
           };
           sgMail.send(mailOptions, (error, result) => {
             if (error) {
@@ -137,9 +137,9 @@ exports.recover = (req, res) => {
             res.status(200).json({ label: "emailSent", message: "A reset email has been sent to " + user.email + "." });
           });
         })
-        .catch(err => res.status(500).json({ message: err.message }));
+        .catch((err) => res.status(500).json({ message: err.message }));
     })
-    .catch(err => res.status(500).json({ message: err.message }));
+    .catch((err) => res.status(500).json({ message: err.message }));
 };
 
 // @route GET api/auth/reset
@@ -147,19 +147,19 @@ exports.recover = (req, res) => {
 // @access Public
 exports.reset = (req, res) => {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } })
-    .then(user => {
+    .then((user) => {
       if (!user) return res.status(401).json({ message: "Password reset token is invalid or has expired." });
       //Redirect user to form with the email address
       res.json({ user });
     })
-    .catch(err => res.status(500).json({ message: err.message }));
+    .catch((err) => res.status(500).json({ message: err.message }));
 };
 
 // @route POST api/auth/reset
 // @desc Reset Password
 // @access Public
 exports.resetPassword = (req, res) => {
-  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }).then(user => {
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }).then((user) => {
     if (!user) return res.status(401).json({ message: "Password reset token is invalid or has expired." });
 
     if (user.email !== req.body.email) {
@@ -176,7 +176,7 @@ exports.resetPassword = (req, res) => {
     user.resetPasswordExpires = undefined;
 
     // Save
-    user.save(err => {
+    user.save((err) => {
       if (err) return res.status(500).json({ message: err.message });
       const resetTemplate = emailResetSuccess(user.given_name, user.email);
       const { lang } = req.body;
@@ -189,9 +189,9 @@ exports.resetPassword = (req, res) => {
         content: [
           {
             type: "text/html",
-            value: resetTemplate.text[lang]
-          }
-        ]
+            value: resetTemplate.text[lang],
+          },
+        ],
       };
 
       sgMail.send(mailOptions, (error, result) => {

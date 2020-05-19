@@ -102,11 +102,11 @@ export const BanknotePreview = ({ match, history }, context) => {
                 <span>{context.translate(`label.banknoteForm.own`)}:</span>
                 {banknote.own ? (
                   <span className="preview__element-value preview__element-value--owned">
-                    <Icon icon="CheckMarkIcon" /> {context.translate(`label.banknoteForm.own.yes`)}
+                    <Icon icon="CheckMarkIcon" /> {context.translate(`label.banknoteForm.own.true`)}
                   </span>
                 ) : (
                   <span className="preview__element-value preview__element-value--not-owned">
-                    <Icon icon="CrossIcon" /> {context.translate(`label.banknoteForm.own.no`)}
+                    <Icon icon="CrossIcon" /> {context.translate(`label.banknoteForm.own.false`)}
                   </span>
                 )}
               </div>
