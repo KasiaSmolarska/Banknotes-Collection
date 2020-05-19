@@ -1,7 +1,8 @@
 import axios from "axios";
-import actions from "./index";
+import actions, { AppThunk } from "./index";
+import {History} from "history"
 
-export const validatePasswordResetToken = (passwordToken, history) => async dispatch => {
+export const validatePasswordResetToken = (passwordToken: string, history: History): AppThunk => async dispatch => {
   try {
     await axios.get(`/api/auth/reset/${passwordToken}`);
   } catch (error) {

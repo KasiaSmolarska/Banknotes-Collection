@@ -28,6 +28,9 @@ import {remindPassword} from "./remindPassword";
 import {validatePasswordResetToken} from "./validatePasswordResetToken";
 import {resetPassword} from "./resetPassword";
 import {confirmAccount} from "./confirmAccount";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { RootState } from "../index";
+import { Action } from "redux";
 
 const actions = {
   fetchUser,
@@ -63,5 +66,14 @@ const actions = {
   resetPassword,
   confirmAccount
 };
+
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>
+
+export type AppDispatch = ThunkDispatch<RootState, unknown,  Action<string>>;
 
 export default actions;
