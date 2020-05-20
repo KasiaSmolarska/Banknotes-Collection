@@ -6,10 +6,13 @@ import { Spinner } from "../Spinner";
 import { BanknoteActions } from "./BanknoteActions";
 import { Slider } from "../Slider";
 import { Icon } from "../Icon";
-import { getCountryName } from "../../utils/countriesCodes";
-import { getCurrencyName } from "../../utils/currenciesCodes";
+import { getCountryName, CountriesKeys } from "../../utils/countriesCodes";
+import { getCurrencyName, CurrenciesKeys } from "../../utils/currenciesCodes";
+import { RootState } from "../../store";
+import { RouteChildrenProps } from "react-router-dom";
+import { TranslateContextTypes } from "../../translate/TranslateProvider";
 
-const getBanknote = state => state.banknote;
+const getBanknote = (state: RootState) => state.banknote;
 
 const listPreviewElements = [
   "issueYear",
@@ -31,11 +34,15 @@ const listPreviewElements = [
   "condition",
   "purchaseDate",
   "pricePaid",
-  "currencyPaid"
+  "currencyPaid",
 ];
 
-export const BanknotePreview = ({ match, history }, context) => {
-  const { banknoteId } = match.params;
+type BanknotePreviewProps = RouteChildrenProps<{
+  banknoteId:string;
+}>
+
+export const BanknotePreview = ({ match, history }:  BanknotePreviewProps, context: TranslateContextTypes) => {
+  const banknoteId =  match?.params?.banknoteId || '';
   const dispatch = useDispatch();
 
   const { banknote, loading, model } = useSelector(getBanknote);
@@ -45,10 +52,9 @@ export const BanknotePreview = ({ match, history }, context) => {
     dispatch(actions.fetchBanknoteById(banknoteId, history));
   }, [dispatch, banknoteId, history]);
 
-
   useEffect(() => {
-    if(model === null){
-      dispatch(actions.fetchBanknoteModel())
+    if (model === null) {
+      dispatch(actions.fetchBanknoteModel());
     }
   }, [dispatch, model]);
 
@@ -66,7 +72,7 @@ export const BanknotePreview = ({ match, history }, context) => {
             <Slider images={[`/api/upload/image/${banknote.imageFront}`, `/api/upload/image/${banknote.imageReverse}`]} />
             <h1 className="preview__title"> {banknote.title}</h1>
             <div className="preview__countryFullName">
-              {getCountryName(banknote.country)} - {banknote.value} {getCurrencyName(banknote.currency)}
+              {getCountryName(banknote.country as CountriesKeys)} - {banknote.value} {getCurrencyName(banknote.currency as CurrenciesKeys)}
             </div>
             <div className="preview__value py-1">
               {banknote.value} {banknote.currency}
@@ -81,7 +87,7 @@ export const BanknotePreview = ({ match, history }, context) => {
 
             <div className="preview__specification py-1">
               {Object.entries(banknote).map(([key, value]) => {
-                return listPreviewElements.map(row => {
+                return listPreviewElements.map((row) => {
                   if (row === key) {
                     return (
                       <div key={key} className={`preview__row preview__${key}`}>
@@ -112,7 +118,7 @@ export const BanknotePreview = ({ match, history }, context) => {
               </div>
             </div>
             <div className="preview__divider"></div>
-            <BanknoteActions id={banknote._id} title={banknote.title} favorite={banknote.favorite} />
+            <BanknoteActions id={banknote._id || ""} title={banknote.title} favorite={banknote.favorite || false} />
           </div>
         </div>
       ) : (
@@ -123,5 +129,5 @@ export const BanknotePreview = ({ match, history }, context) => {
 };
 
 BanknotePreview.contextTypes = {
-  translate: PropTypes.func
+  translate: PropTypes.func,
 };
