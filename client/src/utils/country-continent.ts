@@ -247,6 +247,7 @@ const countryByContinent = {
   YT: "AF",
   ZA: "AF",
   ZM: "AF",
+  ZR: "AF",
   ZW: "AF"
 };
 

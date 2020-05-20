@@ -9,7 +9,7 @@ import { TranslateContextTypes } from "../../translate/TranslateProvider";
 
 interface BanknoteActionsProps {
   id: string;
-  title: string;
+  title?: string;
   favorite: boolean;
 }
 

@@ -3,7 +3,7 @@ import { Icon } from "./Icon";
 import Translate from "../translate/Translate";
 import PropTypes from "prop-types";
 
-export const Modal = ({ onClose, onSubmit, title, submitText, children, type }, context) => {
+export const Modal = ({ onClose, onSubmit, title, submitText, children, type = "" }, context) => {
   return (
     <div className="modal__background">
       <div className={`modal ${type ? "modal--" + type : ""}`}>

@@ -3,12 +3,19 @@ import Translate from "../../translate/Translate";
 import PropTypes from "prop-types";
 import { currentLang } from "../../utils/languages";
 import { isoCurriencies } from "../../utils/currenciesCodes";
+import { WrappedFieldProps } from "redux-form";
+import { DataType } from "../form/Input";
+import { TranslateContextTypes } from "../../translate/TranslateProvider";
 
-const CurrencyInput = ({ input, meta: { touched, error, form }, data }, { translate }) => {
-  const [foundedCurriencies, setFoundedCurriencies] = React.useState([]);
+interface CurrencyInputProps extends WrappedFieldProps {
+  data: DataType;
+}
+
+const CurrencyInput = ({ input, meta: { touched, error, form }, data }: CurrencyInputProps, { translate }: TranslateContextTypes) => {
+  const [foundedCurriencies, setFoundedCurriencies] = React.useState<{ code: string; name: string }[]>([]);
   const currienciesList = isoCurriencies[currentLang()];
 
-  const getCurriencies = search => {
+  const getCurriencies = (search: string) => {
     const searchedCountry = new RegExp(`.*${search}.*`, "i");
     setFoundedCurriencies(
       Object.entries(currienciesList)
@@ -20,7 +27,7 @@ const CurrencyInput = ({ input, meta: { touched, error, form }, data }, { transl
         })
         .map(([key, value]) => ({
           code: key,
-          name: value.name
+          name: value.name,
         }))
     );
   };
@@ -28,8 +35,8 @@ const CurrencyInput = ({ input, meta: { touched, error, form }, data }, { transl
   return (
     <div className="form__control">
       <input
-        onKeyUp={evt => {
-          getCurriencies(evt.target.value);
+        onKeyUp={(evt) => {
+          getCurriencies(evt.currentTarget.value);
         }}
         autoComplete="off"
         list={input.name}
@@ -47,7 +54,7 @@ const CurrencyInput = ({ input, meta: { touched, error, form }, data }, { transl
       </div>
       <datalist id={input.name}>
         {foundedCurriencies.length &&
-          foundedCurriencies.map(currency => {
+          foundedCurriencies.map((currency) => {
             return (
               <option key={currency.code} value={currency.code}>
                 {currency.name}
@@ -62,5 +69,5 @@ const CurrencyInput = ({ input, meta: { touched, error, form }, data }, { transl
 export default CurrencyInput;
 
 CurrencyInput.contextTypes = {
-  translate: PropTypes.func
+  translate: PropTypes.func,
 };
