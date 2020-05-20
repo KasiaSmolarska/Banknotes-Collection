@@ -27,7 +27,6 @@ const NAME_TO_COMPONENT = {
 };
 
 const getTypeOfInput = (modelField: { [key: string]: string | number }, fieldName: string) => {
-  console.log("modelField", modelField);
   if (/image|img/g.test(fieldName)) {
     return "InputFile";
   }
@@ -70,7 +69,6 @@ interface FormGroupProps {
 }
 
 const FormGroup = (props: FormGroupProps, context: TranslateContextTypes) => {
-  console.log("props", props);
   if (!props.data) {
     return false;
   }

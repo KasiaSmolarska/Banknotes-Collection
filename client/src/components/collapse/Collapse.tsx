@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { Icon } from "../Icon";
 import PropTypes from "prop-types";
+import { TranslateContextTypes } from "../../translate/TranslateProvider";
 
-export const Collapse = ({ trigger, children, className, open }, context) => {
-  const [isOpen, setOpen] = useState(open || false);
+interface CollapseProps {
+  trigger: string;
+  children: React.ReactNode;
+  className: string;
+  open: boolean;
+}
+
+export const Collapse = ({ trigger, children, className, open = false }: CollapseProps, context: TranslateContextTypes) => {
+  const [isOpen, setOpen] = useState(open);
   return (
     <div className={className ? "collapse__container " + className : "collapse__container"}>
       <div className="collapse__trigger" onClick={() => setOpen(!isOpen)}>
@@ -18,5 +26,5 @@ export const Collapse = ({ trigger, children, className, open }, context) => {
 };
 
 Collapse.contextTypes = {
-  translate: PropTypes.func
+  translate: PropTypes.func,
 };

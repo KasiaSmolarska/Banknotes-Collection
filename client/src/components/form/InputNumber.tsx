@@ -11,7 +11,6 @@ interface InputNumberProps extends WrappedFieldProps {
 }
 
 const InputNumber = ({ input, meta: { touched, error, form }, data }: InputNumberProps, { translate }: TranslateContextTypes) => {
-  console.log("dataNum", data)
   return (
     <div className="form__control">
       <input pattern={data.validate} placeholder={translate(`label.${form}.${input.name}`)} className="form__input" type="number" {...input} />

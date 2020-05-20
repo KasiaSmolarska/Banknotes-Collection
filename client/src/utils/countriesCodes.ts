@@ -517,7 +517,7 @@ export const getCountryName = (countryCode: countryCodeType<"eng"> | countryCode
   if (isoCountries[currentLang()].hasOwnProperty(countryCode)) {
     return isoCountries[currentLang()][countryCode];
   } else {
-    return countryCode;
+    return countryCode as string;
   }
 };
 
