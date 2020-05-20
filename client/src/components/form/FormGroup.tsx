@@ -63,21 +63,21 @@ const getTypeOfInput = (modelField: { [key: string]: string | number }, fieldNam
 interface FormGroupProps {
   data: {
     [key: string]: any;
-  };
+  } | null;
   inputsName: string[];
   name: string;
 }
 
-const FormGroup = (props: FormGroupProps, context: TranslateContextTypes) => {
+const FormGroup = (props: FormGroupProps, context: TranslateContextTypes): JSX.Element => {
   if (!props.data) {
-    return false;
+    return <div></div>;
   }
   return (
     <div className={`form__group form__group--${props.name}`}>
       <h2 className="form__group-label">{context.translate(`form.groupLabel.${props.name}`)}</h2>
       {props.inputsName.map((name) => {
-        const type = getTypeOfInput(props.data[name], name);
-        return <Field key={name} name={name} component={NAME_TO_COMPONENT[type]} data={props.data[name]} />;
+        const type = getTypeOfInput(props?.data?.[name], name);
+        return <Field key={name} name={name} component={NAME_TO_COMPONENT[type]} data={props?.data?.[name]} />;
       })}
     </div>
   );

@@ -32,7 +32,7 @@ export type BanknoteType = {
   series?: string;
   issueBank?: string;
   issueYear?: number;
-  title: string;
+  title?: string;
   observe?: string;
   reverse?: string;
   textOnNote?: string;
@@ -77,7 +77,7 @@ export interface BanknotesState {
 export const initialState: BanknotesState = {
   model: null,
   banknotesList: [],
-  banknote: { title: "" },
+  banknote: {},
   showedModalToAddBanknote: false,
   showedModalToEditBanknote: false,
   imageModal: {

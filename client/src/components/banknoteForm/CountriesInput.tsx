@@ -1,19 +1,23 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Translate from "../../translate/Translate";
 import PropTypes from "prop-types";
 import { currentLang } from "../../utils/languages";
-import { isoCountries } from "../../utils/countriesCodes";
+import { isoCountries, CountriesKeys } from "../../utils/countriesCodes";
 import { getContinentName } from "../../utils/country-continent";
-import { change } from "redux-form";
-const getForm = state => state.form;
+import { change, WrappedFieldProps } from "redux-form";
+import { TranslateContextTypes } from "../../translate/TranslateProvider";
+import { DataType } from "../form/Input";
 
-const CountriesInput = ({ input, meta: { touched, error, form }, data }, { translate }) => {
-  const [foundedCountries, setFoundedCountries] = React.useState([]);
+interface CountriesInputProps extends WrappedFieldProps {
+  data: DataType;
+}
+
+const CountriesInput = ({ input, meta: { touched, error, form }, data }: CountriesInputProps, { translate }: TranslateContextTypes) => {
+  const [foundedCountries, setFoundedCountries] = React.useState<{ code: string; name: string }[]>([]);
   const countriesList = isoCountries[currentLang()];
-  const { banknoteForm } = useSelector(getForm);
   const dispatch = useDispatch();
-  const getCountries = search => {
+  const getCountries = (search: string) => {
     const searchedCountry = new RegExp(`.*${search}.*`, "i");
     setFoundedCountries(
       Object.entries(countriesList)
@@ -25,7 +29,7 @@ const CountriesInput = ({ input, meta: { touched, error, form }, data }, { trans
         })
         .map(([key, value]) => ({
           code: key,
-          name: value
+          name: value,
         }))
     );
   };
@@ -33,8 +37,8 @@ const CountriesInput = ({ input, meta: { touched, error, form }, data }, { trans
   return (
     <div className="form__control">
       <input
-        onKeyUp={evt => {
-          getCountries(evt.target.value);
+        onKeyUp={(evt: React.KeyboardEvent<HTMLInputElement>) => {
+          getCountries(evt.currentTarget.value);
         }}
         autoComplete="off"
         list={input.name}
@@ -43,7 +47,7 @@ const CountriesInput = ({ input, meta: { touched, error, form }, data }, { trans
         className="form__input"
         type="text"
         {...input}
-        onInput={(e) => dispatch(change("banknoteForm", "continent", getContinentName(e.target.value), true))}
+        onInput={(e: React.FormEvent<HTMLInputElement>) => dispatch(change("banknoteForm", "continent", getContinentName(e.currentTarget.value as CountriesKeys), true))}
       />
       <label className="form__label">
         <Translate name={`label.${form}.${input.name}`} />
@@ -53,7 +57,7 @@ const CountriesInput = ({ input, meta: { touched, error, form }, data }, { trans
       </div>
       <datalist id={input.name}>
         {foundedCountries.length &&
-          foundedCountries.map(country => {
+          foundedCountries.map((country) => {
             return (
               <option key={country.code} value={country.code}>
                 {country.name}
@@ -68,5 +72,5 @@ const CountriesInput = ({ input, meta: { touched, error, form }, data }, { trans
 export default CountriesInput;
 
 CountriesInput.contextTypes = {
-  translate: PropTypes.func
+  translate: PropTypes.func,
 };
