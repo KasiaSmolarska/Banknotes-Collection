@@ -20,7 +20,7 @@ import {
 import { Continents } from "../../../utils/country-continent";
 
 export type BanknoteType = {
-  _user?: string;
+  _id?: string;
   continent?: Continents;
   country?: string;
   own?: boolean;

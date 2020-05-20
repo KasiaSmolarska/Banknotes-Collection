@@ -1,8 +1,8 @@
 import axios from "axios";
 import { BANKNOTE_ERROR } from "./types";
-import actions from "./index";
+import actions, { AppThunk } from "./index";
 
-const deleteBanknoteById = banknoteId => async dispatch => {
+const deleteBanknoteById = (banknoteId: string): AppThunk => async dispatch => {
   try {
     await axios.delete(`/api/banknote/${banknoteId}`);
     dispatch(actions.fetchBanknotes());

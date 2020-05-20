@@ -1,6 +1,6 @@
 import { SET_ALERT, REMOVE_ALERT } from "../../actions/types";
 
-export type Alert = { id: number; msg: string; type: string };
+export type Alert = { id: number; msg: string; type: string; };
 
 export interface AlertState {
   alerts: Alert[];

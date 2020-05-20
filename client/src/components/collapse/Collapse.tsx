@@ -7,7 +7,7 @@ interface CollapseProps {
   trigger: string;
   children: React.ReactNode;
   className: string;
-  open: boolean;
+  open?: boolean;
 }
 
 export const Collapse = ({ trigger, children, className, open = false }: CollapseProps, context: TranslateContextTypes) => {

@@ -17,7 +17,7 @@ interface SliderProps {
   images: string[];
 }
 
-export const Slider = ({ images }: SliderProps): React.ReactNode => {
+export const Slider = ({ images }: SliderProps): JSX.Element => {
   const container = useRef<HTMLDivElement>(null);
   const [clickedElementIndex, setClickedElementIndex] = useState(0);
   const handleClick = (i: number) => {
