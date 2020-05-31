@@ -22,7 +22,7 @@ const BANKNOTE_FORM_GROUPS: { [key: string]: string[] } = {
 
 let data: Data | null = null;
 
-interface Data {
+export interface Data {
   [key: string]: DataType;
 }
 

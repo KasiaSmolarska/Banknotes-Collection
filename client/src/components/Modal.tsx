@@ -2,8 +2,18 @@ import React from "react";
 import { Icon } from "./Icon";
 import Translate from "../translate/Translate";
 import PropTypes from "prop-types";
+import { TranslateContextTypes } from "../translate/TranslateProvider";
 
-export const Modal = ({ onClose, onSubmit, title, submitText, children, type = "" }, context) => {
+interface ModalProps {
+  onClose: () => void;
+  onSubmit: (e: React.SyntheticEvent) => void;
+  title?: string;
+  submitText?: string;
+  children: JSX.Element | JSX.Element[];
+  type?: string;
+}
+
+export const Modal = ({ onClose, onSubmit, title, submitText, children, type = "" }: ModalProps, context: TranslateContextTypes): JSX.Element => {
   return (
     <div className="modal__background">
       <div className={`modal ${type ? "modal--" + type : ""}`}>
@@ -31,5 +41,5 @@ export const Modal = ({ onClose, onSubmit, title, submitText, children, type = "
 };
 
 Modal.contextTypes = {
-  translate: PropTypes.func
+  translate: PropTypes.func,
 };
