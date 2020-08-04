@@ -22,6 +22,9 @@ const isoCurrienciesENG = {
   AMD: {
     name: "Armenian Dram",
   },
+  ARA: {
+    name: "Argentine Austral",
+  },
   ARS: {
     name: "Argentine Peso",
   },
