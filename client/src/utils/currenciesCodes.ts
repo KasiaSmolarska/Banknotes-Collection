@@ -283,6 +283,9 @@ const isoCurrienciesENG = {
   PAB: {
     name: "Panamanian Balboa",
   },
+  PEI: {
+    name: "Peruvian inti"
+  },
   PEN: {
     name: "Peruvian Nuevo Sol",
   },
@@ -775,6 +778,10 @@ const isoCurrienciesPL = {
 
   PAB: {
     name: "Panamanian Balboa",
+  },
+  
+    PEI: {
+    name: "Peruwiański inti"
   },
 
   PEN: {
