@@ -409,7 +409,7 @@ const isoCurrienciesENG = {
   ZRZ: {
     name: "Nouveau Zaïre",
   },
-  ZWL: {
+  ZWD: {
     name: "Zimbabwean Dollar",
   },
 };
@@ -957,7 +957,7 @@ const isoCurrienciesPL = {
     name: "Nouveau Zaïre",
   },
 
-  ZWL: {
+  ZWD: {
     name: "dolar Zimbabwe",
   },
 };
