@@ -395,6 +395,9 @@ const isoCurrienciesENG = {
     name: "South African Rand",
   },
   ZMK: {
+    name: "Zambian Kwacha (ZMW after 2013)",
+  },
+  ZMW: {
     name: "Zambian Kwacha",
   },
   ZRZ: {
@@ -929,6 +932,10 @@ const isoCurrienciesPL = {
   },
 
   ZMK: {
+    name: "Zambijska Kwacha (ZMW po roku 2013)",
+  },
+  
+  ZMW: {
     name: "Zambijska Kwacha",
   },
 
