@@ -427,6 +427,10 @@ const isoCurrienciesPL = {
   AMD: {
     name: "Armenian Dram",
   },
+  
+  ARA: {
+    name: "Austral argentyński",
+  },
 
   ARS: {
     name: "peso argentyńskie",
