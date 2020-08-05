@@ -52,7 +52,7 @@ const banknoteData = {
   },
   userNotes: {
     type: "String",
-    maxlength: 1000
+    maxlength: 1500
   },
   type: {
     type: "String",
