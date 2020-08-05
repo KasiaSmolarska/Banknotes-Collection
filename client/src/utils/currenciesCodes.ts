@@ -199,6 +199,9 @@ const isoCurrienciesENG = {
   KRW: {
     name: "South Korean Won",
   },
+  KGS: {
+    name: "Kyrgyzstani som",
+  },
   KWD: {
     name: "Kuwaiti Dinar",
   },
@@ -661,9 +664,13 @@ const isoCurrienciesPL = {
   KRW: {
     name: "Won południowokoreański",
   },
+  
+  KGS: {
+    name: "Som kirigijski",
+  },
 
   KWD: {
-    name: "dinar kuwejcki",
+    name: "Dinar kuwejcki",
   },
 
   KZT: {
