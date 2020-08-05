@@ -97,6 +97,9 @@ const isoCurrienciesENG = {
   CVE: {
     name: "Cape Verdean Escudo",
   },
+  CYP: {
+    name: "Cypriot pound"
+  },
   CZK: {
     name: "Czech Republic Koruna",
   },
@@ -535,6 +538,10 @@ const isoCurrienciesPL = {
 
   CVE: {
     name: "Escudo z Zielonego Przylądka",
+  },
+  
+  CYP: {
+    name: "Funt cypryjski"
   },
 
   CZK: {
