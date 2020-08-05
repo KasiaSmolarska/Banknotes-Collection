@@ -238,6 +238,9 @@ const isoCurrienciesENG = {
   MGA: {
     name: "Malagasy Ariary",
   },
+  MGF: {
+    name: "Malagasy franc"
+  },
   MKD: {
     name: "Macedonian Denar",
   },
@@ -724,6 +727,10 @@ const isoCurrienciesPL = {
 
   MGA: {
     name: "Madagaskar Ariary",
+  },
+  
+  MGF: {
+    name: "Frank malgaski"
   },
 
   MKD: {
