@@ -224,7 +224,7 @@ const countryByContinent = {
   TN: "AF",
   TO: "OC",
   TR: "EU",
-  TT: "NA",
+  TT: "SA",
   TV: "OC",
   TW: "AS",
   TZ: "AF",
