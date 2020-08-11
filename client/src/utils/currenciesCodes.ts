@@ -385,6 +385,9 @@ const isoCurrienciesENG = {
   VEF: {
     name: "Venezuelan Bolívar",
   },
+  VES: {
+    name: "Venezuelan Bolívar (since 2018)",
+  },
   VND: {
     name: "Vietnamese Dong",
   },
@@ -922,7 +925,11 @@ const isoCurrienciesPL = {
   },
 
   VEF: {
-    name: "wenezuelski Bolívar",
+    name: "Wenezuelski Bolívar",
+  },
+  
+   VES: {
+    name: "Wenezuelski Bolívar (od 2018)",
   },
 
   VND: {
