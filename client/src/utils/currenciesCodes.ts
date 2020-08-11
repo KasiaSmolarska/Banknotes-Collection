@@ -383,7 +383,7 @@ const isoCurrienciesENG = {
     name: "Uzbekistan Som",
   },
   VEF: {
-    name: "Venezuelan Bolívar",
+    name: "Venezuelan Bolívar (to 2018)",
   },
   VES: {
     name: "Venezuelan Bolívar (since 2018)",
@@ -925,7 +925,7 @@ const isoCurrienciesPL = {
   },
 
   VEF: {
-    name: "Wenezuelski Bolívar",
+    name: "Wenezuelski Bolívar (do 2018)",
   },
   
    VES: {
