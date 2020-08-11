@@ -352,6 +352,9 @@ const isoCurrienciesENG = {
   THB: {
     name: "Thai Baht",
   },
+  TMM: {
+    name: "Turkmenistan manat"
+  },
   TND: {
     name: "Tunisian Dinar",
   },
@@ -882,6 +885,10 @@ const isoCurrienciesPL = {
 
   THB: {
     name: "tajski baht",
+  },
+  
+  TMM: {
+    name: "Manat turkmeński"
   },
 
   TND: {
