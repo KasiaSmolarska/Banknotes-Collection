@@ -42,7 +42,7 @@
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
-    "firebase-admin": "^8.9.2",
+    "firebase-admin": "^11.4.1",
     "http-proxy-middleware": "^0.20.0",
     "image-thumbnail": "^1.0.5",
     "md5": "^2.2.1",
